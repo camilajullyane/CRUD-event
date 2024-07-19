@@ -1,7 +1,10 @@
 package org.upe.ui;
 
+import org.upe.persistence.User;
+import org.upe.persistence.UserInterface;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world");
+        User.readCSV();
     }
 }
