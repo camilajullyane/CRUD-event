@@ -1,11 +1,7 @@
 package org.upe.persistence;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
+import java.io.*;
 import java.util.ArrayList;
-
 
 public class User implements UserInterface {
     private static final String dbPath = "DB/user.csv";
@@ -22,37 +18,59 @@ public class User implements UserInterface {
         this.attendeeOn = attendeeOn;
         this.ownerOf = ownerOf;
     }
-
-    public static ArrayList<User> readCSV() {
+    //Esse método é responsável por ler o arquivo CSV e retornar um ArrayList de usuários
+    public static ArrayList<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(dbPath));
-            String line = reader.readLine();
-
-            while (line != null) {
-                line = reader.readLine();
+            reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
                 String[] newUserLine = line.split(",", -1);
                 User user = new User(newUserLine[0],
                         newUserLine[1], newUserLine[2],
                         newUserLine[3] == null ? "" : newUserLine[3],
                         newUserLine[4] == null ? "" : newUserLine[4]);
                 usersArray.add(user);
-                line = reader.readLine();
             }
             reader.close();
         } catch(IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         return usersArray;
+    }
+
+    private static void updateFileData(ArrayList<User> newData) {
+        try {
+            BufferedWriter write = new BufferedWriter(new FileWriter(dbPath));
+            write.write("name,email,cpf,attendeeOn,ownerOf\n");
+            for (User user : newData) {
+                String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(),user.CPF, user.attendeeOn, user.ownerOf);
+                write.write(line);
+            }
+            write.close();
+        } catch (IOException e) {
+         e.printStackTrace();
+        }
     }
 
     public static String findByCPF() {
         return "";
     }
 
-    public String[] getAllCPF() {
-        return CPF.split(",");
+    public static void deleteUser(String CPF) {
+        ArrayList<User> users = User.getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                int index = users.indexOf(user);
+                users.remove(index);
+                break;
+            }
+        }
+
+        updateFileData(users);
     }
 
     public void changeEmail() {
