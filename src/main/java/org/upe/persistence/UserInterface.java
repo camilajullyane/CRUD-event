@@ -4,4 +4,5 @@ public interface UserInterface {
     String getCPF();
     static void createUser() {}
     static void deleteUser() {}
+    static void updateUserEmail() {}
 }

@@ -12,6 +12,6 @@ public class Main {
             System.out.println(user.getName());
         }
 
-        User.deleteUser("65465657");
+        User.updateUserEmail("15524653490", "joaosalgado605@gmail.com");
     }
 }

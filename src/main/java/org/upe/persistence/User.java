@@ -73,8 +73,16 @@ public class User implements UserInterface {
         updateFileData(users);
     }
 
-    public void changeEmail() {
+    public static void updateUserEmail(String CPF, String newEmail) {
+        ArrayList<User> users = User.getAllUsers();
 
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                user.email = newEmail;
+            }
+        }
+
+        updateFileData(users);
     }
 
     public static void createUser(String name, String CPF, String email) {
@@ -89,7 +97,6 @@ public class User implements UserInterface {
         }
     }
 
-    @Override
     public String getCPF() {
         return this.CPF;
     }
