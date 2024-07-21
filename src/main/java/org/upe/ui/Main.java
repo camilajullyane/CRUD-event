@@ -9,9 +9,11 @@ public class Main {
         ArrayList<User> users = User.getAllUsers();
         System.out.println(users.size());
         for (User user : users) {
-            System.out.println(user.getName());
+            for (String eventID: user.getAttendeeOn()) {
+                System.out.println(eventID);
+            }
         }
 
-        User.updateUserEmail("15524653490", "joaosalgado605@gmail.com");
+        User.addAttendeeOnEvent("15524653490", "123456789");
     }
 }

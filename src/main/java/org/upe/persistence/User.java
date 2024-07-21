@@ -108,10 +108,41 @@ public class User implements UserInterface {
     public String getName() {
         return this.name;
     }
-//    //adicionar formatação
-//    public String[] getAttendeeOn() {
-//        return attendeeOn;
+
+    //adicionar formatação
+    public String[] getAttendeeOn() {
+        return this.attendeeOn.split("#");
+    }
+
+    public static void addAttendeeOnEvent(String CPF, String eventID) {
+        ArrayList<User> users = User.getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                user.attendeeOn += "#" + eventID;
+                break;
+            }
+        }
+        User.updateFileData(users);
+    }
+
+//    public static void deleteAttendeeEvent(String CPF, String eventID) {
+//        ArrayList<User> users = User.getAllUsers();
+//
+//        for (User user : users) {
+//            if (user.getCPF().equals(CPF)) {
+//                String[] newArray = new String[user.getAttendeeOn().length];
+//                for (String s : user.getAttendeeOn()) {
+//
+//                }
+//                break;
+//            }
+//        }
+//
+//        updateFileData(users);
 //    }
+
+
 //    //adicionar formatação
 //    public String[] getOwnerOf() {
 //        return ownerOf;
