@@ -1,5 +1,12 @@
 package org.upe.persistence;
 
-public class Event implements EventInterface{
+import java.util.UUID;
 
+    public class Event implements EventInterface{
+
+        public static void generateID() {
+            UUID uuID = UUID.randomUUID();
+            String idString = uuID.toString();
+            System.out.println(idString);
+        }
 }
