@@ -3,7 +3,7 @@ package org.upe.controllers;
 import org.upe.persistence.UserInterface;
 import org.upe.persistence.UserUtility;
 
-public class Login implements LoginInterface {
+public class UserAuthController implements AuthInteface {
     UserInterface userInfo;
 
     public boolean loginUser(String CPF) {

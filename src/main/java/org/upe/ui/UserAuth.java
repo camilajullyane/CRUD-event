@@ -1,7 +1,7 @@
 package org.upe.ui;
 
-import org.upe.controllers.Login;
-import org.upe.controllers.LoginInterface;
+import org.upe.controllers.AuthInteface;
+import org.upe.controllers.UserAuthController;
 
 import java.util.Scanner;
 
@@ -32,7 +32,7 @@ public class UserAuth {
     }
 
     public static void login() {
-        LoginInterface auth = new Login();
+        AuthInteface auth = new UserAuthController();
         Scanner sc = new Scanner(System.in);
 
         boolean isRunning = true;
@@ -59,7 +59,7 @@ public class UserAuth {
     }
 
     public static void singUp() {
-        LoginInterface auth = new Login();
+        AuthInteface auth = new UserAuthController();
         Scanner sc = new Scanner(System.in);
         System.out.println("Criação de conta");
 
