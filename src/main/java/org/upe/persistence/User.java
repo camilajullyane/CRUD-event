@@ -126,26 +126,46 @@ public class User implements UserInterface {
         User.updateFileData(users);
     }
 
-//    public static void deleteAttendeeEvent(String CPF, String eventID) {
-//        ArrayList<User> users = User.getAllUsers();
-//
-//        for (User user : users) {
-//            if (user.getCPF().equals(CPF)) {
-//                String[] newArray = new String[user.getAttendeeOn().length];
-//                for (String s : user.getAttendeeOn()) {
-//
-//                }
-//                break;
-//            }
-//        }
-//
-//        updateFileData(users);
-//    }
+    public static void deleteAttendeeEvent(String CPF, String eventID) {
+        ArrayList<User> users = User.getAllUsers();
 
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                String newString = "";
+                for (int i = 0; i < user.getAttendeeOn().length; i++) {
+                    String id = user.getAttendeeOn()[i];
+                    if (!id.equals(eventID)) {
+                        newString += id + "#";
+                    }
+                }
+                user.attendeeOn = newString.substring(0, newString.length() - 1);
+                break;
+            };
+        }
+        updateFileData(users);
+    }
 
-//    //adicionar formatação
-//    public String[] getOwnerOf() {
-//        return ownerOf;
-//    }
+    public String[] getOwnerOf() {
+        return this.ownerOf.split("#");
+     }
+
+    public void deleteOwnerOf(String CPF, String eventID) {
+        ArrayList<User> users = User.getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                String newString = "";
+                for (int i = 0; i < user.getOwnerOf().length; i++) {
+                    String id = user.getOwnerOf()[i];
+                    if (!id.equals(eventID)) {
+                        newString += id + "#";
+                    }
+                }
+                user.ownerOf = newString.substring(0, newString.length() - 1);
+                break;
+            }
+        }
+        updateFileData(users);
+    }
 }
 
