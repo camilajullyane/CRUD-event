@@ -14,4 +14,12 @@ public class Login implements LoginInterface {
         }
         return false;
     }
+
+    public void singUpUser(String name, String CPF, String email) {
+        UserInterface userData = UserUtility.findByCPF(CPF);
+        if (userData == null) {
+            UserUtility.createUser(name, CPF, email);
+            //userInfo = userData;
+        }
+    }
 }
