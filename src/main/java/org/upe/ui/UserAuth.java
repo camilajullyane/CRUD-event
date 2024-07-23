@@ -9,9 +9,8 @@ public class UserAuth {
     protected static void mainScreen() {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-
+        System.out.println("\nBEM VINDO AO EVEN2\n1 - Para fazer login\n2 - Para criar conta\n3 - Para sair");
         while (isRunning) {
-            System.out.println("\nBEM VINDO AO EVEN2\n1 - Para fazer login\n2 - Para criar conta\n3 - Para sair");
             System.out.print("Escolha sua opção: ");
             String userInput = sc.nextLine();
             switch (userInput) {

@@ -32,8 +32,6 @@ public class UserUtility {
         return usersArray;
     }
 
-    //public static ArrayList<UserInterface> getAllUsersWhere()
-
     private static void updateFileData(ArrayList<User> newData) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter(dbPath));
