@@ -2,25 +2,32 @@ package org.upe.persistence;
 
 import java.util.UUID;
 import java.util.Date;
+import java.time.LocalTime;
 
 public class Event implements EventInterface{
     private String id;
     private String name;
     private Date date;
+    private LocalTime hour;
     private String local;
     private String organization;
     private String description;
+    private String articleList;
 
     // Construtores
     public Event() {}
 
-    public Event(String id, String nome, Date data, String local, String organization, String description) {
+    public Event(String id, String nome, Date data, LocalTime hour, String local, String organization, String description,
+                 String articleList) {
         this.id = id;
         this.name = nome;
         this.date = data;
+        this.hour = hour;
         this.local = local;
         this.organization = organization;
         this.description = description;
+        this.articleList = articleList;
+
     }
 
     // Métodos estáticos
@@ -52,6 +59,14 @@ public class Event implements EventInterface{
         return date;
     }
 
+    public LocalTime getHour(){
+        return hour;
+    }
+
+    public void setHour(LocalTime hour){
+        this.hour = hour;
+    }
+
     public void setData(Date data) {
         this.date = data;
     }
@@ -76,5 +91,9 @@ public class Event implements EventInterface{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String[] getArticleList() {
+        return this.articleList.split("#");
     }
 }
