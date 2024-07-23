@@ -146,4 +146,15 @@ public class UserUtility {
         }
         updateFileData(users);
     }
+    
+    public static void submitArticle(String CPF, String articleName, String eventID) {
+        ArrayList<User> users = UserUtility.getAllUsers();
+        ArrayList<Event> events = EventUtility.getAllEvents();
+        
+        for(User user : users) {
+            if(user.getCPF().equals(CPF) && events.equals(eventID)) {
+                
+            }
+        }
+    }
 }
