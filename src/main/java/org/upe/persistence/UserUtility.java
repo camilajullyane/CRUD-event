@@ -14,10 +14,14 @@ public class UserUtility {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newUserLine = line.split(",", -1);
-                User user = new User(newUserLine[0],
-                        newUserLine[1], newUserLine[2],
+                User user = new User(
+                        newUserLine[0],
+                        newUserLine[1],
+                        newUserLine[2],
                         newUserLine[3] == null ? "" : newUserLine[3],
-                        newUserLine[4] == null ? "" : newUserLine[4]);
+                        newUserLine[4] == null ? "" : newUserLine[4],
+                        newUserLine[5] == null ? "" : newUserLine[5]
+                );
                 usersArray.add(user);
             }
             reader.close();
@@ -35,7 +39,8 @@ public class UserUtility {
             BufferedWriter write = new BufferedWriter(new FileWriter(dbPath));
             write.write("name,email,cpf,attendeeOn,ownerOf\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(),user.CPF, user.attendeeOn, user.ownerOf);
+                String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(),user.CPF, user.attendeeOn,
+                        user.ownerOf);
                 write.write(line);
             }
             write.close();
@@ -45,23 +50,37 @@ public class UserUtility {
     }
 
     public static UserInterface findByCPF(String CPF) {
-        ArrayList<User> users = getAllUsers();
-        UserInterface userFound = null;
-        for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
-                userFound = new User(user.name, user.email, user.CPF, user.attendeeOn, user.ownerOf);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(dbPath));
+            reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] newUserLine = line.split(",", -1);
+                User user = new User(newUserLine[0],
+                        newUserLine[1], newUserLine[2],
+                        newUserLine[3] == null ? "" : newUserLine[3],
+                        newUserLine[4] == null ? "" : newUserLine[4],
+                        newUserLine[5] == null ? "" : newUserLine[5]);
+
+                if (user.getCPF().equals(CPF)) {
+                    reader.close();
+                    return user;
+                }
             }
+            reader.close();
+        } catch(IOException e) {
+            e.printStackTrace();
         }
-        if (userFound == null) {
-            return null;
-        } else {
-            return userFound;
-        }
+        return null;
     }
 
-    public static void createUser(String name, String CPF, String email) {
-        String newLine = String.format("%s,%s,%s,,", name, email,CPF);
+    public static UserInterface createUser(String name, String CPF, String email) {
+
+        if(findByCPF(CPF) != null) {
+            return null;
+        }
         try {
+            String newLine = String.format("%s,%s,%s,,,", name, email,CPF);
             FileWriter writer = new FileWriter(dbPath, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);
@@ -69,6 +88,7 @@ public class UserUtility {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return new User(name, CPF, email, "", "", "");
     }
 
     public static void updateUserEmail(String CPF, String newEmail) {
@@ -88,8 +108,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                int index = users.indexOf(user);
-                users.remove(index);
+                users.remove(user);
                 break;
             }
         }
@@ -146,15 +165,6 @@ public class UserUtility {
         }
         updateFileData(users);
     }
-    
-    public static void submitArticle(String CPF, String articleName, String eventID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
-        ArrayList<Event> events = EventUtility.getAllEvents();
-        
-        for(User user : users) {
-            if(user.getCPF().equals(CPF) && events.equals(eventID)) {
-                
-            }
-        }
-    }
+
+
 }
