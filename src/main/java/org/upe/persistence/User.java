@@ -12,15 +12,15 @@ public class User implements UserInterface {
     protected String email;
     protected String attendeeOn;
     protected String ownerOf;
-    protected String articleID;
+//    protected String articleID;
 
-    protected User(String name, String email, String CPF, String attendeeOn, String ownerOf, String articleID) {
+    protected User(String name, String email, String CPF, String attendeeOn, String ownerOf) {
         this.name = name;
         this.email = email;
         this.CPF = CPF;
         this.attendeeOn = attendeeOn;
         this.ownerOf = ownerOf;
-        this.articleID = articleID;
+//        this.articleID = articleID;
     }
 
     public String getCPF() {
@@ -43,8 +43,8 @@ public class User implements UserInterface {
         return this.ownerOf.split("#");
     }
 
-    public String getArticleID() {
-        return this.articleID;
-    }
+//    public String getArticleID() {
+//        return this.articleID;
+//    }
 }
 

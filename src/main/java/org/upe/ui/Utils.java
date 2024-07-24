@@ -11,17 +11,16 @@ import java.util.Scanner;
 
 public class Utils {
 
-    protected static Date validateDate() {
+    protected static String validateDate() {
         Scanner sc = new Scanner(System.in);
         final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-        DATE_FORMAT.setLenient(false); // This makes the date parsing strict
-        Date date = null;
+        String date = null;
         while (date == null) {
             try {
                 System.out.print("Digite a data (dd/MM/yyyy): ");
                 String dateString = sc.nextLine();
-                date = DATE_FORMAT.parse(dateString);
-                System.out.println(date);
+                Date dateInstance = DATE_FORMAT.parse(dateString);
+                date = DATE_FORMAT.format(dateInstance);
             } catch (ParseException e) {
                 System.out.println("Erro de formatação. Digite uma data válida.");
             }
