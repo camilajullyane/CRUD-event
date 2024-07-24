@@ -52,6 +52,22 @@ public class EventUtility {
         return events;
     }
 
+    public static EventInterface createEvent(String ownerCPF, String name, Date date, LocalTime hour, String local,
+                                             String organization, String description) {
+        String id = EventUtility.generateEventID();
+        try {
+            String newLine = String.format("%s,%s,%s,%s,%s,%s,%s,", id, ownerCPF, name, date, local, organization, description);
+            FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
+            writer.append(System.lineSeparator());
+            writer.append(newLine);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Event(id, ownerCPF, name, date, hour, local, organization, description, "", "");
+    }
+
+
     public static Event getEventById(String id) {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {

@@ -31,7 +31,6 @@ public class MyEvents {
                     System.out.println("Ver meus eventos");
                     break;
                 case "6":
-//                    System.out.println("Voltar ao menu");
                     return true;
             }
         }

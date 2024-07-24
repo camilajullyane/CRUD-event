@@ -5,6 +5,7 @@ import java.util.Date;
 import java.time.LocalTime;
 
 public class Event implements EventInterface{
+    private String ownerCPF;
     private String id;
     private String name;
     private Date date;
@@ -13,21 +14,21 @@ public class Event implements EventInterface{
     private String organization;
     private String description;
     private String articleList;
+    private String attendeesList;
 
-    // Construtores
-    public Event() {}
-
-    public Event(String id, String nome, Date data, LocalTime hour, String local, String organization, String description,
-                 String articleList) {
+    public Event(String id, String ownerCPF, String name, Date date, LocalTime hour, String local, String organization,
+                 String description,
+                 String articleList, String attendeesList) {
+        this.ownerCPF = ownerCPF;
         this.id = id;
-        this.name = nome;
-        this.date = data;
+        this.name = name;
+        this.date = date;
         this.hour = hour;
         this.local = local;
         this.organization = organization;
         this.description = description;
         this.articleList = articleList;
-
+        this.attendeesList = attendeesList;
     }
 
     // Métodos estáticos
