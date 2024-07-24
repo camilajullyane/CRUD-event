@@ -9,22 +9,17 @@ public class UserAuth {
     protected static void mainScreen() {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-        System.out.println("\nBEM VINDO AO EVEN2\n1 - Para fazer login\n2 - Para criar conta\n3 - Para sair");
+
         while (isRunning) {
+            System.out.println("\nBEM VINDO AO EVEN2\nDigite:\n[1] - Para fazer login\n[2] - Para criar conta\n[3] - Para sair");
             System.out.print("Escolha sua opção: ");
             String userInput = sc.nextLine();
             switch (userInput) {
                 case "1":
                     isRunning = login();
-                    if(isRunning) {
-                        System.out.println("\nBEM VINDO AO EVEN2\n1 - para fazer login\n2 - para criar conta\n3 - para sair");
-                    }
                     break;
                 case "2":
                     isRunning = signUp();
-                    if(isRunning) {
-                        System.out.println("\nBEM VINDO AO EVEN2\n1 - para fazer login\n2 - para criar conta\n3 - para sair");
-                    }
                     break;
                 case "3":
                     isRunning = false;

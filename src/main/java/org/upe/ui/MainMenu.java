@@ -6,22 +6,21 @@ import java.util.Scanner;
 
 
 public class MainMenu {
-
     protected static boolean menu(UserInterface user) {
-        UserInterface currentUserData = user;
         Scanner sc = new Scanner(System.in);
         System.out.println("Usuário LOGADO");
         System.out.println("Menu principal:");
         boolean isRunning = true;
         while (isRunning) {
-            System.out.printf("Usuário: %n");
+            System.out.printf("Usuário: %s\n", user.getName());
             System.out.println("[1] - Meus eventos\n[2] - Configurações da conta\n[3] - Sair da conta\n[4] - Fechar aplicativo");
-            System.out.println("Escolha sua opção: ");
+            System.out.print("Escolha sua opção: ");
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-                    isRunning = false;
                     System.out.println("ir pros meus eventos");
+                    isRunning = MyEvents.menuEvents(user);
+                    break;
                 case "2":
                     System.out.println("saindo...");
                     break;
