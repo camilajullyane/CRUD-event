@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class UserUtility {
-    private static final String dbPath = "DB/user.csv";
+    private static final String CSV_FILE_PATH = "DB/user.csv";
 
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(dbPath));
+            BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -34,7 +34,7 @@ public class UserUtility {
 
     private static void updateFileData(ArrayList<User> newData) {
         try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(dbPath));
+            BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
             write.write("name,email,cpf,attendeeOn,ownerOf\n");
             for (User user : newData) {
                 String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(),user.CPF, user.attendeeOn,
@@ -49,7 +49,7 @@ public class UserUtility {
 
     public static UserInterface findByCPF(String CPF) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(dbPath));
+            BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -79,7 +79,7 @@ public class UserUtility {
         }
         try {
             String newLine = String.format("%s,%s,%s,,,", name, email,CPF);
-            FileWriter writer = new FileWriter(dbPath, true);
+            FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);
             writer.close();

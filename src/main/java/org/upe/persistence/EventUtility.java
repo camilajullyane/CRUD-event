@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class EventUtility {
     private static final String CSV_FILE_PATH = "DB/event.csv";
@@ -36,14 +37,17 @@ public class EventUtility {
                 }
                 String[] values = line.split(",");
                 String id = values[0];
-                String name = values[1];
-                Date date = DATE_FORMAT.parse(values[2]);
-                LocalTime hour = LocalTime.parse(values[3], TIME_FORMATTER);
+                String ownerCPF = values[1];
+                String name = values[2];
+                Date date = DATE_FORMAT.parse(values[3]);
                 String local = values[4];
-                String organization = values[5];
-                String description = values[6];
-                String articleList = values[7];
-                Event event = new Event(id, name, date, hour, local, organization, description, articleList);
+                LocalTime hour = LocalTime.parse(values[5], TIME_FORMATTER);
+                String organization = values[6];
+                String description = values[7];
+                String articleList = values[8];
+                String attendeeList = values[9];
+                Event event = new Event(id,ownerCPF,name, date, hour, local,organization, description, articleList,
+                        attendeeList);
                 events.add(event);
             }
         } catch (IOException | ParseException e) {
@@ -187,4 +191,15 @@ public class EventUtility {
             return false;
         }
     }
+
+    public static String generateEventID() {
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString();
+
+        while (getEventById(uuidString) != null) {
+            uuidString = UUID.randomUUID().toString();
+        }
+        return uuidString;
+    }
+
 }

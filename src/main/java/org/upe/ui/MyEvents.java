@@ -1,11 +1,15 @@
 package org.upe.ui;
 
+import org.upe.controllers.EventController;
+import org.upe.persistence.EventInterface;
 import org.upe.persistence.UserInterface;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class MyEvents {
-
     public static boolean menuEvents(UserInterface user) {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
@@ -15,7 +19,7 @@ public class MyEvents {
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-                    isRunning = false;
+                    isRunning = createEventMenu(user);
                     System.out.println("Criar evento =)");
                     break;
                 case "2":
@@ -44,6 +48,41 @@ public class MyEvents {
                 "\n[4] - Submeter artigo" +
                 "\n[5] - Ver meus eventos" +
                 "\n[6] - Voltar ao menu");
+    }
+
+
+//    private static boolean showAllEvents() {
+//        Scanner sc = new Scanner(System.in);
+//        ArrayList<EventInterface> events = EventController.showAllEvents();
+//
+//        if (events.isEmpty()) {
+//            System.out.println("Não há eventos para mostrar.");
+//            return false;
+//        }
+//
+//        for (EventInterface event : events) {
+//            System.out.println(event);
+//        }
+//        return true;
+//    }
+
+
+    private static boolean createEventMenu(UserInterface user) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Criar evento");
+        System.out.print("Nome do evento: ");
+        String name = sc.nextLine();
+        System.out.print("Descrição do evento: ");
+        String description = sc.nextLine();
+        Date date = Utils.validateDate();
+        LocalTime hour = Utils.validateHour();
+        System.out.print("Nome do local: ");
+        String local = sc.nextLine();
+        System.out.print("Organização: ");
+        String organization = sc.nextLine();
+        EventController.createEvent(user, name, description, date, local, organization, hour);
+        return true;
     }
 
 }
