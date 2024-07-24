@@ -6,17 +6,18 @@ import java.time.LocalTime;
 import java.text.SimpleDateFormat;
 
 public class Event implements EventInterface{
+//    public String getCPF;
     private String ownerCPF;
     private String id;
     private String name;
-    private Date date;
+    private String date;
     private String local;
     private String organization;
     private String description;
     private String articleList;
     private String attendeesList;
 
-    public Event(String id, String ownerCPF, String name, Date date, String local, String organization,
+    public Event(String id, String ownerCPF, String name, String date, String local, String organization,
                  String description,
                  String articleList, String attendeesList) {
         this.ownerCPF = ownerCPF;
@@ -51,6 +52,9 @@ public class Event implements EventInterface{
         return name;
     }
 
+    public String getOwnerCPF() {
+        return this.ownerCPF;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -59,10 +63,6 @@ public class Event implements EventInterface{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = dateFormat.format(this.date);
         return formattedDate;
-    }
-
-    public void setData(Date data) {
-        this.date = data;
     }
 
     public String getLocal() {
@@ -93,5 +93,12 @@ public class Event implements EventInterface{
 
     public String[] getAttendeesList() {
         return this.attendeesList.split("#");
+    }
+
+    public String toString() {
+        return "Nome: " + this.name +
+                " | Data: " + this.date +
+                " | Local: " + this.local +
+                " | Descrição: " + this.description;
     }
 }

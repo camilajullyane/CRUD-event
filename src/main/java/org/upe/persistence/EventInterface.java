@@ -13,5 +13,5 @@ public interface EventInterface {
     void setOrganization(String organization);
     String getDescription();
     void setDescription(String description);
-
+    String toString();
 }

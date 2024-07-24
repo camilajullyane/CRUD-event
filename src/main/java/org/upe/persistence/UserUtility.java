@@ -19,8 +19,8 @@ public class UserUtility {
                         newUserLine[1],
                         newUserLine[2],
                         newUserLine[3] == null ? "" : newUserLine[3],
-                        newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5]
+                        newUserLine[4] == null ? "" : newUserLine[4]
+//                        newUserLine[5] == null ? "" : newUserLine[5]
                 );
                 usersArray.add(user);
             }
@@ -57,8 +57,7 @@ public class UserUtility {
                 User user = new User(newUserLine[0],
                         newUserLine[1], newUserLine[2],
                         newUserLine[3] == null ? "" : newUserLine[3],
-                        newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5]);
+                        newUserLine[4] == null ? "" : newUserLine[4]);
 
                 if (user.getCPF().equals(CPF)) {
                     reader.close();
@@ -86,7 +85,7 @@ public class UserUtility {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new User(name, CPF, email, "", "", "");
+        return new User(name, CPF, email, "", "");
     }
 
     public static void updateUserEmail(String CPF, String newEmail) {
@@ -126,7 +125,19 @@ public class UserUtility {
         UserUtility.updateFileData(users);
     }
 
-    public static void deleteAttendeeEvent(String CPF, String eventID) {
+    public static void addOwnerOnEvent(String CPF, String eventID) {
+        ArrayList<User> users = UserUtility.getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                user.ownerOf += "#" + eventID;
+                break;
+            }
+        }
+        UserUtility.updateFileData(users);
+    }
+
+    public static boolean deleteAttendeeEvent(String CPF, String eventID) {
         ArrayList<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
@@ -143,6 +154,7 @@ public class UserUtility {
             }
         }
         updateFileData(users);
+        return true;
     }
 
     public static void deleteOwnerOf(String CPF, String eventID) {

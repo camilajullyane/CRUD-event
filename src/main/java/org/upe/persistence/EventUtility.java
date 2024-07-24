@@ -10,6 +10,7 @@ import java.util.List;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import org.upe.persistence.User;
 
 public class EventUtility {
     private static final String CSV_FILE_PATH = "DB/event.csv";
@@ -30,37 +31,46 @@ public class EventUtility {
         ArrayList<Event> events = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             String line;
-            boolean isFirstLine = true;
+            reader.readLine();
             while ((line = reader.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false; // Skip header
-                    continue;
-                }
-                String[] values = line.split(",");
+                String[] values = line.split(",", -1);
                 String id = values[0];
                 String ownerCPF = values[1];
                 String name = values[2];
-                Date date = DATE_FORMAT.parse(values[3]);
+                String date = values[3];
                 String local = values[4];
                 String organization = values[5];
                 String description = values[6];
-                String articleList = values[7];
-                String attendeeList = values[8];
+                String articleList = values[7] == null ? "" : values[7];
+                String attendeeList = values[8] == null ? "" : values[8];
                 Event event = new Event(id,ownerCPF,name, date, local,organization, description, articleList,
                         attendeeList);
                 events.add(event);
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return events;
     }
 
-    public static EventInterface createEvent(String ownerCPF, String name, Date date, String local,
+    public static  ArrayList<Event> getAllEventsByUser(String ownerCPF) {
+        ArrayList<Event> allEvents = getAllEvents();
+        ArrayList<Event> userEvents = new ArrayList<>();
+
+        for (Event event : allEvents) {
+            if (event.getOwnerCPF().equals(ownerCPF)) {
+                userEvents.add(event);
+            }
+        }
+        return userEvents;
+    }
+
+    public static EventInterface createEvent(String ownerCPF, String name, String date, String local,
                                              String organization, String description) {
         String id = EventUtility.generateEventID();
+
         try {
-            String newLine = String.format("%s,%s,%s,%s,%s,%s,%s,", id, ownerCPF, name, date, local, organization, description);
+            String newLine = String.format("%s,%s,%s,%s,%s,%s,%s,,", id, ownerCPF, name, date, local, organization, description);
             FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);
@@ -68,6 +78,7 @@ public class EventUtility {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        UserUtility.addOwnerOnEvent(ownerCPF, id);
         return new Event(id, ownerCPF, name, date, local, organization, description, "", "");
     }
 
@@ -106,15 +117,15 @@ public class EventUtility {
     }
 
 
-    public static boolean updateEventName(String id, String newName) {
+    public static void updateEventName(String id, String newName) {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setName(newName);
-                return saveEvents(events);
+                saveEvents(events);
             }
         }
-        return false;
+//        return false;
     }
 
     // Update Description

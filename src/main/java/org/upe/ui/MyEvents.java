@@ -1,39 +1,34 @@
 package org.upe.ui;
 
 import org.upe.controllers.EventController;
-import org.upe.persistence.EventInterface;
-import org.upe.persistence.UserInterface;
+import org.upe.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.time.LocalTime;
 import java.util.Scanner;
 
 public class MyEvents {
     public static boolean menuEvents(UserInterface user) {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-        showMyEventsMenu();
 
         while (isRunning) {
+            showMyEventsMenu();
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-                    System.out.println("Criar evento =)");
                     isRunning = createEventMenu(user);
                     break;
                 case "2":
-                    System.out.println("Participar de um evento");
                     isRunning = showAllEvents();
                     break;
                 case "3":
-                    System.out.println("Sair de um evento");
+                    //isRunning = exitEvent();
                     break;
                 case "4":
-                    System.out.println("Submeter artigo");
+                    System.out.println("---Submeter artigo---");
                     break;
                 case "5":
-                    System.out.println("Ver meus eventos");
+                    isRunning = myEvents(user.getCPF());
                     break;
                 case "6":
                     return true;
@@ -52,40 +47,88 @@ public class MyEvents {
     }
 
 
-    private static boolean showAllEvents() {
+    private static void eventsConfig(String eventID, String CPF) {
         Scanner sc = new Scanner(System.in);
+
+        System.out.println("[1] - Atualizar nome do evento\n" +
+                "[2] - Atualizar descrição\n" +
+                "[3] - Atualizar organização\n" +
+                "[4] - Atualizar local\n + " +
+                "[5] - Atualizar data\n");
+
+        int option = sc.nextInt();
+        switch (option) {
+            case 1:
+
+
+                break;
+        }
+    }
+
+
+    private static boolean showAllEvents() {
+        System.out.println("---Participar de um evento---");
         ArrayList<EventInterface> events = EventController.showAllEvents();
+        int cont = 0;
 
         if (events.isEmpty()) {
             System.out.println("Não há eventos para mostrar.");
-            return false;
         }
 
         for (EventInterface event : events) {
-            System.out.println(event);
+            cont++;
+            System.out.println(event.toString());
         }
         return true;
     }
 
+    private static boolean myEvents(String ownerCPF) {
+        System.out.println("---Ver meus eventos---");
+
+        ArrayList<EventInterface> myEvents = EventController.eventByUser(ownerCPF);
+//        int cont = 0;
+
+        if (myEvents.isEmpty()) {
+            System.out.println("Não há eventos para mostrar.");
+        }
+
+        for (EventInterface event : myEvents) {
+            System.out.println(event.toString());
+        }
+        return true;
+    }
+
+//    private static boolean addAttendeeOnEvent(String CPF, String eventID) {
+//
+//    }
 
     private static boolean createEventMenu(UserInterface user) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Criar evento");
+        System.out.println("----Criar evento----");
         System.out.print("Nome do evento: ");
         String name = sc.nextLine();
         System.out.print("Descrição do evento: ");
         String description = sc.nextLine();
-        Date date = Utils.validateDate();
+        String date = Utils.validateDate();
         System.out.print("Nome do local: ");
         String local = sc.nextLine();
         System.out.print("Organização: ");
         String organization = sc.nextLine();
-        EventController.createEvent(user, name, description, date, local, organization);
+        EventInterface event = EventController.createEvent(user, name, description, date, local, organization);
+        System.out.printf("Evento %s criado\n", event.getName());
         return true;
     }
 
     private static boolean exitEvent() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("---Sair de um evento---");
+
+        System.out.print("Digite o número do evento que você quer sair: ");
+        String name = sc.nextLine();
+
+//        boolean event = EventController.deleteEvent();
         return true;
     }
 }
