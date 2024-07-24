@@ -14,15 +14,16 @@ public class Utils {
     protected static Date validateDate() {
         Scanner sc = new Scanner(System.in);
         final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+        DATE_FORMAT.setLenient(false); // This makes the date parsing strict
         Date date = null;
         while (date == null) {
             try {
-                System.out.print("Digite a data (): ");
+                System.out.print("Digite a data (dd/MM/yyyy): ");
                 String dateString = sc.nextLine();
                 date = DATE_FORMAT.parse(dateString);
-                return date;
+                System.out.println(date);
             } catch (ParseException e) {
-                System.out.print("Erro de formatação. Digite uma data válida.");
+                System.out.println("Erro de formatação. Digite uma data válida.");
             }
         }
         return date;

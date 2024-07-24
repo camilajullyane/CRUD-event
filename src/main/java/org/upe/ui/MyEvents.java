@@ -19,11 +19,12 @@ public class MyEvents {
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-                    isRunning = createEventMenu(user);
                     System.out.println("Criar evento =)");
+                    isRunning = createEventMenu(user);
                     break;
                 case "2":
                     System.out.println("Participar de um evento");
+                    isRunning = showAllEvents();
                     break;
                 case "3":
                     System.out.println("Sair de um evento");
@@ -51,20 +52,20 @@ public class MyEvents {
     }
 
 
-//    private static boolean showAllEvents() {
-//        Scanner sc = new Scanner(System.in);
-//        ArrayList<EventInterface> events = EventController.showAllEvents();
-//
-//        if (events.isEmpty()) {
-//            System.out.println("Não há eventos para mostrar.");
-//            return false;
-//        }
-//
-//        for (EventInterface event : events) {
-//            System.out.println(event);
-//        }
-//        return true;
-//    }
+    private static boolean showAllEvents() {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<EventInterface> events = EventController.showAllEvents();
+
+        if (events.isEmpty()) {
+            System.out.println("Não há eventos para mostrar.");
+            return false;
+        }
+
+        for (EventInterface event : events) {
+            System.out.println(event);
+        }
+        return true;
+    }
 
 
     private static boolean createEventMenu(UserInterface user) {
@@ -76,13 +77,15 @@ public class MyEvents {
         System.out.print("Descrição do evento: ");
         String description = sc.nextLine();
         Date date = Utils.validateDate();
-        LocalTime hour = Utils.validateHour();
         System.out.print("Nome do local: ");
         String local = sc.nextLine();
         System.out.print("Organização: ");
         String organization = sc.nextLine();
-        EventController.createEvent(user, name, description, date, local, organization, hour);
+        EventController.createEvent(user, name, description, date, local, organization);
         return true;
     }
 
+    private static boolean exitEvent() {
+        return true;
+    }
 }

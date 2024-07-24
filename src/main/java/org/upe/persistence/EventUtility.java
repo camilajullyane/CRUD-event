@@ -1,6 +1,7 @@
 package org.upe.persistence;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class EventUtility {
     private static final String CSV_FILE_PATH = "DB/event.csv";
     private static final String[] HEADER = {"id", "name", "date", "local", "organization", "description"};
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     // Create
@@ -41,12 +42,11 @@ public class EventUtility {
                 String name = values[2];
                 Date date = DATE_FORMAT.parse(values[3]);
                 String local = values[4];
-                LocalTime hour = LocalTime.parse(values[5], TIME_FORMATTER);
-                String organization = values[6];
-                String description = values[7];
-                String articleList = values[8];
-                String attendeeList = values[9];
-                Event event = new Event(id,ownerCPF,name, date, hour, local,organization, description, articleList,
+                String organization = values[5];
+                String description = values[6];
+                String articleList = values[7];
+                String attendeeList = values[8];
+                Event event = new Event(id,ownerCPF,name, date, local,organization, description, articleList,
                         attendeeList);
                 events.add(event);
             }
@@ -56,7 +56,7 @@ public class EventUtility {
         return events;
     }
 
-    public static EventInterface createEvent(String ownerCPF, String name, Date date, LocalTime hour, String local,
+    public static EventInterface createEvent(String ownerCPF, String name, Date date, String local,
                                              String organization, String description) {
         String id = EventUtility.generateEventID();
         try {
@@ -68,7 +68,7 @@ public class EventUtility {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Event(id, ownerCPF, name, date, hour, local, organization, description, "", "");
+        return new Event(id, ownerCPF, name, date, local, organization, description, "", "");
     }
 
 
@@ -105,16 +105,6 @@ public class EventUtility {
         return false;
     }
 
-    public static boolean updateEventHour(String id, LocalTime newHour) {
-        ArrayList<Event> events = getAllEvents();
-        for (Event event : events) {
-            if (event.getId().equals(id)) {
-                event.setHour(newHour);
-                return saveEvents(events);
-            }
-        }
-        return false;
-    }
 
     public static boolean updateEventName(String id, String newName) {
         ArrayList<Event> events = getAllEvents();
@@ -175,12 +165,10 @@ public class EventUtility {
                 String[] data = {
                         event.getId(),
                         event.getName(),
-                        DATE_FORMAT.format(event.getData()),
-                        event.getHour().format(TIME_FORMATTER),
+                        event.getDate(),
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
-
                 };
                 writer.write(String.join(",", data));
                 writer.newLine();

@@ -11,15 +11,15 @@ import java.util.ArrayList;
 
 public interface EventController {
     static EventInterface createEvent(UserInterface user, String name, String description, Date date, String local,
-                                      String organization,
-                                      LocalTime hour) {
-        EventInterface event = EventUtility.createEvent(user.getCPF(), name, date, hour, local, organization, description);
+                                      String organization) {
+        EventInterface event = EventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
         return null;
     }
 
-//    static ArrayList<EventInterface> showAllEvents() {
-//        ArrayList<EventInterface> events = EventUtility.getAllEvents();
-//
-//        return events;
-//    }
+    static ArrayList<EventInterface> showAllEvents() {
+        ArrayList<Event> events = EventUtility.getAllEvents();
+        return new ArrayList<EventInterface>(events);
+    }
+
+
 }

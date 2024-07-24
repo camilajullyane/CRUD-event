@@ -3,27 +3,26 @@ package org.upe.persistence;
 import java.util.UUID;
 import java.util.Date;
 import java.time.LocalTime;
+import java.text.SimpleDateFormat;
 
 public class Event implements EventInterface{
     private String ownerCPF;
     private String id;
     private String name;
     private Date date;
-    private LocalTime hour;
     private String local;
     private String organization;
     private String description;
     private String articleList;
     private String attendeesList;
 
-    public Event(String id, String ownerCPF, String name, Date date, LocalTime hour, String local, String organization,
+    public Event(String id, String ownerCPF, String name, Date date, String local, String organization,
                  String description,
                  String articleList, String attendeesList) {
         this.ownerCPF = ownerCPF;
         this.id = id;
         this.name = name;
         this.date = date;
-        this.hour = hour;
         this.local = local;
         this.organization = organization;
         this.description = description;
@@ -56,16 +55,10 @@ public class Event implements EventInterface{
         this.name = name;
     }
 
-    public Date getData() {
-        return date;
-    }
-
-    public LocalTime getHour(){
-        return hour;
-    }
-
-    public void setHour(LocalTime hour){
-        this.hour = hour;
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(this.date);
+        return formattedDate;
     }
 
     public void setData(Date data) {
