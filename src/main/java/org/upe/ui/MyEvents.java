@@ -77,7 +77,7 @@ public class MyEvents {
 
         for (EventInterface event : events) {
             cont++;
-            System.out.println(event.toString());
+            System.out.println(event.toString(cont));
         }
         return true;
     }
