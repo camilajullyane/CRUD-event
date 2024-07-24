@@ -1,11 +1,15 @@
 package org.upe.ui;
 
 import org.upe.controllers.AuthInterface;
-import org.upe.persistence.UserInterface;
+import org.upe.controllers.UserController;
+import org.upe.persistence.User;
 
 import java.util.Scanner;
 
 public class UserAuth {
+
+    private static AuthInterface authController = new UserController();
+
     protected static void mainScreen() {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
@@ -33,15 +37,16 @@ public class UserAuth {
 
     protected static boolean login() {
         Scanner sc = new Scanner(System.in);
-        UserInterface user;
+        User user;
         while (true) {
             System.out.print("Digite seu CPF: ");
             String userInput = sc.nextLine();
             if (userInput.length() != 11) {
                 System.out.print("Formato inválido de CPF. ");
-
-            } else if ((user = AuthInterface.loginUser(userInput)) != null) {
+            } else if ((user = authController.loginUser(userInput)) != null) {
                 return MainMenu.menu(user);
+            } else {
+                System.out.println("CPF não encontrado.");
             }
         }
     }
@@ -63,7 +68,7 @@ public class UserAuth {
         System.out.print("Digite seu email: ");
         String email = sc.nextLine();
 
-        UserInterface signUpValidate = AuthInterface.signUpUser(name, CPF, email);
+        User signUpValidate = authController.signUpUser(name, CPF, email);
 
         if(signUpValidate == null) {
             System.out.println("CPF já cadastrado. Faça login!");
@@ -73,4 +78,3 @@ public class UserAuth {
         }
     }
 }
-

@@ -1,25 +1,28 @@
 package org.upe.controllers;
 
-import org.upe.persistence.UserInterface;
+import org.upe.persistence.User;
 import org.upe.persistence.UserUtility;
+import java.util.List;
 
-import java.util.ArrayList;
+public interface AuthInterface {
 
-public interface AuthInterface  {
-    static UserInterface loginUser(String CPF) {
-        UserInterface userData = UserUtility.findByCPF(CPF);
-        if (userData != null) {
-            return userData;
-        }
-        return null;
-    }
+    User loginUser(String CPF);
 
-    static UserInterface signUpUser(String name, String CPF, String email) {
-        UserInterface userData = UserUtility.createUser(name, CPF, email);
+    User signUpUser(String name, String CPF, String email);
 
-        if(userData != null) {
-            return userData;
-        }
-        return null;
-    }
+    User createUser(String name, String CPF, String email);
+
+    User getUserByCPF(String CPF);
+
+    void updateUserEmail(String CPF, String newEmail);
+
+    void deleteUser(String CPF);
+
+    void addAttendeeOnEvent(String CPF, String eventID);
+
+    void deleteAttendeeEvent(String CPF, String eventID);
+
+    void deleteOwnerOf(String CPF, String eventID);
+
+    List<User> getAllUsers();
 }
