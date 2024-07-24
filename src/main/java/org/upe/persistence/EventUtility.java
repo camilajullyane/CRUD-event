@@ -1,6 +1,7 @@
 package org.upe.persistence;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,11 +9,12 @@ import java.util.Date;
 import java.util.List;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class EventUtility {
     private static final String CSV_FILE_PATH = "DB/event.csv";
     private static final String[] HEADER = {"id", "name", "date", "local", "organization", "description"};
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     // Create
@@ -36,14 +38,16 @@ public class EventUtility {
                 }
                 String[] values = line.split(",");
                 String id = values[0];
-                String name = values[1];
-                Date date = DATE_FORMAT.parse(values[2]);
-                LocalTime hour = LocalTime.parse(values[3], TIME_FORMATTER);
+                String ownerCPF = values[1];
+                String name = values[2];
+                Date date = DATE_FORMAT.parse(values[3]);
                 String local = values[4];
                 String organization = values[5];
                 String description = values[6];
                 String articleList = values[7];
-                Event event = new Event(id, name, date, hour, local, organization, description, articleList);
+                String attendeeList = values[8];
+                Event event = new Event(id,ownerCPF,name, date, local,organization, description, articleList,
+                        attendeeList);
                 events.add(event);
             }
         } catch (IOException | ParseException e) {
@@ -51,6 +55,22 @@ public class EventUtility {
         }
         return events;
     }
+
+    public static EventInterface createEvent(String ownerCPF, String name, Date date, String local,
+                                             String organization, String description) {
+        String id = EventUtility.generateEventID();
+        try {
+            String newLine = String.format("%s,%s,%s,%s,%s,%s,%s,", id, ownerCPF, name, date, local, organization, description);
+            FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
+            writer.append(System.lineSeparator());
+            writer.append(newLine);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Event(id, ownerCPF, name, date, local, organization, description, "", "");
+    }
+
 
     public static Event getEventById(String id) {
         ArrayList<Event> events = getAllEvents();
@@ -85,16 +105,6 @@ public class EventUtility {
         return false;
     }
 
-    public static boolean updateEventHour(String id, LocalTime newHour) {
-        ArrayList<Event> events = getAllEvents();
-        for (Event event : events) {
-            if (event.getId().equals(id)) {
-                event.setHour(newHour);
-                return saveEvents(events);
-            }
-        }
-        return false;
-    }
 
     public static boolean updateEventName(String id, String newName) {
         ArrayList<Event> events = getAllEvents();
@@ -155,12 +165,10 @@ public class EventUtility {
                 String[] data = {
                         event.getId(),
                         event.getName(),
-                        DATE_FORMAT.format(event.getData()),
-                        event.getHour().format(TIME_FORMATTER),
+                        event.getDate(),
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
-
                 };
                 writer.write(String.join(",", data));
                 writer.newLine();
@@ -171,4 +179,15 @@ public class EventUtility {
             return false;
         }
     }
+
+    public static String generateEventID() {
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString();
+
+        while (getEventById(uuidString) != null) {
+            uuidString = UUID.randomUUID().toString();
+        }
+        return uuidString;
+    }
+
 }

@@ -1,7 +1,2 @@
-id,name,date,local,organization,description,articleID
-33aa7bc4-166c-484f-b44c-7083663c6fce,Evento Teste 1,22-07-2024,Local 1,Organização 1,Descrição 1,
-2a2814ab-7532-420a-8bc4-21e774da2cc9,Evento Teste 2,15-08-2024,Local 2,Organização 2,Descrição 2,
-6501c9df-40ab-4ddc-9dff-012692fd80c3,Evento Teste 3,10-09-2024,Local 3,Organização 3,Descrição 3,
-940a39ac-b9ba-4147-b5ac-6a1b20c8a8f3,Evento Teste 1,22-07-2024,Local 1,Organização 1,Descrição 1,
-b34d2ed5-4107-499d-be58-e0e2fe89c970,Evento Teste 2,15-08-2024,Local 2,Organização 2,Descrição 2,
-388217dd-3af2-42ad-89c4-7669981a5750,Evento Teste 3,10-09-2024,Local 3,Organização 3,Descrição 3,
+id,ownerCPF,name,date,local,organization,description,articleID,attendeesCPF
+4f653bff-9c8c-4e56-8db4-35c6f2a9fc6a,12022262484,Festa,Wed Dec 12 00:00:00 BRST 2012,Casa de Vitu,Vitu,Festinha,
