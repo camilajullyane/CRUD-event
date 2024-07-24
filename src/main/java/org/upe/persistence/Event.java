@@ -101,4 +101,14 @@ public class Event implements EventInterface{
                 " | Local: " + this.local +
                 " | Descrição: " + this.description;
     }
+
+    public String toString(int position) {
+        return "Evento["+ position+"] - " +
+                "Nome: "+ this.name +
+                " | Data: " + this.date +
+                " | Local: " + this.local +
+                " | Descrição: " + this.description;
+    }
+
+
 }

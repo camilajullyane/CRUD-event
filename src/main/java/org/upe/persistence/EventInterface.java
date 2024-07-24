@@ -14,4 +14,5 @@ public interface EventInterface {
     String getDescription();
     void setDescription(String description);
     String toString();
+    String toString(int position);
 }
