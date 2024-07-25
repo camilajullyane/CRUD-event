@@ -18,7 +18,7 @@ public class MainMenu {
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-                    System.out.println("ir pros meus eventos");
+//                    System.out.println("ir pros meus eventos");
                     isRunning = MyEvents.menuEvents(user);
                     break;
                 case "2":

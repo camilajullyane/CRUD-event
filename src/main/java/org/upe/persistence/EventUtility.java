@@ -78,19 +78,13 @@ public class EventUtility {
 
     public static EventInterface createEvent(String ownerCPF, String name, String date, String local,
                                              String organization, String description) {
+        ArrayList<Event> events = EventUtility.getAllEvents();
         String id = EventUtility.generateEventID();
-
-        try {
-            String newLine = String.format("%s,%s,%s,%s,%s,%s,%s,,", id, ownerCPF, name, date, local, organization, description);
-            FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
-            writer.append(System.lineSeparator());
-            writer.append(newLine);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Event newEvent = new Event(id, ownerCPF, name, date, local, organization, description, "");
+        events.add(newEvent);
+        EventUtility.saveEvents(events);
         UserUtility.addOwnerOnEvent(ownerCPF, id);
-        return new Event(id, ownerCPF, name, date, local, organization, description, "");
+        return newEvent;
     }
 
 
@@ -124,11 +118,11 @@ public class EventUtility {
                 return saveEvents(events);
             }
         }
-        return false;
+        return true;
     }
 
 
-    public static void updateEventName(String id, String newName) {
+    public static boolean updateEventName(String id, String newName) {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
@@ -136,7 +130,7 @@ public class EventUtility {
                 saveEvents(events);
             }
         }
-//        return false;
+        return true;
     }
 
     // Update Description
@@ -148,7 +142,7 @@ public class EventUtility {
                 return saveEvents(events);
             }
         }
-        return false;
+        return true;
     }
 
     // Update Organization
@@ -160,15 +154,28 @@ public class EventUtility {
                 return saveEvents(events);
             }
         }
-        return false;
+        return true;
+    }
+
+    public static boolean updateEventDate(String id, String newDate) {
+        ArrayList<Event> events = getAllEvents();
+        for (Event event : events) {
+            if (event.getId().equals(id)) {
+                event.organization = newDate;
+                return saveEvents(events);
+            }
+        }
+        return true;
     }
 
     // Delete
     public static boolean deleteEvent(String id) {
         ArrayList<Event> events = getAllEvents();
+        events.size();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
                 events.remove(i);
+                System.out.println(events.size());
                 return saveEvents(events);
             }
         }
@@ -197,17 +204,18 @@ public class EventUtility {
                 for (int i = 0; i < event.getAttendeesList().length; i++) {
                     String id = event.getAttendeesList()[i];
                     if (!id.equals(CPF)) {
-                        newString += id + "#";
+                        if (!newString.isEmpty()) {
+                            newString += "#";
+                        }
+                        newString += id;
                     }
                 }
-                event.attendeesList = newString.substring(0, newString.length() - 1);
-                break;
+                event.attendeesList = newString;
             }
         }
         saveEvents(events);
     }
-
-
+        
 
     private static boolean saveEvents(List<Event> events) {
         try {
@@ -219,7 +227,6 @@ public class EventUtility {
                         event.organization, event.description, event.attendeesList);
                 write.write(line);
             }
-
             write.close();
             return true;
         } catch (IOException e) {

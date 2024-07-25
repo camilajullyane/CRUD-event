@@ -69,4 +69,27 @@ public class Utils {
         }
         return null;
     }
+
+    protected static EventInterface chooseEventToLeave(ArrayList<EventInterface> myEvents) {
+        Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.print("Qual evento você quer Sair? (-1 para voltar) ");
+            String input = sc.nextLine();
+            if (input.equals("-1")) {
+                return null;
+            } else if (input.matches("\\d+") || input.equals("0")) {
+                int eventNumber = Integer.parseInt(input);
+                if (eventNumber < myEvents.size()) {
+                    return myEvents.get(eventNumber);
+                } else {
+                    System.out.print("[ERRO] Número do evento inválido.");
+                }
+            } else {
+                System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
+            }
+        }
+        return null;
+    }
+
 }
