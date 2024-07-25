@@ -1,11 +1,14 @@
 package org.upe.ui;
 
+import org.upe.persistence.EventInterface;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -43,5 +46,27 @@ public class Utils {
             }
         }
         return hour;
+    }
+
+    protected static EventInterface chooseEventOnList(ArrayList<EventInterface> myEvents) {
+        Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.print("Qual evento você quer editar? (-1 para voltar) ");
+            String input = sc.nextLine();
+            if (input.equals("-1")) {
+                return null;
+            } else if (input.matches("\\d+") || input.equals("0")) { // Verifica se a entrada contém apenas números
+                int eventNumber = Integer.parseInt(input);
+                if (eventNumber < myEvents.size()) {
+                    return myEvents.get(eventNumber);
+                } else {
+                    System.out.print("[ERRO] Número do evento inválido.");
+                }
+            } else {
+                System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
+            }
+        }
+        return null;
     }
 }

@@ -17,22 +17,10 @@ public interface EventController {
         return new ArrayList<EventInterface>(events);
     }
 
-    static boolean deleteEvent(String CPF, String eventID) {
-        boolean user = UserUtility.deleteAttendeeEvent(CPF, eventID);
-
-        return true;
-    }
-
     static ArrayList<EventInterface> eventByUser(String ownerCPF) {
         ArrayList<Event> eventByUser = EventUtility.getAllEventsByUser(ownerCPF);
 
         return new ArrayList<EventInterface>(eventByUser);
-    }
-
-    static ArrayList<EventInterface> userEventsIn(String ownerCPF) {
-        ArrayList<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
-
-        return new ArrayList<EventInterface>(userEventsIn);
     }
 
     static boolean addAttendeeOnList(UserInterface user, EventInterface event) {
@@ -45,7 +33,15 @@ public interface EventController {
         UserUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
         return true;
     }
-//    static boolean updateEventName(String CPF, String eventID) {
-//
-//    }
+
+    static boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
+        for(String eventID : event.getAttendeesList()) {
+            if(eventID.equals(event.getId())) {
+                EventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
+                return true;
+            }
+        }
+        return false;
+
+    }
 }
