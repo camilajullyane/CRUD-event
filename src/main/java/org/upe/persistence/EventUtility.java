@@ -12,7 +12,6 @@ import org.upe.persistence.User;
 
 public class EventUtility {
     private static final String CSV_FILE_PATH = "DB/event.csv";
-    private static final String[] HEADER = {"id", "ownerCPF","name", "date", "local", "organization", "description", "attendeesList"};
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     // Create
@@ -38,10 +37,9 @@ public class EventUtility {
                 String local = values[4];
                 String organization = values[5];
                 String description = values[6];
-                String articleList = values[7] == null ? "" : values[7];
-                String attendeeList = values[8] == null ? "" : values[8];
-                Event event = new Event(id,ownerCPF,name, date, local,organization, description, articleList,
-                        attendeeList);
+//                String articleList = values[7] == null ? "" : values[7];
+                String attendeeList = values[7] == null ? "" : values[7];
+                Event event = new Event(id,ownerCPF,name, date, local,organization, description, attendeeList);
                 events.add(event);
             }
         } catch (IOException e) {
@@ -92,7 +90,7 @@ public class EventUtility {
             e.printStackTrace();
         }
         UserUtility.addOwnerOnEvent(ownerCPF, id);
-        return new Event(id, ownerCPF, name, date, local, organization, description, "", "");
+        return new Event(id, ownerCPF, name, date, local, organization, description, "");
     }
 
 
@@ -183,7 +181,7 @@ public class EventUtility {
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.attendeesList += event.attendeesList.isEmpty() ? eventID : "#" + eventID;
+                event.attendeesList += event.attendeesList.isEmpty() ? CPF : "#" + CPF;
                 break;
             }
         }
@@ -192,26 +190,17 @@ public class EventUtility {
 
 
     private static boolean saveEvents(List<Event> events) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
-            // Write header
-            writer.write(String.join(",", HEADER));
-            writer.newLine();
-
-            // Write event data
+        try {
+            BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+            write.write("id,ownerCPF,name,date,local,organization,description,attendeesList\n");
             for (Event event : events) {
-                String[] data = {
-                        event.getId(),
-                        event.getName(),
-                        event.getDate(),
-                        event.getLocal(),
-                        event.getOrganization(),
-                        event.getDescription(),
-                        event.attendeesList,
-                        event.articleList
-                };
-                writer.write(String.join(",", data));
-                writer.newLine();
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s\n", event.id, event.ownerCPF, event.name, event.date,
+                        event.local,
+                        event.organization, event.description, event.attendeesList);
+                write.write(line);
             }
+
+            write.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
