@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class UserUtility {
-    private static final String CSV_FILE_PATH = "DB/user.csv";
+    protected static String CSV_FILE_PATH = "DB/user.csv";
 
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
@@ -72,7 +72,7 @@ public class UserUtility {
         return null;
     }
 
-    public static UserInterface createUser(String name, String CPF, String email) {
+    public static UserInterface createUser(String name,  String email, String CPF) {
 
         if(findByCPF(CPF) != null) {
             return null;
