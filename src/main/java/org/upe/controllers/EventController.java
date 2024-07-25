@@ -40,6 +40,7 @@ public interface EventController {
         for (String attendeeCPF : event.getAttendeesList()) {
             if (attendeeCPF.equals(user.getCPF())) {
                 EventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
+                UserUtility.deleteAttendeeEvent(user.getCPF(), event.getId());
                 return true;
             }
         }
@@ -76,8 +77,9 @@ public interface EventController {
         return true;
     }
 
-    static boolean deleteEvent(String id) {
+    static boolean deleteEvent(String id, UserInterface user) {
         EventUtility.deleteEvent(id);
+        UserUtility.deleteOwnerOf(id, user.getCPF());
 
         return true;
     }

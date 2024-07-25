@@ -38,7 +38,7 @@ public class UserUtility {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
             write.write("name,email,cpf,attendeeOn,ownerOf\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(),user.CPF, user.attendeeOn,
+                String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(), user.CPF, user.attendeeOn,
                         user.ownerOf);
                 write.write(line);
             }
@@ -147,10 +147,13 @@ public class UserUtility {
                 for (int i = 0; i < user.getAttendeeOn().length; i++) {
                     String id = user.getAttendeeOn()[i];
                     if (!id.equals(eventID)) {
-                        newString += id + "#";
+                        if (!newString.isEmpty()) {
+                            newString += "#";
+                        }
+                        newString += id;
                     }
                 }
-                user.attendeeOn = newString.substring(0, newString.length() - 1);
+                user.attendeeOn = newString;
                 break;
             }
         }
@@ -167,15 +170,16 @@ public class UserUtility {
                 for (int i = 0; i < user.getOwnerOf().length; i++) {
                     String id = user.getOwnerOf()[i];
                     if (!id.equals(eventID)) {
-                        newString += id + "#";
+                        if (!newString.isEmpty()) {
+                            newString += "#";
+                        }
+                        newString += id;
                     }
                 }
-                user.ownerOf = newString.substring(0, newString.length() - 1);
+                user.ownerOf = newString;
                 break;
             }
         }
         updateFileData(users);
     }
-
-
 }

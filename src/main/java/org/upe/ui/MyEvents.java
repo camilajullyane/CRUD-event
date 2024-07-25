@@ -24,7 +24,7 @@ public class MyEvents {
                     isRunning = userEnterEvent(user);
                     break;
                 case "3":
-                    isRunning = exitEvent(user);
+                    isRunning = userExitEvent(user);
                     break;
                 case "4":
                     System.out.println("---Submeter artigo---");
@@ -153,7 +153,7 @@ public class MyEvents {
                     isRunning = editEventOrganization(myEvent.getId());
                     break;
                 case "6":
-                    isRunning = deleteEvent(myEvent.getId());
+                    isRunning = deleteEvent(myEvent.getId(), user);
                     break;
                 case "7":
                     return false;
@@ -221,8 +221,8 @@ public class MyEvents {
         return newOrganization;
     }
 
-    private static boolean deleteEvent(String id) {
-        boolean eventDel = EventController.deleteEvent(id);
+    private static boolean deleteEvent(String id, UserInterface user) {
+        boolean eventDel = EventController.deleteEvent(id, user);
         System.out.println("Evento deletado!");
 
         return eventDel;
@@ -248,7 +248,7 @@ public class MyEvents {
     }
 
 
-    private static boolean exitEvent(UserInterface user) {
+    private static boolean userExitEvent(UserInterface user) {
         ArrayList<EventInterface> myEvents = UserController.userEventsIn(user.getCPF());
 
         int cont = 0;
@@ -261,6 +261,7 @@ public class MyEvents {
             System.out.println(event.toString(cont));
             cont++;
         }
+
         EventInterface event = Utils.chooseEventToLeave(myEvents);
 
         if(event == null) {
