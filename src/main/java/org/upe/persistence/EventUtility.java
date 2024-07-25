@@ -175,7 +175,6 @@ public class EventUtility {
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
                 events.remove(i);
-                System.out.println(events.size());
                 return saveEvents(events);
             }
         }

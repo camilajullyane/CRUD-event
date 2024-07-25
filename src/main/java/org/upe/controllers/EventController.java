@@ -79,7 +79,7 @@ public interface EventController {
 
     static boolean deleteEvent(String id, UserInterface user) {
         EventUtility.deleteEvent(id);
-        UserUtility.deleteOwnerOf(id, user.getCPF());
+        UserUtility.deleteOwnerOf(user.getCPF(), id);
 
         return true;
     }
