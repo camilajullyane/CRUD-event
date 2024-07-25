@@ -11,11 +11,11 @@ import java.util.UUID;
 import org.upe.persistence.User;
 
 public class EventUtility {
-    private static final String CSV_FILE_PATH = "DB/event.csv";
+    protected static String CSV_FILE_PATH = "DB/event.csv";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     // Create
-    public boolean addEvent(Event event) {
+    public static boolean addEvent(Event event) {
         ArrayList<Event> events = getAllEvents();
         event.id = Event.generateID(); // Define a new unique ID
         events.add(event);

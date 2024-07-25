@@ -14,7 +14,7 @@ public class User implements UserInterface {
     protected String ownerOf;
 //    protected String articleID;
 
-    protected User(String name, String email, String CPF, String attendeeOn, String ownerOf) {
+    protected User(String name ,String email, String CPF, String attendeeOn, String ownerOf) {
         this.name = name;
         this.email = email;
         this.CPF = CPF;
