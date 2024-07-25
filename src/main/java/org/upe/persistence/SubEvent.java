@@ -12,10 +12,10 @@
 //    private List<String> speakers;
 //
 //    // Construtor
-//    public SubEvent(String id, String name, Date date, LocalTime hour, String local, String organization, String description,
+//    public SubEvent(String id, String name, String date, String hour, String local, String organization, String description,
 //                    String articleList,
 //                    String parentEventId, String subEventType, List<String> speakers) {
-//        super(id, name, date, hour, local, organization, description, articleList, "", "");
+//        super(id, name, date, hour, local, organization, description, articleList, "");
 //        this.parentEventId = parentEventId;
 //        this.subEventType = subEventType;
 //        this.speakers = speakers;

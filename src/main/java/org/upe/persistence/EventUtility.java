@@ -37,8 +37,9 @@ public class EventUtility {
                 String local = values[4];
                 String organization = values[5];
                 String description = values[6];
-//                String articleList = values[7] == null ? "" : values[7];
                 String attendeeList = values[7] == null ? "" : values[7];
+//                String articleList = values[8] == null ? "" : values[8];
+
                 Event event = new Event(id,ownerCPF,name, date, local,organization, description, attendeeList);
                 events.add(event);
             }
@@ -215,7 +216,7 @@ public class EventUtility {
         }
         saveEvents(events);
     }
-        
+
 
     private static boolean saveEvents(List<Event> events) {
         try {
