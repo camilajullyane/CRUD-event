@@ -7,21 +7,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import org.upe.persistence.User;
 
 public class EventUtility {
     private static final String CSV_FILE_PATH = "DB/event.csv";
-    private static final String[] HEADER = {"id", "name", "date", "local", "organization", "description"};
+    private static final String[] HEADER = {"id", "ownerCPF","name", "date", "local", "organization", "description", "attendeesList"};
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     // Create
     public boolean addEvent(Event event) {
         ArrayList<Event> events = getAllEvents();
-        event.setId(Event.generateID()); // Define a new unique ID
+        event.id = Event.generateID(); // Define a new unique ID
         events.add(event);
         return saveEvents(events);
     }
@@ -63,6 +60,22 @@ public class EventUtility {
             }
         }
         return userEvents;
+    }
+
+    public static ArrayList<Event> getEventsIn(String CPF) {
+        ArrayList<Event> allEvents = getAllEvents();
+        ArrayList<Event> eventsIn = new ArrayList<>();
+
+        for (Event event : allEvents) {
+            String[] attendees = event.getAttendeesList();
+            for (String attendee : attendees) {
+                if (attendee.trim().equals(CPF)) {
+                    eventsIn.add(event);
+                    break;
+                }
+            }
+        }
+        return eventsIn;
     }
 
     public static EventInterface createEvent(String ownerCPF, String name, String date, String local,
@@ -109,7 +122,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.setLocal(newLocal);
+                event.local = newLocal;
                 return saveEvents(events);
             }
         }
@@ -121,7 +134,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.setName(newName);
+                event.name = newName;
                 saveEvents(events);
             }
         }
@@ -133,7 +146,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.setDescription(newDescription);
+                event.description = newDescription;
                 return saveEvents(events);
             }
         }
@@ -145,7 +158,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.setOrganization(newOrganization);
+                event.organization = newOrganization;
                 return saveEvents(events);
             }
         }
@@ -165,6 +178,19 @@ public class EventUtility {
     }
 
     // Utility Methods
+    public static void addAttendeeOnList(String CPF, String eventID) {
+        ArrayList<Event> events = getAllEvents();
+
+        for(Event event : events) {
+            if (event.getId().equals(eventID)) {
+                event.attendeesList += event.attendeesList.isEmpty() ? eventID : "#" + eventID;
+                break;
+            }
+        }
+        saveEvents(events);
+    }
+
+
     private static boolean saveEvents(List<Event> events) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
             // Write header
@@ -180,6 +206,8 @@ public class EventUtility {
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
+                        event.attendeesList,
+                        event.articleList
                 };
                 writer.write(String.join(",", data));
                 writer.newLine();

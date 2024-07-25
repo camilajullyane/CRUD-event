@@ -1,21 +1,22 @@
 package org.upe.persistence;
 
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.Date;
-import java.time.LocalTime;
 import java.text.SimpleDateFormat;
 
 public class Event implements EventInterface{
 //    public String getCPF;
-    private String ownerCPF;
-    private String id;
-    private String name;
-    private String date;
-    private String local;
-    private String organization;
-    private String description;
-    private String articleList;
-    private String attendeesList;
+    protected String ownerCPF;
+    protected String id;
+    protected String name;
+    protected String date;
+    protected String local;
+    protected String organization;
+    protected String description;
+    protected String articleList;
+    protected String attendeesList;
 
     public Event(String id, String ownerCPF, String name, String date, String local, String organization,
                  String description,
@@ -44,10 +45,6 @@ public class Event implements EventInterface{
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -55,36 +52,21 @@ public class Event implements EventInterface{
     public String getOwnerCPF() {
         return this.ownerCPF;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = dateFormat.format(this.date);
-        return formattedDate;
+        return date;
     }
 
     public String getLocal() {
         return local;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
-    }
     public String getOrganization() {
         return organization;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String[] getArticleList() {
@@ -109,6 +91,4 @@ public class Event implements EventInterface{
                 " | Local: " + this.local +
                 " | Descrição: " + this.description;
     }
-
-
 }

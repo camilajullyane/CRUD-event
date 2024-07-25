@@ -28,6 +28,23 @@ public interface EventController {
 
         return new ArrayList<EventInterface>(eventByUser);
     }
+
+    static ArrayList<EventInterface> userEventsIn(String ownerCPF) {
+        ArrayList<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
+
+        return new ArrayList<EventInterface>(userEventsIn);
+    }
+
+    static boolean addAttendeeOnList(UserInterface user, EventInterface event) {
+        for(String attendeeOn : user.getAttendeeOn()) {
+            if(attendeeOn.equals(event.getId())) {
+                return false;
+            }
+        }
+        EventUtility.addAttendeeOnList(user.getCPF(), event.getId());
+        UserUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
+        return true;
+    }
 //    static boolean updateEventName(String CPF, String eventID) {
 //
 //    }

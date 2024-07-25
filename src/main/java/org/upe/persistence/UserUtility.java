@@ -1,6 +1,7 @@
 package org.upe.persistence;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class UserUtility {
@@ -118,7 +119,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.attendeeOn += "#" + eventID;
+                user.attendeeOn += user.attendeeOn.isEmpty() ? eventID : "#" + eventID;
                 break;
             }
         }
@@ -130,7 +131,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.ownerOf += "#" + eventID;
+                user.ownerOf += user.ownerOf.isEmpty() ? eventID : "#" + eventID;
                 break;
             }
         }
