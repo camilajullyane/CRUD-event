@@ -1,6 +1,7 @@
 package org.upe.ui;
 
 import org.upe.controllers.EventController;
+import org.upe.controllers.UserController;
 import org.upe.persistence.*;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ public class MyEvents {
                     break;
                 case "2":
                     isRunning = userEnterEvent(user);
-
                     break;
                 case "3":
                     isRunning = exitEvent(user.getCPF());
@@ -73,7 +73,7 @@ public class MyEvents {
 
     private static boolean showMyEvents(String ownerCPF) {
         System.out.println("-------------Eventos que participo---------------");
-        ArrayList<EventInterface> events = EventController.userEventsIn(ownerCPF);
+        ArrayList<EventInterface> events = UserController.userEventsIn(ownerCPF);
         int cont = 0;
 
         if (events.isEmpty()) {
@@ -112,23 +112,11 @@ public class MyEvents {
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-                    boolean isRunningCase1 = true;
-                    while (isRunningCase1) {
-                        System.out.print("Qual evento você quer editar? (-1 para voltar) ");
-                        String input = sc.nextLine();
-                        if (input.equals("-1")) {
-                            isRunningCase1 = false;
-                        } else if (input.matches("\\d+") || input.equals("0")) { // Verifica se a entrada contém apenas números
-                            int eventNumber = Integer.parseInt(input);
-                            if (eventNumber < myEvents.size()) {
-                                isRunningCase1 = MyEvents.editMyEvent(user, myEvents.get(eventNumber));
-                            } else {
-                                System.out.print("[ERRO] Número do evento inválido.");
-                            }
-                        } else {
-                            System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
-                        }
+                    EventInterface event;
+                    if((event = Utils.chooseEventOnList(myEvents)) == null) {
+                        break;
                     }
+                    isRunning = MyEvents.editMyEvent(user, event);
                     break;
                 case "2":
                     return true;
@@ -194,7 +182,7 @@ public class MyEvents {
         System.out.print("Digite o número do evento que você quer sair: ");
         String name = sc.nextLine();
 
-//        boolean event = EventController.deleteEvent();
+//        boolean event = EventController.deleteAttendeeOnList();
         return true;
     }
 
