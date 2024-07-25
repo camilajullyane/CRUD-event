@@ -68,6 +68,9 @@ public class Event implements EventInterface{
         return description;
     }
 
+//    public String[] getArticleList() {
+//        return this.articleList.split("#");
+//    }
 
     public String[] getAttendeesList() {
         return this.attendeesList.split("#");
