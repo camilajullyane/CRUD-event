@@ -62,6 +62,22 @@ public class EventUtility {
         return userEvents;
     }
 
+    public static ArrayList<Event> getEventsIn(String CPF) {
+        ArrayList<Event> allEvents = getAllEvents();
+        ArrayList<Event> eventsIn = new ArrayList<>();
+
+        for (Event event : allEvents) {
+            String[] attendees = event.getAttendeesList();
+            for (String attendee : attendees) {
+                if (attendee.trim().equals(CPF)) {
+                    eventsIn.add(event);
+                    break;
+                }
+            }
+        }
+        return eventsIn;
+    }
+
     public static EventInterface createEvent(String ownerCPF, String name, String date, String local,
                                              String organization, String description) {
         String id = EventUtility.generateEventID();
@@ -162,6 +178,19 @@ public class EventUtility {
     }
 
     // Utility Methods
+    public static void addAttendeeOnList(String CPF, String eventID) {
+        ArrayList<Event> events = getAllEvents();
+
+        for(Event event : events) {
+            if (event.getId().equals(eventID)) {
+                event.attendeesList += event.attendeesList.isEmpty() ? eventID : "#" + eventID;
+                break;
+            }
+        }
+        saveEvents(events);
+    }
+
+
     private static boolean saveEvents(List<Event> events) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
             // Write header
@@ -177,6 +206,8 @@ public class EventUtility {
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
+                        event.attendeesList,
+                        event.articleList
                 };
                 writer.write(String.join(",", data));
                 writer.newLine();
