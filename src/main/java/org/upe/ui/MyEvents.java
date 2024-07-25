@@ -24,7 +24,7 @@ public class MyEvents {
                     isRunning = userEnterEvent(user);
                     break;
                 case "3":
-                    isRunning = exitEvent(user.getCPF());
+                    isRunning = exitEvent(user);
                     break;
                 case "4":
                     System.out.println("---Submeter artigo---");
@@ -132,21 +132,30 @@ public class MyEvents {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("Digite: \n[1] - Editar nome\n[2] - Editar data\n[3] - editar local\n[4] - Editar Descrição\n[5] - Apagar evento\n[6] - voltar");
+            System.out.println("Digite: \n[1] - Editar nome do evento\n[2] - Editar data\n[3] - Editar local\n[4] - Editar " +
+                    "Descrição\n[5] - Editar Organização do evento\n[6] - Apagar evento\n[7] - Voltar");
             System.out.println("Escolha sua opção");
             String option = sc.nextLine();
             switch (option) {
                 case "1":
+                    isRunning = editEventName((myEvent.getId()));
                     break;
                 case "2":
+                    isRunning = editEventDate(myEvent.getId());
                     break;
                 case "3":
+                    isRunning = editEventLocal(myEvent.getId());
                     break;
                 case "4":
+                    isRunning = editEventDescription(myEvent.getId());
                     break;
                 case "5":
+                    isRunning = editEventOrganization(myEvent.getId());
                     break;
                 case "6":
+                    isRunning = deleteEvent(myEvent.getId());
+                    break;
+                case "7":
                     return false;
                 default:
                     System.out.print("[ERRO] Digite novamente. ");
@@ -155,6 +164,70 @@ public class MyEvents {
         }
         return isRunning;
     }
+
+    private static boolean editEventName(String id) {
+        Scanner sc = new Scanner((System.in));
+        System.out.print("Digite o novo nome do evento: ");
+        String name = sc.nextLine();
+
+        boolean newName = EventController.editEventName(id, name);
+        System.out.println("Nome do evento alterado!");
+
+        return newName;
+    }
+
+    private static boolean editEventDate(String id) {
+        Scanner sc = new Scanner((System.in));
+        System.out.print("Digite a nova data do evento: ");
+        String date = sc.nextLine();
+
+        boolean newDate = EventController.editEventDate(id, date);
+        System.out.println("Data do evento alterada!");
+
+        return newDate;
+    }
+
+    private static boolean editEventLocal(String id) {
+        Scanner sc = new Scanner((System.in));
+        System.out.print("Digite o novo local do evento: ");
+        String local = sc.nextLine();
+
+        boolean newLocal = EventController.editEventLocal(id, local);
+        System.out.println("Local do evento alterado!");
+
+        return newLocal;
+    }
+
+
+    private static boolean editEventDescription(String id) {
+        Scanner sc = new Scanner((System.in));
+        System.out.print("Digite o novo local do evento: ");
+        String description = sc.nextLine();
+
+        boolean newDescription = EventController.editEventDescription(id, description);
+        System.out.println("Descrição do evento alterada!");
+
+        return newDescription;
+    }
+
+    private static boolean editEventOrganization(String id) {
+        Scanner sc = new Scanner((System.in));
+        System.out.print("Digite o nome do novo organizador do evento: ");
+        String organization = sc.nextLine();
+
+        boolean newOrganization = EventController.editEventOrganization(id, organization);
+        System.out.println("Organizador do evento alterado!");
+
+        return newOrganization;
+    }
+
+    private static boolean deleteEvent(String id) {
+        boolean eventDel = EventController.deleteEvent(id);
+        System.out.println("Evento deletado!");
+
+        return eventDel;
+    }
+
 
     private static boolean createEventMenu(UserInterface user) {
         Scanner sc = new Scanner(System.in);
@@ -174,17 +247,34 @@ public class MyEvents {
         return true;
     }
 
-    private static boolean exitEvent(String ownerCPF) {
-        Scanner sc = new Scanner(System.in);
-        showMyEvents(ownerCPF);
-        System.out.println("----------Sair de um evento------------");
 
-        System.out.print("Digite o número do evento que você quer sair: ");
-        String name = sc.nextLine();
+    private static boolean exitEvent(UserInterface user) {
+        ArrayList<EventInterface> myEvents = UserController.userEventsIn(user.getCPF());
 
-//        boolean event = EventController.deleteAttendeeOnList();
+        int cont = 0;
+        if (myEvents.isEmpty()) {
+            System.out.println("Não há eventos para sair.");
+            return true;
+        }
+
+        for (EventInterface event : myEvents) {
+            System.out.println(event.toString(cont));
+            cont++;
+        }
+        EventInterface event = Utils.chooseEventToLeave(myEvents);
+
+        if(event == null) {
+            return true;
+        }
+
+        if(EventController.deleteAttendeeOnList(user, event) ) {
+            System.out.printf("Você saiu do evento %s\n", event.getName());
+        }
+
         return true;
+
     }
+
 
     private static boolean userEnterEvent(UserInterface user){
         ArrayList<EventInterface> events = EventController.showAllEvents();
@@ -199,6 +289,7 @@ public class MyEvents {
            System.out.println(event.toString(cont));
             cont++;
         }
+
         EventInterface event = Utils.chooseEventOnList(events);
 
         if(event == null) {
@@ -212,5 +303,6 @@ public class MyEvents {
         }
         return true;
     }
+
 }
 

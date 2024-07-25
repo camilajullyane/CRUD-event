@@ -124,11 +124,11 @@ public class EventUtility {
                 return saveEvents(events);
             }
         }
-        return false;
+        return true;
     }
 
 
-    public static void updateEventName(String id, String newName) {
+    public static boolean updateEventName(String id, String newName) {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
@@ -136,7 +136,7 @@ public class EventUtility {
                 saveEvents(events);
             }
         }
-//        return false;
+        return true;
     }
 
     // Update Description
@@ -148,7 +148,7 @@ public class EventUtility {
                 return saveEvents(events);
             }
         }
-        return false;
+        return true;
     }
 
     // Update Organization
@@ -160,7 +160,18 @@ public class EventUtility {
                 return saveEvents(events);
             }
         }
-        return false;
+        return true;
+    }
+
+    public static boolean updateEventDate(String id, String newDate) {
+        ArrayList<Event> events = getAllEvents();
+        for (Event event : events) {
+            if (event.getId().equals(id)) {
+                event.organization = newDate;
+                return saveEvents(events);
+            }
+        }
+        return true;
     }
 
     // Delete
@@ -204,6 +215,7 @@ public class EventUtility {
                 break;
             }
         }
+
         saveEvents(events);
     }
 
