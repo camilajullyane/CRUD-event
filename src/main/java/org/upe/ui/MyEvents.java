@@ -108,7 +108,7 @@ public class MyEvents {
         boolean isRunning = true;
         while (isRunning){
             System.out.println("Digite:\n[1] - Editar um dos eventos\n[2] - Voltar ao menu");
-            System.out.println("Escolha sua opção: ");
+            System.out.print("Escolha sua opção: ");
             String option = sc.nextLine();
             switch (option) {
                 case "1":
@@ -189,42 +189,28 @@ public class MyEvents {
     private static boolean userEnterEvent(UserInterface user){
         ArrayList<EventInterface> events = EventController.showAllEvents();
         System.out.println("---------------Ver eventos criados---------------");
-           int cont = 0;
-           if (events.isEmpty()) {
-                System.out.println("Não há eventos para se inscrever.");
-                return true;
-           }
-
-           for (EventInterface event : events) {
-               System.out.println(event.toString(cont));
-                cont++;
-           }
-
-        Scanner sc = new Scanner(System.in);
-        boolean isRunning = true;
-        while (isRunning) {
-            System.out.print("Qual evento você quer entrar? (-1 para voltar) ");
-            String input = sc.nextLine();
-            if (input.equals("-1")) {
-                isRunning = false;
-            } else if (input.matches("\\d+") || input.equals("0")) {
-                int eventNumber = Integer.parseInt(input);
-                if (eventNumber < events.size()) {
-                    if(EventController.addAttendeeOnList(user, events.get(eventNumber))) {
-                        System.out.printf("Você se inscreveu no evento %s\n", events.get(eventNumber).getName());
-                        isRunning = false;
-                    } else {
-                        System.out.println("Você já está inscrito nesse evento");
-                    }
-
-                } else {
-                    System.out.print("[ERRO] Número do evento inválido.");
-                }
-            } else {
-                System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
-            }
+        int cont = 0;
+        if (events.isEmpty()) {
+            System.out.println("Não há eventos para se inscrever.");
+            return true;
         }
-           return true;
+
+        for (EventInterface event : events) {
+           System.out.println(event.toString(cont));
+            cont++;
+        }
+        EventInterface event = Utils.chooseEventOnList(events);
+
+        if(event == null) {
+            return true;
+        }
+
+        if(EventController.addAttendeeOnList(user, event) ) {
+            System.out.printf("Você se inscreveu no evento %s\n", event.getName());
+        } else {
+            System.out.println("Você já está inscrito nesse evento");
+        }
+        return true;
     }
 }
 
