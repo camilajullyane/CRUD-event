@@ -1,4 +1,2 @@
-id,ownerCPF,name,date,local,organization,description,articleID,attendeesCPF
-f081fc5d-2247-4552-a36d-fa16c1d09255,15524653490,Teste1,11/04/1998,localTeste,testadores,,,
-128c3791-5391-4a9a-a978-ed6f49a9cdce,11486723462,cana,12/06/2021,upe,camila,muita cana,,
-1df8865e-e1bf-42ff-baef-6adb6c1b8dec,11486723462,festa do balacobaco,24/07/2024,casa de keisy,Keysi lisandra,muita cana,,
+id,ownerCPF,name,date,local,organization,description,attendeesList
+35d4df48-28a1-4b12-a212-df7552abe37f,11/09/2001,new york,trade center,teste dos testes,35d4df48-28a1-4b12-a212-df7552abe37f,35d4df48-28a1-4b12-a212-df7552abe37f,
