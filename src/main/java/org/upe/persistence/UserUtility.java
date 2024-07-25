@@ -78,7 +78,7 @@ public class UserUtility {
             return null;
         }
         try {
-            String newLine = String.format("%s,%s,%s,,,", name, email,CPF);
+            String newLine = String.format("%s,%s,%s,,", name, email,CPF);
             FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);

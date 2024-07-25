@@ -188,6 +188,26 @@ public class EventUtility {
         saveEvents(events);
     }
 
+    public static void deleteAttendeeOnList(String CPF, String eventID) {
+        ArrayList<Event> events = getAllEvents();
+
+        for(Event event : events) {
+            if(event.getId().equals(eventID)) {
+                String newString = "";
+                for (int i = 0; i < event.getAttendeesList().length; i++) {
+                    String id = event.getAttendeesList()[i];
+                    if (!id.equals(CPF)) {
+                        newString += id + "#";
+                    }
+                }
+                event.attendeesList = newString.substring(0, newString.length() - 1);
+                break;
+            }
+        }
+        saveEvents(events);
+    }
+
+
 
     private static boolean saveEvents(List<Event> events) {
         try {

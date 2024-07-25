@@ -9,6 +9,7 @@ public interface EventInterface {
     String getDate();
     String getOrganization();
     String getDescription();
+    String[] getAttendeesList();
     String toString();
     String toString(int position);
 }
