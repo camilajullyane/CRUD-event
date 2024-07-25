@@ -1,3 +1,5 @@
 name,email,cpf,attendeeOn,ownerOf
-John Doe,john@example.com,123456789,Event1,Event3#Event4
+John Doe,john@example.com,123456789,Event1#Event2,Event3#Event4
 Jane Smith,jane@example.com,987654321,Event5,
+
+Alice,55555555555,alice@example.com,,,
