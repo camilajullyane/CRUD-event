@@ -15,12 +15,11 @@ public class Event implements EventInterface{
     protected String local;
     protected String organization;
     protected String description;
-    protected String articleList;
+//    protected String articleList;
     protected String attendeesList;
 
     public Event(String id, String ownerCPF, String name, String date, String local, String organization,
-                 String description,
-                 String articleList, String attendeesList) {
+                 String description, String attendeesList) {
         this.ownerCPF = ownerCPF;
         this.id = id;
         this.name = name;
@@ -28,7 +27,7 @@ public class Event implements EventInterface{
         this.local = local;
         this.organization = organization;
         this.description = description;
-        this.articleList = articleList;
+//        this.articleList = articleList;
         this.attendeesList = attendeesList;
     }
 
@@ -69,9 +68,6 @@ public class Event implements EventInterface{
         return description;
     }
 
-    public String[] getArticleList() {
-        return this.articleList.split("#");
-    }
 
     public String[] getAttendeesList() {
         return this.attendeesList.split("#");

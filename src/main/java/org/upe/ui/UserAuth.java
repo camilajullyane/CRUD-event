@@ -35,13 +35,17 @@ public class UserAuth {
         Scanner sc = new Scanner(System.in);
         UserInterface user;
         while (true) {
-            System.out.print("Digite seu CPF: ");
+            System.out.print("Digite seu CPF (-1 retorna ao menu): ");
             String userInput = sc.nextLine();
-            if (userInput.length() != 11) {
+            if (userInput.equals("-1")) {
+                return true;
+            } else if (userInput.length() != 11) {
                 System.out.print("Formato inválido de CPF. ");
-
             } else if ((user = AuthInterface.loginUser(userInput)) != null) {
                 return MainMenu.menu(user);
+            } else {
+                System.out.println("CPF errado ou não cadastrado.");
+                return true;
             }
         }
     }
