@@ -20,8 +20,8 @@ public class UserUtility {
                         newUserLine[1],
                         newUserLine[2],
                         newUserLine[3] == null ? "" : newUserLine[3],
-                        newUserLine[4] == null ? "" : newUserLine[4]
-//                        newUserLine[5] == null ? "" : newUserLine[5]
+                        newUserLine[4] == null ? "" : newUserLine[4],
+                        newUserLine[5] == null ? "" : newUserLine[5]
                 );
                 usersArray.add(user);
             }
@@ -58,7 +58,8 @@ public class UserUtility {
                 User user = new User(newUserLine[0],
                         newUserLine[1], newUserLine[2],
                         newUserLine[3] == null ? "" : newUserLine[3],
-                        newUserLine[4] == null ? "" : newUserLine[4]);
+                        newUserLine[4] == null ? "" : newUserLine[4],
+                        newUserLine[5] == null ? "" : newUserLine[5]);
 
                 if (user.getCPF().equals(CPF)) {
                     reader.close();
@@ -78,7 +79,7 @@ public class UserUtility {
             return null;
         }
         try {
-            String newLine = String.format("%s,%s,%s,,", name, email,CPF);
+            String newLine = String.format("%s,%s,%s,,,", name, email,CPF);
             FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);
@@ -86,7 +87,7 @@ public class UserUtility {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new User(name, CPF, email, "", "");
+        return new User(name, CPF, email, "", "","");
     }
 
     public static void updateUserEmail(String CPF, String newEmail) {
@@ -181,5 +182,18 @@ public class UserUtility {
             }
         }
         updateFileData(users);
+    }
+
+    public static void addUserArticle(String CPF, String articleID) {
+        ArrayList<User> users = UserUtility.getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(CPF)) {
+                user.articleID += user.articleID.isEmpty() ? articleID : "#" + articleID;
+                break;
+            }
+        }
+
+        UserUtility.updateFileData(users);
     }
 }

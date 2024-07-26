@@ -1,6 +1,7 @@
 package org.upe.persistence;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,8 +13,6 @@ import org.upe.persistence.User;
 
 public class EventUtility {
     protected static String CSV_FILE_PATH = "DB/event.csv";
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-
     // Create
     public static boolean addEvent(Event event) {
         ArrayList<Event> events = getAllEvents();
@@ -38,9 +37,9 @@ public class EventUtility {
                 String organization = values[5];
                 String description = values[6];
                 String attendeeList = values[7] == null ? "" : values[7];
-//                String articleList = values[8] == null ? "" : values[8];
+                String articleList = values[8] == null ? "" : values[8];
 
-                Event event = new Event(id,ownerCPF,name, date, local,organization, description, attendeeList);
+                Event event = new Event(id,ownerCPF,name, date, local,organization, description, attendeeList, articleList);
                 events.add(event);
             }
         } catch (IOException e) {
@@ -81,7 +80,7 @@ public class EventUtility {
                                              String organization, String description) {
         ArrayList<Event> events = EventUtility.getAllEvents();
         String id = EventUtility.generateEventID();
-        Event newEvent = new Event(id, ownerCPF, name, date, local, organization, description, "");
+        Event newEvent = new Event(id, ownerCPF, name, date, local, organization, description, "", "");
         events.add(newEvent);
         EventUtility.saveEvents(events);
         UserUtility.addOwnerOnEvent(ownerCPF, id);
@@ -245,4 +244,17 @@ public class EventUtility {
         return uuidString;
     }
 
+
+    public static boolean addArticleOnList(String articleID, String eventID) {
+        ArrayList<Event> events = getAllEvents();
+
+        for(Event event : events) {
+            if (event.getId().equals(eventID)) {
+                event.articleList += event.articleList.isEmpty() ? articleID : "#" + articleID;
+                break;
+            }
+        }
+        saveEvents(events);
+        return true;
+    }
 }

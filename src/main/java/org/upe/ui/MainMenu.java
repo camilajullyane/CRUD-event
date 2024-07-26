@@ -13,7 +13,7 @@ public class MainMenu {
         boolean isRunning = true;
         while (isRunning) {
             System.out.printf("Usuário: %s\n", user.getName());
-            System.out.println("[1] - Meus eventos\n[2] - Configurações da conta\n[3] - Sair da conta\n[4] - Fechar aplicativo");
+            System.out.println("[1] - Meus eventos\n[2] - Meus artigos\n[3] - Configurações da conta\n[4] - Sair da conta\n[5] - Fechar aplicativo");
             System.out.print("Escolha sua opção: ");
             String option = sc.nextLine();
             switch (option) {
@@ -22,12 +22,15 @@ public class MainMenu {
                     isRunning = MyEvents.menuEvents(user);
                     break;
                 case "2":
-                    System.out.println("saindo...");
+                    isRunning = MyArticles.myArticlesMenu(user);
                     break;
                 case "3":
                     System.out.println("saindo...");
-                    return true;
+                    break;
                 case "4":
+                    System.out.println("saindo...");
+                    return true;
+                case "5":
                     return false;
                 default:
                     System.out.print("[ERRO] Digite novamente. ");

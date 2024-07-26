@@ -1,0 +1,3 @@
+id,parentEventID,name,date,local,description,attendeesList
+1,null,SubEvent 1,01/01/2022,Local 1,New Description,
+2,null,SubEvent 2,02/02/2022,Local 2,789,

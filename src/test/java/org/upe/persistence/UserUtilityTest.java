@@ -18,9 +18,9 @@ class UserUtilityTest {
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
-            writer.write("name,email,cpf,attendeeOn,ownerOf\n");
-            writer.write("John Doe,john@example.com,123456789,Event1#Event2,Event3#Event4\n");
-            writer.write("Jane Smith,jane@example.com,987654321,Event5,\n");
+            writer.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
+            writer.write("John Doe,john@example.com,123456789,Event1#Event2,Event3#Event4,\n");
+            writer.write("Jane Smith,jane@example.com,987654321,Event5,,\n");
         }
         // Atualizar o caminho do CSV para os testes
         UserUtility.CSV_FILE_PATH = TEST_CSV_FILE_PATH;

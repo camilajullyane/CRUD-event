@@ -120,6 +120,8 @@ public class MyEvents {
                     break;
                 case "2":
                     return true;
+                case "3":
+//                    MySubEvents.subEventMenu(user);
                 default:
                     System.out.print("[ERRO] Digite novamente. ");
             }

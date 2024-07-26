@@ -18,9 +18,9 @@ class EventUtilityTest {
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
-            writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList\n");
-            writer.write("1,123456789,Sample Event 1,01/01/2024,Local 1,Org 1,Description 1,987654321\n");
-            writer.write("2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,\n");
+            writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
+            writer.write("1,123456789,Sample Event 1,01/01/2024,Local 1,Org 1,Description 1,987654321,\n");
+            writer.write("2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,,\n");
         }
         // Atualizar o caminho do CSV para os testes
         EventUtility.CSV_FILE_PATH = TEST_CSV_FILE_PATH;
@@ -68,7 +68,7 @@ class EventUtilityTest {
 
     @Test
     void updateEvent() {
-        Event updatedEvent = new Event("1", "123456789", "Updated Event", "01/01/2024", "Updated Local", "Updated Org", "Updated Description", "987654321");
+        Event updatedEvent = new Event("1", "123456789", "Updated Event", "01/01/2024", "Updated Local", "Updated Org", "Updated Description", "987654321","article1");
         assertTrue(EventUtility.updateEvent(updatedEvent), "O evento deve ser atualizado com sucesso");
 
         Event event = EventUtility.getEventById("1");

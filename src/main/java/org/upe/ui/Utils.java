@@ -1,6 +1,6 @@
 package org.upe.ui;
 
-import org.upe.persistence.EventInterface;
+import org.upe.persistence.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -74,7 +74,7 @@ public class Utils {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            System.out.print("Qual evento você quer Sair? (-1 para voltar) ");
+            System.out.print("Qual evento você quer sair? (-1 para voltar) ");
             String input = sc.nextLine();
             if (input.equals("-1")) {
                 return null;
@@ -84,6 +84,51 @@ public class Utils {
                     return myEvents.get(eventNumber);
                 } else {
                     System.out.print("[ERRO] Número do evento inválido.");
+                }
+            } else {
+                System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
+            }
+        }
+        return null;
+    }
+
+
+    protected static SubEventInterface chooseSubEventOnList(ArrayList<SubEventInterface> subEvents) {
+        Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.print("Qual sub-evento você quer editar? (-1 para voltar) ");
+            String input = sc.nextLine();
+            if (input.equals("-1")) {
+                return null;
+            } else if (input.matches("\\d+")) { // Verifica se a entrada contém apenas números
+                int subEventNumber = Integer.parseInt(input);
+                if (subEventNumber >= 0 && subEventNumber < subEvents.size()) {
+                    return subEvents.get(subEventNumber);
+                } else {
+                    System.out.println("[ERRO] Número do sub-evento inválido.");
+                }
+            } else {
+                System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
+            }
+        }
+        return null;
+    }
+
+    protected static ArticleInterface chooseArticleOnList(ArrayList<ArticleInterface> myArticles) {
+        Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.print("Qual artigo você quer submeter? (-1 para voltar) ");
+            String input = sc.nextLine();
+            if (input.equals("-1")) {
+                return null;
+            } else if (input.matches("\\d+") || input.equals("0")) {
+                int eventNumber = Integer.parseInt(input);
+                if (eventNumber < myArticles.size()) {
+                    return myArticles.get(eventNumber);
+                } else {
+                    System.out.print("[ERRO] Número do artigo inválido.");
                 }
             } else {
                 System.out.println("[ERRO] Entrada inválida. Digite apenas números.");
