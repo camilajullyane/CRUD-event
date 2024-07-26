@@ -26,6 +26,12 @@ public interface EventController {
 
 
     static boolean addAttendeeOnList(UserInterface user, EventInterface event) {
+        for (String ownerOf : user.getOwnerOf()) {
+            if (ownerOf.equals(event.getId())) {
+                return false;
+            }
+        }
+
         for(String attendeeOn : user.getAttendeeOn()) {
             if(attendeeOn.equals(event.getId())) {
                 return false;
@@ -67,7 +73,6 @@ public interface EventController {
 
     static boolean editEventOrganization(String id, String newOrganization) {
         EventUtility.updateEventOrganization(id, newOrganization);
-
         return true;
     }
 
@@ -80,9 +85,7 @@ public interface EventController {
     static boolean deleteEvent(String id, UserInterface user) {
         EventUtility.deleteEvent(id);
         UserUtility.deleteOwnerOf(user.getCPF(), id);
-
+        UserUtility.deleteAllAttendeesFromEvent(id);
         return true;
     }
-
-
 }
