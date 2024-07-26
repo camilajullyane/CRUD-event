@@ -55,8 +55,8 @@ public class MyEvents {
     }
 
 
-    private static boolean showAllEvents() {
-        System.out.println("------------Participar de um evento--------------");
+    protected static boolean showAllEvents() {
+//        System.out.println("------------Participar de um evento--------------");
         ArrayList<EventInterface> events = EventController.showAllEvents();
         int cont = 0;
 
@@ -65,8 +65,8 @@ public class MyEvents {
         }
 
         for (EventInterface event : events) {
-            cont++;
             System.out.println(event.toString(cont));
+            cont++;
         }
         return true;
     }

@@ -22,7 +22,7 @@ public interface ArticleController {
 
     static boolean submitArticle(ArticleInterface article, EventInterface event) {
        for (String articleID : event.getArticleList()) {
-           if (articleID.equals(event.getId())) {
+           if (articleID.equals(article.getArticleID())) {
                return false;
            }
        }

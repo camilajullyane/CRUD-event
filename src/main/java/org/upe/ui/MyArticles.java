@@ -17,7 +17,7 @@ public class MyArticles {
         boolean isRunning = true;
         while (isRunning) {
             showMyArticleMenu();
-            System.out.print("Escolha sua opção");
+            System.out.print("Escolha sua opção: ");
             String option = sc.nextLine();
             switch (option) {
                 case "1":
@@ -65,8 +65,8 @@ public class MyArticles {
 
         int cont = 0;
         for (ArticleInterface article : articles) {
-            cont++;
             System.out.println(article.toString(cont));
+            cont++;
         }
         return articles;
     }
@@ -74,8 +74,13 @@ public class MyArticles {
     private static boolean submitArticle(UserInterface user) {
         ArrayList<ArticleInterface> articles = showMyArticles(user.getCPF());
         ArrayList<EventInterface> events = EventController.showAllEvents();
-
         ArticleInterface chosenArticle = Utils.chooseArticleOnList(articles);
+
+        if(!MyEvents.showAllEvents()) {
+            System.out.println("Não há eventos para submter artigos.");
+            return true;
+        }
+
         System.out.println("Em qual evento você deseja submeter esse artigo?");
         EventInterface event = Utils.chooseEventOnList(events);
         if (event == null) {
@@ -84,9 +89,9 @@ public class MyArticles {
 
         boolean validate = ArticleController.submitArticle(chosenArticle, event);
         if (validate) {
-            System.out.printf("Artigo submetido com sucesso!");
+            System.out.println("Artigo submetido com sucesso!");
         } else {
-            System.out.printf("Você já submeteu esse artigo nesse evento.");
+            System.out.println("Você já submeteu esse artigo nesse evento.");
         }
         return true;
     }

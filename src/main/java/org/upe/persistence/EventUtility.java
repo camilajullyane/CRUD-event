@@ -219,11 +219,11 @@ public class EventUtility {
     private static boolean saveEvents(List<Event> events) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
-            write.write("id,ownerCPF,name,date,local,organization,description,attendeesList\n");
+            write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s\n", event.id, event.ownerCPF, event.name, event.date,
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.id, event.ownerCPF, event.name, event.date,
                         event.local,
-                        event.organization, event.description, event.attendeesList);
+                        event.organization, event.description, event.attendeesList,event.articleList);
                 write.write(line);
             }
             write.close();

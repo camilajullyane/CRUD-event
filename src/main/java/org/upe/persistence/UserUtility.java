@@ -36,10 +36,10 @@ public class UserUtility {
     private static void updateFileData(ArrayList<User> newData) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
-            write.write("name,email,cpf,attendeeOn,ownerOf\n");
+            write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(), user.CPF, user.attendeeOn,
-                        user.ownerOf);
+                String line = String.format("%s,%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(), user.CPF, user.attendeeOn,
+                        user.ownerOf, user.articleID);
                 write.write(line);
             }
             write.close();
