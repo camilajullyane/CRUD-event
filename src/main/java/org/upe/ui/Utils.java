@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -23,7 +24,12 @@ public class Utils {
                 System.out.print("Digite a data (dd/MM/yyyy): ");
                 String dateString = sc.nextLine();
                 Date dateInstance = DATE_FORMAT.parse(dateString);
-                date = DATE_FORMAT.format(dateInstance);
+                Date currentDate = Calendar.getInstance().getTime();
+                if (dateInstance.before(currentDate)) {
+                    System.out.println("Erro: A data deve ser posterior à data atual.");
+                } else {
+                    date = DATE_FORMAT.format(dateInstance);
+                }
             } catch (ParseException e) {
                 System.out.println("Erro de formatação. Digite uma data válida.");
             }

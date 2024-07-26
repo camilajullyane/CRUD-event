@@ -139,6 +139,28 @@ public class UserUtility {
         UserUtility.updateFileData(users);
     }
 
+    public static boolean deleteAllAttendeesFromEvent(String eventID) {
+        ArrayList<User> users = UserUtility.getAllUsers();
+
+        for (User user : users) {
+            if (user.attendeeOn.contains(eventID)) {
+                String newString = "";
+                for (int i = 0; i < user.getAttendeeOn().length; i++) {
+                    String id = user.getAttendeeOn()[i];
+                    if (!id.equals(eventID)) {
+                        if (!newString.isEmpty()) {
+                            newString += "#";
+                        }
+                        newString += id;
+                    }
+                }
+                user.attendeeOn = newString;
+            }
+        }
+        updateFileData(users);
+        return true;
+    }
+
     public static boolean deleteAttendeeEvent(String CPF, String eventID) {
         ArrayList<User> users = UserUtility.getAllUsers();
 

@@ -299,13 +299,12 @@ public class MyEvents {
             return true;
         }
 
-        if(EventController.addAttendeeOnList(user, event) ) {
+        if(EventController.addAttendeeOnList(user, event)) {
             System.out.printf("Você se inscreveu no evento %s\n", event.getName());
         } else {
-            System.out.println("Você já está inscrito nesse evento");
+            System.out.println("Você já está inscrito nesse evento ou você é dono dele.");
         }
         return true;
     }
-
 }
 
