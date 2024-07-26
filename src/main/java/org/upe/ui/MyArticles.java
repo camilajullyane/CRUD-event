@@ -2,9 +2,7 @@ package org.upe.ui;
 
 import org.upe.controllers.ArticleController;
 import org.upe.controllers.EventController;
-import org.upe.controllers.UserController;
 import org.upe.persistence.ArticleInterface;
-import org.upe.persistence.ArticleUtility;
 import org.upe.persistence.EventInterface;
 import org.upe.persistence.UserInterface;
 
@@ -73,7 +71,7 @@ public class MyArticles {
 
     private static boolean submitArticle(UserInterface user) {
         ArrayList<ArticleInterface> articles = showMyArticles(user.getCPF());
-        ArrayList<EventInterface> events = EventController.showAllEvents();
+        ArrayList<EventInterface> events = EventController.getAllEvents();
         ArticleInterface chosenArticle = Utils.chooseArticleOnList(articles);
 
         if(!MyEvents.showAllEvents()) {

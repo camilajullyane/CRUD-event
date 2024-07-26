@@ -37,28 +37,28 @@ public class Utils {
         return date;
     }
 
-    protected static LocalTime validateHour() {
+    protected static String validateHour() {
         Scanner sc = new Scanner(System.in);
         final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime hour = null;
         while (hour == null) {
             try {
-                System.out.print("Digite a hora (): ");
+                System.out.print("Digite a hora (hh:MM): ");
                 String hourString = sc.nextLine();
                 hour = LocalTime.parse(hourString, TIME_FORMATTER);
-                return hour;
+                return hour.toString();
             } catch (DateTimeParseException e) {
                 System.out.print("Erro de formatação. Digite uma hora válida.");
             }
         }
-        return hour;
+        return hour.toString();
     }
 
     protected static EventInterface chooseEventOnList(ArrayList<EventInterface> myEvents) {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            System.out.print("Qual evento você quer editar? (-1 para voltar) ");
+            System.out.print("Escolha um evento: (-1 para voltar) ");
             String input = sc.nextLine();
             if (input.equals("-1")) {
                 return null;

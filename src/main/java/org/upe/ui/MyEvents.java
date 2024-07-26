@@ -57,7 +57,7 @@ public class MyEvents {
 
     protected static boolean showAllEvents() {
 //        System.out.println("------------Participar de um evento--------------");
-        ArrayList<EventInterface> events = EventController.showAllEvents();
+        ArrayList<EventInterface> events = EventController.getAllEvents();
         int cont = 0;
 
         if (events.isEmpty()) {
@@ -71,7 +71,7 @@ public class MyEvents {
         return true;
     }
 
-    private static boolean showMyEvents(String ownerCPF) {
+    protected static boolean showMyEvents(String ownerCPF) {
         System.out.println("-------------Eventos que participo---------------");
         ArrayList<EventInterface> events = UserController.userEventsIn(ownerCPF);
         int cont = 0;
@@ -91,7 +91,7 @@ public class MyEvents {
     private static boolean myEvents(UserInterface user) {
         System.out.println("---------------Ver eventos criados---------------");
 
-        ArrayList<EventInterface> myEvents = EventController.eventByUser(user.getCPF());
+        ArrayList<EventInterface> myEvents = EventController.getAllEventsByUser(user.getCPF());
         int cont = 0;
 
         if (myEvents.isEmpty()) {
@@ -120,8 +120,6 @@ public class MyEvents {
                     break;
                 case "2":
                     return true;
-                case "3":
-//                    MySubEvents.subEventMenu(user);
                 default:
                     System.out.print("[ERRO] Digite novamente. ");
             }
@@ -280,7 +278,7 @@ public class MyEvents {
 
 
     private static boolean userEnterEvent(UserInterface user){
-        ArrayList<EventInterface> events = EventController.showAllEvents();
+        ArrayList<EventInterface> events = EventController.getAllEvents();
         System.out.println("---------------Ver eventos criados---------------");
         int cont = 0;
         if (events.isEmpty()) {

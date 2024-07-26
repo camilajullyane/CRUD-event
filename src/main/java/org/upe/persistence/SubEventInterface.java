@@ -10,4 +10,5 @@ public interface SubEventInterface {
     String getDescription();
     String toString();
     String toString(int position);
+    String getHour();
 }

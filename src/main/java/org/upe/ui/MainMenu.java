@@ -13,19 +13,19 @@ public class MainMenu {
         boolean isRunning = true;
         while (isRunning) {
             System.out.printf("Usuário: %s\n", user.getName());
-            System.out.println("[1] - Meus eventos\n[2] - Meus artigos\n[3] - Configurações da conta\n[4] - Sair da conta\n[5] - Fechar aplicativo");
+            System.out.println("[1] - Meus eventos\n[2] - Meus artigos\n[3] - Meus sub-eventos\n[4] - Sair da conta\n[5] - " +
+                    "Fechar aplicativo");
             System.out.print("Escolha sua opção: ");
             String option = sc.nextLine();
             switch (option) {
                 case "1":
-//                    System.out.println("ir pros meus eventos");
                     isRunning = MyEvents.menuEvents(user);
                     break;
                 case "2":
                     isRunning = MyArticles.myArticlesMenu(user);
                     break;
                 case "3":
-                    System.out.println("saindo...");
+                    isRunning = MySubEvents.subEventMenu(user);
                     break;
                 case "4":
                     System.out.println("saindo...");
