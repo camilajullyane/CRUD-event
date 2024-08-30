@@ -18,6 +18,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions: write-all
+    name: event
+    environment: dev
 
     steps:
     - uses: actions/checkout@v4
