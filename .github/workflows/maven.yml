@@ -10,10 +10,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions:
-      contents: read 
-      id-token: write 
-      actions: write 
+    permissions: write-all
     name: Build and Release
     environment: dev
 
