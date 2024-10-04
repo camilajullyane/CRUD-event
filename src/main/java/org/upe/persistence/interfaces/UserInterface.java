@@ -1,4 +1,4 @@
-package org.upe.persistence;
+package org.upe.persistence.interfaces;
 
 public interface UserInterface {
     String getCPF();

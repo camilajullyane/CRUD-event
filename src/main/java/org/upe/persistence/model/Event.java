@@ -1,13 +1,10 @@
-package org.upe.persistence;
+package org.upe.persistence.model;
 
-import java.text.ParseException;
-import java.util.Locale;
+import org.upe.persistence.interfaces.EventInterface;
+
 import java.util.UUID;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-public class Event implements EventInterface{
+public class Event implements EventInterface {
     protected String ownerCPF;
     protected String id;
     protected String name;
@@ -44,9 +41,13 @@ public class Event implements EventInterface{
         return id;
     }
 
+    public void setId(String id) {this.id = id;}
+
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {this.name = name;}
 
     public String getOwnerCPF() {
         return this.ownerCPF;
@@ -56,25 +57,39 @@ public class Event implements EventInterface{
         return date;
     }
 
+    public void setDate(String date) {this.date = date;}
+
     public String getLocal() {
         return local;
     }
+
+    public void setLocal(String local) {this.local = local;}
 
     public String getOrganization() {
         return organization;
     }
 
+    public void setOrganization(String organization) {this.organization = organization;}
+
     public String getDescription() {
         return description;
     }
+
+    public void setDescription(String description) {this.description = description;}
 
     public String[] getArticleList() {
         return this.articleList.split("#");
     }
 
+    public void setArticleList(String[] articleList) {
+        this.articleList = articleList;
+    }
+
     public String[] getAttendeesList() {
         return this.attendeesList.split("#");
     }
+
+    public void setAttendeesList(String attendeesList) {this.attendeesList = attendeesList;}
 
     public String toString() {
         return "Nome: " + this.name +

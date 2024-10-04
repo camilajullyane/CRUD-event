@@ -1,7 +1,9 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
+
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.model.Article;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 

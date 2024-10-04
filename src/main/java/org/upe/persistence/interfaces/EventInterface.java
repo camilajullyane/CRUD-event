@@ -1,7 +1,4 @@
-package org.upe.persistence;
-
-import java.time.LocalTime;
-import java.util.Date;
+package org.upe.persistence.interfaces;
 
 public interface EventInterface {
     String getId();

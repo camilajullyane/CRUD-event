@@ -2,11 +2,13 @@ package org.upe.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.repository.EventUtility;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

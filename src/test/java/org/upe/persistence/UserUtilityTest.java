@@ -2,6 +2,9 @@ package org.upe.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.User;
+import org.upe.persistence.repository.UserUtility;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,7 +1,9 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
+
+import org.upe.persistence.model.User;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class UserUtility {
@@ -39,7 +41,7 @@ public class UserUtility {
             write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
                 String line = String.format("%s,%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(), user.CPF, user.attendeeOn,
-                        user.ownerOf, user.articleID);
+                        user.getOwnerOf(), user.getArticleID());
                 write.write(line);
             }
             write.close();
@@ -95,7 +97,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.email = newEmail;
+                user.setEmail(newEmail);
             }
         }
 
@@ -120,7 +122,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.attendeeOn += user.attendeeOn.isEmpty() ? eventID : "#" + eventID;
+                user.setAttendeeOn(user.getAttendeeOn() += user.getAttendeeOn().isEmpty() ? eventID : "#" + eventID);
                 break;
             }
         }
@@ -132,7 +134,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.ownerOf += user.ownerOf.isEmpty() ? eventID : "#" + eventID;
+                user.setOwnerOf(user.getOwnerOf() += user.getOwnerOf().isEmpty() ? eventID : "#" + eventID);
                 break;
             }
         }
@@ -143,7 +145,7 @@ public class UserUtility {
         ArrayList<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.attendeeOn.contains(eventID)) {
+            if (user.getAttendeeOn().contains(eventID)) {
                 String newString = "";
                 for (int i = 0; i < user.getAttendeeOn().length; i++) {
                     String id = user.getAttendeeOn()[i];
@@ -154,7 +156,7 @@ public class UserUtility {
                         newString += id;
                     }
                 }
-                user.attendeeOn = newString;
+                user.setAttendeeOn(newString);
             }
         }
         updateFileData(users);
@@ -176,7 +178,7 @@ public class UserUtility {
                         newString += id;
                     }
                 }
-                user.attendeeOn = newString;
+                user.setAttendeeOn(newString);
                 break;
             }
         }
@@ -199,7 +201,7 @@ public class UserUtility {
                         newString += id;
                     }
                 }
-                user.ownerOf = newString;
+                user.setOwnerOf(newString);
                 break;
             }
         }
@@ -211,7 +213,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.articleID += user.articleID.isEmpty() ? articleID : "#" + articleID;
+                user.setArticleID(user.getArticleID() += user.getArticleID().isEmpty() ? articleID : "#" + articleID);
                 break;
             }
         }
