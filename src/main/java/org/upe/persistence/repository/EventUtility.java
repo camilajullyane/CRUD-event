@@ -84,7 +84,6 @@ public class EventUtility {
         return newEvent;
     }
 
-
     public static Event getEventById(String id) {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
@@ -179,34 +178,25 @@ public class EventUtility {
     }
 
     // Utility Methods
-    public static void addAttendeeOnList(String CPF, String eventID) {
+    public static void addAttendeeOnList(String userCPF, String eventID) {
         ArrayList<Event> events = getAllEvents();
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.setAttendeesList(event.getAttendeesList() += event.getAttendeesList().isEmpty() ? CPF : "#" + CPF);
+                event.addAttendeesList(userCPF);
                 break;
             }
         }
         saveEvents(events);
     }
 
-    public static void deleteAttendeeOnList(String CPF, String eventID) {
+    public static void deleteAttendeeOnList(String userCPF, String eventID) {
         ArrayList<Event> events = getAllEvents();
 
         for(Event event : events) {
             if(event.getId().equals(eventID)) {
-                String newString = "";
-                for (int i = 0; i < event.getAttendeesList().length; i++) {
-                    String id = event.getAttendeesList()[i];
-                    if (!id.equals(CPF)) {
-                        if (!newString.isEmpty()) {
-                            newString += "#";
-                        }
-                        newString += id;
-                    }
-                }
-                event.setAttendeesList(newString);
+
+                event.deleteAttendee(userCPF);
             }
         }
         saveEvents(events);
@@ -218,8 +208,15 @@ public class EventUtility {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(), event.getOwnerCPF(), event.getName(), event.getDate(),
-                        event.getLocal(), event.getOrganization(), event.getDescription(), event.getAttendeesList(),event.getArticleList());
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
+                        event.getOwnerCPF(),
+                        event.getName(),
+                        event.getDate(),
+                        event.getLocal(),
+                        event.getOrganization(),
+                        event.getDescription(),
+                        String.join("#" ,event.getAttendeesList()),
+                        String.join("#", event.getArticleList()));
                 write.write(line);
             }
             write.close();
@@ -246,7 +243,7 @@ public class EventUtility {
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.articleList += event.articleList.isEmpty() ? articleID : "#" + articleID;
+                event.addArticleList(articleID);
                 break;
             }
         }

@@ -19,7 +19,6 @@ import java.util.UUID;
             return saveSubEvents(subEvents);
         }
 
-
         public static ArrayList<SubEvent> getAllSubEvents() {
             ArrayList<SubEvent> subEvents = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
@@ -152,37 +151,27 @@ import java.util.UUID;
         }
 
         // Utility Methods
-        public static void addAttendeeOnList(String CPF, String subEventID) {
+        public static void addAttendeeOnList(String userCPF, String subEventID) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
 
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(subEventID)) {
-                    subEvent.setAttendeesList(subEvent.getAttendeesList() += subEvent.getAttendeesList().isEmpty() ? CPF : "#" + CPF);
+                    subEvent.addAttendeesList(userCPF);
                     break;
                 }
             }
             saveSubEvents(subEvents);
         }
 
-        public static void deleteAttendeeOnList(String CPF, String subEventID) {
+        public static void deleteAttendeeOnList(String userCPF, String subEventID) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
 
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(subEventID)) {
-                    String newString = "";
-                    for (int i = 0; i < subEvent.getAttendeesList().length; i++) {
-                        String attendeeCPF = subEvent.getAttendeesList()[i];
-                        if (!attendeeCPF.equals(CPF)) {
-                            if (!newString.isEmpty()) {
-                                newString += "#";
-                            }
-                            newString += attendeeCPF;
-                        }
-                    }
-                    subEvent.setAttendeesList(newString);
+                    subEvent.deleteAttendee(userCPF);
                 }
+                saveSubEvents(subEvents);
             }
-            saveSubEvents(subEvents);
         }
 
         private static boolean saveSubEvents(ArrayList<SubEvent> SubEvents) {
@@ -199,7 +188,7 @@ import java.util.UUID;
                             subEvent.getLocal(),
                             subEvent.getDescription(),
                             subEvent.getSpeakers(),
-                            subEvent.getAttendeesList());
+                            String.join("#", subEvent.getAttendeesList()));
                     write.write(line);
                 }
                 write.close();

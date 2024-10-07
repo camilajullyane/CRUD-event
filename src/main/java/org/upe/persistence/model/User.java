@@ -14,7 +14,7 @@ public class User implements UserInterface {
     protected String articleID;
 
 
-    protected User(String name ,String email, String CPF, String attendeeOn, String ownerOf, String articleID) {
+    public User(String name ,String email, String CPF, String attendeeOn, String ownerOf, String articleID) {
         this.name = name;
         this.email = email;
         this.CPF = CPF;
@@ -43,18 +43,52 @@ public class User implements UserInterface {
         return this.attendeeOn.split("#");
     }
 
-    public void setAttendeeOn(String attendeeOn) {this.attendeeOn = attendeeOn;}
+    public void addAttendeeOn(String eventID) {
+        this.attendeeOn = this.attendeeOn.isEmpty() ? eventID : "#" + eventID;
+    }
+
+    public void deleteAttendeeOn(String eventID) {
+        String newString = "";
+        for (int i = 0; i < this.getAttendeeOn().length; i++) {
+            String id = this.getAttendeeOn()[i];
+            if (!id.equals(eventID)) {
+                if (!newString.isEmpty()) {
+                    newString += "#";
+                }
+                newString += id;
+            }
+            this.attendeeOn = newString;
+        }
+    }
 
     public String[] getOwnerOf() {
         return this.ownerOf.split("#");
     }
 
-    public void setOwnerOf(String ownerOf) {this.ownerOf = ownerOf;}
+    public void addOwnerOf(String eventID) {
+        this.ownerOf = this.ownerOf.isEmpty() ? eventID : "#" + eventID;
+    }
+
+    public void deleteOwnerOf(String eventID) {
+        String newString = "";
+        for (int i = 0; i < this.getOwnerOf().length; i++) {
+            String id = this.getOwnerOf()[i];
+            if (!id.equals(eventID)) {
+                if (!newString.isEmpty()) {
+                    newString += "#";
+                }
+                newString += id;
+            }
+        }
+        this.ownerOf = newString;
+    }
 
     public String[] getArticleID() {
         return this.articleID.split("#");
     }
 
-    public void setArticleID(String articleID) {this.articleID = articleID;}
+    public void addArticleID(String articleID) {
+        this.articleID = this.articleID.isEmpty() ? articleID : "#" + articleID;
+    }
 }
 

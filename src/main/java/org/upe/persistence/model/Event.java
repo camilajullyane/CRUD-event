@@ -36,7 +36,6 @@ public class Event implements EventInterface {
         return idString;
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }
@@ -81,15 +80,31 @@ public class Event implements EventInterface {
         return this.articleList.split("#");
     }
 
-    public void setArticleList(String[] articleList) {
-        this.articleList = articleList;
+    public void addArticleList(String articleID) {
+        this.articleList = this.articleList.isEmpty() ? articleID : "#" + articleID;
     }
 
     public String[] getAttendeesList() {
         return this.attendeesList.split("#");
     }
 
-    public void setAttendeesList(String attendeesList) {this.attendeesList = attendeesList;}
+    public void addAttendeesList(String CPF) {
+        this.attendeesList = this.attendeesList.isEmpty() ? CPF : "#" + CPF;
+    }
+
+    public void deleteAttendee(String userCPF) {
+        String newString = "";
+        for (int i = 0; i < this.getAttendeesList().length; i++) {
+            String CPF = this.getAttendeesList()[i];
+            if (!CPF.equals(userCPF)) {
+                if (!newString.isEmpty()) {
+                    newString += "#";
+                }
+                newString += id;
+            }
+        }
+        this.attendeesList = newString;
+    }
 
     public String toString() {
         return "Nome: " + this.name +
