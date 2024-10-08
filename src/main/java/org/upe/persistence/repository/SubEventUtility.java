@@ -1,22 +1,27 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
+
+import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.interfaces.EventInterface;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
     public class SubEventUtility {
         protected static String CSV_FILE_PATH = "DB/subevent.csv";
         private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
+        public static void setCsvFilePath(String csvFilePath) {
+            CSV_FILE_PATH = csvFilePath;
+        }
+
         public static boolean addSubEvent(SubEvent subEvent) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
-            subEvent.id = generateSubEventID();
+            subEvent.setId(generateSubEventID());
             subEvents.add(subEvent);
             return saveSubEvents(subEvents);
         }
-
 
         public static ArrayList<SubEvent> getAllSubEvents() {
             ArrayList<SubEvent> subEvents = new ArrayList<>();
@@ -46,7 +51,7 @@ import java.util.UUID;
         }
 
         public static EventInterface createSubEvent(String parentEventID, String name, String date, String hour, String local,
-                                                 String organization, String description, String speaker) {
+                                                    String organization, String description, String speaker) {
             ArrayList<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
             String id = SubEventUtility.generateSubEventID();
             SubEvent newSubEvent = new SubEvent(id, parentEventID, name, date, hour, local, organization, description, speaker, "");
@@ -93,7 +98,7 @@ import java.util.UUID;
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(id)) {
-                    subEvent.name = newName;
+                    subEvent.setName(newName);
                     saveSubEvents(subEvents);
                     return true;
                 }
@@ -105,7 +110,7 @@ import java.util.UUID;
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(id)) {
-                    subEvent.date = newDate;
+                    subEvent.setDate(newDate);
                     saveSubEvents(subEvents);
                     return true;
                 }
@@ -117,7 +122,7 @@ import java.util.UUID;
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(id)) {
-                    subEvent.local = newLocal;
+                    subEvent.setLocal(newLocal);
                     saveSubEvents(subEvents);
                     return true;
                 }
@@ -129,7 +134,7 @@ import java.util.UUID;
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(id)) {
-                    subEvent.description = newDescription;
+                    subEvent.setDescription(newDescription);
                     saveSubEvents(subEvents);
                     return true;
                 }
@@ -150,37 +155,27 @@ import java.util.UUID;
         }
 
         // Utility Methods
-        public static void addAttendeeOnList(String CPF, String subEventID) {
+        public static void addAttendeeOnList(String userCPF, String subEventID) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
 
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(subEventID)) {
-                    subEvent.attendeesList += subEvent.attendeesList.isEmpty() ? CPF : "#" + CPF;
+                    subEvent.addAttendeesList(userCPF);
                     break;
                 }
             }
             saveSubEvents(subEvents);
         }
 
-        public static void deleteAttendeeOnList(String CPF, String subEventID) {
+        public static void deleteAttendeeOnList(String userCPF, String subEventID) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
 
             for (SubEvent subEvent : subEvents) {
                 if (subEvent.getId().equals(subEventID)) {
-                    String newString = "";
-                    for (int i = 0; i < subEvent.getAttendeesList().length; i++) {
-                        String attendeeCPF = subEvent.getAttendeesList()[i];
-                        if (!attendeeCPF.equals(CPF)) {
-                            if (!newString.isEmpty()) {
-                                newString += "#";
-                            }
-                            newString += attendeeCPF;
-                        }
-                    }
-                    subEvent.attendeesList = newString;
+                    subEvent.deleteAttendee(userCPF);
                 }
+                saveSubEvents(subEvents);
             }
-            saveSubEvents(subEvents);
         }
 
         private static boolean saveSubEvents(ArrayList<SubEvent> SubEvents) {
@@ -189,15 +184,15 @@ import java.util.UUID;
                 write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
                 for (SubEvent subEvent : SubEvents) {
                     String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
-                            subEvent.id,
-                            subEvent.parentEventID,
-                            subEvent.name,
-                            subEvent.date,
-                            subEvent.hour,
-                            subEvent.local,
-                            subEvent.description,
-                            subEvent.speakers,
-                            subEvent.attendeesList);
+                            subEvent.getId(),
+                            subEvent.getParentEventID(),
+                            subEvent.getName(),
+                            subEvent.getDate(),
+                            subEvent.getHour(),
+                            subEvent.getLocal(),
+                            subEvent.getDescription(),
+                            subEvent.getSpeakers(),
+                            String.join("#", subEvent.getAttendeesList()));
                     write.write(line);
                 }
                 write.close();

@@ -1,22 +1,23 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import org.upe.persistence.User;
+
+import org.upe.persistence.model.Event;
+import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
     protected static String CSV_FILE_PATH = "DB/event.csv";
+
+    public static void setCsvFilePath(String csvFilePath) {
+        CSV_FILE_PATH = csvFilePath;
+    }
     // Create
     public static boolean addEvent(Event event) {
         ArrayList<Event> events = getAllEvents();
-        event.id = Event.generateID(); // Define a new unique ID
+        event.setId(Event.generateID()); // Define a new unique ID
         events.add(event);
         return saveEvents(events);
     }
@@ -87,7 +88,6 @@ public class EventUtility {
         return newEvent;
     }
 
-
     public static Event getEventById(String id) {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
@@ -114,7 +114,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.local = newLocal;
+                event.setLocal(newLocal);
                 return saveEvents(events);
             }
         }
@@ -126,7 +126,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.name = newName;
+                event.setName(newName);
                 return saveEvents(events);
             }
         }
@@ -138,7 +138,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.description = newDescription;
+                event.setDescription(newDescription);
                 return saveEvents(events);
             }
         }
@@ -150,7 +150,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.organization = newOrganization;
+                event.setOrganization(newOrganization);
                 return saveEvents(events);
             }
         }
@@ -161,7 +161,7 @@ public class EventUtility {
         ArrayList<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.organization = newDate;
+                event.setOrganization(newDate);
                 return saveEvents(events);
             }
         }
@@ -182,34 +182,25 @@ public class EventUtility {
     }
 
     // Utility Methods
-    public static void addAttendeeOnList(String CPF, String eventID) {
+    public static void addAttendeeOnList(String userCPF, String eventID) {
         ArrayList<Event> events = getAllEvents();
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.attendeesList += event.attendeesList.isEmpty() ? CPF : "#" + CPF;
+                event.addAttendeesList(userCPF);
                 break;
             }
         }
         saveEvents(events);
     }
 
-    public static void deleteAttendeeOnList(String CPF, String eventID) {
+    public static void deleteAttendeeOnList(String userCPF, String eventID) {
         ArrayList<Event> events = getAllEvents();
 
         for(Event event : events) {
             if(event.getId().equals(eventID)) {
-                String newString = "";
-                for (int i = 0; i < event.getAttendeesList().length; i++) {
-                    String id = event.getAttendeesList()[i];
-                    if (!id.equals(CPF)) {
-                        if (!newString.isEmpty()) {
-                            newString += "#";
-                        }
-                        newString += id;
-                    }
-                }
-                event.attendeesList = newString;
+
+                event.deleteAttendee(userCPF);
             }
         }
         saveEvents(events);
@@ -221,9 +212,15 @@ public class EventUtility {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.id, event.ownerCPF, event.name, event.date,
-                        event.local,
-                        event.organization, event.description, event.attendeesList,event.articleList);
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
+                        event.getOwnerCPF(),
+                        event.getName(),
+                        event.getDate(),
+                        event.getLocal(),
+                        event.getOrganization(),
+                        event.getDescription(),
+                        String.join("#" ,event.getAttendeesList()),
+                        String.join("#", event.getArticleList()));
                 write.write(line);
             }
             write.close();
@@ -250,7 +247,7 @@ public class EventUtility {
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.articleList += event.articleList.isEmpty() ? articleID : "#" + articleID;
+                event.addArticleList(articleID);
                 break;
             }
         }

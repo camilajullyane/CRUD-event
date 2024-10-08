@@ -2,6 +2,9 @@ package org.upe.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.model.Article;
+import org.upe.persistence.repository.ArticleUtility;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ class ArticleUtilityTest {
             writer.write("Article 3,123e4567-e89b-12d3-a456-556642440002,123456789,Abstract 3\n");
         }
         // Atualizar o caminho do CSV para os testes
-        ArticleUtility.CSV_FILE_PATH = TEST_CSV_FILE_PATH;
+        ArticleUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test

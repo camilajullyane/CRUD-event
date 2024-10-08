@@ -1,11 +1,17 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
 
+import org.upe.persistence.model.User;
+import org.upe.persistence.interfaces.UserInterface;
+import java.util.Arrays;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class UserUtility {
     protected static String CSV_FILE_PATH = "DB/user.csv";
+
+    public static void setCsvFilePath(String csvFilePath) {
+        CSV_FILE_PATH = csvFilePath;
+    }
 
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
@@ -38,8 +44,13 @@ public class UserUtility {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
             write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s,%s\n", user.getName(), user.getEmail(), user.CPF, user.attendeeOn,
-                        user.ownerOf, user.articleID);
+                String line = String.format("%s,%s,%s,%s,%s,%s\n",
+                        user.getName(),
+                        user.getEmail(),
+                        user.getCPF(),
+                        String.join("#", user.getAttendeeOn()),
+                        String.join("#", user.getOwnerOf()),
+                        String.join("#", user.getArticleID()));
                 write.write(line);
             }
             write.close();
@@ -95,7 +106,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.email = newEmail;
+                user.setEmail(newEmail);
             }
         }
 
@@ -111,7 +122,6 @@ public class UserUtility {
                 break;
             }
         }
-
         updateFileData(users);
     }
 
@@ -120,7 +130,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.attendeeOn += user.attendeeOn.isEmpty() ? eventID : "#" + eventID;
+                user.addAttendeeOn(eventID);
                 break;
             }
         }
@@ -132,7 +142,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.ownerOf += user.ownerOf.isEmpty() ? eventID : "#" + eventID;
+                user.addOwnerOf(eventID);
                 break;
             }
         }
@@ -143,18 +153,8 @@ public class UserUtility {
         ArrayList<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.attendeeOn.contains(eventID)) {
-                String newString = "";
-                for (int i = 0; i < user.getAttendeeOn().length; i++) {
-                    String id = user.getAttendeeOn()[i];
-                    if (!id.equals(eventID)) {
-                        if (!newString.isEmpty()) {
-                            newString += "#";
-                        }
-                        newString += id;
-                    }
-                }
-                user.attendeeOn = newString;
+            if (Arrays.asList(user.getAttendeeOn()).contains(eventID)) {
+                user.deleteAttendeeOn(eventID);
             }
         }
         updateFileData(users);
@@ -166,17 +166,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                String newString = "";
-                for (int i = 0; i < user.getAttendeeOn().length; i++) {
-                    String id = user.getAttendeeOn()[i];
-                    if (!id.equals(eventID)) {
-                        if (!newString.isEmpty()) {
-                            newString += "#";
-                        }
-                        newString += id;
-                    }
-                }
-                user.attendeeOn = newString;
+                user.deleteAttendeeOn(eventID);
                 break;
             }
         }
@@ -189,17 +179,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                String newString = "";
-                for (int i = 0; i < user.getOwnerOf().length; i++) {
-                    String id = user.getOwnerOf()[i];
-                    if (!id.equals(eventID)) {
-                        if (!newString.isEmpty()) {
-                            newString += "#";
-                        }
-                        newString += id;
-                    }
-                }
-                user.ownerOf = newString;
+                user.deleteOwnerOf(eventID);
                 break;
             }
         }
@@ -211,7 +191,7 @@ public class UserUtility {
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
-                user.articleID += user.articleID.isEmpty() ? articleID : "#" + articleID;
+                user.addArticleID(articleID);
                 break;
             }
         }

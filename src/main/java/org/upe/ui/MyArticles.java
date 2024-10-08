@@ -2,9 +2,9 @@ package org.upe.ui;
 
 import org.upe.controllers.ArticleController;
 import org.upe.controllers.EventController;
-import org.upe.persistence.ArticleInterface;
-import org.upe.persistence.EventInterface;
-import org.upe.persistence.UserInterface;
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.util.ArrayList;
 import java.util.Scanner;
