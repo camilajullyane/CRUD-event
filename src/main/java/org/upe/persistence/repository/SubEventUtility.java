@@ -12,6 +12,10 @@ import java.util.UUID;
         protected static String CSV_FILE_PATH = "DB/subevent.csv";
         private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
+        public static void setCsvFilePath(String csvFilePath) {
+            CSV_FILE_PATH = csvFilePath;
+        }
+
         public static boolean addSubEvent(SubEvent subEvent) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             subEvent.setId(generateSubEventID());

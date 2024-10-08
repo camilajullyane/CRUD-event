@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class UserUtility {
     protected static String CSV_FILE_PATH = "DB/user.csv";
 
+    public static void setCsvFilePath(String csvFilePath) {
+        CSV_FILE_PATH = csvFilePath;
+    }
+
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
         try {

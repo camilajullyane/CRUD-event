@@ -10,6 +10,10 @@ import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
     protected static String CSV_FILE_PATH = "DB/event.csv";
+
+    public static void setCsvFilePath(String csvFilePath) {
+        CSV_FILE_PATH = csvFilePath;
+    }
     // Create
     public static boolean addEvent(Event event) {
         ArrayList<Event> events = getAllEvents();

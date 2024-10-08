@@ -10,6 +10,10 @@ import java.util.UUID;
 public class ArticleUtility {
     protected static String CSV_FILE_PATH = "DB/articles.csv";
 
+    public static void setCsvFilePath(String csvFilePath) {
+        CSV_FILE_PATH = csvFilePath;
+    }
+
 //    public static void submitArticle(String CPF, String articleName, String eventID) {
 //        ArrayList<User> users = UserUtility.getAllUsers();
 //        ArrayList<Event> events = EventUtility.getAllEvents();

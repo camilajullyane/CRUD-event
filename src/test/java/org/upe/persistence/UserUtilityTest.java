@@ -26,7 +26,7 @@ class UserUtilityTest {
             writer.write("Jane Smith,jane@example.com,987654321,Event5,,\n");
         }
         // Atualizar o caminho do CSV para os testes
-        UserUtility.CSV_FILE_PATH = TEST_CSV_FILE_PATH;
+        UserUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
 
