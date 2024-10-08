@@ -80,7 +80,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>org.upe.ui.HelloApplication</mainClass>
+                <mainClass>org.upe.ui.StartApp</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -113,7 +113,7 @@
               <!-- Default configuration for running with: mvn clean javafx:run -->
               <id>default-cli</id>
               <configuration>
-                <mainClass>org.upe.ui.HelloApplication</mainClass>
+                <mainClass>org.upe.ui.StartApp</mainClass>
                 <launcher>app</launcher>
                 <jlinkZipName>app</jlinkZipName>
                 <jlinkImageName>app</jlinkImageName>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="770" prefWidth="1080" spacing="20.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" >
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Text fill="#2dd4bf" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Montserrat; -fx-font-size: 120px;" text="Even2" textAlignment="CENTER" wrappingWidth="424.6340026855469">
+      <font>
+         <Font size="96.0" />
+      </font>
+   </Text>
+</VBox>
