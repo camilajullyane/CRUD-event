@@ -1,10 +1,8 @@
 package org.upe.controllers;
 
 import org.upe.persistence.*;
-import org.upe.ui.MyEvents;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public interface SubEventController {
 
