@@ -1,7 +1,6 @@
-package org.upe.persistence;
+package org.upe.persistence.model;
 
-import java.util.List;
-import java.util.UUID;
+import org.upe.persistence.interfaces.SubEventInterface;
 
 
 public class SubEvent extends Event implements SubEventInterface {
@@ -34,6 +33,7 @@ public class SubEvent extends Event implements SubEventInterface {
     public String getParentEventID() {
         return this.parentEventID;
     }
+
     public String getHour() {
         return this.hour;
     }

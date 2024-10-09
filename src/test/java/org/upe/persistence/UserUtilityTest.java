@@ -2,6 +2,9 @@ package org.upe.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.User;
+import org.upe.persistence.repository.UserUtility;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ class UserUtilityTest {
             writer.write("Jane Smith,jane@example.com,987654321,Event5,,\n");
         }
         // Atualizar o caminho do CSV para os testes
-        UserUtility.CSV_FILE_PATH = TEST_CSV_FILE_PATH;
+        UserUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
 

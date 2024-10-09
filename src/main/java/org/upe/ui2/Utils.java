@@ -1,6 +1,8 @@
 package org.upe.ui2;
 
-import org.upe.persistence.*;
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

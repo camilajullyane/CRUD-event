@@ -1,13 +1,10 @@
-package org.upe.persistence;
+package org.upe.persistence.model;
 
-import java.text.ParseException;
-import java.util.Locale;
+import org.upe.persistence.interfaces.EventInterface;
+
 import java.util.UUID;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-public class Event implements EventInterface{
+public class Event implements EventInterface {
     protected String ownerCPF;
     protected String id;
     protected String name;
@@ -39,14 +36,17 @@ public class Event implements EventInterface{
         return idString;
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }
 
+    public void setId(String id) {this.id = id;}
+
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {this.name = name;}
 
     public String getOwnerCPF() {
         return this.ownerCPF;
@@ -56,24 +56,54 @@ public class Event implements EventInterface{
         return date;
     }
 
+    public void setDate(String date) {this.date = date;}
+
     public String getLocal() {
         return local;
     }
+
+    public void setLocal(String local) {this.local = local;}
 
     public String getOrganization() {
         return organization;
     }
 
+    public void setOrganization(String organization) {this.organization = organization;}
+
     public String getDescription() {
         return description;
     }
+
+    public void setDescription(String description) {this.description = description;}
 
     public String[] getArticleList() {
         return this.articleList.split("#");
     }
 
+    public void addArticleList(String articleID) {
+        this.articleList = this.articleList.isEmpty() ? articleID : "#" + articleID;
+    }
+
     public String[] getAttendeesList() {
         return this.attendeesList.split("#");
+    }
+
+    public void addAttendeesList(String CPF) {
+        this.attendeesList = this.attendeesList.isEmpty() ? CPF : "#" + CPF;
+    }
+
+    public void deleteAttendee(String userCPF) {
+        String newString = "";
+        for (int i = 0; i < this.getAttendeesList().length; i++) {
+            String CPF = this.getAttendeesList()[i];
+            if (!CPF.equals(userCPF)) {
+                if (!newString.isEmpty()) {
+                    newString += "#";
+                }
+                newString += id;
+            }
+        }
+        this.attendeesList = newString;
     }
 
     public String toString() {

@@ -2,11 +2,13 @@ package org.upe.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.repository.EventUtility;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +25,7 @@ class EventUtilityTest {
             writer.write("2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,,\n");
         }
         // Atualizar o caminho do CSV para os testes
-        EventUtility.CSV_FILE_PATH = TEST_CSV_FILE_PATH;
+        EventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test

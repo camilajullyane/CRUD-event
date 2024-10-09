@@ -1,7 +1,7 @@
 package org.upe.ui2;
 
 import org.upe.controllers.AuthInterface;
-import org.upe.persistence.UserInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 
 import java.util.Scanner;

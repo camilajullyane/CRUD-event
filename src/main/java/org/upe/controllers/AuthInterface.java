@@ -1,9 +1,7 @@
 package org.upe.controllers;
 
-import org.upe.persistence.UserInterface;
-import org.upe.persistence.UserUtility;
-
-import java.util.ArrayList;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.repository.UserUtility;
 
 public interface AuthInterface  {
     static UserInterface loginUser(String CPF) {

@@ -2,7 +2,8 @@ package org.upe.ui2;
 
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
-import org.upe.persistence.*;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.util.ArrayList;
 import java.util.Scanner;
