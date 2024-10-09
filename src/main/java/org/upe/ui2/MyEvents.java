@@ -1,4 +1,4 @@
-package org.upe.ui;
+package org.upe.ui2;
 
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
