@@ -62,7 +62,7 @@ public class ArticleUtility {
         }
 
         return articlesArray;
-    };
+    }
 
     public static String generateArticleID() {
         UUID uuid = UUID.randomUUID();

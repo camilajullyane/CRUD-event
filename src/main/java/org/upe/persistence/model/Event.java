@@ -3,8 +3,10 @@ package org.upe.persistence.model;
 import org.upe.persistence.interfaces.EventInterface;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class Event implements EventInterface {
+    private static final Logger logger = Logger.getLogger(Event.class.getName());
     protected String ownerCPF;
     protected String id;
     protected String name;
@@ -32,7 +34,7 @@ public class Event implements EventInterface {
     public static String generateID() {
         UUID uuID = UUID.randomUUID();
         String idString = uuID.toString();
-        System.out.println(idString);
+        logger.info(idString);
         return idString;
     }
 
@@ -93,17 +95,17 @@ public class Event implements EventInterface {
     }
 
     public void deleteAttendee(String userCPF) {
-        String newString = "";
+        StringBuilder newString = new StringBuilder();
         for (int i = 0; i < this.getAttendeesList().length; i++) {
             String CPF = this.getAttendeesList()[i];
             if (!CPF.equals(userCPF)) {
                 if (!newString.isEmpty()) {
-                    newString += "#";
+                    newString.append("#");
                 }
-                newString += id;
+                newString.append(id);
             }
         }
-        this.attendeesList = newString;
+        this.attendeesList = newString.toString();
     }
 
     public String toString() {

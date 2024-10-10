@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface SubEventController {
 
-    static SubEventInterface createSubEvent(UserInterface user, EventInterface event, String name, String date, String local, String hour,
+    static SubEventInterface createSubEvent(EventInterface event, String name, String date, String local, String hour,
                                             String description, String speaker) {
         return (SubEventInterface) SubEventUtility.createSubEvent(event.getId(), name, date, hour, local, event.getOrganization(),description,
                 speaker);
@@ -19,7 +19,7 @@ public interface SubEventController {
     static ArrayList<SubEventInterface> showAllSubEvents() {
         ArrayList<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
 
-        return new ArrayList<SubEventInterface>(subEvents);
+        return new ArrayList<>(subEvents);
     }
 
     static ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
