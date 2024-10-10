@@ -7,6 +7,7 @@ import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.UserUtility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface EventController {
 
@@ -15,13 +16,13 @@ public interface EventController {
         return EventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
     }
 
-    static ArrayList<EventInterface> getAllEvents() {
-        ArrayList<Event> events = EventUtility.getAllEvents();
+    static List<EventInterface> getAllEvents() {
+        List<Event> events = EventUtility.getAllEvents();
         return new ArrayList<EventInterface>(events);
     }
 
-    static ArrayList<EventInterface> getAllEventsByUser(String ownerCPF) {
-        ArrayList<Event> eventByUser = EventUtility.getAllEventsByUser(ownerCPF);
+    static List<EventInterface> getAllEventsByUser(String ownerCPF) {
+        List<Event> eventByUser = EventUtility.getAllEventsByUser(ownerCPF);
 
         return new ArrayList<EventInterface>(eventByUser);
     }

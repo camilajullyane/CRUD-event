@@ -6,6 +6,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MyEvents {
@@ -58,7 +59,7 @@ public class MyEvents {
 
     protected static boolean showAllEvents() {
 //        System.out.println("------------Participar de um evento--------------");
-        ArrayList<EventInterface> events = EventController.getAllEvents();
+        List<EventInterface> events = EventController.getAllEvents();
         int cont = 0;
 
         if (events.isEmpty()) {
@@ -92,7 +93,7 @@ public class MyEvents {
     private static boolean myEvents(UserInterface user) {
         System.out.println("---------------Ver eventos criados---------------");
 
-        ArrayList<EventInterface> myEvents = EventController.getAllEventsByUser(user.getCPF());
+        List<EventInterface> myEvents = EventController.getAllEventsByUser(user.getCPF());
         int cont = 0;
 
         if (myEvents.isEmpty()) {
@@ -279,7 +280,7 @@ public class MyEvents {
 
 
     private static boolean userEnterEvent(UserInterface user){
-        ArrayList<EventInterface> events = EventController.getAllEvents();
+        List<EventInterface> events = EventController.getAllEvents();
         System.out.println("---------------Ver eventos criados---------------");
         int cont = 0;
         if (events.isEmpty()) {

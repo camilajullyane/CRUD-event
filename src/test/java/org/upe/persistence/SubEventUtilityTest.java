@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubEventUtilityTest {
 
-    private static final String TEST_CSV_FILE_PATH = "DB/test_subevent.csv";
+    private static final String testCsvFilePath = "DB/test_subevent.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
             writer.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
             writer.write("1,1001,SubEvent 1,01/01/2024,10:00,Local 1,Description 1,Speaker 1,123456789\n");
             writer.write("2,1002,SubEvent 2,02/01/2024,11:00,Local 2,Description 2,Speaker 2,\n");
             writer.write("3,1001,SubEvent 3,03/01/2024,12:00,Local 3,Description 3,Speaker 3,987654321\n");
         }
         // Atualizar o caminho do CSV para os testes
-        SubEventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
+        SubEventUtility.setCsvFilePath(testCsvFilePath);
     }
 
     @Test
