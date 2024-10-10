@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ArticleUtility {
+
+    private ArticleUtility() {
+        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+    }
+
     protected static String CSV_FILE_PATH = "DB/articles.csv";
 
     public static void setCsvFilePath(String csvFilePath) {
@@ -46,6 +51,7 @@ public class ArticleUtility {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
             reader.readLine();
+            String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newArticleLine = line.split(",", -1);
@@ -120,8 +126,8 @@ public class ArticleUtility {
                 userArticles.add(article);
             }
         }
-        if(userArticles.isEmpty()) {
-            return null;
+        if (userArticles.isEmpty()) {
+            return new ArrayList<>();
         }
         return userArticles;
     }

@@ -9,8 +9,13 @@ import java.util.ArrayList;
 import java.util.UUID;
 
     public class SubEventUtility {
+
+        private SubEventUtility() {
+            throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+        }
+
         protected static String CSV_FILE_PATH = "DB/subevent.csv";
-        private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+
 
         public static void setCsvFilePath(String csvFilePath) {
             CSV_FILE_PATH = csvFilePath;

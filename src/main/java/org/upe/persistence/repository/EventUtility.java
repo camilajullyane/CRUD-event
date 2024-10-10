@@ -9,6 +9,11 @@ import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
+
+    private EventUtility() {
+        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+    }
+
     protected static String CSV_FILE_PATH = "DB/event.csv";
 
     public static void setCsvFilePath(String csvFilePath) {
@@ -28,6 +33,7 @@ public class EventUtility {
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             String line;
             reader.readLine();
+            String headerLine = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",", -1);
                 String id = values[0];
