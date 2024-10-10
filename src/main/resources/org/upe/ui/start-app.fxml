@@ -1,17 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="770" prefWidth="1080" spacing="20.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" >
+<VBox alignment="TOP_CENTER" disable="true" prefHeight="770" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Text fill="#2dd4bf" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Montserrat; -fx-font-size: 120px;" text="Even2" textAlignment="CENTER" wrappingWidth="424.6340026855469">
+   <Text fill="#2dd4bf" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Montserrat; -fx-font-size: 80px;" text="EVEN2" textAlignment="CENTER" wrappingWidth="419.0340270996094">
       <font>
-         <Font size="96.0" />
+         <Font name="Arial" size="96.0" />
       </font>
    </Text>
+   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@do-utilizador.png" />
+      </image>
+   </ImageView>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <Button contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefWidth="174.0" style="-fx-background-color: transpa; -fx-border-color: transparent;" text=" SIGN IN" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" translateX="-20.0">
+            <font>
+               <Font name="Calibri Bold" size="25.0" />
+            </font>
+         </Button>
+         <Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="SIGN UP" textFill="WHITE" translateX="20.0">
+            <font>
+               <Font name="Calibri Bold" size="25.0" />
+            </font>
+         </Button>
+      </children>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+   </HBox>
+   <VBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="1040.0">
+      <children>
+         <TextField promptText="CPF" style="-fx-background-color: white;">
+            <font>
+               <Font name="Calibri" size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="200.0" right="200.0" />
+            </VBox.margin>
+         </TextField>
+         <TextField promptText="SENHA" translateY="20.0">
+            <font>
+               <Font name="Calibri" size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="200.0" right="200.0" />
+            </VBox.margin>
+         </TextField>
+      </children>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+   </VBox>
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
+      <VBox.margin>
+         <Insets left="200.0" right="200.0" />
+      </VBox.margin>
+      <children>
+         <Button layoutX="13.0" layoutY="2.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #2dd4bf;" text="SIGN IN" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="Calibri" size="25.0" />
+            </font>
+         </Button>
+      </children>
+   </AnchorPane>
 </VBox>
