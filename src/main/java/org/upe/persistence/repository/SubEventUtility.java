@@ -25,7 +25,8 @@ import java.util.UUID;
 
         public static ArrayList<SubEvent> getAllSubEvents() {
             ArrayList<SubEvent> subEvents = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
                 String line;
                 reader.readLine();
                 while ((line = reader.readLine()) != null) {

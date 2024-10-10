@@ -2,9 +2,6 @@ package org.upe.persistence.model;
 
 import org.upe.persistence.interfaces.UserInterface;
 
-//User user = new User(fudiufgasdf) - user.
-//UserInterface user = new User(shiufdas) user.
-
 public class User implements UserInterface {
     protected String name;
     protected String CPF;

@@ -1,6 +1,6 @@
 package org.upe.ui2;
 
-import org.upe.controllers.AuthInterface;
+import org.upe.controllers.AuthController;
 import org.upe.persistence.interfaces.UserInterface;
 
 
@@ -44,7 +44,7 @@ public class UserAuth {
                 return true;
             } else if (!userInput.matches(CPF_REGEX)) {
                 System.out.print("Formato inválido de CPF.");
-            } else if ((user = AuthInterface.loginUser(userInput)) != null) {
+            } else if ((user = AuthController.loginUser(userInput)) != null) {
                 return MainMenu.menu(user);
             } else {
                 System.out.println("CPF errado ou não cadastrado.");
@@ -70,7 +70,7 @@ public class UserAuth {
         System.out.print("Digite seu email: ");
         String email = sc.nextLine();
 
-        UserInterface signUpValidate = AuthInterface.signUpUser(name, CPF, email);
+        UserInterface signUpValidate = AuthController.signUpUser(name, CPF, email);
 
         if(signUpValidate == null) {
             System.out.println("CPF já cadastrado. Faça login!");
