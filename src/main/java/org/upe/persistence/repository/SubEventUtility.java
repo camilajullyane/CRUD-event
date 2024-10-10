@@ -76,7 +76,7 @@ import java.util.UUID;
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             ArrayList<SubEvent> filteredSubEvents = new ArrayList<>();
             for (SubEvent subEvent : subEvents) {
-                if (subEvent.getParentEventId().equals(parentEventID)) {
+                if (subEvent.getParentEventID().equals(parentEventID)) {
                     filteredSubEvents.add(subEvent);
                 }
             }

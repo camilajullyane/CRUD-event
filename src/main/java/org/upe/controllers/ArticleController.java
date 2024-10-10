@@ -20,8 +20,7 @@ public interface ArticleController {
 
 
     static ArrayList<ArticleInterface> getAllArticlesByUser(String userCPF) {
-        ArrayList<ArticleInterface> articles = ArticleUtility.getAllArticlesByUser(userCPF);
-        return articles;
+        return ArticleUtility.getAllArticlesByUser(userCPF);
     }
 
 
