@@ -2,7 +2,7 @@ package org.upe.persistence.repository;
 
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.model.Article;
-
+import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -46,12 +46,10 @@ public class ArticleUtility {
 //        }
 //    }
 
-    public static ArrayList<Article> getAllArticles() {
-        ArrayList<Article> articlesArray = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
+    public static List<Article> getAllArticles() {
+        List<Article> articlesArray = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             reader.readLine();
-            String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newArticleLine = line.split(",", -1);
@@ -62,13 +60,13 @@ public class ArticleUtility {
                         newArticleLine[3]);
                 articlesArray.add(article);
             }
-            reader.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return articlesArray;
-    };
+    }
+
 
     public static String generateArticleID() {
         UUID uuid = UUID.randomUUID();
@@ -81,7 +79,7 @@ public class ArticleUtility {
     }
 
     public static ArticleInterface createArticle(String name, String userCPF, String articleAbstract) {
-        ArrayList<Article> articles = ArticleUtility.getAllArticles();
+        List<Article> articles = ArticleUtility.getAllArticles();
         String articleID = generateArticleID();
 
         Article newArticle = new Article(name, articleID, userCPF, articleAbstract);
@@ -93,7 +91,7 @@ public class ArticleUtility {
     }
 
     public static Article getArticleById(String articleID) {
-        ArrayList<Article> articles = getAllArticles();
+        List<Article> articles = getAllArticles();
 
         for(Article article : articles) {
             if(article.getArticleID().equals(articleID)) {
@@ -103,12 +101,12 @@ public class ArticleUtility {
         return null;
     }
 
-    private static void updateArticleFileData(ArrayList<Article> newData) {
+    private static void updateArticleFileData(List<Article> newData) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
             write.write("name,articleID,userCPF,articleAbstract\n");
             for (Article article : newData) {
-                String line = String.format("%s,%s,%s,%s\n", article.getName(), article.getArticleID(), article.getUserCPF(), article.getArticleAbstract());
+                String line = String.format("%s,%s,%s,%s%n", article.getName(), article.getArticleID(), article.getUserCPF(), article.getArticleAbstract());
                 write.write(line);
             }
             write.close();
@@ -118,7 +116,7 @@ public class ArticleUtility {
     }
 
     public static  ArrayList<ArticleInterface> getAllArticlesByUser(String userCPF) {
-        ArrayList<Article> allArticles = ArticleUtility.getAllArticles();
+        List<Article> allArticles = ArticleUtility.getAllArticles();
         ArrayList<ArticleInterface> userArticles = new ArrayList<>();
 
         for (Article article : allArticles) {

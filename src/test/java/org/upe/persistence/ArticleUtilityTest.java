@@ -8,7 +8,7 @@ import org.upe.persistence.repository.ArticleUtility;
 
 import java.io.*;
 import java.util.ArrayList;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleUtilityTest {
@@ -30,7 +30,7 @@ class ArticleUtilityTest {
 
     @Test
     void getAllArticles() {
-        ArrayList<Article> actualArticles = ArticleUtility.getAllArticles();
+        List<Article> actualArticles = ArticleUtility.getAllArticles();
 
         assertEquals(3, actualArticles.size(), "O número de artigos deve ser o mesmo");
 
@@ -73,7 +73,7 @@ class ArticleUtilityTest {
         assertEquals(articleAbstract, newArticle.getArticleAbstract(), "O resumo do novo artigo deve ser 'Abstract 4'");
 
         // Verifica se o novo artigo foi adicionado ao arquivo CSV
-        ArrayList<Article> actualArticles = ArticleUtility.getAllArticles();
+        List<Article> actualArticles = ArticleUtility.getAllArticles();
         assertEquals(4, actualArticles.size(), "O número de artigos deve ser 4 após a adição do novo artigo");
     }
 

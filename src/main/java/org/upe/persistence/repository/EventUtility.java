@@ -177,7 +177,6 @@ public class EventUtility {
     // Delete
     public static boolean deleteEvent(String id) {
         ArrayList<Event> events = getAllEvents();
-        events.size();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
                 events.remove(i);
@@ -214,8 +213,7 @@ public class EventUtility {
 
 
     private static boolean saveEvents(List<Event> events) {
-        try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
@@ -225,17 +223,17 @@ public class EventUtility {
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
-                        String.join("#" ,event.getAttendeesList()),
+                        String.join("#", event.getAttendeesList()),
                         String.join("#", event.getArticleList()));
                 write.write(line);
             }
-            write.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
     }
+
 
     public static String generateEventID() {
         UUID uuid = UUID.randomUUID();
