@@ -8,29 +8,30 @@ import org.upe.persistence.repository.ArticleUtility;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleUtilityTest {
 
-    private static final String TEST_CSV_FILE_PATH = "DB/test_articles.csv";
+    private static final String testCsvFilePath = "DB/test_articles.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
             writer.write("name,articleID,userCPF,articleAbstract\n");
             writer.write("Article 1,123e4567-e89b-12d3-a456-556642440000,123456789,Abstract 1\n");
             writer.write("Article 2,123e4567-e89b-12d3-a456-556642440001,987654321,Abstract 2\n");
             writer.write("Article 3,123e4567-e89b-12d3-a456-556642440002,123456789,Abstract 3\n");
         }
         // Atualizar o caminho do CSV para os testes
-        ArticleUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
+        ArticleUtility.setCsvFilePath(testCsvFilePath);
     }
 
     @Test
     void getAllArticles() {
-        ArrayList<Article> actualArticles = ArticleUtility.getAllArticles();
+        List<Article> actualArticles = ArticleUtility.getAllArticles();
 
         assertEquals(3, actualArticles.size(), "O número de artigos deve ser o mesmo");
 
@@ -90,7 +91,7 @@ class ArticleUtilityTest {
     @Test
     void getAllArticlesByUser() {
         String userCPF = "123456789";
-        ArrayList<ArticleInterface> userArticles = ArticleUtility.getAllArticlesByUser(userCPF);
+        List<ArticleInterface> userArticles = ArticleUtility.getAllArticlesByUser(userCPF);
 
         assertNotNull(userArticles, "A lista de artigos do usuário não deve ser nula");
         assertEquals(2, userArticles.size(), "O número de artigos do usuário deve ser 2");

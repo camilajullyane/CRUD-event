@@ -9,23 +9,23 @@ import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
-    protected static String CSV_FILE_PATH = "DB/event.csv";
+    protected static String csvFilePath = "DB/event.csv";
 
     public static void setCsvFilePath(String csvFilePath) {
-        CSV_FILE_PATH = csvFilePath;
+        EventUtility.csvFilePath = csvFilePath;
     }
     // Create
     public static boolean addEvent(Event event) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         event.setId(Event.generateID()); // Define a new unique ID
         events.add(event);
         return saveEvents(events);
     }
 
     // Read
-    public static ArrayList<Event> getAllEvents() {
-        ArrayList<Event> events = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+    public static List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -50,7 +50,7 @@ public class EventUtility {
     }
 
     public static  ArrayList<Event> getAllEventsByUser(String ownerCPF) {
-        ArrayList<Event> allEvents = getAllEvents();
+        List<Event> allEvents = getAllEvents();
         ArrayList<Event> userEvents = new ArrayList<>();
 
         for (Event event : allEvents) {
@@ -62,7 +62,7 @@ public class EventUtility {
     }
 
     public static ArrayList<Event> getEventsIn(String CPF) {
-        ArrayList<Event> allEvents = getAllEvents();
+        List<Event> allEvents = getAllEvents();
         ArrayList<Event> eventsIn = new ArrayList<>();
 
         for (Event event : allEvents) {
@@ -79,7 +79,7 @@ public class EventUtility {
 
     public static EventInterface createEvent(String ownerCPF, String name, String date, String local,
                                              String organization, String description) {
-        ArrayList<Event> events = EventUtility.getAllEvents();
+        List<Event> events = EventUtility.getAllEvents();
         String id = EventUtility.generateEventID();
         Event newEvent = new Event(id, ownerCPF, name, date, local, organization, description, "", "");
         events.add(newEvent);
@@ -89,7 +89,7 @@ public class EventUtility {
     }
 
     public static Event getEventById(String id) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 return event;
@@ -100,7 +100,7 @@ public class EventUtility {
 
     // Update
     public static boolean updateEvent(Event updatedEvent) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(updatedEvent.getId())) {
                 events.set(i, updatedEvent);
@@ -111,7 +111,7 @@ public class EventUtility {
     }
 
     public static boolean updateEventLocal(String id, String newLocal) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setLocal(newLocal);
@@ -123,7 +123,7 @@ public class EventUtility {
 
 
     public static boolean updateEventName(String id, String newName) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setName(newName);
@@ -135,7 +135,7 @@ public class EventUtility {
 
     // Update Description
     public static boolean updateEventDescription(String id, String newDescription) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setDescription(newDescription);
@@ -147,7 +147,7 @@ public class EventUtility {
 
     // Update Organization
     public static boolean updateEventOrganization(String id, String newOrganization) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setOrganization(newOrganization);
@@ -158,7 +158,7 @@ public class EventUtility {
     }
 
     public static boolean updateEventDate(String id, String newDate) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setOrganization(newDate);
@@ -170,7 +170,7 @@ public class EventUtility {
 
     // Delete
     public static boolean deleteEvent(String id) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
         events.size();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
@@ -183,7 +183,7 @@ public class EventUtility {
 
     // Utility Methods
     public static void addAttendeeOnList(String userCPF, String eventID) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
@@ -195,7 +195,7 @@ public class EventUtility {
     }
 
     public static void deleteAttendeeOnList(String userCPF, String eventID) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
 
         for(Event event : events) {
             if(event.getId().equals(eventID)) {
@@ -209,7 +209,7 @@ public class EventUtility {
 
     private static boolean saveEvents(List<Event> events) {
         try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
@@ -243,7 +243,7 @@ public class EventUtility {
 
 
     public static boolean addArticleOnList(String articleID, String eventID) {
-        ArrayList<Event> events = getAllEvents();
+        List<Event> events = getAllEvents();
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {

@@ -5,18 +5,19 @@ import org.upe.persistence.interfaces.UserInterface;
 import java.util.Arrays;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserUtility {
-    protected static String CSV_FILE_PATH = "DB/user.csv";
+    protected static String csvFilePath = "DB/user.csv";
 
     public static void setCsvFilePath(String csvFilePath) {
-        CSV_FILE_PATH = csvFilePath;
+        UserUtility.csvFilePath = csvFilePath;
     }
 
-    public static ArrayList<User> getAllUsers() {
+    public static List<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -39,9 +40,9 @@ public class UserUtility {
         return usersArray;
     }
 
-    private static void updateFileData(ArrayList<User> newData) {
+    private static void updateFileData(List<User> newData) {
         try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
                 String line = String.format("%s,%s,%s,%s,%s,%s\n",
@@ -61,7 +62,7 @@ public class UserUtility {
 
     public static UserInterface findByCPF(String CPF) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -91,7 +92,7 @@ public class UserUtility {
         }
         try {
             String newLine = String.format("%s,%s,%s,,,", name, email,CPF);
-            FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
+            FileWriter writer = new FileWriter(csvFilePath, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);
             writer.close();
@@ -102,7 +103,7 @@ public class UserUtility {
     }
 
     public static void updateUserEmail(String CPF, String newEmail) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
@@ -114,7 +115,7 @@ public class UserUtility {
     }
 
     public static void deleteUser(String CPF) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
@@ -126,7 +127,7 @@ public class UserUtility {
     }
 
     public static void addAttendeeOnEvent(String CPF, String eventID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
@@ -138,7 +139,7 @@ public class UserUtility {
     }
 
     public static void addOwnerOnEvent(String CPF, String eventID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
@@ -150,7 +151,7 @@ public class UserUtility {
     }
 
     public static boolean deleteAllAttendeesFromEvent(String eventID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (Arrays.asList(user.getAttendeeOn()).contains(eventID)) {
@@ -162,7 +163,7 @@ public class UserUtility {
     }
 
     public static boolean deleteAttendeeEvent(String CPF, String eventID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
@@ -175,7 +176,7 @@ public class UserUtility {
     }
 
     public static void deleteOwnerOf(String CPF, String eventID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {
@@ -187,7 +188,7 @@ public class UserUtility {
     }
 
     public static void addUserArticle(String CPF, String articleID) {
-        ArrayList<User> users = UserUtility.getAllUsers();
+        List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(CPF)) {

@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.UUID;
 
     public class SubEventUtility {
-        protected static String CSV_FILE_PATH = "DB/subevent.csv";
+        protected static String csvFilePath = "DB/subevent.csv";
         private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
         public static void setCsvFilePath(String csvFilePath) {
-            CSV_FILE_PATH = csvFilePath;
+            SubEventUtility.csvFilePath = csvFilePath;
         }
 
         public static boolean addSubEvent(SubEvent subEvent) {
@@ -25,7 +25,7 @@ import java.util.UUID;
 
         public static ArrayList<SubEvent> getAllSubEvents() {
             ArrayList<SubEvent> subEvents = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
                 String line;
                 reader.readLine();
                 while ((line = reader.readLine()) != null) {
@@ -178,11 +178,11 @@ import java.util.UUID;
             }
         }
 
-        private static boolean saveSubEvents(ArrayList<SubEvent> SubEvents) {
+        private static boolean saveSubEvents(ArrayList<SubEvent> subEvents) {
             try {
-                BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+                BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
                 write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
-                for (SubEvent subEvent : SubEvents) {
+                for (SubEvent subEvent : subEvents) {
                     String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
                             subEvent.getId(),
                             subEvent.getParentEventID(),

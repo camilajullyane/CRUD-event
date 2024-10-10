@@ -15,24 +15,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserUtilityTest {
 
-    private static String TEST_CSV_FILE_PATH = "DB/test_user.csv";
+    private static final String testCsvFilePath = "DB/test_user.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
             writer.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             writer.write("John Doe,john@example.com,123456789,Event1#Event2,Event3#Event4,\n");
             writer.write("Jane Smith,jane@example.com,987654321,Event5,,\n");
         }
         // Atualizar o caminho do CSV para os testes
-        UserUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
+        UserUtility.setCsvFilePath(testCsvFilePath);
     }
 
 
     @Test
     void getAllUsers() {
-        ArrayList<User> actualUsers = UserUtility.getAllUsers();
+        List<User> actualUsers = UserUtility.getAllUsers();
 
         assertEquals(2, actualUsers.size(), "O número de usuários deve ser o mesmo");
 

@@ -9,10 +9,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class Utils {
 
@@ -55,7 +52,7 @@ public class Utils {
         return hour.toString();
     }
 
-    protected static EventInterface chooseEventOnList(ArrayList<EventInterface> myEvents) {
+    protected static EventInterface chooseEventOnList(List<EventInterface> myEvents) {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {

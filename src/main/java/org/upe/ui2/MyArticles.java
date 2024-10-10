@@ -7,6 +7,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MyArticles {
@@ -71,7 +72,7 @@ public class MyArticles {
 
     private static boolean submitArticle(UserInterface user) {
         ArrayList<ArticleInterface> articles = showMyArticles(user.getCPF());
-        ArrayList<EventInterface> events = EventController.getAllEvents();
+        List<EventInterface> events = EventController.getAllEvents();
         ArticleInterface chosenArticle = Utils.chooseArticleOnList(articles);
 
         if(!MyEvents.showAllEvents()) {
