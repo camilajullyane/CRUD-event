@@ -71,7 +71,7 @@ class EventUtilityTest {
 
     @Test
     void getAllEventsByUser() {
-        ArrayList<Event> userEvents = EventUtility.getAllEventsByUser("123456789");
+        List<Event> userEvents = EventUtility.getAllEventsByUser("123456789");
         assertEquals(1, userEvents.size(), "O número de eventos do usuário deve ser 1");
         assertEquals("Sample Event 1", userEvents.get(0).getName(), "O nome do evento do usuário deve ser 'Sample Event 1'");
     }

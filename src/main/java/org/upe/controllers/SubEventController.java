@@ -2,7 +2,6 @@ package org.upe.controllers;
 
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.SubEventUtility;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 
 public interface SubEventController {
 
-    static SubEventInterface createSubEvent(UserInterface user, EventInterface event, String name, String date, String local, String hour,
+    static SubEventInterface createSubEvent(EventInterface event, String name, String date, String local, String hour,
                                             String description, String speaker) {
         return (SubEventInterface) SubEventUtility.createSubEvent(event.getId(), name, date, hour, local, event.getOrganization(),description,
                 speaker);

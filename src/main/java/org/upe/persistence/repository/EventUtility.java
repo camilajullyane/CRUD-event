@@ -21,10 +21,16 @@ public class EventUtility {
     public static void setCsvFilePath(String csvFilePath) {
         EventUtility.csvFilePath = csvFilePath;
     }
+
+    public static String generateID() {
+        UUID uuID = UUID.randomUUID();
+        return uuID.toString();
+    }
+
     // Create
     public static boolean addEvent(Event event) {
         List<Event> events = getAllEvents();
-        event.setId(Event.generateID()); // Define a new unique ID
+        event.setId(EventUtility.generateID()); // Define a new unique ID
         events.add(event);
         return saveEvents(events);
     }
@@ -35,8 +41,12 @@ public class EventUtility {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
 
             String line;
-            String headerLine = reader.readLine();
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] values = line.split(",", -1);
                 String id = values[0];
                 String ownerCPF = values[1];
@@ -57,7 +67,7 @@ public class EventUtility {
         return events;
     }
 
-    public static  ArrayList<Event> getAllEventsByUser(String ownerCPF) {
+    public static  List<Event> getAllEventsByUser(String ownerCPF) {
         List<Event> allEvents = getAllEvents();
         ArrayList<Event> userEvents = new ArrayList<>();
 
