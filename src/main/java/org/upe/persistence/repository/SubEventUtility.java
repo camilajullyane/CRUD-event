@@ -7,8 +7,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-    public class SubEventUtility {
+public class SubEventUtility {
+        private static final Logger LOGGER = Logger.getLogger(SubEventUtility.class.getName());
         protected static String csvFilePath = "DB/subevent.csv";
       
         private SubEventUtility() {
@@ -28,9 +31,8 @@ import java.util.UUID;
 
         public static List<SubEvent> getAllSubEvents() {
             List<SubEvent> subEvents = new ArrayList<>();
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new FileReader(csvFilePath));
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
                 String line;
                 String headerLine = reader.readLine();
                 while ((line = reader.readLine()) != null) {
@@ -50,15 +52,7 @@ import java.util.UUID;
                     subEvents.add(subEvent);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
             }
             return subEvents;
         }
@@ -192,8 +186,7 @@ import java.util.UUID;
         }
 
         private static boolean saveSubEvents(List<SubEvent> subEvents) {
-            try {
-                BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
+            try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
                 write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
                 for (SubEvent subEvent : subEvents) {
                     String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n",
@@ -208,10 +201,9 @@ import java.util.UUID;
                             String.join("#", subEvent.getAttendeesList()));
                     write.write(line);
                 }
-                write.close();
                 return true;
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
                 return false;
             }
         }
