@@ -7,6 +7,7 @@ import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MySubEvents {
@@ -48,7 +49,7 @@ public class MySubEvents {
     private static boolean createSubEventMenu(UserInterface user) {
         Scanner sc = new Scanner(System.in);
 
-        ArrayList<EventInterface> events = EventController.getAllEventsByUser(user.getCPF());
+        List<EventInterface> events = EventController.getAllEventsByUser(user.getCPF());
 
         if (events.isEmpty()) {
             System.out.println("Você não tem nenhum evento.");
@@ -86,7 +87,7 @@ public class MySubEvents {
 
     private static boolean editSubEventMenu(UserInterface user) {
         System.out.println("----Editar sub-evento----");
-        ArrayList<EventInterface> events = EventController.getAllEventsByUser(user.getCPF());
+        List<EventInterface> events = EventController.getAllEventsByUser(user.getCPF());
 
         if (events.isEmpty()) {
             System.out.println("Você não tem nenhum evento.");
@@ -214,7 +215,7 @@ public class MySubEvents {
     private static boolean deleteSubEventMenu(UserInterface user) {
 
         System.out.println("----Remover sub-evento----");
-        ArrayList<EventInterface> events = EventController.getAllEventsByUser(user.getCPF());
+        List<EventInterface> events = EventController.getAllEventsByUser(user.getCPF());
 
         if (events.isEmpty()) {
             System.out.println("Você não tem nenhum evento.");

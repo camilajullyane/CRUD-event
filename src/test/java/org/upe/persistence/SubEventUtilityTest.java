@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubEventUtilityTest {
 
-    private static final String TEST_CSV_FILE_PATH = "DB/test_subevent.csv";
+    private static final String testCsvFilePath = "DB/test_subevent.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
             writer.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
             writer.write("1,1001,SubEvent 1,01/01/2024,10:00,Local 1,Description 1,Speaker 1,123456789\n");
             writer.write("2,1002,SubEvent 2,02/01/2024,11:00,Local 2,Description 2,Speaker 2,\n");
             writer.write("3,1001,SubEvent 3,03/01/2024,12:00,Local 3,Description 3,Speaker 3,987654321\n");
         }
         // Atualizar o caminho do CSV para os testes
-        SubEventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
+        SubEventUtility.setCsvFilePath(testCsvFilePath);
     }
 
     @Test
@@ -35,7 +35,7 @@ class SubEventUtilityTest {
 
         SubEvent subEvent1 = actualSubEvents.get(0);
         assertEquals("1", subEvent1.getId(), "O ID do primeiro sub-evento deve ser '1'");
-        assertEquals("1001", subEvent1.getParentEventId(), "O ID do evento pai do primeiro sub-evento deve ser '1001'");
+        assertEquals("1001", subEvent1.getParentEventID(), "O ID do evento pai do primeiro sub-evento deve ser '1001'");
         assertEquals("SubEvent 1", subEvent1.getName(), "O nome do primeiro sub-evento deve ser 'SubEvent 1'");
         assertEquals("01/01/2024", subEvent1.getDate(), "A data do primeiro sub-evento deve ser '01/01/2024'");
         assertEquals("10:00", subEvent1.getHour(), "A hora do primeiro sub-evento deve ser '10:00'");
@@ -48,7 +48,7 @@ class SubEventUtilityTest {
 
         SubEvent subEvent2 = actualSubEvents.get(1);
         assertEquals("2", subEvent2.getId(), "O ID do segundo sub-evento deve ser '2'");
-        assertEquals("1002", subEvent2.getParentEventId(), "O ID do evento pai do segundo sub-evento deve ser '1002'");
+        assertEquals("1002", subEvent2.getParentEventID(), "O ID do evento pai do segundo sub-evento deve ser '1002'");
         assertEquals("SubEvent 2", subEvent2.getName(), "O nome do segundo sub-evento deve ser 'SubEvent 2'");
         assertEquals("02/01/2024", subEvent2.getDate(), "A data do segundo sub-evento deve ser '02/01/2024'");
         assertEquals("11:00", subEvent2.getHour(), "A hora do segundo sub-evento deve ser '11:00'");
@@ -60,7 +60,7 @@ class SubEventUtilityTest {
 
         SubEvent subEvent3 = actualSubEvents.get(2);
         assertEquals("3", subEvent3.getId(), "O ID do terceiro sub-evento deve ser '3'");
-        assertEquals("1001", subEvent3.getParentEventId(), "O ID do evento pai do terceiro sub-evento deve ser '1001'");
+        assertEquals("1001", subEvent3.getParentEventID(), "O ID do evento pai do terceiro sub-evento deve ser '1001'");
         assertEquals("SubEvent 3", subEvent3.getName(), "O nome do terceiro sub-evento deve ser 'SubEvent 3'");
         assertEquals("03/01/2024", subEvent3.getDate(), "A data do terceiro sub-evento deve ser '03/01/2024'");
         assertEquals("12:00", subEvent3.getHour(), "A hora do terceiro sub-evento deve ser '12:00'");
@@ -93,7 +93,7 @@ class SubEventUtilityTest {
 
         SubEvent subEvent1 = subEvents.get(0);
         assertEquals("1", subEvent1.getId(), "O ID do primeiro sub-evento deve ser '1'");
-        assertEquals("1001", subEvent1.getParentEventId(), "O ID do evento pai do primeiro sub-evento deve ser '1001'");
+        assertEquals("1001", subEvent1.getParentEventID(), "O ID do evento pai do primeiro sub-evento deve ser '1001'");
         assertEquals("SubEvent 1", subEvent1.getName(), "O nome do primeiro sub-evento deve ser 'SubEvent 1'");
         assertEquals("01/01/2024", subEvent1.getDate(), "A data do primeiro sub-evento deve ser '01/01/2024'");
         assertEquals("10:00", subEvent1.getHour(), "A hora do primeiro sub-evento deve ser '10:00'");
@@ -105,7 +105,7 @@ class SubEventUtilityTest {
 
         SubEvent subEvent2 = subEvents.get(1);
         assertEquals("3", subEvent2.getId(), "O ID do segundo sub-evento deve ser '3'");
-        assertEquals("1001", subEvent2.getParentEventId(), "O ID do evento pai do segundo sub-evento deve ser '1001'");
+        assertEquals("1001", subEvent2.getParentEventID(), "O ID do evento pai do segundo sub-evento deve ser '1001'");
         assertEquals("SubEvent 3", subEvent2.getName(), "O nome do segundo sub-evento deve ser 'SubEvent 3'");
         assertEquals("03/01/2024", subEvent2.getDate(), "A data do segundo sub-evento deve ser '03/01/2024'");
         assertEquals("12:00", subEvent2.getHour(), "A hora do segundo sub-evento deve ser '12:00'");

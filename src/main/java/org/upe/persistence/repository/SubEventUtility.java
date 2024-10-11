@@ -4,22 +4,19 @@ import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.interfaces.EventInterface;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
     public class SubEventUtility {
-
+        protected static String csvFilePath = "DB/subevent.csv";
+      
         private SubEventUtility() {
             throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
         }
 
-        protected static String CSV_FILE_PATH = "DB/subevent.csv";
-
-
         public static void setCsvFilePath(String csvFilePath) {
-            CSV_FILE_PATH = csvFilePath;
+            SubEventUtility.csvFilePath = csvFilePath;
         }
 
         public static boolean addSubEvent(SubEvent subEvent) {
@@ -31,7 +28,7 @@ import java.util.UUID;
 
         public static List<SubEvent> getAllSubEvents() {
             List<SubEvent> subEvents = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath)) {
                 String line;
                 reader.readLine();
                 String headerLine = reader.readLine();
@@ -82,7 +79,7 @@ import java.util.UUID;
             List<SubEvent> subEvents = getAllSubEvents();
             ArrayList<SubEvent> filteredSubEvents = new ArrayList<>();
             for (SubEvent subEvent : subEvents) {
-                if (subEvent.getParentEventId().equals(parentEventID)) {
+                if (subEvent.getParentEventID().equals(parentEventID)) {
                     filteredSubEvents.add(subEvent);
                 }
             }
@@ -186,9 +183,10 @@ import java.util.UUID;
         }
 
         private static boolean saveSubEvents(List<SubEvent> SubEvents) {
-            try (BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
+            try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
+
                 write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
-                for (SubEvent subEvent : SubEvents) {
+                for (SubEvent subEvent : subEvents) {
                     String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
                             subEvent.getId(),
                             subEvent.getParentEventID(),

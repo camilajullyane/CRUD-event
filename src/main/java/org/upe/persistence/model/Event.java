@@ -88,15 +88,15 @@ public class Event implements EventInterface {
         return this.attendeesList.split("#");
     }
 
-    public void addAttendeesList(String CPF) {
-        this.attendeesList = this.attendeesList.isEmpty() ? CPF : "#" + CPF;
+    public void addAttendeesList(String userCPF) {
+        this.attendeesList = this.attendeesList.isEmpty() ? userCPF : "#" + userCPF;
     }
 
     public void deleteAttendee(String userCPF) {
         String newString = "";
         for (int i = 0; i < this.getAttendeesList().length; i++) {
-            String CPF = this.getAttendeesList()[i];
-            if (!CPF.equals(userCPF)) {
+            String cpf = this.getAttendeesList()[i];
+            if (!cpf.equals(userCPF)) {
                 if (!newString.isEmpty()) {
                     newString += "#";
                 }

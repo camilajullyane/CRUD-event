@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ArticleUtility {
-
+    protected static String csvFilePath = "DB/articles.csv";
+  
     private ArticleUtility() {
         throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
     }
 
-    protected static String CSV_FILE_PATH = "DB/articles.csv";
-
     public static void setCsvFilePath(String csvFilePath) {
-        CSV_FILE_PATH = csvFilePath;
+        ArticleUtility.csvFilePath = csvFilePath;
     }
+
+
 
 //    public static void submitArticle(String CPF, String articleName, String eventID) {
 //        ArrayList<User> users = UserUtility.getAllUsers();
@@ -48,7 +49,7 @@ public class ArticleUtility {
 
     public static List<Article> getAllArticles() {
         List<Article> articlesArray = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -103,7 +104,7 @@ public class ArticleUtility {
 
     private static void updateArticleFileData(List<Article> newData) {
         try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("name,articleID,userCPF,articleAbstract\n");
             for (Article article : newData) {
                 String line = String.format("%s,%s,%s,%s%n", article.getName(), article.getArticleID(), article.getUserCPF(), article.getArticleAbstract());
