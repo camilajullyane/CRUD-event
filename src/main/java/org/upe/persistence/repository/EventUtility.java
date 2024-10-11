@@ -29,9 +29,9 @@ public class EventUtility {
     // Read
     public static List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
             String line;
-            reader.readLine();
             String headerLine = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",", -1);
@@ -176,7 +176,6 @@ public class EventUtility {
     // Delete
     public static boolean deleteEvent(String id) {
         List<Event> events = getAllEvents();
-        events.size();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
                 events.remove(i);
@@ -213,7 +212,8 @@ public class EventUtility {
 
 
     private static boolean saveEvents(List<Event> events) {
-        try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
+        try {
+            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
@@ -227,6 +227,7 @@ public class EventUtility {
                         String.join("#", event.getArticleList()));
                 write.write(line);
             }
+            write.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();

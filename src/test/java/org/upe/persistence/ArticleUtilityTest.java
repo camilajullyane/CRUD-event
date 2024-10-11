@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleUtilityTest {
 
-    private static final String testCsvFilePath = "DB/test_articles.csv";
+    private static final String testCsvFilePath = "DB/teste/test_articles.csv";
 
     @BeforeEach
     void setUp() throws IOException {
@@ -95,7 +95,7 @@ class ArticleUtilityTest {
         assertNotNull(userArticles, "A lista de artigos do usuário não deve ser nula");
         assertEquals(2, userArticles.size(), "O número de artigos do usuário deve ser 2");
 
-        ArticleInterface article1 = userArticles.get(0);
+        ArticleInterface article1 = userArticles.getFirst();
         assertEquals("Article 1", article1.getName(), "O nome do primeiro artigo deve ser 'Article 1'");
         assertEquals("123e4567-e89b-12d3-a456-556642440000", article1.getArticleID(), "O ID do primeiro artigo deve ser '123e4567-e89b-12d3-a456-556642440000'");
         assertEquals("123456789", article1.getUserCPF(), "O CPF do usuário do primeiro artigo deve ser '123456789'");

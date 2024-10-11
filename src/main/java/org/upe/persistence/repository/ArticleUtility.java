@@ -49,8 +49,9 @@ public class ArticleUtility {
 
     public static List<Article> getAllArticles() {
         List<Article> articlesArray = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            reader.readLine();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+            String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newArticleLine = line.split(",", -1);
@@ -61,6 +62,7 @@ public class ArticleUtility {
                         newArticleLine[3]);
                 articlesArray.add(article);
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,7 +128,7 @@ public class ArticleUtility {
             }
         }
         if (userArticles.isEmpty()) {
-            return new ArrayList<>();
+            return null;
         }
         return userArticles;
     }

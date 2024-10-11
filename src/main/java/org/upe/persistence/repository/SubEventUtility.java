@@ -28,9 +28,9 @@ import java.util.UUID;
 
         public static List<SubEvent> getAllSubEvents() {
             List<SubEvent> subEvents = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath)) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
                 String line;
-                reader.readLine();
                 String headerLine = reader.readLine();
                 while ((line = reader.readLine()) != null) {
                     String[] values = line.split(",", -1);
@@ -182,9 +182,9 @@ import java.util.UUID;
             }
         }
 
-        private static boolean saveSubEvents(List<SubEvent> SubEvents) {
-            try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
-
+        private static boolean saveSubEvents(List<SubEvent> subEvents) {
+            try {
+                BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
                 write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
                 for (SubEvent subEvent : subEvents) {
                     String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
@@ -199,6 +199,7 @@ import java.util.UUID;
                             String.join("#", subEvent.getAttendeesList()));
                     write.write(line);
                 }
+                write.close();
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();

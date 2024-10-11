@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserUtilityTest {
 
-    private static final String testCsvFilePath = "DB/test_user.csv";
+    private static final String testCsvFilePath = "DB/teste/test_user.csv";
 
     @BeforeEach
     void setUp() throws IOException {

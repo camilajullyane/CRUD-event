@@ -16,7 +16,8 @@ public class UserUtility {
 
     public static List<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath)) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
             reader.readLine();  // Skip the first line (header)
             String line;
             while ((line = reader.readLine()) != null) {
@@ -38,7 +39,7 @@ public class UserUtility {
         return usersArray;
     }
 
-    private static void updateFileData(ArrayList<User> newData) {
+    private static void updateFileData(List<User> newData) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
@@ -61,7 +62,6 @@ public class UserUtility {
     public static UserInterface findByCPF(String CPF) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-            reader.readLine();
             String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {

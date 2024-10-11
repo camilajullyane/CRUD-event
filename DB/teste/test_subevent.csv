@@ -1,4 +1,1 @@
 id,parentEventID,name,date,hour,local,description,speaker,attendeesList
-1,1001,SubEvent 1,01/01/2024,10:00,Local 1,Description 1,Speaker 1,123456789
-2,1002,SubEvent 2,02/01/2024,11:00,Local 2,Description 2,Speaker 2,
-3,1001,SubEvent 3,03/01/2024,12:00,Local 3,Description 3,Speaker 3,987654321
