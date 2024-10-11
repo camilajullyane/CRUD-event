@@ -6,8 +6,11 @@ import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ArticleUtility {
+    private static final Logger LOGGER = Logger.getLogger(ArticleUtility.class.getName());
     protected static String csvFilePath = "DB/articles.csv";
   
     private ArticleUtility() {
@@ -17,8 +20,6 @@ public class ArticleUtility {
     public static void setCsvFilePath(String csvFilePath) {
         ArticleUtility.csvFilePath = csvFilePath;
     }
-
-
 
 //    public static void submitArticle(String CPF, String articleName, String eventID) {
 //        ArrayList<User> users = UserUtility.getAllUsers();
@@ -49,8 +50,7 @@ public class ArticleUtility {
 
     public static List<Article> getAllArticles() {
         List<Article> articlesArray = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -62,9 +62,8 @@ public class ArticleUtility {
                         newArticleLine[3]);
                 articlesArray.add(article);
             }
-            reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
         }
 
         return articlesArray;
@@ -105,16 +104,14 @@ public class ArticleUtility {
     }
 
     private static void updateArticleFileData(List<Article> newData) {
-        try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,articleID,userCPF,articleAbstract\n");
             for (Article article : newData) {
                 String line = String.format("%s,%s,%s,%s%n", article.getName(), article.getArticleID(), article.getUserCPF(), article.getArticleAbstract());
                 write.write(line);
             }
-            write.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
     }
 

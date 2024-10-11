@@ -4,11 +4,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
+    private static final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
     protected static String csvFilePath = "DB/event.csv";
   
     private EventUtility() {
@@ -29,9 +32,8 @@ public class EventUtility {
     // Read
     public static List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(csvFilePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+
             String line;
             String headerLine = reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -50,16 +52,8 @@ public class EventUtility {
                 events.add(event);
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        };
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
+        }
         return events;
     }
 
@@ -175,7 +169,7 @@ public class EventUtility {
         List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.setOrganization(newDate);
+                event.setDate(newDate);
                 return saveEvents(events);
             }
         }
@@ -221,8 +215,7 @@ public class EventUtility {
 
 
     private static boolean saveEvents(List<Event> events) {
-        try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n", event.getId(),
@@ -239,7 +232,7 @@ public class EventUtility {
             write.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
             return false;
         }
     }

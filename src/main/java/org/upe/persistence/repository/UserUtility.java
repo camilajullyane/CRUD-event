@@ -6,8 +6,11 @@ import java.util.Arrays;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserUtility {
+    private static final Logger LOGGER = Logger.getLogger(UserUtility.class.getName());
     protected static String csvFilePath = "DB/user.csv";
 
     private UserUtility() {
@@ -20,8 +23,7 @@ public class UserUtility {
 
     public static List<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));) {
             String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -37,16 +39,14 @@ public class UserUtility {
                 usersArray.add(user);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
         }
 
         return usersArray;
     }
 
     private static void updateFileData(List<User> newData) {
-        BufferedWriter write = null;
-        try {
-            write = new BufferedWriter(new FileWriter(csvFilePath));
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
                 String line = String.format("%s,%s,%s,%s,%s,%s%n",
@@ -59,22 +59,12 @@ public class UserUtility {
                 write.write(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(write != null) {
-                    write.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
     }
 
     public static UserInterface findByCPF(String cpf) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(csvFilePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -91,15 +81,7 @@ public class UserUtility {
                 }
             }
         } catch(IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
         }
         return null;
     }
@@ -109,22 +91,14 @@ public class UserUtility {
         if(findByCPF(cpf) != null) {
             return null;
         }
-        FileWriter writer = null;
-        try {
+
+        try (FileWriter writer = new FileWriter(csvFilePath, true)) {
             String newLine = String.format("%s,%s,%s,,,", name, email, cpf);
-            writer = new FileWriter(csvFilePath, true);
+
             writer.append(System.lineSeparator());
             writer.append(newLine);
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
         return new User(name, cpf, email, "", "","");
     }
