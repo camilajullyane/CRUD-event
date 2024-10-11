@@ -20,12 +20,12 @@ public interface SubEventController {
     static List<SubEventInterface> showAllSubEvents() {
         List<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
 
-        return new ArrayList<SubEventInterface>(subEvents);
+        return new ArrayList<>(subEvents);
     }
 
     static ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = SubEventUtility.getSubEventByEvent(parentID);
-        return new ArrayList<SubEventInterface>(subEventsByEvent);
+        return new ArrayList<>(subEventsByEvent);
     }
 
     static boolean editSubEventName(String id, String newName) {

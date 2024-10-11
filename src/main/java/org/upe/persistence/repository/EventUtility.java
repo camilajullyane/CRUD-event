@@ -29,8 +29,9 @@ public class EventUtility {
     // Read
     public static List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
+        BufferedReader reader = null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+            reader = new BufferedReader(new FileReader(csvFilePath));
             String line;
             String headerLine = reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -50,7 +51,15 @@ public class EventUtility {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
         return events;
     }
 
@@ -66,14 +75,14 @@ public class EventUtility {
         return userEvents;
     }
 
-    public static ArrayList<Event> getEventsIn(String CPF) {
+    public static List<Event> getEventsIn(String cpf) {
         List<Event> allEvents = getAllEvents();
         ArrayList<Event> eventsIn = new ArrayList<>();
 
         for (Event event : allEvents) {
             String[] attendees = event.getAttendeesList();
             for (String attendee : attendees) {
-                if (attendee.trim().equals(CPF)) {
+                if (attendee.trim().equals(cpf)) {
                     eventsIn.add(event);
                     break;
                 }
@@ -216,7 +225,7 @@ public class EventUtility {
             BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n", event.getId(),
                         event.getOwnerCPF(),
                         event.getName(),
                         event.getDate(),

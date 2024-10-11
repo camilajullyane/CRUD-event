@@ -7,6 +7,7 @@ import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.UserUtility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface UserController {
     static boolean deleteAttendeeEvent(String userCPF, String eventID) {
@@ -15,7 +16,7 @@ public interface UserController {
     }
 
     static ArrayList<EventInterface> userEventsIn(String ownerCPF) {
-        ArrayList<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
+        List<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
         return new ArrayList<EventInterface>(userEventsIn);
     }
 

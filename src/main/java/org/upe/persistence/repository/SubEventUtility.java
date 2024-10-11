@@ -28,13 +28,14 @@ import java.util.UUID;
 
         public static List<SubEvent> getAllSubEvents() {
             List<SubEvent> subEvents = new ArrayList<>();
+            BufferedReader reader = null;
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+                reader = new BufferedReader(new FileReader(csvFilePath));
                 String line;
                 String headerLine = reader.readLine();
                 while ((line = reader.readLine()) != null) {
                     String[] values = line.split(",", -1);
-                    String ID = values[0];
+                    String id = values[0];
                     String parentID = values[1];
                     String name = values[2];
                     String date = values[3];
@@ -44,12 +45,20 @@ import java.util.UUID;
                     String speaker = values[7];
                     String attendeesList = values[8] == null ? "" : values[8];
 
-                    SubEvent subEvent = new SubEvent(ID, parentID, name, date, hour, local,"",description,speaker,
+                    SubEvent subEvent = new SubEvent(id, parentID, name, date, hour, local,"", description, speaker,
                             attendeesList);
                     subEvents.add(subEvent);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return subEvents;
         }
@@ -187,7 +196,7 @@ import java.util.UUID;
                 BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
                 write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
                 for (SubEvent subEvent : subEvents) {
-                    String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+                    String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n",
                             subEvent.getId(),
                             subEvent.getParentEventID(),
                             subEvent.getName(),
