@@ -23,10 +23,14 @@ public class UserUtility {
 
     public static List<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));) {
-            String headerLine = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] newUserLine = line.split(",", -1);
                 User user = new User(
                         newUserLine[0],
@@ -65,9 +69,13 @@ public class UserUtility {
 
     public static UserInterface findByCPF(String cpf) {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            String headerLine = reader.readLine();
             String line;
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] newUserLine = line.split(",", -1);
                 User user = new User(newUserLine[0],
                         newUserLine[1], newUserLine[2],

@@ -34,8 +34,12 @@ public class SubEventUtility {
 
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
                 String line;
-                String headerLine = reader.readLine();
+                boolean isFirstLine = true;
                 while ((line = reader.readLine()) != null) {
+                    if (isFirstLine) {
+                        isFirstLine = false;
+                        continue;
+                    }
                     String[] values = line.split(",", -1);
                     String id = values[0];
                     String parentID = values[1];

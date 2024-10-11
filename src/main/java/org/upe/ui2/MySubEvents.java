@@ -80,7 +80,7 @@ public class MySubEvents {
         String local = sc.nextLine();
         System.out.print("Palestrante do sub-evento: ");
         String speaker = sc.nextLine();
-        SubEventInterface subEvent = SubEventController.createSubEvent(user, event, name, date, local, hour,description,speaker);
+        SubEventInterface subEvent = SubEventController.createSubEvent(event, name, date, local, hour,description,speaker);
         System.out.printf("Sub-evento %s criado\n", subEvent.getName());
         return true;
     }

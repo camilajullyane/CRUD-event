@@ -51,9 +51,13 @@ public class ArticleUtility {
     public static List<Article> getAllArticles() {
         List<Article> articlesArray = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            String headerLine = reader.readLine();
             String line;
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] newArticleLine = line.split(",", -1);
                 Article article = new Article(
                         newArticleLine[0],

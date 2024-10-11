@@ -28,14 +28,6 @@ public class Event implements EventInterface {
         this.attendeesList = attendeesList;
     }
 
-    // Métodos estáticos
-    public static String generateID() {
-        UUID uuID = UUID.randomUUID();
-        String idString = uuID.toString();
-        System.out.println(idString);
-        return idString;
-    }
-
     public String getId() {
         return id;
     }

@@ -24,7 +24,7 @@ public class User implements UserInterface {
         return this.userCPF;
     }
 
-    public void setCPF(String CPF) {this.userCPF = userCPF;}
+    public void setCPF(String userCPF) {this.userCPF = this.userCPF;}
 
     public String getEmail() {
         return this.email;

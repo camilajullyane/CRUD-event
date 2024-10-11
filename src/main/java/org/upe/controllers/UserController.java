@@ -17,7 +17,7 @@ public interface UserController {
 
     static ArrayList<EventInterface> userEventsIn(String ownerCPF) {
         List<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
-        return new ArrayList<EventInterface>(userEventsIn);
+        return new ArrayList<>(userEventsIn);
     }
 
     static boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event) {
