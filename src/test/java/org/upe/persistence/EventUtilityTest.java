@@ -15,18 +15,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EventUtilityTest {
 
-    private static final String testCsvFilePath = "DB/teste/test_event.csv";
+    private static final String TEST_CSV_FILE_PATH = "DB/teste/test_event.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
             writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             writer.write("1,123456789,Sample Event 1,01/01/2024,Local 1,Org 1,Description 1,987654321,\n");
             writer.write("2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,,\n");
         }
         // Atualizar o caminho do CSV para os testes
-        EventUtility.setCsvFilePath(testCsvFilePath);
+        EventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test

@@ -13,19 +13,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleUtilityTest {
 
-    private static final String testCsvFilePath = "DB/teste/test_articles.csv";
+    private static final String TEST_CSV_FILE_PATH = "DB/teste/test_articles.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
             writer.write("name,articleID,userCPF,articleAbstract\n");
             writer.write("Article 1,123e4567-e89b-12d3-a456-556642440000,123456789,Abstract 1\n");
             writer.write("Article 2,123e4567-e89b-12d3-a456-556642440001,987654321,Abstract 2\n");
             writer.write("Article 3,123e4567-e89b-12d3-a456-556642440002,123456789,Abstract 3\n");
         }
         // Atualizar o caminho do CSV para os testes
-        ArticleUtility.setCsvFilePath(testCsvFilePath);
+        ArticleUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test
