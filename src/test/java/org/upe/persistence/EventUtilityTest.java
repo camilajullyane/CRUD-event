@@ -78,7 +78,7 @@ class EventUtilityTest {
 
     @Test
     void getEventsIn() {
-        ArrayList<Event> eventsIn = EventUtility.getEventsIn("987654321");
+        List<Event> eventsIn = EventUtility.getEventsIn("987654321");
         assertEquals(1, eventsIn.size(), "O número de eventos que o usuário está participando deve ser 1");
         assertEquals("Sample Event 1", eventsIn.get(0).getName(), "O nome do evento em que o usuário está participando deve ser 'Sample Event 1'");
     }

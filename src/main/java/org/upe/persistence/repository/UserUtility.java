@@ -10,6 +10,10 @@ import java.util.List;
 public class UserUtility {
     protected static String csvFilePath = "DB/user.csv";
 
+    private UserUtility() {
+        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+    }
+
     public static void setCsvFilePath(String csvFilePath) {
         UserUtility.csvFilePath = csvFilePath;
     }
@@ -18,7 +22,7 @@ public class UserUtility {
         ArrayList<User> usersArray = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-            reader.readLine();  // Skip the first line (header)
+            String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newUserLine = line.split(",", -1);
@@ -40,11 +44,12 @@ public class UserUtility {
     }
 
     private static void updateFileData(List<User> newData) {
+        BufferedWriter write = null;
         try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
+            write = new BufferedWriter(new FileWriter(csvFilePath));
             write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s,%s\n",
+                String line = String.format("%s,%s,%s,%s,%s,%s%n",
                         user.getName(),
                         user.getEmail(),
                         user.getCPF(),
@@ -53,15 +58,23 @@ public class UserUtility {
                         String.join("#", user.getArticleID()));
                 write.write(line);
             }
-            write.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(write != null) {
+                    write.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static UserInterface findByCPF(String cpf) {
+        BufferedReader reader = null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+            reader = new BufferedReader(new FileReader(csvFilePath));
             String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -77,9 +90,16 @@ public class UserUtility {
                     return user;
                 }
             }
-            reader.close();
         } catch(IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -89,14 +109,22 @@ public class UserUtility {
         if(findByCPF(cpf) != null) {
             return null;
         }
+        FileWriter writer = null;
         try {
             String newLine = String.format("%s,%s,%s,,,", name, email, cpf);
-            FileWriter writer = new FileWriter(csvFilePath, true);
+            writer = new FileWriter(csvFilePath, true);
             writer.append(System.lineSeparator());
             writer.append(newLine);
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return new User(name, cpf, email, "", "","");
     }
