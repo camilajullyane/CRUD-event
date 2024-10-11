@@ -10,6 +10,10 @@ import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
     protected static String csvFilePath = "DB/event.csv";
+  
+    private EventUtility() {
+        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+    }
 
     public static void setCsvFilePath(String csvFilePath) {
         EventUtility.csvFilePath = csvFilePath;
@@ -25,9 +29,10 @@ public class EventUtility {
     // Read
     public static List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
             String line;
-            reader.readLine();
+            String headerLine = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",", -1);
                 String id = values[0];
@@ -171,7 +176,6 @@ public class EventUtility {
     // Delete
     public static boolean deleteEvent(String id) {
         List<Event> events = getAllEvents();
-        events.size();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
                 events.remove(i);
@@ -219,7 +223,7 @@ public class EventUtility {
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
-                        String.join("#" ,event.getAttendeesList()),
+                        String.join("#", event.getAttendeesList()),
                         String.join("#", event.getArticleList()));
                 write.write(line);
             }
@@ -230,6 +234,7 @@ public class EventUtility {
             return false;
         }
     }
+
 
     public static String generateEventID() {
         UUID uuid = UUID.randomUUID();

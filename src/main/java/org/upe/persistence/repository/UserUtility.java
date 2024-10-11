@@ -18,7 +18,7 @@ public class UserUtility {
         ArrayList<User> usersArray = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-            reader.readLine();
+            reader.readLine();  // Skip the first line (header)
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newUserLine = line.split(",", -1);
@@ -32,8 +32,7 @@ public class UserUtility {
                 );
                 usersArray.add(user);
             }
-            reader.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -63,7 +62,7 @@ public class UserUtility {
     public static UserInterface findByCPF(String CPF) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-            reader.readLine();
+            String headerLine = reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] newUserLine = line.split(",", -1);

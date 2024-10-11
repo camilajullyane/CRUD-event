@@ -5,6 +5,7 @@ import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.SubEventUtility;
+import java.util.List;
 
 import java.util.ArrayList;
 
@@ -16,14 +17,15 @@ public interface SubEventController {
                 speaker);
     }
 
-    static ArrayList<SubEventInterface> showAllSubEvents() {
-        ArrayList<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
-        return new ArrayList<>(subEvents);
+    static List<SubEventInterface> showAllSubEvents() {
+        List<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
+
+        return new ArrayList<SubEventInterface>(subEvents);
     }
 
     static ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
-        ArrayList<SubEvent> subEventsByEvent = SubEventUtility.getSubEventByEvent(parentID);
-        return new ArrayList<>(subEventsByEvent);
+        List<SubEvent> subEventsByEvent = SubEventUtility.getSubEventByEvent(parentID);
+        return new ArrayList<SubEventInterface>(subEventsByEvent);
     }
 
     static boolean editSubEventName(String id, String newName) {

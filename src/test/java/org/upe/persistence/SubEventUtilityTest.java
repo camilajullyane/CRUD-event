@@ -7,12 +7,13 @@ import org.upe.persistence.repository.SubEventUtility;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubEventUtilityTest {
 
-    private static final String testCsvFilePath = "DB/test_subevent.csv";
+    private static final String testCsvFilePath = "DB/teste/test_subevent.csv";
 
     @BeforeEach
     void setUp() throws IOException {
@@ -29,7 +30,7 @@ class SubEventUtilityTest {
 
     @Test
     void getAllSubEvents() {
-        ArrayList<SubEvent> actualSubEvents = SubEventUtility.getAllSubEvents();
+        List<SubEvent> actualSubEvents = SubEventUtility.getAllSubEvents();
 
         assertEquals(3, actualSubEvents.size(), "O número de sub-eventos deve ser o mesmo");
 
@@ -86,7 +87,7 @@ class SubEventUtilityTest {
     @Test
     void getSubEventByEvent() {
         String parentEventID = "1001";
-        ArrayList<SubEvent> subEvents = SubEventUtility.getSubEventByEvent(parentEventID);
+        List<SubEvent> subEvents = SubEventUtility.getSubEventByEvent(parentEventID);
 
         assertNotNull(subEvents, "A lista de sub-eventos do evento pai não deve ser nula");
         assertEquals(2, subEvents.size(), "O número de sub-eventos do evento pai deve ser 2");
@@ -126,7 +127,7 @@ class SubEventUtilityTest {
         SubEvent subEvent = SubEventUtility.getSubEventById("2");
         assertNull(subEvent, "O sub-evento com o ID '2' não deve existir após a exclusão");
 
-        ArrayList<SubEvent> actualSubEvents = SubEventUtility.getAllSubEvents();
+        List<SubEvent> actualSubEvents = SubEventUtility.getAllSubEvents();
         assertEquals(2, actualSubEvents.size(), "O número de sub-eventos deve ser 2 após a exclusão do sub-evento");
     }
 
