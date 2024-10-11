@@ -76,7 +76,6 @@ public class UserUtility {
                         newUserLine[5] == null ? "" : newUserLine[5]);
 
                 if (user.getCPF().equals(cpf)) {
-                    reader.close();
                     return user;
                 }
             }

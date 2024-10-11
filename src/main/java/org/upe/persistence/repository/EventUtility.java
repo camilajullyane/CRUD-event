@@ -229,7 +229,6 @@ public class EventUtility {
                         String.join("#", event.getArticleList()));
                 write.write(line);
             }
-            write.close();
             return true;
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
