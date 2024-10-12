@@ -54,9 +54,9 @@ public class MyArticles {
     }
 
 
-    private static ArrayList<ArticleInterface> showMyArticles(String ownerCPF) {
+    private static List<ArticleInterface> showMyArticles(String ownerCPF) {
         System.out.println("-------------Meus artigos---------------");
-        ArrayList<ArticleInterface> articles = ArticleController.getAllArticlesByUser(ownerCPF);
+        List<ArticleInterface> articles = ArticleController.getAllArticlesByUser(ownerCPF);
 
         if (articles.isEmpty()) {
             System.out.println("Não há artigos para mostrar.");
@@ -71,7 +71,7 @@ public class MyArticles {
     }
 
     private static boolean submitArticle(UserInterface user) {
-        ArrayList<ArticleInterface> articles = showMyArticles(user.getCPF());
+        List<ArticleInterface> articles = showMyArticles(user.getCPF());
         List<EventInterface> events = EventController.getAllEvents();
         ArticleInterface chosenArticle = Utils.chooseArticleOnList(articles);
 

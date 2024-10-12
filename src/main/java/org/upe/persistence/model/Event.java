@@ -2,8 +2,6 @@ package org.upe.persistence.model;
 
 import org.upe.persistence.interfaces.EventInterface;
 
-import java.util.UUID;
-
 public class Event implements EventInterface {
     protected String ownerCPF;
     protected String id;

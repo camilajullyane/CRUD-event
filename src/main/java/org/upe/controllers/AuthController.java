@@ -13,7 +13,6 @@ public interface AuthController {
     }
 
     static UserInterface signUpUser(String name, String cpf, String email) {
-        UserInterface userData = UserUtility.createUser(name, email, cpf);
-        return userData;
+        return UserUtility.createUser(name, email, cpf);
     }
 }

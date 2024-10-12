@@ -119,7 +119,7 @@ public class Utils {
         return null;
     }
 
-    protected static ArticleInterface chooseArticleOnList(ArrayList<ArticleInterface> myArticles) {
+    protected static ArticleInterface chooseArticleOnList(List<ArticleInterface> myArticles) {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {

@@ -7,7 +7,6 @@ import org.upe.persistence.model.Article;
 import org.upe.persistence.repository.ArticleUtility;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -108,7 +107,6 @@ class ArticleUtilityTest {
         assertEquals("Abstract 3", article2.getArticleAbstract(), "O resumo do segundo artigo deve ser 'Abstract 3'");
 
         String nonExistentUserCPF = "non-existent-cpf";
-        ArrayList<ArticleInterface> nonExistentUserArticles = ArticleUtility.getAllArticlesByUser(nonExistentUserCPF);
-        assertNull(nonExistentUserArticles, "A lista de artigos do usuário inexistente deve ser nula");
+        assertTrue(ArticleUtility.getAllArticlesByUser(nonExistentUserCPF).isEmpty(), "A lista de artigos do usuário inexistente deve ser nula");
     }
 }
