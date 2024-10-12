@@ -119,7 +119,7 @@ public class ArticleUtility {
         }
     }
 
-    public static  ArrayList<ArticleInterface> getAllArticlesByUser(String userCPF) {
+    public static  List<ArticleInterface> getAllArticlesByUser(String userCPF) {
         List<Article> allArticles = ArticleUtility.getAllArticles();
         ArrayList<ArticleInterface> userArticles = new ArrayList<>();
 
@@ -129,7 +129,7 @@ public class ArticleUtility {
             }
         }
         if (userArticles.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
         return userArticles;
     }
