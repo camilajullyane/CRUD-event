@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<StackPane style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" >
+    <AnchorPane prefHeight="517.69" prefWidth="728.0" style="-fx-background-color: #3F3F46;">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="518.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0" />
+    </AnchorPane>
+</StackPane>
