@@ -11,12 +11,12 @@
       <ImageView fitHeight="79.0" fitWidth="110.0" layoutX="325.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/logo.png" />
       </ImageView>
-      <PasswordField layoutX="210.0" layoutY="310.0" prefHeight="42.0" prefWidth="309.0" promptText="  Senha" style="-fx-background-radius: 25;">
+      <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="310.0" prefHeight="42.0" prefWidth="309.0" promptText="  Senha" style="-fx-background-radius: 25;">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <TextField layoutX="210.0" layoutY="244.0" prefHeight="42.0" prefWidth="309.0" promptText="  CPF" style="-fx-background-radius: 25;">
+      <TextField fx:id="cpfField" layoutX="210.0" layoutY="244.0" prefHeight="42.0" prefWidth="309.0" promptText="  CPF" style="-fx-background-radius: 25;">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,7 +34,8 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="404.0" layoutY="149.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; -fx-underline: #2DD4BF;" text="Cadastrar" textFill="#fcfcfc">
+      <Label fx:id="errorMessage" layoutX="210.0" layoutY="360.0" textFill="RED" visible="false" />
+      <Button layoutX="404.0" layoutY="149.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
          <font>
             <Font size="20.0" />
          </font>
