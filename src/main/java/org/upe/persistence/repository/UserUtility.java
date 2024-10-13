@@ -50,7 +50,7 @@ public class UserUtility {
         return usersArray;
     }
 
-    private static void updateFileData(List<User> newData) {
+    public static void updateFileData(List<User> newData) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {

@@ -2,6 +2,9 @@ package org.upe.persistence.repository;
 
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.model.Article;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
+
 import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
@@ -21,32 +24,23 @@ public class ArticleUtility {
         ArticleUtility.csvFilePath = csvFilePath;
     }
 
-//    public static void submitArticle(String CPF, String articleName, String eventID) {
-//        ArrayList<User> users = UserUtility.getAllUsers();
-//        ArrayList<Event> events = EventUtility.getAllEvents();
-//
-//        for (Event event : events) {
-//            if (event.getId().equals(eventID)) {
-//                for (User user : users) {
-//                    if (user.getCPF().equals(CPF)) {
-//                        // Criar um novo artigo
-//                        Article newArticle = new Article(articleName, eventID, CPF);
-//
-//                        // Adicionar o artigo à lista de artigos do usuário
-//                        User.getArticleID().add(newArticle);
-//
-//                        // Adicionar o artigo à lista de artigos submetidos do evento
-//                        event.getSubmittedArticles().add(newArticle);
-//
-//                        // Atualizar o arquivo de usuários e eventos, se necessário
-//                        UserUtility.updateUser(user);
-//                        EventUtility.updateEvent(event);
-//                        return;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public static void submitArticle(String CPF, String articleName, String eventID, String articleAbstract) {
+        List<User> users = UserUtility.getAllUsers();
+        List<Event> events = EventUtility.getAllEvents();
+
+        for (Event event : events) {
+            if (event.getId().equals(eventID)) {
+                for (User user : users) {
+                    if (user.getCPF().equals(CPF)) {
+                        Article newArticle = new Article(articleName, eventID, CPF, articleAbstract);
+                        user.addArticleID(newArticle.getArticleID());
+                        event.addArticleList(newArticle.getArticleID());
+                    }
+                }
+            }
+        }
+        UserUtility.updateFileData(users);
+    }
 
     public static List<Article> getAllArticles() {
         List<Article> articlesArray = new ArrayList<>();

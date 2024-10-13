@@ -11,4 +11,5 @@ public interface SubEventInterface {
     String toString();
     String toString(int position);
     String getHour();
+    String getSpeakers();
 }
