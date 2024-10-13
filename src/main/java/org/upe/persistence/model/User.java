@@ -5,14 +5,15 @@ import org.upe.persistence.interfaces.UserInterface;
 public class User implements UserInterface {
     protected String name;
     protected String userCPF;
+    protected String password;
     protected String email;
     protected String attendeeOn;
     protected String ownerOf;
     protected String articleID;
 
-
-    public User(String name ,String email, String userCPF, String attendeeOn, String ownerOf, String articleID) {
+    public User(String name, String email, String userCPF, String password, String attendeeOn, String ownerOf, String articleID) {
         this.name = name;
+        this.password = password;
         this.email = email;
         this.userCPF = userCPF;
         this.attendeeOn = attendeeOn;
@@ -22,6 +23,10 @@ public class User implements UserInterface {
 
     public String getCPF() {
         return this.userCPF;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public void setCPF(String userCPF) {this.userCPF = userCPF;}

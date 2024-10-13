@@ -70,7 +70,10 @@ public class UserAuth {
         System.out.print("Digite seu email: ");
         String email = sc.nextLine();
 
-        UserInterface signUpValidate = AuthController.signUpUser(name, CPF, email);
+        System.out.print("Digite sua senha: ");
+        String password = sc.nextLine();
+
+        UserInterface signUpValidate = AuthController.signUpUser(name, CPF, email, password);
 
         if(signUpValidate == null) {
             System.out.println("CPF já cadastrado. Faça login!");

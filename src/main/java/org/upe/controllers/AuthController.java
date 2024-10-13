@@ -12,7 +12,7 @@ public interface AuthController {
         return null;
     }
 
-    static UserInterface signUpUser(String name, String cpf, String email) {
-        return UserUtility.createUser(name, email, cpf);
+    static UserInterface signUpUser(String name, String cpf, String email, String password) {
+        return UserUtility.createUser(name, email, cpf, password);
     }
 }
