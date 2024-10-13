@@ -6,9 +6,16 @@ import java.util.Arrays;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserUtility {
+    private static final Logger LOGGER = Logger.getLogger(UserUtility.class.getName());
     protected static String csvFilePath = "DB/user.csv";
+
+    private UserUtility() {
+        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+    }
 
     public static void setCsvFilePath(String csvFilePath) {
         UserUtility.csvFilePath = csvFilePath;
@@ -16,97 +23,103 @@ public class UserUtility {
 
     public static List<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-            reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] newUserLine = line.split(",", -1);
                 User user = new User(
                         newUserLine[0],
                         newUserLine[1],
                         newUserLine[2],
-                        newUserLine[3] == null ? "" : newUserLine[3],
+                        newUserLine[3],
                         newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5]
+                        newUserLine[5] == null ? "" : newUserLine[5],
+                        newUserLine[6] == null ? "" : newUserLine[6]
                 );
                 usersArray.add(user);
             }
-            reader.close();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
         }
 
         return usersArray;
     }
 
     private static void updateFileData(List<User> newData) {
-        try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
-            write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
+            write.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s,%s\n",
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s%n",
                         user.getName(),
                         user.getEmail(),
                         user.getCPF(),
+                        user.getPassword(),
                         String.join("#", user.getAttendeeOn()),
                         String.join("#", user.getOwnerOf()),
                         String.join("#", user.getArticleID()));
                 write.write(line);
             }
-            write.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
     }
 
-    public static UserInterface findByCPF(String CPF) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-            reader.readLine();
+    public static User findByCPF(String cpf) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] newUserLine = line.split(",", -1);
-                User user = new User(newUserLine[0],
-                        newUserLine[1], newUserLine[2],
-                        newUserLine[3] == null ? "" : newUserLine[3],
+                User user = new User(
+                        newUserLine[0],
+                        newUserLine[1],
+                        newUserLine[2],
+                        newUserLine[3],
                         newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5]);
+                        newUserLine[5] == null ? "" : newUserLine[5],
+                        newUserLine[6] == null ? "" : newUserLine[6]);
 
-                if (user.getCPF().equals(CPF)) {
-                    reader.close();
+                if (user.getCPF().equals(cpf)) {
                     return user;
                 }
             }
-            reader.close();
         } catch(IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
         }
         return null;
     }
 
-    public static UserInterface createUser(String name,  String email, String CPF) {
+    public static UserInterface createUser(String name, String email, String cpf, String password) {
 
-        if(findByCPF(CPF) != null) {
+        if(findByCPF(cpf) != null) {
             return null;
         }
-        try {
-            String newLine = String.format("%s,%s,%s,,,", name, email,CPF);
-            FileWriter writer = new FileWriter(csvFilePath, true);
+
+        try (FileWriter writer = new FileWriter(csvFilePath, true)) {
+            String newLine = String.format("%s,%s,%s,%s,,,", name, email, cpf, password);
+
             writer.append(System.lineSeparator());
             writer.append(newLine);
-            writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
-        return new User(name, CPF, email, "", "","");
+        return new User(name, cpf, email, "", "","", password);
     }
 
-    public static void updateUserEmail(String CPF, String newEmail) {
+    public static void updateUserEmail(String cpf, String newEmail) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 user.setEmail(newEmail);
             }
         }
@@ -114,11 +127,11 @@ public class UserUtility {
         updateFileData(users);
     }
 
-    public static void deleteUser(String CPF) {
+    public static void deleteUser(String cpf) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 users.remove(user);
                 break;
             }
@@ -126,11 +139,11 @@ public class UserUtility {
         updateFileData(users);
     }
 
-    public static void addAttendeeOnEvent(String CPF, String eventID) {
+    public static void addAttendeeOnEvent(String cpf, String eventID) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 user.addAttendeeOn(eventID);
                 break;
             }
@@ -138,11 +151,11 @@ public class UserUtility {
         UserUtility.updateFileData(users);
     }
 
-    public static void addOwnerOnEvent(String CPF, String eventID) {
+    public static void addOwnerOnEvent(String cpf, String eventID) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 user.addOwnerOf(eventID);
                 break;
             }
@@ -162,11 +175,11 @@ public class UserUtility {
         return true;
     }
 
-    public static boolean deleteAttendeeEvent(String CPF, String eventID) {
+    public static boolean deleteAttendeeEvent(String cpf, String eventID) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 user.deleteAttendeeOn(eventID);
                 break;
             }
@@ -175,11 +188,11 @@ public class UserUtility {
         return true;
     }
 
-    public static void deleteOwnerOf(String CPF, String eventID) {
+    public static void deleteOwnerOf(String cpf, String eventID) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 user.deleteOwnerOf(eventID);
                 break;
             }
@@ -187,16 +200,28 @@ public class UserUtility {
         updateFileData(users);
     }
 
-    public static void addUserArticle(String CPF, String articleID) {
+    public static void addUserArticle(String cpf, String articleID) {
         List<User> users = UserUtility.getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(CPF)) {
+            if (user.getCPF().equals(cpf)) {
                 user.addArticleID(articleID);
                 break;
             }
         }
 
         UserUtility.updateFileData(users);
+    }
+
+    public static UserInterface authUser(String cpf, String password) {
+        User user = findByCPF(cpf);
+        if (user == null) {
+            return null;
+        }
+
+        if(user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
 }

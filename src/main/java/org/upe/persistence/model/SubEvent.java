@@ -18,10 +18,6 @@ public class SubEvent extends Event implements SubEventInterface {
     }
 
     // Getters e Setters
-    public String getParentEventId() {
-        return this.parentEventID;
-    }
-
     public String getSpeakers() {
         return this.speakers;
     }

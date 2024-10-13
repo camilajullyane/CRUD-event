@@ -2,32 +2,34 @@ package org.upe.persistence.model;
 
 import org.upe.persistence.interfaces.UserInterface;
 
-//User user = new User(fudiufgasdf) - user.
-//UserInterface user = new User(shiufdas) user.
-
 public class User implements UserInterface {
     protected String name;
-    protected String CPF;
+    protected String userCPF;
+    protected String password;
     protected String email;
     protected String attendeeOn;
     protected String ownerOf;
     protected String articleID;
 
-
-    public User(String name ,String email, String CPF, String attendeeOn, String ownerOf, String articleID) {
+    public User(String name, String email, String userCPF, String password, String attendeeOn, String ownerOf, String articleID) {
         this.name = name;
+        this.password = password;
         this.email = email;
-        this.CPF = CPF;
+        this.userCPF = userCPF;
         this.attendeeOn = attendeeOn;
         this.ownerOf = ownerOf;
         this.articleID = articleID;
     }
 
     public String getCPF() {
-        return this.CPF;
+        return this.userCPF;
     }
 
-    public void setCPF(String CPF) {this.CPF = CPF;}
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setCPF(String userCPF) {this.userCPF = userCPF;}
 
     public String getEmail() {
         return this.email;

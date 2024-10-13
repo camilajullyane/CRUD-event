@@ -7,18 +7,17 @@ import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.UserUtility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface UserController {
-    static boolean deleteAttendeeEvent(String CPF, String eventID) {
-        boolean user = UserUtility.deleteAttendeeEvent(CPF, eventID);
-
+    static boolean deleteAttendeeEvent(String userCPF, String eventID) {
+        UserUtility.deleteAttendeeEvent(userCPF, eventID);
         return true;
     }
 
     static ArrayList<EventInterface> userEventsIn(String ownerCPF) {
-        ArrayList<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
-
-        return new ArrayList<EventInterface>(userEventsIn);
+        List<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
+        return new ArrayList<>(userEventsIn);
     }
 
     static boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event) {

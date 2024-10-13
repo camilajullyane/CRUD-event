@@ -4,20 +4,33 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
+    private static final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
     protected static String csvFilePath = "DB/event.csv";
+  
+    private EventUtility() {
+        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
+    }
 
     public static void setCsvFilePath(String csvFilePath) {
         EventUtility.csvFilePath = csvFilePath;
     }
+
+    public static String generateID() {
+        UUID uuID = UUID.randomUUID();
+        return uuID.toString();
+    }
+
     // Create
     public static boolean addEvent(Event event) {
         List<Event> events = getAllEvents();
-        event.setId(Event.generateID()); // Define a new unique ID
+        event.setId(EventUtility.generateID()); // Define a new unique ID
         events.add(event);
         return saveEvents(events);
     }
@@ -26,9 +39,14 @@ public class EventUtility {
     public static List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+
             String line;
-            reader.readLine();
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] values = line.split(",", -1);
                 String id = values[0];
                 String ownerCPF = values[1];
@@ -44,12 +62,12 @@ public class EventUtility {
                 events.add(event);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
         }
         return events;
     }
 
-    public static  ArrayList<Event> getAllEventsByUser(String ownerCPF) {
+    public static  List<Event> getAllEventsByUser(String ownerCPF) {
         List<Event> allEvents = getAllEvents();
         ArrayList<Event> userEvents = new ArrayList<>();
 
@@ -61,14 +79,14 @@ public class EventUtility {
         return userEvents;
     }
 
-    public static ArrayList<Event> getEventsIn(String CPF) {
+    public static List<Event> getEventsIn(String cpf) {
         List<Event> allEvents = getAllEvents();
         ArrayList<Event> eventsIn = new ArrayList<>();
 
         for (Event event : allEvents) {
             String[] attendees = event.getAttendeesList();
             for (String attendee : attendees) {
-                if (attendee.trim().equals(CPF)) {
+                if (attendee.trim().equals(cpf)) {
                     eventsIn.add(event);
                     break;
                 }
@@ -161,7 +179,7 @@ public class EventUtility {
         List<Event> events = getAllEvents();
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                event.setOrganization(newDate);
+                event.setDate(newDate);
                 return saveEvents(events);
             }
         }
@@ -171,7 +189,6 @@ public class EventUtility {
     // Delete
     public static boolean deleteEvent(String id) {
         List<Event> events = getAllEvents();
-        events.size();
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId().equals(id)) {
                 events.remove(i);
@@ -208,28 +225,27 @@ public class EventUtility {
 
 
     private static boolean saveEvents(List<Event> events) {
-        try {
-            BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
+        try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", event.getId(),
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n", event.getId(),
                         event.getOwnerCPF(),
                         event.getName(),
                         event.getDate(),
                         event.getLocal(),
                         event.getOrganization(),
                         event.getDescription(),
-                        String.join("#" ,event.getAttendeesList()),
+                        String.join("#", event.getAttendeesList()),
                         String.join("#", event.getArticleList()));
                 write.write(line);
             }
-            write.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
             return false;
         }
     }
+
 
     public static String generateEventID() {
         UUID uuid = UUID.randomUUID();

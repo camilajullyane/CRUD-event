@@ -7,7 +7,6 @@ import org.upe.persistence.model.Event;
 import org.upe.persistence.repository.EventUtility;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,18 +14,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EventUtilityTest {
 
-    private static final String testCsvFilePath = "DB/test_event.csv";
+    private static final String TEST_CSV_FILE_PATH = "DB/teste/test_event.csv";
 
     @BeforeEach
     void setUp() throws IOException {
         // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testCsvFilePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
             writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             writer.write("1,123456789,Sample Event 1,01/01/2024,Local 1,Org 1,Description 1,987654321,\n");
             writer.write("2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,,\n");
         }
         // Atualizar o caminho do CSV para os testes
-        EventUtility.setCsvFilePath(testCsvFilePath);
+        EventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test
@@ -71,14 +70,14 @@ class EventUtilityTest {
 
     @Test
     void getAllEventsByUser() {
-        ArrayList<Event> userEvents = EventUtility.getAllEventsByUser("123456789");
+        List<Event> userEvents = EventUtility.getAllEventsByUser("123456789");
         assertEquals(1, userEvents.size(), "O número de eventos do usuário deve ser 1");
         assertEquals("Sample Event 1", userEvents.get(0).getName(), "O nome do evento do usuário deve ser 'Sample Event 1'");
     }
 
     @Test
     void getEventsIn() {
-        ArrayList<Event> eventsIn = EventUtility.getEventsIn("987654321");
+        List<Event> eventsIn = EventUtility.getEventsIn("987654321");
         assertEquals(1, eventsIn.size(), "O número de eventos que o usuário está participando deve ser 1");
         assertEquals("Sample Event 1", eventsIn.get(0).getName(), "O nome do evento em que o usuário está participando deve ser 'Sample Event 1'");
     }

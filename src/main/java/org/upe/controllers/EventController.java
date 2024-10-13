@@ -18,13 +18,13 @@ public interface EventController {
 
     static List<EventInterface> getAllEvents() {
         List<Event> events = EventUtility.getAllEvents();
-        return new ArrayList<EventInterface>(events);
+        return new ArrayList<>(events);
     }
 
     static List<EventInterface> getAllEventsByUser(String ownerCPF) {
         List<Event> eventByUser = EventUtility.getAllEventsByUser(ownerCPF);
 
-        return new ArrayList<EventInterface>(eventByUser);
+        return new ArrayList<>(eventByUser);
     }
 
 

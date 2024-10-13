@@ -2,29 +2,29 @@ package org.upe.controllers;
 
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.SubEventUtility;
+import java.util.List;
 
 import java.util.ArrayList;
 
 public interface SubEventController {
 
-    static SubEventInterface createSubEvent(UserInterface user, EventInterface event, String name, String date, String local, String hour,
+    static SubEventInterface createSubEvent(EventInterface event, String name, String date, String local, String hour,
                                             String description, String speaker) {
         return (SubEventInterface) SubEventUtility.createSubEvent(event.getId(), name, date, hour, local, event.getOrganization(),description,
                 speaker);
     }
 
-    static ArrayList<SubEventInterface> showAllSubEvents() {
-        ArrayList<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
+    static List<SubEventInterface> showAllSubEvents() {
+        List<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
 
-        return new ArrayList<SubEventInterface>(subEvents);
+        return new ArrayList<>(subEvents);
     }
 
     static ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
-        ArrayList<SubEvent> subEventsByEvent = SubEventUtility.getSubEventByEvent(parentID);
-        return new ArrayList<SubEventInterface>(subEventsByEvent);
+        List<SubEvent> subEventsByEvent = SubEventUtility.getSubEventByEvent(parentID);
+        return new ArrayList<>(subEventsByEvent);
     }
 
     static boolean editSubEventName(String id, String newName) {

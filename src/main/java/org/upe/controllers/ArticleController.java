@@ -6,8 +6,7 @@ import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.repository.ArticleUtility;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.UserUtility;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ArticleController {
 
@@ -19,9 +18,8 @@ public interface ArticleController {
     }
 
 
-    static ArrayList<ArticleInterface> getAllArticlesByUser(String userCPF) {
-        ArrayList<ArticleInterface> articles = ArticleUtility.getAllArticlesByUser(userCPF);
-        return articles;
+    static List<ArticleInterface> getAllArticlesByUser(String userCPF) {
+        return ArticleUtility.getAllArticlesByUser(userCPF);
     }
 
 
