@@ -36,9 +36,10 @@ public class UserUtility {
                         newUserLine[0],
                         newUserLine[1],
                         newUserLine[2],
-                        newUserLine[3] == null ? "" : newUserLine[3],
+                        newUserLine[3],
                         newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5]
+                        newUserLine[5] == null ? "" : newUserLine[5],
+                        newUserLine[6] == null ? "" : newUserLine[6]
                 );
                 usersArray.add(user);
             }
@@ -51,12 +52,13 @@ public class UserUtility {
 
     private static void updateFileData(List<User> newData) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
-            write.write("name,email,cpf,attendeeOn,ownerOf,articleID\n");
+            write.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
-                String line = String.format("%s,%s,%s,%s,%s,%s%n",
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s%n",
                         user.getName(),
                         user.getEmail(),
                         user.getCPF(),
+                        user.getPassword(),
                         String.join("#", user.getAttendeeOn()),
                         String.join("#", user.getOwnerOf()),
                         String.join("#", user.getArticleID()));
@@ -67,7 +69,7 @@ public class UserUtility {
         }
     }
 
-    public static UserInterface findByCPF(String cpf) {
+    public static User findByCPF(String cpf) {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             boolean isFirstLine = true;
@@ -77,11 +79,14 @@ public class UserUtility {
                     continue;
                 }
                 String[] newUserLine = line.split(",", -1);
-                User user = new User(newUserLine[0],
-                        newUserLine[1], newUserLine[2],
-                        newUserLine[3] == null ? "" : newUserLine[3],
+                User user = new User(
+                        newUserLine[0],
+                        newUserLine[1],
+                        newUserLine[2],
+                        newUserLine[3],
                         newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5]);
+                        newUserLine[5] == null ? "" : newUserLine[5],
+                        newUserLine[6] == null ? "" : newUserLine[6]);
 
                 if (user.getCPF().equals(cpf)) {
                     return user;
@@ -93,21 +98,21 @@ public class UserUtility {
         return null;
     }
 
-    public static UserInterface createUser(String name,  String email, String cpf) {
+    public static UserInterface createUser(String name, String email, String cpf, String password) {
 
         if(findByCPF(cpf) != null) {
             return null;
         }
 
         try (FileWriter writer = new FileWriter(csvFilePath, true)) {
-            String newLine = String.format("%s,%s,%s,,,", name, email, cpf);
+            String newLine = String.format("%s,%s,%s,%s,,,", name, email, cpf, password);
 
             writer.append(System.lineSeparator());
             writer.append(newLine);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
-        return new User(name, cpf, email, "", "","");
+        return new User(name, cpf, email, "", "","", password);
     }
 
     public static void updateUserEmail(String cpf, String newEmail) {
@@ -206,5 +211,17 @@ public class UserUtility {
         }
 
         UserUtility.updateFileData(users);
+    }
+
+    public static UserInterface authUser(String cpf, String password) {
+        User user = findByCPF(cpf);
+        if (user == null) {
+            return null;
+        }
+
+        if(user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
 }

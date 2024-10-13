@@ -1,1 +1,2 @@
-name,email,cpf,attendeeOn,ownerOf,articleID
+name,email,cpf,password,attendeeOn,ownerOf,articleID
+joao,joao.upe,15524652490,joao896,,,
