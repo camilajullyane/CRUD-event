@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<StackPane style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" >
+<StackPane style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <ImageView fitHeight="79.0" fitWidth="110.0" layoutX="361.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="361.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="43.0">
             <Image url="@../../../images/logo.png" />
@@ -16,17 +15,17 @@
                 <Font size="14.0" />
             </font>
         </TextField>
-        <TextField layoutX="246.0" layoutY="350.0" prefHeight="42.0" prefWidth="309.0" promptText="  EMAIL" style="-fx-background-radius: 25;">
+        <TextField layoutX="246.0" layoutY="350.0" prefHeight="42.0" prefWidth="309.0" promptText="  Email" style="-fx-background-radius: 25;">
             <font>
                 <Font size="14.0" />
             </font>
         </TextField>
-        <TextField layoutX="246.0" layoutY="408.0" prefHeight="42.0" prefWidth="309.0" promptText="  SENHA" style="-fx-background-radius: 25;">
+        <TextField layoutX="246.0" layoutY="408.0" prefHeight="42.0" prefWidth="309.0" promptText="  Senha" style="-fx-background-radius: 25;">
             <font>
                 <Font size="14.0" />
             </font>
         </TextField>
-        <TextField layoutX="246.0" layoutY="233.0" prefHeight="42.0" prefWidth="309.0" promptText="  NOME" style="-fx-background-radius: 25;">
+        <TextField layoutX="246.0" layoutY="233.0" prefHeight="42.0" prefWidth="309.0" promptText="  Nome" style="-fx-background-radius: 25;">
             <font>
                 <Font size="14.0" />
             </font>

@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.LoginController" style="-fx-background-color: #3F3F46;">
-   <AnchorPane fx:id="loginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.69" prefWidth="729.0" style="-fx-background-color: #3F3F46; -fx-background-position: center;">
+<StackPane fx:id="loginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.LoginController">
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.69" prefWidth="729.0" style="-fx-background-color: #3F3F46; -fx-background-position: center;">
       <ImageView fitHeight="79.0" fitWidth="110.0" layoutX="325.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/logo.png" />
       </ImageView>
@@ -35,10 +35,13 @@
          </font>
       </Button>
       <Label fx:id="errorMessage" layoutX="210.0" layoutY="360.0" textFill="RED" visible="false" />
-      <Button layoutX="404.0" layoutY="149.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
+      <Button fx:id="signUpButton" layoutX="404.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
          <font>
             <Font size="20.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </AnchorPane>
 </StackPane>

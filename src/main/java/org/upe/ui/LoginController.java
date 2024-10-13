@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.upe.controllers.AuthController;
 import org.upe.persistence.interfaces.UserInterface;
@@ -15,16 +16,24 @@ import org.upe.persistence.interfaces.UserInterface;
 import java.io.IOException;
 
 public class LoginController {
+
     @FXML
-    public AnchorPane loginPage;
+    StackPane loginPage;
+
     @FXML
     Button signInButton;
+
     @FXML
     TextField cpfField;
+
     @FXML
     PasswordField passwordField;
+
     @FXML
     Label errorMessage;
+
+    @FXML
+    Button signUpButton;
 
    @FXML
     private void handleLogin() throws IOException {
@@ -38,11 +47,21 @@ public class LoginController {
             errorMessage.setVisible(true);
         } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("telaInicio.fxml"));
-            AnchorPane screen = loader.load();
+            StackPane screen = loader.load();
             Scene scene = new Scene(screen);
             Stage stage = (Stage) loginPage.getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Even2");
         }
+    }
+
+    @FXML
+    private void handleSignUp() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("telaCadastro.fxml"));
+        StackPane screen = loader.load();
+        Scene scene = new Scene(screen);
+        Stage stage = (Stage) loginPage.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Even2");
     }
 }
