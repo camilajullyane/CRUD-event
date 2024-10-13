@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="770" prefWidth="1080" spacing="20.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" >
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <Text fill="#2dd4bf" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Montserrat; -fx-font-size: 120px;" text="Even2" textAlignment="CENTER" wrappingWidth="424.6340026855469">
+
+<AnchorPane fx:controller="org.upe.ui.LoginController"
+            fx:id="loginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.69" prefWidth="729.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1">
+   <ImageView fitHeight="79.0" fitWidth="110.0" layoutX="325.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/logo.png"/>
+   </ImageView>
+   <PasswordField layoutX="210.0" layoutY="310.0" prefHeight="42.0" prefWidth="309.0" promptText="  Senha"
+                  style="-fx-background-radius: 25;">
       <font>
-         <Font size="96.0" />
+         <Font size="14.0"/>
       </font>
-   </Text>
-</VBox>
+   </PasswordField>
+   <TextField layoutX="210.0" layoutY="244.0" prefHeight="42.0" prefWidth="309.0" promptText="  CPF"
+              style="-fx-background-radius: 25;">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Button fx:id="signInButton" layoutX="210.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleLogin"
+           prefHeight="42.0" prefWidth="309.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;"
+           text="Entrar" textFill="WHITE">
+      <font>
+         <Font name="Microsoft YaHei Bold" size="20.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Button layoutX="235.0" layoutY="148.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="79.0"
+           style="-fx-background-color: #3F3F46; -fx-border-color: transparent transparent #2DD4BF transparent; -fx-border-width: 0 0 2px 0;"
+           text="Entrar" textFill="#fcfcfc">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Button>
+   <Button layoutX="404.0" layoutY="149.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="110.0"
+           style="-fx-background-color: #3F3F46; -fx-underline: #2DD4BF;" text="Cadastrar" textFill="#fcfcfc">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Button>
+</AnchorPane>
