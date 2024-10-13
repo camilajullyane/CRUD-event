@@ -56,7 +56,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleSignUp() throws IOException {
+    private void moveToSignUp() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("telaCadastro.fxml"));
         StackPane screen = loader.load();
         Scene scene = new Scene(screen);

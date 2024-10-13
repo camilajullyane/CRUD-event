@@ -34,8 +34,8 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="errorMessage" layoutX="210.0" layoutY="360.0" textFill="RED" visible="false" />
-      <Button fx:id="signUpButton" layoutX="404.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
+      <Label fx:id="errorMessage" layoutX="210.0" layoutY="360.0" textFill="#ff4949" visible="false" />
+      <Button fx:id="signUpButton" layoutX="404.0" layoutY="149.0" mnemonicParsing="false" onAction="#moveToSignUp" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
          <font>
             <Font size="20.0" />
          </font>
