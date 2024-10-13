@@ -69,7 +69,7 @@ public class UserUtility {
         }
     }
 
-    public static UserInterface findByCPF(String cpf) {
+    public static User findByCPF(String cpf) {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             boolean isFirstLine = true;
@@ -211,5 +211,17 @@ public class UserUtility {
         }
 
         UserUtility.updateFileData(users);
+    }
+
+    public static UserInterface AuthUser(String cpf, String password) {
+        User user = findByCPF(cpf);
+        if (user == null) {
+            return null;
+        }
+
+        if(user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
 }

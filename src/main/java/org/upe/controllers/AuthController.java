@@ -4,12 +4,8 @@ import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.repository.UserUtility;
 
 public interface AuthController {
-    static UserInterface loginUser(String cpf) {
-        UserInterface userData = UserUtility.findByCPF(cpf);
-        if (userData != null) {
-            return userData;
-        }
-        return null;
+    static UserInterface loginUser(String cpf, String password) {
+        return UserUtility.AuthUser(cpf, password);
     }
 
     static UserInterface signUpUser(String name, String cpf, String email, String password) {

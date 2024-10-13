@@ -39,15 +39,17 @@ public class UserAuth {
 
         while (true) {
             System.out.print("Digite seu CPF (-1 retorna ao menu): ");
-            String userInput = sc.nextLine();
-            if (userInput.equals("-1")) {
+            String userCPF = sc.nextLine();
+            System.out.print("Digite sua senha (-1 retorna ao menu): ");
+            String userPassword = sc.nextLine();
+            if (userCPF.equals("-1") || userPassword.equals("-1")) {
                 return true;
-            } else if (!userInput.matches(CPF_REGEX)) {
+            } else if (!userCPF.matches(CPF_REGEX)) {
                 System.out.print("Formato inválido de CPF.");
-            } else if ((user = AuthController.loginUser(userInput)) != null) {
+            } else if ((user = AuthController.loginUser(userCPF, userPassword)) != null) {
                 return MainMenu.menu(user);
             } else {
-                System.out.println("CPF errado ou não cadastrado.");
+                System.out.println("Credenciais erradas ou não cadastradas.");
                 return true;
             }
         }
