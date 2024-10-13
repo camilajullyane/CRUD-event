@@ -5,7 +5,7 @@ import org.upe.persistence.repository.UserUtility;
 
 public interface AuthController {
     static UserInterface loginUser(String cpf, String password) {
-        return UserUtility.AuthUser(cpf, password);
+        return UserUtility.authUser(cpf, password);
     }
 
     static UserInterface signUpUser(String name, String cpf, String email, String password) {

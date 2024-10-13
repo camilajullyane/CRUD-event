@@ -213,7 +213,7 @@ public class UserUtility {
         UserUtility.updateFileData(users);
     }
 
-    public static UserInterface AuthUser(String cpf, String password) {
+    public static UserInterface authUser(String cpf, String password) {
         User user = findByCPF(cpf);
         if (user == null) {
             return null;
