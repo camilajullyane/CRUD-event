@@ -9,32 +9,32 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BeginController {
+public class SubscriptionController {
     @FXML
-    Button subscriptionButton;
+    Button homeButton;
 
     @FXML
-    StackPane beginPage;
+    Button logOutButton;
 
     @FXML
-    Button LogOutButton;
-
-    @FXML
-    private void handleSubscription() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("telaInscricoes.fxml"));
-        StackPane screen = loader.load();
-        Scene scene = new Scene(screen);
-        Stage stage = (Stage) beginPage.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Even2");
-    }
+    StackPane mySubscriptionPage;
 
     @FXML
     private void logOut() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("start-app.fxml"));
         StackPane screen = loader.load();
         Scene scene = new Scene(screen);
-        Stage stage = (Stage) beginPage.getScene().getWindow();
+        Stage stage = (Stage) mySubscriptionPage.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Even2");
+    }
+
+    @FXML
+    private void homePage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("telaInicio.fxml"));
+        StackPane screen = loader.load();
+        Scene scene = new Scene(screen);
+        Stage stage = (Stage) mySubscriptionPage.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Even2");
     }

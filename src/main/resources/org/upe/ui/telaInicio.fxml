@@ -14,14 +14,7 @@
          <rotationAxis>
             <Point3D />
          </rotationAxis></Rectangle>
-      <Button layoutX="62.0" layoutY="537.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/deixar.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -29,14 +22,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
-         <graphic>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/chamine-de-casa.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -44,17 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="subscriptionButton" layoutX="14.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
-         <graphic>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../../../images/bilhete.png" />
-               </image>
-               <rotationAxis>
-                  <Point3D />
-               </rotationAxis>
-            </ImageView>
-         </graphic>
+      <Button layoutX="40.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -62,47 +46,18 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="14.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+      <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
-         <graphic>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/verificacao-de-calendario.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="14.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+      <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
-         <graphic>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/upload-de-arquivo.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="14.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-         <graphic>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/credencial-de-graduacao.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -148,5 +103,35 @@
             </Text>
          </children>
       </AnchorPane>
+      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/chamine-de-casa.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/bilhete.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/verificacao-de-calendario.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/upload-de-arquivo.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/credencial-de-graduacao.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="61.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deixar.png" />
+         </image>
+      </ImageView>
     </AnchorPane>
 </StackPane>

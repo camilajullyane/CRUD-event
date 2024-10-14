@@ -27,7 +27,7 @@ public class SignUpController {
     TextField passwordField;
 
     @FXML
-    Button signUpButton;
+    Button signInButton;
 
     @FXML
     StackPane signUpPage;
@@ -57,5 +57,15 @@ public class SignUpController {
 
         }
 
+    }
+
+    @FXML
+    private void signInPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-app.fxml"));
+        StackPane screen = loader.load();
+        Scene scene = new Scene(screen);
+        Stage stage = (Stage) signUpPage.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Even2");
     }
 }
