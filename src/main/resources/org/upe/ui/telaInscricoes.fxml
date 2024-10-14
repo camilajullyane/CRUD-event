@@ -6,12 +6,12 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="mySubscriptionPage" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.SubscriptionController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
       <children>
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="#333338" strokeType="INSIDE" width="210.0" />
          <Slider layoutX="786.0" layoutY="91.0" orientation="VERTICAL" prefHeight="476.0" prefWidth="14.0" />
-         <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefWidth="62.0" style="-fx-background-color: #333338;" text="Início" textFill="WHITE">
+         <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#homePage" prefWidth="62.0" style="-fx-background-color: #333338;" text="Início" textFill="WHITE">
             <font>
                <Font size="15.0" />
             </font>
@@ -60,7 +60,7 @@
                <Image url="@../../../images/credencial-de-graduacao.png" />
             </image>
          </ImageView>
-         <Button layoutX="71.0" layoutY="547.0" mnemonicParsing="false" prefWidth="62.0" style="-fx-background-color: #333338;" text="Sair" textFill="WHITE">
+         <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#logOut" prefWidth="62.0" style="-fx-background-color: #333338;" text="Sair" textFill="WHITE">
             <font>
                <Font size="15.0" />
             </font>
