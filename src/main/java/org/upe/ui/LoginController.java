@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.upe.controllers.AuthController;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
@@ -47,6 +48,7 @@ public class LoginController {
             errorMessage.setText("Credenciais erradas ou não cadastradas");
             errorMessage.setVisible(true);
         } else {
+            UserSession.getInstance().setCurrentUser(isLogged);
             SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Principal", loginPage);
         }
     }

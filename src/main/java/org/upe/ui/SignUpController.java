@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.controllers.AuthController;
 import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
@@ -46,9 +47,11 @@ public class SignUpController {
         UserInterface isCreated = AuthController.signUpUser(name, cpf, email, password);
 
         if(isCreated == null) {
+
             errorMessage.setText("Usuário já cadastrado");
             errorMessage.setVisible(true);
         } else {
+            UserSession.getInstance().setCurrentUser(isCreated);
             SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", signUpPage);
         }
 
