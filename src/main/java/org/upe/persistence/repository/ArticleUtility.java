@@ -39,6 +39,7 @@ public class ArticleUtility {
                 }
             }
         }
+        EventUtility.saveEvents(events);
         UserUtility.updateFileData(users);
     }
 

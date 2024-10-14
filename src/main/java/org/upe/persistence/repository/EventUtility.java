@@ -22,20 +22,6 @@ public class EventUtility {
         EventUtility.csvFilePath = csvFilePath;
     }
 
-    public static String generateID() {
-        UUID uuID = UUID.randomUUID();
-        return uuID.toString();
-    }
-
-    // Create
-    public static boolean addEvent(Event event) {
-        List<Event> events = getAllEvents();
-        event.setId(EventUtility.generateID()); // Define a new unique ID
-        events.add(event);
-        return saveEvents(events);
-    }
-
-    // Read
     public static List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -116,18 +102,6 @@ public class EventUtility {
         return null;
     }
 
-    // Update
-    public static boolean updateEvent(Event updatedEvent) {
-        List<Event> events = getAllEvents();
-        for (int i = 0; i < events.size(); i++) {
-            if (events.get(i).getId().equals(updatedEvent.getId())) {
-                events.set(i, updatedEvent);
-                return saveEvents(events);
-            }
-        }
-        return false;
-    }
-
     public static boolean updateEventLocal(String id, String newLocal) {
         List<Event> events = getAllEvents();
         for (Event event : events) {
@@ -138,7 +112,6 @@ public class EventUtility {
         }
         return false;
     }
-
 
     public static boolean updateEventName(String id, String newName) {
         List<Event> events = getAllEvents();
@@ -224,7 +197,7 @@ public class EventUtility {
     }
 
 
-    private static boolean saveEvents(List<Event> events) {
+    public static boolean saveEvents(List<Event> events) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
