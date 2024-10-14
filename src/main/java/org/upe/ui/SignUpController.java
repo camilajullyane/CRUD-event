@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.controllers.AuthController;
+import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
 
@@ -48,13 +49,7 @@ public class SignUpController {
             errorMessage.setText("Usuário já cadastrado");
             errorMessage.setVisible(true);
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("telaInicio.fxml"));
-            StackPane screen = loader.load();
-            Scene scene = new Scene(screen);
-            Stage stage = (Stage) signUpPage.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Even2");
-
+            SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", signUpPage);
         }
 
     }
