@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
+    <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis></Rectangle>
+      <Button layoutX="62.0" layoutY="537.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/deixar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+         <graphic>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/chamine-de-casa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="subscriptionButton" layoutX="14.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+         <graphic>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../../../images/bilhete.png" />
+               </image>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="14.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/verificacao-de-calendario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="14.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/upload-de-arquivo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="14.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/credencial-de-graduacao.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text fx:id="userName" fill="WHITE" layoutX="411.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutX="293.0" layoutY="148.0" prefHeight="260.0" prefWidth="360.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
+         <children>
+            <Button layoutX="91.0" layoutY="100.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um evento" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="91.0" layoutY="140.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Realizar Submissão" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="91.0" layoutY="180.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um evento" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text fill="#aeaeae" layoutX="33.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Você ainda não faz parte de nenhum evento">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+    </AnchorPane>
+</StackPane>
