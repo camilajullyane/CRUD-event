@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.repository.interfaces.UserInterface;
 import org.upe.controllers.AuthController;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -13,6 +13,8 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class SignUpController {
+    private static final AuthController authController = new AuthController();
+
     @FXML
     TextField cpfField;
 
@@ -41,7 +43,7 @@ public class SignUpController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        UserInterface isCreated = AuthController.signUpUser(name, cpf, email, password);
+        UserInterface isCreated = authController.signUpUser(name, cpf, email, password);
 
         if(isCreated == null) {
 

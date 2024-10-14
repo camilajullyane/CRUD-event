@@ -1,4 +1,4 @@
-package org.upe.persistence.repository;
+package org.upe.persistence.repository.repository;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,10 +7,12 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.upe.persistence.model.Event;
-import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.repository.model.Event;
+import org.upe.persistence.repository.interfaces.EventInterface;
 
 public class EventUtility {
+    private static final UserUtility userUtility = new UserUtility();
+
     private static final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
     protected static String csvFilePath = "DB/event.csv";
   
@@ -88,7 +90,7 @@ public class EventUtility {
         Event newEvent = new Event(id, ownerCPF, name, date, local, organization, description, "", "");
         events.add(newEvent);
         EventUtility.saveEvents(events);
-        UserUtility.addOwnerOnEvent(ownerCPF, id);
+        userUtility.addOwnerOnEvent(ownerCPF, id);
         return newEvent;
     }
 

@@ -1,7 +1,7 @@
-package org.upe.persistence.repository;
+package org.upe.persistence.repository.repository;
 
-import org.upe.persistence.model.User;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.repository.model.User;
+import org.upe.persistence.repository.interfaces.UserInterface;
 import java.util.Arrays;
 import java.io.*;
 import java.util.ArrayList;
@@ -13,15 +13,11 @@ public class UserUtility {
     private static final Logger LOGGER = Logger.getLogger(UserUtility.class.getName());
     protected static String csvFilePath = "DB/user.csv";
 
-    private UserUtility() {
-        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
-    }
-
-    public static void setCsvFilePath(String csvFilePath) {
+    public void setCsvFilePath(String csvFilePath) {
         UserUtility.csvFilePath = csvFilePath;
     }
 
-    public static List<User> getAllUsers() {
+    public List<User> getAllUsers() {
         ArrayList<User> usersArray = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -50,7 +46,7 @@ public class UserUtility {
         return usersArray;
     }
 
-    public static void updateFileData(List<User> newData) {
+    public void updateFileData(List<User> newData) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
@@ -69,15 +65,15 @@ public class UserUtility {
         }
     }
 
-    public static User findByCPF(String cpf) {
+    public User findByCPF(String cpf) {
         return getAllUsers().stream().filter(user -> user.getCPF().equals(cpf)).findFirst().orElse(null);
     }
 
-    public static User findByEmail(String email) {
+    public User findByEmail(String email) {
         return getAllUsers().stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
     }
 
-    public static UserInterface createUser(String name, String email, String cpf, String password) {
+    public UserInterface createUser(String name, String email, String cpf, String password) {
 
         if(findByCPF(cpf) != null) {
             return null;
@@ -98,8 +94,8 @@ public class UserUtility {
         return new User(name, cpf, email, password, "","", "");
     }
 
-    public static boolean updateUserEmail(String cpf, String newEmail) {
-        List<User> users = UserUtility.getAllUsers();
+    public boolean updateUserEmail(String cpf, String newEmail) {
+        List<User> users = getAllUsers();
 
         if (findByEmail(newEmail) != null) {
             return false;
@@ -116,8 +112,8 @@ public class UserUtility {
         return true;
     }
 
-    public static void deleteUser(String cpf) {
-        List<User> users = UserUtility.getAllUsers();
+    public void deleteUser(String cpf) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -128,8 +124,8 @@ public class UserUtility {
         updateFileData(users);
     }
 
-    public static void addAttendeeOnEvent(String cpf, String eventID) {
-        List<User> users = UserUtility.getAllUsers();
+    public void addAttendeeOnEvent(String cpf, String eventID) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -137,11 +133,11 @@ public class UserUtility {
                 break;
             }
         }
-        UserUtility.updateFileData(users);
+        updateFileData(users);
     }
 
-    public static void addOwnerOnEvent(String cpf, String eventID) {
-        List<User> users = UserUtility.getAllUsers();
+    public void addOwnerOnEvent(String cpf, String eventID) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -149,11 +145,11 @@ public class UserUtility {
                 break;
             }
         }
-        UserUtility.updateFileData(users);
+        updateFileData(users);
     }
 
-    public static boolean deleteAllAttendeesFromEvent(String eventID) {
-        List<User> users = UserUtility.getAllUsers();
+    public boolean deleteAllAttendeesFromEvent(String eventID) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (Arrays.asList(user.getAttendeeOn()).contains(eventID)) {
@@ -164,8 +160,8 @@ public class UserUtility {
         return true;
     }
 
-    public static boolean deleteAttendeeEvent(String cpf, String eventID) {
-        List<User> users = UserUtility.getAllUsers();
+    public boolean deleteAttendeeEvent(String cpf, String eventID) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -177,8 +173,8 @@ public class UserUtility {
         return true;
     }
 
-    public static void deleteOwnerOf(String cpf, String eventID) {
-        List<User> users = UserUtility.getAllUsers();
+    public void deleteOwnerOf(String cpf, String eventID) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -189,8 +185,8 @@ public class UserUtility {
         updateFileData(users);
     }
 
-    public static void addUserArticle(String cpf, String articleID) {
-        List<User> users = UserUtility.getAllUsers();
+    public void addUserArticle(String cpf, String articleID) {
+        List<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -199,10 +195,10 @@ public class UserUtility {
             }
         }
 
-        UserUtility.updateFileData(users);
+        updateFileData(users);
     }
 
-    public static UserInterface authUser(String cpf, String password) {
+    public UserInterface authUser(String cpf, String password) {
         User user = findByCPF(cpf);
         if (user == null) {
             return null;

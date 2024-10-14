@@ -1,6 +1,6 @@
-package org.upe.persistence.model;
+package org.upe.persistence.repository.model;
 
-import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.repository.interfaces.EventInterface;
 
 public class Event implements EventInterface {
     protected String ownerCPF;
