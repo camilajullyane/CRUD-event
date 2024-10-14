@@ -1,10 +1,10 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.model.Article;
-import org.upe.persistence.repository.ArticleUtility;
+import org.upe.persistence.repository.interfaces.ArticleInterface;
+import org.upe.persistence.repository.model.Article;
+import org.upe.persistence.repository.repository.ArticleUtility;
 
 import java.io.*;
 import java.util.List;

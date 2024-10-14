@@ -1,4 +1,4 @@
-package org.upe.persistence.interfaces;
+package org.upe.persistence.repository.interfaces;
 
 public interface ArticleInterface {
     String getName();

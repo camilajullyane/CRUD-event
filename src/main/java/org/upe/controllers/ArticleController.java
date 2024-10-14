@@ -1,19 +1,19 @@
 package org.upe.controllers;
 
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.repository.ArticleUtility;
-import org.upe.persistence.repository.EventUtility;
-import org.upe.persistence.repository.UserUtility;
+import org.upe.persistence.repository.interfaces.ArticleInterface;
+import org.upe.persistence.repository.interfaces.EventInterface;
+import org.upe.persistence.repository.interfaces.UserInterface;
+import org.upe.persistence.repository.repository.ArticleUtility;
+import org.upe.persistence.repository.repository.EventUtility;
+import org.upe.persistence.repository.repository.UserUtility;
 import java.util.List;
 
-public interface ArticleController {
+public class ArticleController {
+    private static final UserUtility userUtility = new UserUtility();
 
     static ArticleInterface createArticle(UserInterface user, String name, String articleAbstract) {
         ArticleInterface article = ArticleUtility.createArticle(name, user.getCPF(), articleAbstract);
-
-        UserUtility.addUserArticle(user.getCPF(), article.getArticleID());
+        userUtility.addUserArticle(user.getCPF(), article.getArticleID());
         return article;
     }
 

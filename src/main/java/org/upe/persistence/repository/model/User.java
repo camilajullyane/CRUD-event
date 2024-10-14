@@ -1,6 +1,6 @@
-package org.upe.persistence.model;
+package org.upe.persistence.repository.model;
 
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.repository.interfaces.UserInterface;
 
 public class User implements UserInterface {
     protected String name;

@@ -1,10 +1,10 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.repository.EventUtility;
+import org.upe.persistence.repository.interfaces.EventInterface;
+import org.upe.persistence.repository.model.Event;
+import org.upe.persistence.repository.repository.EventUtility;
 
 import java.io.*;
 import java.util.Arrays;

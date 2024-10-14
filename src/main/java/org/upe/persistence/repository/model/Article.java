@@ -1,6 +1,6 @@
-package org.upe.persistence.model;
+package org.upe.persistence.repository.model;
 
-import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.repository.interfaces.ArticleInterface;
 
 public class Article implements ArticleInterface {
     private final String name;

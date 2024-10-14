@@ -1,9 +1,9 @@
-package org.upe.persistence.repository;
+package org.upe.persistence.repository.repository;
 
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.model.Article;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.model.User;
+import org.upe.persistence.repository.interfaces.ArticleInterface;
+import org.upe.persistence.repository.model.Article;
+import org.upe.persistence.repository.model.Event;
+import org.upe.persistence.repository.model.User;
 
 import java.util.List;
 import java.io.*;
@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ArticleUtility {
+    private static final UserUtility userUtility = new UserUtility();
+
     private static final Logger LOGGER = Logger.getLogger(ArticleUtility.class.getName());
     protected static String csvFilePath = "DB/articles.csv";
   
@@ -25,7 +27,7 @@ public class ArticleUtility {
     }
 
     public static void submitArticle(String CPF, String articleName, String eventID, String articleAbstract) {
-        List<User> users = UserUtility.getAllUsers();
+        List<User> users = userUtility.getAllUsers();
         List<Event> events = EventUtility.getAllEvents();
 
         for (Event event : events) {
@@ -40,7 +42,7 @@ public class ArticleUtility {
             }
         }
         EventUtility.saveEvents(events);
-        UserUtility.updateFileData(users);
+        userUtility.updateFileData(users);
     }
 
     public static List<Article> getAllArticles() {
