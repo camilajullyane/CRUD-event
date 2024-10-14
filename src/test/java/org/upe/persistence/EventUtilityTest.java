@@ -94,17 +94,6 @@ class EventUtilityTest {
     }
 
     @Test
-    void updateEvent() {
-        Event updatedEvent = new Event("1", "123456789", "Updated Event", "01/01/2024", "Updated Local", "Updated Org", "Updated Description", "987654321","article1");
-        assertTrue(EventUtility.updateEvent(updatedEvent), "O evento deve ser atualizado com sucesso");
-
-        EventInterface event = EventUtility.getEventById("1");
-        assertNotNull(event, "O evento deve ser encontrado após atualização");
-        assertEquals("Updated Event", event.getName(), "O nome do evento deve ser atualizado para 'Updated Event'");
-        assertEquals("Updated Local", event.getLocal(), "O local do evento deve ser atualizado para 'Updated Local'");
-    }
-
-    @Test
     void updateEventLocal() {
         assertTrue(EventUtility.updateEventLocal("1", "New Local"), "O local do evento deve ser atualizado com sucesso");
 

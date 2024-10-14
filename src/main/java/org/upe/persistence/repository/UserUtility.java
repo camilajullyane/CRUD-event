@@ -50,7 +50,7 @@ public class UserUtility {
         return usersArray;
     }
 
-    private static void updateFileData(List<User> newData) {
+    public static void updateFileData(List<User> newData) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
             for (User user : newData) {
@@ -70,37 +70,20 @@ public class UserUtility {
     }
 
     public static User findByCPF(String cpf) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            String line;
-            boolean isFirstLine = true;
-            while ((line = reader.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                }
-                String[] newUserLine = line.split(",", -1);
-                User user = new User(
-                        newUserLine[0],
-                        newUserLine[1],
-                        newUserLine[2],
-                        newUserLine[3],
-                        newUserLine[4] == null ? "" : newUserLine[4],
-                        newUserLine[5] == null ? "" : newUserLine[5],
-                        newUserLine[6] == null ? "" : newUserLine[6]);
+        return getAllUsers().stream().filter(user -> user.getCPF().equals(cpf)).findFirst().orElse(null);
+    }
 
-                if (user.getCPF().equals(cpf)) {
-                    return user;
-                }
-            }
-        } catch(IOException e) {
-            LOGGER.log(Level.SEVERE, "Erro ao ler o arquivo CSV", e);
-        }
-        return null;
+    public static User findByEmail(String email) {
+        return getAllUsers().stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
     }
 
     public static UserInterface createUser(String name, String email, String cpf, String password) {
 
         if(findByCPF(cpf) != null) {
+            return null;
+        }
+
+        if(findByEmail(email) != null) {
             return null;
         }
 
@@ -112,11 +95,15 @@ public class UserUtility {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
-        return new User(name, cpf, email, "", "","", password);
+        return new User(name, cpf, email, password, "","", "");
     }
 
-    public static void updateUserEmail(String cpf, String newEmail) {
+    public static boolean updateUserEmail(String cpf, String newEmail) {
         List<User> users = UserUtility.getAllUsers();
+
+        if (findByEmail(newEmail) != null) {
+            return false;
+        }
 
         for (User user : users) {
             if (user.getCPF().equals(cpf)) {
@@ -125,6 +112,8 @@ public class UserUtility {
         }
 
         updateFileData(users);
+
+        return true;
     }
 
     public static void deleteUser(String cpf) {
