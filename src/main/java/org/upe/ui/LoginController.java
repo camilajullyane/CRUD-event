@@ -12,6 +12,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.upe.controllers.AuthController;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
@@ -46,22 +48,13 @@ public class LoginController {
             errorMessage.setText("Credenciais erradas ou não cadastradas");
             errorMessage.setVisible(true);
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("telaInicio.fxml"));
-            StackPane screen = loader.load();
-            Scene scene = new Scene(screen);
-            Stage stage = (Stage) loginPage.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Even2");
+            UserSession.getInstance().setCurrentUser(isLogged);
+            SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Principal", loginPage);
         }
     }
 
     @FXML
     private void moveToSignUp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("telaCadastro.fxml"));
-        StackPane screen = loader.load();
-        Scene scene = new Scene(screen);
-        Stage stage = (Stage) loginPage.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Even2");
+        SceneLoader.loadScene("/org/upe/ui/telaCadastro.fxml", "Cadastro", loginPage);
     }
 }

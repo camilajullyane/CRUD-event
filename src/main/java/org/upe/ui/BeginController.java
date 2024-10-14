@@ -6,36 +6,29 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.upe.utils.SceneLoader;
+import javafx.scene.text.Text;
+import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
 public class BeginController {
     @FXML
     Button subscriptionButton;
-
     @FXML
     StackPane beginPage;
 
     @FXML
-    Button LogOutButton;
+    Text userName;
 
     @FXML
-    private void handleSubscription() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("telaInscricoes.fxml"));
-        StackPane screen = loader.load();
-        Scene scene = new Scene(screen);
-        Stage stage = (Stage) beginPage.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Even2");
+
+    private void initialize() throws IOException {
+        if (UserSession.getInstance().getCurrentUser() != null) {
+            userName.setText(UserSession.getInstance().getCurrentUser().getName());
+//            userName.setVisible(true);
+        }
+    }
     }
 
-    @FXML
-    private void logOut() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-app.fxml"));
-        StackPane screen = loader.load();
-        Scene scene = new Scene(screen);
-        Stage stage = (Stage) beginPage.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Even2");
-    }
-}
+
