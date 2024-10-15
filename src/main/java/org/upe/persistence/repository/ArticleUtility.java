@@ -1,9 +1,9 @@
-package org.upe.persistence.repository.repository;
+package org.upe.persistence.repository;
 
-import org.upe.persistence.repository.interfaces.ArticleInterface;
-import org.upe.persistence.repository.model.Article;
-import org.upe.persistence.repository.model.Event;
-import org.upe.persistence.repository.model.User;
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.model.Article;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
 
 import java.util.List;
 import java.io.*;

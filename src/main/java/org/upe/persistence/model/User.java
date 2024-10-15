@@ -1,6 +1,6 @@
-package org.upe.persistence.repository.model;
+package org.upe.persistence.model;
 
-import org.upe.persistence.repository.interfaces.UserInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 public class User implements UserInterface {
     protected String name;
@@ -72,17 +72,17 @@ public class User implements UserInterface {
     }
 
     public void deleteOwnerOf(String eventID) {
-        String newString = "";
+        StringBuilder newString = new StringBuilder();
         for (int i = 0; i < this.getOwnerOf().length; i++) {
             String id = this.getOwnerOf()[i];
             if (!id.equals(eventID)) {
                 if (!newString.isEmpty()) {
-                    newString += "#";
+                    newString.append("#");
                 }
-                newString += id;
+                newString.append(id);
             }
         }
-        this.ownerOf = newString;
+        this.ownerOf = newString.toString();
     }
 
     public String[] getArticleID() {

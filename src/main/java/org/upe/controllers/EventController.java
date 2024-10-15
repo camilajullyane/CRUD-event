@@ -1,10 +1,10 @@
 package org.upe.controllers;
 
-import org.upe.persistence.repository.interfaces.EventInterface;
-import org.upe.persistence.repository.interfaces.UserInterface;
-import org.upe.persistence.repository.model.Event;
-import org.upe.persistence.repository.repository.EventUtility;
-import org.upe.persistence.repository.repository.UserUtility;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.repository.EventUtility;
+import org.upe.persistence.repository.UserUtility;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package org.upe.persistence.repository.model;
+package org.upe.persistence.model;
 
-import org.upe.persistence.repository.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 
 
 public class SubEvent extends Event implements SubEventInterface {

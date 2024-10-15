@@ -1,4 +1,4 @@
-package org.upe.persistence.repository.repository;
+package org.upe.persistence.repository;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.upe.persistence.repository.model.Event;
-import org.upe.persistence.repository.interfaces.EventInterface;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
     private static final UserUtility userUtility = new UserUtility();
