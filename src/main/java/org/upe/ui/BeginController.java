@@ -23,7 +23,6 @@ public class BeginController {
     Text userName;
 
     @FXML
-
     private void initialize(){
         if (UserSession.getInstance().getCurrentUser() != null) {
             userName.setText(UserSession.getInstance().getCurrentUser().getName());
@@ -39,5 +38,11 @@ public class BeginController {
     @FXML
     private void logOut() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", beginPage);
+    }
+
+    @FXML
+    private void handleScheduleButton() throws IOException {
+        System.out.println("Entrou");
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
     }
 }
