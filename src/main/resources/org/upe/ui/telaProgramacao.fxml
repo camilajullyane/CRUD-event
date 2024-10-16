@@ -16,26 +16,41 @@
             <font>
                <Font size="15.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
          <Button layoutX="40.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Inscrições" textFill="WHITE">
             <font>
                <Font size="15.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
          <Button layoutX="40.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Programação" textFill="WHITE">
             <font>
                <Font name="System Bold" size="15.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
          <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Submissões" textFill="WHITE">
             <font>
                <Font size="15.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
          <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Certificados" textFill="WHITE">
             <font>
                <Font size="15.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
          <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -65,110 +80,26 @@
             <font>
                <Font size="15.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
          <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="61.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../../images/deixar.png" />
             </image>
          </ImageView>
-         <AnchorPane layoutX="242.0" layoutY="91.0" prefHeight="260.0" prefWidth="535.0" style="-fx-background-color: #4E4E55; -fx-background-radius: 25;">
-            <children>
-               <Label fx:id="eventName" layoutX="135.0" layoutY="3.0" prefHeight="62.0" prefWidth="272.0" text="PETROLINA - &quot;Diabetes em Foco: Alimentação e Estratégias Nutricionais para o Controle e Prevenção&quot;" textAlignment="CENTER" textFill="#2dd4bf" wrapText="true">
-                  <font>
-                     <Font name="System Bold Italic" size="12.0" />
-                  </font>
-               </Label>
-               <Label layoutX="30.0" layoutY="62.0" prefHeight="71.0" prefWidth="481.0" text="Explorar a relação entre a alimentação e os níveis de glicose no sangue, e como isso afeta o controle do diabetes.- Apresentar estratégias nutricionais baseadas em evidências para a prevenção e manejo do diabetes.- Incentivar a adoção de práticas alimentares saudáveis e eficazes entre os participantes da comunidade acadêmica." textAlignment="CENTER" textFill="#cdc7c7" wrapText="true" />
-               <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                    <Image url="@../../../images/evento-confirmado.png" />
-                    </image>
-               </ImageView>
-
-               <Label layoutX="48.0" layoutY="154.0" prefHeight="17.0" prefWidth="210.0" text="Quarta-feira, 25 de outubro de 2024" textFill="WHITE">
-                  <font>
-                     <Font name="System Italic" size="12.0" />
-                  </font>
-               </Label>
-
-<ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                    <Image url="@../../../images/local.png" />
-                    </image>
-               </ImageView>
-               <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="291.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
-                                   <image>
-                                   <Image url="@../../../images/relogio.png" />
-                                   </image>
-                              </ImageView>
-               <Label layoutX="48.0" layoutY="183.0" prefHeight="20.0" prefWidth="210.0" text="UPE Petrolina - SALA 08 - BLOCO B" textFill="#cdc7c7" />
-               <Label layoutX="317.0" layoutY="154.0" prefHeight="17.0" prefWidth="89.0" text="08:00 - 10:00" textFill="WHITE">
-                  <font>
-                     <Font name="System Italic" size="12.0" />
-                  </font>
-               </Label>
-               <Button layoutX="70.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Mais informações" textAlignment="CENTER" textFill="WHITE">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor></Button>
-               <Button layoutX="359.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Realizar inscrição" textAlignment="CENTER" textFill="WHITE">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor></Button>
-               <Line endX="397.0" layoutX="121.0" layoutY="144.0" startX="-100.0" stroke="#ffffff66" />
-            </children>
-         </AnchorPane>
          <Button layoutX="426.0" layoutY="28.0" mnemonicParsing="false" style="-fx-background-color: #3F3F46;" text="Programação" textFill="WHITE">
             <font>
                <Font name="System Bold" size="19.0" />
             </font>
          </Button>
-         <AnchorPane layoutX="242.0" layoutY="367.0" prefHeight="260.0" prefWidth="535.0" style="-fx-background-color: #4E4E55; -fx-background-radius: 25;">
-            <children>
-               <Label fx:id="eventName1" layoutX="135.0" layoutY="3.0" prefHeight="62.0" prefWidth="272.0" text="PETROLINA - &quot;Diabetes em Foco: Alimentação e Estratégias Nutricionais para o Controle e Prevenção&quot;" textAlignment="CENTER" textFill="#2dd4bf" wrapText="true">
-                  <font>
-                     <Font name="System Bold Italic" size="12.0" />
-                  </font>
-               </Label>
-               <Label layoutX="30.0" layoutY="62.0" prefHeight="71.0" prefWidth="481.0" text="Explorar a relação entre a alimentação e os níveis de glicose no sangue, e como isso afeta o controle do diabetes.- Apresentar estratégias nutricionais baseadas em evidências para a prevenção e manejo do diabetes.- Incentivar a adoção de práticas alimentares saudáveis e eficazes entre os participantes da comunidade acadêmica." textAlignment="CENTER" textFill="#cdc7c7" wrapText="true" />
-               <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../../images/evento-confirmado.png" />
-                  </image>
-               </ImageView>
-               <Label layoutX="48.0" layoutY="154.0" prefHeight="17.0" prefWidth="210.0" text="Quarta-feira, 25 de outubro de 2024" textFill="WHITE">
-                  <font>
-                     <Font name="System Italic" size="12.0" />
-                  </font>
-               </Label>
-               <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../../images/local.png" />
-                  </image>
-               </ImageView>
-               <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="291.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../../images/relogio.png" />
-                  </image>
-               </ImageView>
-               <Label layoutX="48.0" layoutY="183.0" prefHeight="20.0" prefWidth="210.0" text="UPE Petrolina - SALA 08 - BLOCO B" textFill="#cdc7c7" />
-               <Label layoutX="317.0" layoutY="154.0" prefHeight="17.0" prefWidth="89.0" text="08:00 - 10:00" textFill="WHITE">
-                  <font>
-                     <Font name="System Italic" size="12.0" />
-                  </font>
-               </Label>
-               <Button layoutX="70.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Mais informações" textAlignment="CENTER" textFill="WHITE">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-               </Button>
-               <Button layoutX="359.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Realizar inscrição" textAlignment="CENTER" textFill="WHITE">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-               </Button>
-               <Line endX="397.0" layoutX="121.0" layoutY="144.0" startX="-100.0" stroke="#ffffff66" />
-            </children>
-         </AnchorPane>
+         <ScrollPane layoutX="210.0" layoutY="69.0" opacity="0.0" prefHeight="532.0" prefWidth="593.0" style="-fx-background-color: transparent;">
+             <content>
+                 <VBox prefHeight="210" prefWidth="490" style="-fx-background-color: red;">
+                     <Label prefWidth="200" text="OI CARAI" />
+                 </VBox>
+             </content>
+         </ScrollPane>
       </children></AnchorPane>
 </StackPane>
