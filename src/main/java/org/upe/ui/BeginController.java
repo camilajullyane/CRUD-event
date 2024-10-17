@@ -41,7 +41,6 @@ public class BeginController {
 
     @FXML
     private void handleScheduleButton() throws IOException {
-        System.out.println("Entrou");
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
     }
 }
