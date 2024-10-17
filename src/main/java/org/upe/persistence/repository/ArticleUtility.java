@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public class ArticleUtility {
     private static final UserUtility userUtility = new UserUtility();
+    private static final EventUtility eventUtility = new EventUtility();
 
     private static final Logger LOGGER = Logger.getLogger(ArticleUtility.class.getName());
     protected static String csvFilePath = "DB/articles.csv";
@@ -28,7 +29,7 @@ public class ArticleUtility {
 
     public static void submitArticle(String CPF, String articleName, String eventID, String articleAbstract) {
         List<User> users = userUtility.getAllUsers();
-        List<Event> events = EventUtility.getAllEvents();
+        List<Event> events = eventUtility.getAllEvents();
 
         for (Event event : events) {
             if (event.getId().equals(eventID)) {
@@ -41,7 +42,7 @@ public class ArticleUtility {
                 }
             }
         }
-        EventUtility.saveEvents(events);
+        eventUtility.saveEvents(events);
         userUtility.updateFileData(users);
     }
 

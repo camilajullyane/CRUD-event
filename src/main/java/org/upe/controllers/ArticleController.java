@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ArticleController {
     private static final UserUtility userUtility = new UserUtility();
+    private static final EventUtility eventUtility = new EventUtility();
 
     static ArticleInterface createArticle(UserInterface user, String name, String articleAbstract) {
         ArticleInterface article = ArticleUtility.createArticle(name, user.getCPF(), articleAbstract);
@@ -29,7 +30,7 @@ public class ArticleController {
                return false;
            }
        }
-        return EventUtility.addArticleOnList(article.getArticleID(), event.getId());
+        return eventUtility.addArticleOnList(article.getArticleID(), event.getId());
     }
 
 }

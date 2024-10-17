@@ -2,7 +2,6 @@ package org.upe.persistence.model;
 
 import org.upe.persistence.interfaces.SubEventInterface;
 
-
 public class SubEvent extends Event implements SubEventInterface {
     protected String parentEventID;
     protected String speakers;

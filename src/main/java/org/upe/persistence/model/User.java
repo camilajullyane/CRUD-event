@@ -50,16 +50,16 @@ public class User implements UserInterface {
     }
 
     public void deleteAttendeeOn(String eventID) {
-        String newString = "";
+        StringBuilder newString = new StringBuilder();
         for (int i = 0; i < this.getAttendeeOn().length; i++) {
             String id = this.getAttendeeOn()[i];
             if (!id.equals(eventID)) {
                 if (!newString.isEmpty()) {
-                    newString += "#";
+                    newString.append("#");
                 }
-                newString += id;
+                newString.append(id);
             }
-            this.attendeeOn = newString;
+            this.attendeeOn = newString.toString();
         }
     }
 
