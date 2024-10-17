@@ -26,7 +26,6 @@ public class BeginController {
     private void initialize(){
         if (UserSession.getInstance().getCurrentUser() != null) {
             userName.setText(UserSession.getInstance().getCurrentUser().getName());
-//            userName.setVisible(true);
         }
     }
 
