@@ -11,16 +11,17 @@ import java.util.List;
 public class ArticleController {
     private static final UserUtility userUtility = new UserUtility();
     private static final EventUtility eventUtility = new EventUtility();
+    private static final ArticleUtility articleUtility = new ArticleUtility();
 
     static ArticleInterface createArticle(UserInterface user, String name, String articleAbstract) {
-        ArticleInterface article = ArticleUtility.createArticle(name, user.getCPF(), articleAbstract);
+        ArticleInterface article = articleUtility.createArticle(name, user.getCPF(), articleAbstract);
         userUtility.addUserArticle(user.getCPF(), article.getArticleID());
         return article;
     }
 
 
     static List<ArticleInterface> getAllArticlesByUser(String userCPF) {
-        return ArticleUtility.getAllArticlesByUser(userCPF);
+        return articleUtility.getAllArticlesByUser(userCPF);
     }
 
 
