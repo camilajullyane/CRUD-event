@@ -1,16 +1,17 @@
 package org.upe.controllers;
 
-import org.upe.persistence.repository.interfaces.EventInterface;
-import org.upe.persistence.repository.interfaces.UserInterface;
-import org.upe.persistence.repository.model.Event;
-import org.upe.persistence.repository.repository.EventUtility;
-import org.upe.persistence.repository.repository.UserUtility;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.repository.EventUtility;
+import org.upe.persistence.repository.UserUtility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
     private static final UserUtility userUtility = new UserUtility();
+    private static final EventUtility eventUtility = new EventUtility();
 
     static boolean deleteAttendeeEvent(String userCPF, String eventID) {
         userUtility.deleteAttendeeEvent(userCPF, eventID);
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     static ArrayList<EventInterface> userEventsIn(String ownerCPF) {
-        List<Event> userEventsIn = EventUtility.getEventsIn(ownerCPF);
+        List<Event> userEventsIn = eventUtility.getEventsIn(ownerCPF);
         return new ArrayList<>(userEventsIn);
     }
 
