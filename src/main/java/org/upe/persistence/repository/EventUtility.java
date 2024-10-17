@@ -121,7 +121,6 @@ public class EventUtility {
         return false;
     }
 
-
     public static boolean updateEventName(String id, String newName) {
         List<Event> events = getAllEvents();
         for (Event event : events) {
@@ -159,6 +158,8 @@ public class EventUtility {
 
     public static boolean updateEventDate(String id, String newDate) {
         List<Event> events = getAllEvents();
+
+        SubEventUtility.updateSubEventDate(id, newDate);
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setOrganization(newDate);
@@ -206,7 +207,6 @@ public class EventUtility {
         saveEvents(events);
     }
 
-
     private static boolean saveEvents(List<Event> events) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath));
@@ -240,7 +240,6 @@ public class EventUtility {
         }
         return uuidString;
     }
-
 
     public static boolean addArticleOnList(String articleID, String eventID) {
         List<Event> events = getAllEvents();

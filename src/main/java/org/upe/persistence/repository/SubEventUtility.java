@@ -107,10 +107,10 @@ import java.util.UUID;
             return false;
         }
 
-        public static boolean updateSubEventDate(String id, String newDate) {
+        public static boolean updateSubEventDate(String EventID, String newDate) {
             ArrayList<SubEvent> subEvents = getAllSubEvents();
             for (SubEvent subEvent : subEvents) {
-                if (subEvent.getId().equals(id)) {
+                if (subEvent.getParentEventID().equals(EventID)) {
                     subEvent.setDate(newDate);
                     saveSubEvents(subEvents);
                     return true;

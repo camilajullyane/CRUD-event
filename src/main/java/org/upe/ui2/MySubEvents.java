@@ -72,8 +72,7 @@ public class MySubEvents {
         String name = sc.nextLine();
         System.out.print("Descrição do sub-evento: ");
         String description = sc.nextLine();
-        System.out.print("Data do sub-evento: ");
-        String date = Utils.validateDate();
+        String date = event.getDate();
 //        System.out.println("Hora do sub-evento");
         String hour = Utils.validateHour();
         System.out.print("Local do sub-evento: ");
@@ -124,11 +123,10 @@ public class MySubEvents {
         while (isRunning) {
             System.out.println("Digite: " +
                     "\n[1] - Editar nome do sub-evento" +
-                    "\n[2] - Editar data" +
-                    "\n[3] - Editar local" +
-                    "\n[4] - Editar descrição" +
-                    "\n[5] - Editar palestrante" +
-                    "\n[6] - Voltar");
+                    "\n[2] - Editar local" +
+                    "\n[3] - Editar descrição" +
+                    "\n[4] - Editar palestrante" +
+                    "\n[5] - Voltar");
 
             System.out.print("Escolha sua opção: ");
             String option = sc.nextLine();
@@ -137,18 +135,15 @@ public class MySubEvents {
                     isRunning = editSubEventName(subEvent.getId());
                     break;
                 case "2":
-                    isRunning = editSubEventDate(subEvent.getId());
-                    break;
-                case "3":
                     isRunning = editSubEventLocal(subEvent.getId());
                     break;
-                case "4":
+                case "3":
                     isRunning = editSubEventDescription(subEvent.getId());
                     break;
-                case "5":
+                case "4":
                     isRunning = editSubEventSpeaker(subEvent.getId());
                     break;
-                case "6":
+                case "5":
                     return true;
                 default:
                     System.out.print("[ERRO] Digite novamente. ");
@@ -166,17 +161,6 @@ public class MySubEvents {
         System.out.println("Nome do sub-evento alterado!");
 
         return newName;
-    }
-
-    private static boolean editSubEventDate(String id) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Digite a nova data do sub-evento: ");
-        String date = Utils.validateDate();
-
-        boolean newDate = SubEventController.editSubEventDate(id, date);
-        System.out.println("Data do sub-evento alterada!");
-
-        return newDate;
     }
 
     private static boolean editSubEventLocal(String id) {
