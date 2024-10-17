@@ -1,4 +1,4 @@
-package org.upe.persistence.repository.interfaces;
+package org.upe.persistence.interfaces;
 
 public interface EventInterface {
     String getId();
@@ -8,8 +8,6 @@ public interface EventInterface {
     String getDescription();
     String[] getAttendeesList();
     String[] getArticleList();
-    String toString();
-    String toString(int position);
     String getLocal();
     String getOwnerCPF();
 }

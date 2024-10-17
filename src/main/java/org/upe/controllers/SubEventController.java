@@ -1,9 +1,9 @@
 package org.upe.controllers;
 
-import org.upe.persistence.repository.interfaces.EventInterface;
-import org.upe.persistence.repository.interfaces.SubEventInterface;
-import org.upe.persistence.repository.model.SubEvent;
-import org.upe.persistence.repository.repository.SubEventUtility;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.repository.SubEventUtility;
 import java.util.List;
 
 import java.util.ArrayList;

@@ -2,9 +2,8 @@ package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.repository.model.User;
-import org.upe.persistence.repository.interfaces.UserInterface;
-import org.upe.persistence.repository.repository.UserUtility;
+import org.upe.persistence.model.User;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserUtilityTest {
+class UserUtilityTest {
     private UserUtility userUtility;
 
     @BeforeEach
@@ -93,4 +92,39 @@ public class UserUtilityTest {
         assertNotNull(user, "The user should be authenticated successfully");
         assertEquals("John Doe", user.getName(), "The user name should match");
     }
+
+    @Test
+    void testCreateUserWithExistingCPF() {
+        UserInterface newUser = userUtility.createUser("Jane Doe", "new.email@upe.br", "13545345312", "newpassword");
+        assertNull(newUser, "The user should not be created with an existing CPF");
+    }
+
+    @Test
+    void testCreateUserWithExistingEmail() {
+        UserInterface newUser = userUtility.createUser("Jane Doe", "jane.doe@upe.br", "98765432100", "newpassword");
+        assertNull(newUser, "The user should not be created with an existing email");
+    }
+
+    @Test
+    void testCreateUserWithEmptyFields() {
+        UserInterface newUser = userUtility.createUser("", "", "", "");
+        assertNotNull(newUser, "The user should be created even with empty fields");
+        assertEquals("", newUser.getName(), "The user name should be empty");
+        assertEquals("", newUser.getEmail(), "The user email should be empty");
+        assertEquals("", newUser.getCPF(), "The user CPF should be empty");
+    }
+
+    @Test
+    void testUpdateUserEmailWithExistingEmail() {
+        boolean result = userUtility.updateUserEmail("13545345312", "john.doe@example.com");
+        assertFalse(result, "The email should not be updated to an existing email");
+    }
+
+    @Test
+    void testDeleteUserWithNonExistingCPF() {
+        userUtility.deleteUser("00000000000");
+        User user = userUtility.findByCPF("00000000000");
+        assertNull(user, "The user should be null as it does not exist");
+    }
+
 }

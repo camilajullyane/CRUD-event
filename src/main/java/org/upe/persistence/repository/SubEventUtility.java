@@ -1,7 +1,7 @@
-package org.upe.persistence.repository.repository;
+package org.upe.persistence.repository;
 
-import org.upe.persistence.repository.model.SubEvent;
-import org.upe.persistence.repository.interfaces.EventInterface;
+import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.interfaces.EventInterface;
 
 import java.io.*;
 import java.util.ArrayList;

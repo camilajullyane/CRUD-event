@@ -1,6 +1,6 @@
 package org.upe.utils;
 
-import org.upe.persistence.repository.interfaces.UserInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 public class UserSession {
     private static UserSession instance;

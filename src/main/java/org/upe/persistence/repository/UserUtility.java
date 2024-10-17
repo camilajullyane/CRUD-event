@@ -1,7 +1,7 @@
-package org.upe.persistence.repository.repository;
+package org.upe.persistence.repository;
 
-import org.upe.persistence.repository.model.User;
-import org.upe.persistence.repository.interfaces.UserInterface;
+import org.upe.persistence.model.User;
+import org.upe.persistence.interfaces.UserInterface;
 import java.util.Arrays;
 import java.io.*;
 import java.util.ArrayList;

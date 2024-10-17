@@ -1,29 +1,30 @@
 package org.upe.controllers;
 
-import org.upe.persistence.repository.interfaces.EventInterface;
-import org.upe.persistence.repository.interfaces.UserInterface;
-import org.upe.persistence.repository.model.Event;
-import org.upe.persistence.repository.repository.EventUtility;
-import org.upe.persistence.repository.repository.UserUtility;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.repository.EventUtility;
+import org.upe.persistence.repository.UserUtility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventController {
     private static final UserUtility userUtility = new UserUtility();
+    private static final EventUtility eventUtility = new EventUtility();
 
     public EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
                                       String organization) {
-        return EventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
+        return eventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
     }
 
     public List<EventInterface> getAllEvents() {
-        List<Event> events = EventUtility.getAllEvents();
+        List<Event> events = eventUtility.getAllEvents();
         return new ArrayList<>(events);
     }
 
     public List<EventInterface> getAllEventsByUser(String ownerCPF) {
-        List<Event> eventByUser = EventUtility.getAllEventsByUser(ownerCPF);
+        List<Event> eventByUser = eventUtility.getAllEventsByUser(ownerCPF);
 
         return new ArrayList<>(eventByUser);
     }
@@ -40,7 +41,7 @@ public class EventController {
                 return false;
             }
         }
-        EventUtility.addAttendeeOnList(user.getCPF(), event.getId());
+        eventUtility.addAttendeeOnList(user.getCPF(), event.getId());
         userUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
         return true;
     }
@@ -48,7 +49,7 @@ public class EventController {
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
         for (String attendeeCPF : event.getAttendeesList()) {
             if (attendeeCPF.equals(user.getCPF())) {
-                EventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
+                eventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
                 userUtility.deleteAttendeeEvent(user.getCPF(), event.getId());
                 return true;
             }
@@ -57,36 +58,36 @@ public class EventController {
     }
 
     public boolean editEventName(String id, String newName) {
-        EventUtility.updateEventName(id, newName);
+        eventUtility.updateEventName(id, newName);
 
         return true;
     }
 
     public boolean editEventLocal(String id, String newLocal) {
-        EventUtility.updateEventLocal(id, newLocal);
+        eventUtility.updateEventLocal(id, newLocal);
 
         return true;
     }
 
     public boolean editEventDescription(String id, String newDescription) {
-        EventUtility.updateEventDescription(id, newDescription);
+        eventUtility.updateEventDescription(id, newDescription);
 
         return true;
     }
 
     public boolean editEventOrganization(String id, String newOrganization) {
-        EventUtility.updateEventOrganization(id, newOrganization);
+        eventUtility.updateEventOrganization(id, newOrganization);
         return true;
     }
 
     public boolean editEventDate(String id, String newDate) {
-        EventUtility.updateEventDate(id, newDate);
+        eventUtility.updateEventDate(id, newDate);
 
         return true;
     }
 
     public boolean deleteEvent(String id, UserInterface user) {
-        EventUtility.deleteEvent(id);
+        eventUtility.deleteEvent(id);
         userUtility.deleteOwnerOf(user.getCPF(), id);
         userUtility.deleteAllAttendeesFromEvent(id);
         return true;

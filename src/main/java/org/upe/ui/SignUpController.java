@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import org.upe.persistence.repository.interfaces.UserInterface;
+import org.upe.persistence.interfaces.UserInterface;
 import org.upe.controllers.AuthController;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
