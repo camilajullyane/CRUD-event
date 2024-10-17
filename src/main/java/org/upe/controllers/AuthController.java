@@ -1,7 +1,7 @@
 package org.upe.controllers;
 
-import org.upe.persistence.repository.interfaces.UserInterface;
-import org.upe.persistence.repository.repository.UserUtility;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.repository.UserUtility;
 
 public class AuthController {
     private static final UserUtility userUtility = new UserUtility();

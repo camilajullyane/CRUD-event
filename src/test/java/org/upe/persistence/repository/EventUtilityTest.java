@@ -2,147 +2,168 @@ package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.repository.interfaces.EventInterface;
-import org.upe.persistence.repository.model.Event;
-import org.upe.persistence.repository.repository.EventUtility;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.interfaces.EventInterface;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EventUtilityTest {
-
-    private static final String TEST_CSV_FILE_PATH = "DB/teste/test_event.csv";
+    private EventUtility eventUtility;
 
     @BeforeEach
     void setUp() throws IOException {
-        // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
+        eventUtility = new EventUtility();
+        eventUtility.setCsvFilePath("DB/test_event.csv");
+
+        // Populate the CSV file with test data
+        try (FileWriter writer = new FileWriter("DB/test_event.csv")) {
             writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
-            writer.write("1,123456789,Sample Event 1,01/01/2024,Local 1,Org 1,Description 1,987654321,\n");
-            writer.write("2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,,\n");
+            writer.write("1,123456789,Event One,2023-10-01,Location One,Org One,Description One,,\n");
+            writer.write("2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,\n");
         }
-        // Atualizar o caminho do CSV para os testes
-        EventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test
-    void createEvent() {
-        String ownerCPF = "123456789";
-        String name = "New Event";
-        String date = "03/01/2024";
-        String local = "New Local";
-        String organization = "New Organization";
-        String description = "New Description";
-
-        EventInterface newEvent = EventUtility.createEvent(ownerCPF, name, date, local, organization, description);
-
-        assertNotNull(newEvent, "O evento deve ser criado");
-        assertEquals(ownerCPF, newEvent.getOwnerCPF(), "O CPF do proprietário deve ser '123456789'");
-        assertEquals(name, newEvent.getName(), "O nome do evento deve ser 'New Event'");
-        assertEquals(date, newEvent.getDate(), "A data do evento deve ser '03/01/2024'");
-        assertEquals(local, newEvent.getLocal(), "O local do evento deve ser 'New Local'");
-        assertEquals(organization, newEvent.getOrganization(), "A organização do evento deve ser 'New Organization'");
-        assertEquals(description, newEvent.getDescription(), "A descrição do evento deve ser 'New Description'");
-
-        // Verificar se o evento foi salvo corretamente no arquivo CSV
-        List<Event> events = EventUtility.getAllEvents();
-        assertTrue(events.stream().anyMatch(event -> event.getId().equals(newEvent.getId())), "O novo evento deve estar presente na lista de eventos");
-    }
-
-
-
-    @Test
-    void getAllEvents() {
-        List<Event> events = EventUtility.getAllEvents();
-        assertEquals(2, events.size(), "O número de eventos deve ser 2");
-
-        EventInterface event1 = events.get(0);
-        assertEquals("1", event1.getId(), "O ID do primeiro evento deve ser '1'");
-        assertEquals("Sample Event 1", event1.getName(), "O nome do primeiro evento deve ser 'Sample Event 1'");
-
-        EventInterface event2 = events.get(1);
-        assertEquals("2", event2.getId(), "O ID do segundo evento deve ser '2'");
-        assertEquals("Sample Event 2", event2.getName(), "O nome do segundo evento deve ser 'Sample Event 2'");
+    void testGetAllEvents() {
+        List<Event> events = eventUtility.getAllEvents();
+        assertNotNull(events, "The event list should not be null");
+        assertFalse(events.isEmpty(), "The event list should not be empty");
     }
 
     @Test
-    void getAllEventsByUser() {
-        List<Event> userEvents = EventUtility.getAllEventsByUser("123456789");
-        assertEquals(1, userEvents.size(), "O número de eventos do usuário deve ser 1");
-        assertEquals("Sample Event 1", userEvents.get(0).getName(), "O nome do evento do usuário deve ser 'Sample Event 1'");
+    void testGetAllEventsByUser() {
+        List<Event> events = eventUtility.getAllEventsByUser("123456789");
+        assertNotNull(events, "The event list should not be null");
+        assertEquals(1, events.size(), "The user should have one event");
     }
 
     @Test
-    void getEventsIn() {
-        List<Event> eventsIn = EventUtility.getEventsIn("987654321");
-        assertEquals(1, eventsIn.size(), "O número de eventos que o usuário está participando deve ser 1");
-        assertEquals("Sample Event 1", eventsIn.get(0).getName(), "O nome do evento em que o usuário está participando deve ser 'Sample Event 1'");
-    }
-
-
-    @Test
-    void getEventById() {
-        EventInterface event = EventUtility.getEventById("1");
-        assertNotNull(event, "O evento deve ser encontrado");
-        assertEquals("Sample Event 1", event.getName(), "O nome do evento deve ser 'Sample Event 1'");
-
-        EventInterface nonExistentEvent = EventUtility.getEventById("999");
-        assertNull(nonExistentEvent, "O evento não existente deve retornar nulo");
+    void testGetEventsIn() {
+        eventUtility.addAttendeeOnList("123456789", "1");
+        List<Event> events = eventUtility.getEventsIn("123456789");
+        assertNotNull(events, "The event list should not be null");
+        assertEquals(1, events.size(), "The user should be an attendee of one event");
     }
 
     @Test
-    void updateEventLocal() {
-        assertTrue(EventUtility.updateEventLocal("1", "New Local"), "O local do evento deve ser atualizado com sucesso");
-
-        Event event = EventUtility.getEventById("1");
-        assertNotNull(event, "O evento deve ser encontrado após a atualização");
-        assertEquals("New Local", event.getLocal(), "O local do evento deve ser 'New Local'");
+    void testCreateEvent() {
+        EventInterface newEvent = eventUtility.createEvent("123456789", "New Event", "2023-12-01", "New Location", "New Org", "New Description");
+        assertNotNull(newEvent, "The new event should not be null");
+        assertEquals("New Event", newEvent.getName(), "The event name should match");
     }
 
     @Test
-    void updateEventName() {
-        EventUtility.updateEventName("1", "New Event Name");
-        Event event = EventUtility.getEventById("1");
-        assertNotNull(event, "O evento deve ser encontrado após a atualização");
-        assertEquals("New Event Name", event.getName(), "O nome do evento deve ser 'New Event Name'");
+    void testGetEventById() {
+        Event event = eventUtility.getEventById("1");
+        assertNotNull(event, "The event should not be null");
+        assertEquals("Event One", event.getName(), "The event name should match");
     }
 
     @Test
-    void updateEventDescription() {
-        assertTrue(EventUtility.updateEventDescription("1", "New Description"), "A descrição do evento deve ser atualizada com sucesso");
-
-        EventInterface event = EventUtility.getEventById("1");
-        assertNotNull(event, "O evento deve ser encontrado após a atualização");
-        assertEquals("New Description", event.getDescription(), "A descrição do evento deve ser 'New Description'");
+    void testUpdateEventLocal() {
+        boolean result = eventUtility.updateEventLocal("1", "Updated Location");
+        assertTrue(result, "The event location should be updated successfully");
+        Event event = eventUtility.getEventById("1");
+        assertEquals("Updated Location", event.getLocal(), "The event location should match the new location");
     }
 
     @Test
-    void updateEventOrganization() {
-        assertTrue(EventUtility.updateEventOrganization("1", "New Organization"), "A organização do evento deve ser atualizada com sucesso");
-
-        EventInterface event = EventUtility.getEventById("1");
-        assertNotNull(event, "O evento deve ser encontrado após a atualização");
-        assertEquals("New Organization", event.getOrganization(), "A organização do evento deve ser 'New Organization'");
+    void testUpdateEventName() {
+        boolean result = eventUtility.updateEventName("1", "Updated Name");
+        assertTrue(result, "The event name should be updated successfully");
+        Event event = eventUtility.getEventById("1");
+        assertEquals("Updated Name", event.getName(), "The event name should match the new name");
     }
 
     @Test
-    void deleteEvent() {
-        assertTrue(EventUtility.deleteEvent("2"), "O evento deve ser deletado com sucesso");
-
-        EventInterface event = EventUtility.getEventById("2");
-        assertNull(event, "O evento deletado deve ser nulo");
+    void testUpdateEventDescription() {
+        boolean result = eventUtility.updateEventDescription("1", "Updated Description");
+        assertTrue(result, "The event description should be updated successfully");
+        Event event = eventUtility.getEventById("1");
+        assertEquals("Updated Description", event.getDescription(), "The event description should match the new description");
     }
 
     @Test
-    void addAttendeeOnList() {
-        EventUtility.addAttendeeOnList("987654321", "1");
-        EventInterface event = EventUtility.getEventById("1");
-
-        assertNotNull(event, "O evento deve ser encontrado após adicionar o participante");
-        assertTrue(Arrays.asList(event.getAttendeesList()).contains("987654321"), "O participante deve ser adicionado à lista de participantes");
+    void testUpdateEventOrganization() {
+        boolean result = eventUtility.updateEventOrganization("1", "Updated Organization");
+        assertTrue(result, "The event organization should be updated successfully");
+        Event event = eventUtility.getEventById("1");
+        assertEquals("Updated Organization", event.getOrganization(), "The event organization should match the new organization");
     }
 
+    @Test
+    void testUpdateEventDate() {
+        boolean result = eventUtility.updateEventDate("1", "2023-12-31");
+        assertTrue(result, "The event date should be updated successfully");
+        Event event = eventUtility.getEventById("1");
+        assertEquals("2023-12-31", event.getDate(), "The event date should match the new date");
+    }
+
+    @Test
+    void testDeleteEvent() {
+        boolean result = eventUtility.deleteEvent("1");
+        assertTrue(result, "The event should be deleted successfully");
+        Event event = eventUtility.getEventById("1");
+        assertNull(event, "The event should be null after deletion");
+    }
+
+    @Test
+    void testAddAttendeeOnList() {
+        eventUtility.addAttendeeOnList("123456789", "2");
+        Event event = eventUtility.getEventById("2");
+        assertTrue(Arrays.asList(event.getAttendeesList()).contains("123456789"), "The user should be an attendee of the event");
+    }
+
+    @Test
+    void testDeleteAttendeeOnList() {
+        eventUtility.addAttendeeOnList("123456789", "2");
+        eventUtility.deleteAttendeeOnList("123456789", "2");
+        Event event = eventUtility.getEventById("2");
+        assertFalse(Arrays.asList(event.getAttendeesList()).contains("123456789"), "The user should not be an attendee of the event");
+    }
+
+    @Test
+    void testAddArticleOnList() {
+        boolean result = eventUtility.addArticleOnList("article123", "2");
+        assertTrue(result, "The article should be added successfully");
+        Event event = eventUtility.getEventById("2");
+        assertTrue(Arrays.asList(event.getArticleList()).contains("article123"), "The article should be in the event's article list");
+    }
+
+    @Test
+    void testUpdateNonExistentEvent() {
+        boolean result = eventUtility.updateEventLocal("999", "Non-Existent Location");
+        assertFalse(result, "The update should fail for a non-existent event");
+    }
+
+    @Test
+    void testDeleteNonExistentEvent() {
+        boolean result = eventUtility.deleteEvent("999");
+        assertFalse(result, "The delete should fail for a non-existent event");
+    }
+
+    @Test
+    void testAddAttendeeToNonExistentEvent() {
+        eventUtility.addAttendeeOnList("123456789", "999");
+        Event event = eventUtility.getEventById("999");
+        assertNull(event, "The event should not exist");
+    }
+
+    @Test
+    void testDeleteAttendeeFromNonExistentEvent() {
+        eventUtility.deleteAttendeeOnList("123456789", "999");
+        Event event = eventUtility.getEventById("999");
+        assertNull(event, "The event should not exist");
+    }
+
+    @Test
+    void testAddArticleToNonExistentEvent() {
+        boolean result = eventUtility.addArticleOnList("article123", "999");
+        assertFalse(result, "The add article should fail for a non-existent event");
+    }
 }

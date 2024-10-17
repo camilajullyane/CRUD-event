@@ -3,11 +3,13 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import org.upe.controllers.UserController;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
 
 public class SubscriptionController {
+
     @FXML
     Button homeButton;
 
