@@ -1,0 +1,3 @@
+id,ownerCPF,name,date,local,organization,description,attendeesList,articleList
+1,123456789,Event One,2023-10-01,Location One,Org One,Description One,,
+2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,
