@@ -2,6 +2,7 @@ package org.upe.persistence.repository;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -9,9 +10,11 @@ import java.util.logging.Logger;
 
 import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.model.SubEvent;
 
 public class EventUtility {
     private static final UserUtility userUtility = new UserUtility();
+    private static SubEventUtility instanciaSubEventutility = new SubEventUtility();
 
     private final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
     protected String csvFilePath = "DB/event.csv";
@@ -148,6 +151,8 @@ public class EventUtility {
 
     public boolean updateEventDate(String id, String newDate) {
         List<Event> events = getAllEvents();
+
+        instanciaSubEventutility.updateSubEventDate(id, newDate);
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setDate(newDate);
@@ -186,9 +191,15 @@ public class EventUtility {
         List<Event> events = getAllEvents();
 
         for(Event event : events) {
-            if(event.getId().equals(eventID)) {
-
+            if (event.getId().equals(eventID)) {
                 event.deleteAttendee(userCPF);
+
+                // Amanha continuar, pelo visto getSubEventByEvent ta retornando uma lista de subEvent
+                SubEvent subEvent = instanciaSubEventutility.getSubEventByEvent(eventID);
+                if (!Arrays.asList(subEvent.getAttendeesList()).contains(userCPF)) {
+                    subEvent.deleteAttendee(userCPF);
+                }
+                break;
             }
         }
         saveEvents(events);
