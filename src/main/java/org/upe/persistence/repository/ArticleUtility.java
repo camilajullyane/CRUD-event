@@ -100,7 +100,7 @@ public class ArticleUtility {
         return null;
     }
 
-    private void updateArticleFileData(List<Article> newData) {
+    public void updateArticleFileData(List<Article> newData) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,articleID,userCPF,articleAbstract\n");
             for (Article article : newData) {
