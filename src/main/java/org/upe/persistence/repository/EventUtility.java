@@ -2,7 +2,6 @@ package org.upe.persistence.repository;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -194,10 +193,11 @@ public class EventUtility {
             if (event.getId().equals(eventID)) {
                 event.deleteAttendee(userCPF);
 
-                // Amanha continuar, pelo visto getSubEventByEvent ta retornando uma lista de subEvent
-                SubEvent subEvent = instanciaSubEventutility.getSubEventByEvent(eventID);
-                if (!Arrays.asList(subEvent.getAttendeesList()).contains(userCPF)) {
-                    subEvent.deleteAttendee(userCPF);
+                List<SubEvent> subEvents = instanciaSubEventutility.getSubEventByEvent(eventID);
+                for(SubEvent subEvent : subEvents) {
+                    if (subEvent.getParentEventID().equals(eventID)) {
+                        instanciaSubEventutility.deleteAttendeeOnList(userCPF, subEvent.getId());
+                    }
                 }
                 break;
             }
