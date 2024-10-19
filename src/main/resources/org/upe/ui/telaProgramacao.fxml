@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="schedulePage" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.ScheduleController">
+    <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+      <children>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="#333338" strokeType="INSIDE" width="210.0" />
+         <Slider layoutX="786.0" layoutY="91.0" orientation="VERTICAL" prefHeight="476.0" prefWidth="14.0" />
+         <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefWidth="62.0" onAction="#moveToHomeScreen" style="-fx-background-color: #333338;" text="Início" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button layoutX="40.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: #333338;" onAction="#moveToRegisterInScreen" text="Inscrições" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button layoutX="40.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Programação" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Submissões" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: #333338;" text="Certificados" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/chamine-de-casa.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/bilhete.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/verificacao-de-calendario.png" />
+            </image></ImageView>
+         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/upload-de-arquivo.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/credencial-de-graduacao.png" />
+            </image>
+         </ImageView>
+         <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" prefWidth="62.0" style="-fx-background-color: #333338;" text="Sair" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="61.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/deixar.png" />
+            </image>
+         </ImageView>
+         <Button layoutX="426.0" layoutY="28.0" mnemonicParsing="false" style="-fx-background-color: #3F3F46;" text="Programação" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="19.0" />
+            </font>
+         </Button>
+<ScrollPane  fx:id="scrollPane"  layoutX="210.0" layoutY="69.0" prefHeight="532.0" prefWidth="593.0">
+
+</ScrollPane>
+      </children></AnchorPane>
+</StackPane>

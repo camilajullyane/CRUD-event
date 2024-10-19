@@ -2,6 +2,9 @@ package org.upe.persistence.repository;
 
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.model.Article;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
+
 import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
@@ -10,45 +13,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ArticleUtility {
+    private  final UserUtility userUtility = new UserUtility();
+    private  final EventUtility eventUtility = new EventUtility();
+
     private static final Logger LOGGER = Logger.getLogger(ArticleUtility.class.getName());
     protected static String csvFilePath = "DB/articles.csv";
-  
-    private ArticleUtility() {
-        throw new UnsupportedOperationException("Essa é uma utilityClass e não pode ser instânciada");
-    }
 
-    public static void setCsvFilePath(String csvFilePath) {
+    public void setCsvFilePath(String csvFilePath) {
         ArticleUtility.csvFilePath = csvFilePath;
     }
 
-//    public static void submitArticle(String CPF, String articleName, String eventID) {
-//        ArrayList<User> users = UserUtility.getAllUsers();
-//        ArrayList<Event> events = EventUtility.getAllEvents();
-//
-//        for (Event event : events) {
-//            if (event.getId().equals(eventID)) {
-//                for (User user : users) {
-//                    if (user.getCPF().equals(CPF)) {
-//                        // Criar um novo artigo
-//                        Article newArticle = new Article(articleName, eventID, CPF);
-//
-//                        // Adicionar o artigo à lista de artigos do usuário
-//                        User.getArticleID().add(newArticle);
-//
-//                        // Adicionar o artigo à lista de artigos submetidos do evento
-//                        event.getSubmittedArticles().add(newArticle);
-//
-//                        // Atualizar o arquivo de usuários e eventos, se necessário
-//                        UserUtility.updateUser(user);
-//                        EventUtility.updateEvent(event);
-//                        return;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public void submitArticle(String CPF, String articleName, String eventID, String articleAbstract) {
+        List<User> users = userUtility.getAllUsers();
+        List<Event> events = eventUtility.getAllEvents();
 
-    public static List<Article> getAllArticles() {
+        for (Event event : events) {
+            if (event.getId().equals(eventID)) {
+                for (User user : users) {
+                    if (user.getCPF().equals(CPF)) {
+                        Article newArticle = new Article(articleName, eventID, CPF, articleAbstract);
+                        user.addArticleID(newArticle.getArticleID());
+                        event.addArticleList(newArticle.getArticleID());
+                    }
+                }
+            }
+        }
+        eventUtility.saveEvents(events);
+        userUtility.updateFileData(users);
+    }
+
+    public  List<Article> getAllArticles() {
         List<Article> articlesArray = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -73,8 +67,7 @@ public class ArticleUtility {
         return articlesArray;
     }
 
-
-    public static String generateArticleID() {
+    public String generateArticleID() {
         UUID uuid = UUID.randomUUID();
         String uuidString = uuid.toString();
 
@@ -84,8 +77,8 @@ public class ArticleUtility {
         return uuidString;
     }
 
-    public static ArticleInterface createArticle(String name, String userCPF, String articleAbstract) {
-        List<Article> articles = ArticleUtility.getAllArticles();
+    public ArticleInterface createArticle(String name, String userCPF, String articleAbstract) {
+        List<Article> articles = getAllArticles();
         String articleID = generateArticleID();
 
         Article newArticle = new Article(name, articleID, userCPF, articleAbstract);
@@ -96,7 +89,7 @@ public class ArticleUtility {
         return newArticle;
     }
 
-    public static Article getArticleById(String articleID) {
+    public  Article getArticleById(String articleID) {
         List<Article> articles = getAllArticles();
 
         for(Article article : articles) {
@@ -107,7 +100,7 @@ public class ArticleUtility {
         return null;
     }
 
-    private static void updateArticleFileData(List<Article> newData) {
+    private void updateArticleFileData(List<Article> newData) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,articleID,userCPF,articleAbstract\n");
             for (Article article : newData) {
@@ -119,8 +112,8 @@ public class ArticleUtility {
         }
     }
 
-    public static  List<ArticleInterface> getAllArticlesByUser(String userCPF) {
-        List<Article> allArticles = ArticleUtility.getAllArticles();
+    public List<ArticleInterface> getAllArticlesByUser(String userCPF) {
+        List<Article> allArticles = getAllArticles();
         ArrayList<ArticleInterface> userArticles = new ArrayList<>();
 
         for (Article article : allArticles) {

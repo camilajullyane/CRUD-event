@@ -1,1 +1,7 @@
 id,ownerCPF,name,date,local,organization,description,attendeesList,articleList
+1,12022262484,Evento de tecnologia,2021-10-10 10:00:00,Recife,UFPE,É um evento que trata sobre tecnologia e outros fatores,12022262484,
+2,98765432100,Conferência de Inteligência Artificial,2022-05-15 09:00:00,São Paulo,USP,Discussões sobre as novas tendências em IA e machine learning,12022262484,
+3,12345678901,Encontro de Desenvolvedores Web,2023-02-22 14:00:00,Caruaru,UPE,Um encontro para desenvolvedores compartilharem práticas de front-end e back-end,12022262484,
+4,65432198700,Simpósio de Ciência de Dados,2023-08-18 08:30:00,Belo Horizonte,UFMG,Discussões sobre uso de dados para tomada de decisão nas empresas,,
+5,32165498700,Palestra sobre Cibersegurança,2024-01-10 10:00:00,Fortaleza,UNIFOR,Exploração das melhores práticas de segurança na web e proteção de dados pessoais,,
+51c7283a-96a0-4aba-83df-a15b12a8a562,12022262484,CANA NA CASA DE KEISY,2024-10-21,CASA DE KEISY,KEISY,MUITA CANA PRA QUEM QUISER,,

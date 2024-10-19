@@ -9,26 +9,27 @@ import org.upe.persistence.repository.UserUtility;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface EventController {
+public class EventController {
+    private static final UserUtility userUtility = new UserUtility();
+    private static final EventUtility eventUtility = new EventUtility();
 
-    static EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
+    public EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
                                       String organization) {
-        return EventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
+        return eventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
     }
 
-    static List<EventInterface> getAllEvents() {
-        List<Event> events = EventUtility.getAllEvents();
+    public List<EventInterface> getAllEvents() {
+        List<Event> events = eventUtility.getAllEvents();
         return new ArrayList<>(events);
     }
 
-    static List<EventInterface> getAllEventsByUser(String ownerCPF) {
-        List<Event> eventByUser = EventUtility.getAllEventsByUser(ownerCPF);
+    public List<EventInterface> getAllEventsByUser(String ownerCPF) {
+        List<Event> eventByUser = eventUtility.getAllEventsByUser(ownerCPF);
 
         return new ArrayList<>(eventByUser);
     }
 
-
-    static boolean addAttendeeOnList(UserInterface user, EventInterface event) {
+    public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
         for (String ownerOf : user.getOwnerOf()) {
             if (ownerOf.equals(event.getId())) {
                 return false;
@@ -40,55 +41,55 @@ public interface EventController {
                 return false;
             }
         }
-        EventUtility.addAttendeeOnList(user.getCPF(), event.getId());
-        UserUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
+        eventUtility.addAttendeeOnList(user.getCPF(), event.getId());
+        userUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
         return true;
     }
 
-    static boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
+    public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
         for (String attendeeCPF : event.getAttendeesList()) {
             if (attendeeCPF.equals(user.getCPF())) {
-                EventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
-                UserUtility.deleteAttendeeEvent(user.getCPF(), event.getId());
+                eventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
+                userUtility.deleteAttendeeEvent(user.getCPF(), event.getId());
                 return true;
             }
         }
         return false;
     }
 
-    static boolean editEventName(String id, String newName) {
-        EventUtility.updateEventName(id, newName);
+    public boolean editEventName(String id, String newName) {
+        eventUtility.updateEventName(id, newName);
 
         return true;
     }
 
-    static boolean editEventLocal(String id, String newLocal) {
-        EventUtility.updateEventLocal(id, newLocal);
+    public boolean editEventLocal(String id, String newLocal) {
+        eventUtility.updateEventLocal(id, newLocal);
 
         return true;
     }
 
-    static boolean editEventDescription(String id, String newDescription) {
-        EventUtility.updateEventDescription(id, newDescription);
+    public boolean editEventDescription(String id, String newDescription) {
+        eventUtility.updateEventDescription(id, newDescription);
 
         return true;
     }
 
-    static boolean editEventOrganization(String id, String newOrganization) {
-        EventUtility.updateEventOrganization(id, newOrganization);
+    public boolean editEventOrganization(String id, String newOrganization) {
+        eventUtility.updateEventOrganization(id, newOrganization);
         return true;
     }
 
-    static boolean editEventDate(String id, String newDate) {
-        EventUtility.updateEventDate(id, newDate);
+    public boolean editEventDate(String id, String newDate) {
+        eventUtility.updateEventDate(id, newDate);
 
         return true;
     }
 
-    static boolean deleteEvent(String id, UserInterface user) {
-        EventUtility.deleteEvent(id);
-        UserUtility.deleteOwnerOf(user.getCPF(), id);
-        UserUtility.deleteAllAttendeesFromEvent(id);
+    public boolean deleteEvent(String id, UserInterface user) {
+        eventUtility.deleteEvent(id);
+        userUtility.deleteOwnerOf(user.getCPF(), id);
+        userUtility.deleteAllAttendeesFromEvent(id);
         return true;
     }
 }

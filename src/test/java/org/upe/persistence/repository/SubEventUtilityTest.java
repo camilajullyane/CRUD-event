@@ -1,9 +1,8 @@
-package org.upe.persistence;
+package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.repository.SubEventUtility;
 
 import java.io.*;
 import java.util.List;

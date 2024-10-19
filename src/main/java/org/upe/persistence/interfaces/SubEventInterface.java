@@ -8,7 +8,6 @@ public interface SubEventInterface {
     String getDate();
     String getLocal();
     String getDescription();
-    String toString();
-    String toString(int position);
     String getHour();
+    String getSpeakers();
 }

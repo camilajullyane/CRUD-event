@@ -30,13 +30,17 @@ public class Event implements EventInterface {
         return id;
     }
 
-    public void setId(String id) {this.id = id;}
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {this.name = name;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getOwnerCPF() {
         return this.ownerCPF;
@@ -46,25 +50,33 @@ public class Event implements EventInterface {
         return date;
     }
 
-    public void setDate(String date) {this.date = date;}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getLocal() {
         return local;
     }
 
-    public void setLocal(String local) {this.local = local;}
+    public void setLocal(String local) {
+        this.local = local;
+    }
 
     public String getOrganization() {
         return organization;
     }
 
-    public void setOrganization(String organization) {this.organization = organization;}
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {this.description = description;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String[] getArticleList() {
         return this.articleList.split("#");
@@ -83,31 +95,16 @@ public class Event implements EventInterface {
     }
 
     public void deleteAttendee(String userCPF) {
-        String newString = "";
+        StringBuilder newString = new StringBuilder();
         for (int i = 0; i < this.getAttendeesList().length; i++) {
             String cpf = this.getAttendeesList()[i];
             if (!cpf.equals(userCPF)) {
                 if (!newString.isEmpty()) {
-                    newString += "#";
+                    newString.append("#");
                 }
-                newString += id;
+                newString.append(id);
             }
         }
-        this.attendeesList = newString;
-    }
-
-    public String toString() {
-        return "Nome: " + this.name +
-                " | Data: " + this.date +
-                " | Local: " + this.local +
-                " | Descrição: " + this.description;
-    }
-
-    public String toString(int position) {
-        return "Evento["+ position+"] - " +
-                "Nome: "+ this.name +
-                " | Data: " + this.date +
-                " | Local: " + this.local +
-                " | Descrição: " + this.description;
+        this.attendeesList = newString.toString();
     }
 }

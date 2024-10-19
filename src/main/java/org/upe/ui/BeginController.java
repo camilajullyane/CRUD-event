@@ -1,11 +1,8 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import org.upe.utils.SceneLoader;
 import javafx.scene.text.Text;
 import org.upe.utils.UserSession;
@@ -17,26 +14,41 @@ public class BeginController {
     Button subscriptionButton;
 
     @FXML
+    Button createEventButton;
+
+    @FXML
     StackPane beginPage;
 
     @FXML
-    Button LogOutButton;
+    Button logOutButton;
   
     @FXML
     Text userName;
 
     @FXML
-
-    private void initialize() throws IOException {
+    private void initialize(){
         if (UserSession.getInstance().getCurrentUser() != null) {
             userName.setText(UserSession.getInstance().getCurrentUser().getName());
-//            userName.setVisible(true);
         }
     }
 
+    @FXML
+    private void handleSubscription() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", beginPage);
+    }
 
     @FXML
     private void logOut() throws IOException {
-      
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", beginPage);
+    }
+
+    @FXML
+    private void handleScheduleButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
+    }
+
+    @FXML
+    private void createNewEvent() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Criar Evento", beginPage);
     }
 }

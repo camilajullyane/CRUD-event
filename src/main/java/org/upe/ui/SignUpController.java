@@ -1,13 +1,10 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.controllers.AuthController;
 import org.upe.utils.SceneLoader;
@@ -16,6 +13,8 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class SignUpController {
+    private static final AuthController authController = new AuthController();
+
     @FXML
     TextField cpfField;
 
@@ -44,10 +43,27 @@ public class SignUpController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        UserInterface isCreated = AuthController.signUpUser(name, cpf, email, password);
+        if (!isCpfValid(cpf)) {
+            errorMessage.setText("CPF em formato inválido");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        if (!isEmailValid(email)) {
+            errorMessage.setText("Email em formato inválido");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        if (!isPasswordValid(password)) {
+            errorMessage.setText("Tamanho de senha inválida");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        UserInterface isCreated = authController.signUpUser(name, cpf, email, password);
 
         if(isCreated == null) {
-
             errorMessage.setText("Usuário já cadastrado");
             errorMessage.setVisible(true);
         } else {
@@ -59,11 +75,18 @@ public class SignUpController {
 
     @FXML
     private void signInPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-app.fxml"));
-        StackPane screen = loader.load();
-        Scene scene = new Scene(screen);
-        Stage stage = (Stage) signUpPage.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Even2");
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", signUpPage);
+    }
+
+    private boolean isCpfValid(String cpf) {
+        return cpf.matches("[0-9]{11}");
+    }
+
+    private boolean isEmailValid(String email) {
+        return email.matches("[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+");
+    }
+
+    private boolean isPasswordValid(String password) {
+        return password.length() >= 6;
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
+<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
          <rotationAxis>
@@ -31,17 +31,6 @@
          </cursor>
       </Button>
       <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
-      <Button fx:id="subscriptionButton" layoutX="14.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
-         <graphic>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../../../images/bilhete.png" />
-               </image>
-               <rotationAxis>
-                  <Point3D />
-               </rotationAxis>
-            </ImageView>
-         </graphic>
          <font>
             <Font size="15.0" />
          </font>
@@ -49,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="40.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+      <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false"  onAction="#handleScheduleButton"  style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -99,7 +88,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="91.0" layoutY="180.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um evento" textFill="WHITE">
+            <Button fx:id="createEventButton" layoutX="91.0" layoutY="180.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="178.0" onAction="#createNewEvent" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um evento" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
