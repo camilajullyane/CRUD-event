@@ -15,9 +15,13 @@ import java.io.IOException;
 public class BeginController {
     @FXML
     Button subscriptionButton;
+
     @FXML
     StackPane beginPage;
 
+    @FXML
+    Button LogOutButton;
+  
     @FXML
     Text userName;
 
@@ -29,6 +33,10 @@ public class BeginController {
 //            userName.setVisible(true);
         }
     }
+
+
+    @FXML
+    private void logOut() throws IOException {
+      
     }
-
-
+}
