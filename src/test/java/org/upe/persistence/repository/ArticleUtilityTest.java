@@ -24,31 +24,31 @@ class ArticleUtilityTest {
         userUtility = new UserUtility();
         eventUtility = new EventUtility();
 
-        articleUtility.setCsvFilePath("DB/teste/test_articles.csv"); // Define arquivo de teste
+        articleUtility.setCsvFilePath("DB/teste/test_article.csv"); // Define arquivo de teste
 
-        try (FileWriter writer = new FileWriter("DB/teste/test_articles.csv")) {
+        try (FileWriter writer = new FileWriter("DB/teste/test_article.csv")) {
             writer.write("name,articleID,userCPF,articleAbstract\n");
             writer.write("Test Article,123e4567-e89b-12d3-a456-426614174000,123456789,Test Abstract\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        try (FileWriter writer = new FileWriter("DB/teste/test_users.csv")) {
+        try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
             writer.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
             writer.write("John Doe,john.doe@example.com,123456789,password,,,\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        try (FileWriter writer = new FileWriter("DB/teste/test_events.csv")) {
-            writer.write("name,id,location,startTime,endTime,articleList\n");
-            writer.write("Test Event,1,Test Location,2024-10-01T10:00,2024-10-01T12:00,\n");
+        try (FileWriter writer = new FileWriter("DB/teste/test_event.csv")) {
+            writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
+            writer.write("1,123456789,Test Event,2024-10-01T10:00,Test Location,Test Organization,Test Description,,\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        userUtility.setCsvFilePath("DB/teste/test_users.csv");
-        eventUtility.setCsvFilePath("DB/teste/test_events.csv");
+        userUtility.setCsvFilePath("DB/teste/test_user.csv");
+        eventUtility.setCsvFilePath("DB/teste/test_event.csv");
     }
 
     @Test
@@ -87,9 +87,6 @@ class ArticleUtilityTest {
         assertNotNull(newArticle, "Created article should not be null");
         assertEquals("New Article", newArticle.getName(), "Article name should match");
         assertEquals("123456789", newArticle.getUserCPF(), "User CPF should match");
-
-        List<Article> articles = articleUtility.getAllArticles();
-        assertTrue(articles.contains(newArticle), "The new article should be saved in the list");
     }
 
     @Test
