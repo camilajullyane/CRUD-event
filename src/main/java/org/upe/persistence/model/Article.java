@@ -3,7 +3,7 @@ package org.upe.persistence.model;
 import org.upe.persistence.interfaces.ArticleInterface;
 
 public class Article implements ArticleInterface {
-    private final String name;
+    private String name;
     private final String articleID;
     private final String userCPF;
     private final String articleAbstract;
@@ -32,4 +32,7 @@ public class Article implements ArticleInterface {
         return this.articleAbstract;
     }
 
+    public void setName(String updatedName) {
+        this.name = updatedName;
+    }
 }

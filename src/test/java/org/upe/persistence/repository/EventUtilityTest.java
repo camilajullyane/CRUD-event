@@ -18,10 +18,10 @@ class EventUtilityTest {
     @BeforeEach
     void setUp() throws IOException {
         eventUtility = new EventUtility();
-        eventUtility.setCsvFilePath("DB/test_event.csv");
+        eventUtility.setCsvFilePath("DB/teste/test_event.csv");
 
         // Populate the CSV file with test data
-        try (FileWriter writer = new FileWriter("DB/test_event.csv")) {
+        try (FileWriter writer = new FileWriter("DB/teste/test_event.csv")) {
             writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             writer.write("1,123456789,Event One,2023-10-01,Location One,Org One,Description One,,\n");
             writer.write("2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,\n");
