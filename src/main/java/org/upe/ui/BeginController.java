@@ -14,6 +14,9 @@ public class BeginController {
     Button subscriptionButton;
 
     @FXML
+    Button createEventButton;
+
+    @FXML
     StackPane beginPage;
 
     @FXML
@@ -41,7 +44,11 @@ public class BeginController {
 
     @FXML
     private void handleScheduleButton() throws IOException {
-        System.out.println("Entrou");
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
+    }
+
+    @FXML
+    private void createNewEvent() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Criar Evento", beginPage);
     }
 }
