@@ -115,6 +115,7 @@ public class ScheduleController implements Initializable {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         }
+
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
         eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
