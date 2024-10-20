@@ -94,8 +94,8 @@
                <Font name="System Bold" size="19.0" />
             </font>
          </Button>
-<ScrollPane  fx:id="scrollPane"  layoutX="210.0" layoutY="69.0" prefHeight="532.0" prefWidth="593.0">
-
-</ScrollPane>
-      </children></AnchorPane>
+         <ScrollPane  fx:id="scrollPane"  layoutX="210.0" layoutY="69.0" prefHeight="532.0" prefWidth="593.0">
+         </ScrollPane>
+      </children>
+    </AnchorPane>
 </StackPane>
