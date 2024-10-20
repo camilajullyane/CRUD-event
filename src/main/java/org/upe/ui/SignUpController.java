@@ -61,7 +61,7 @@ public class SignUpController {
             return;
         }
 
-        UserInterface isCreated = authController.signUpUser(cpf, name, email, password);
+        UserInterface isCreated = authController.signUpUser(name, cpf, email, password);
 
         if(isCreated == null) {
             errorMessage.setText("Usuário já cadastrado");

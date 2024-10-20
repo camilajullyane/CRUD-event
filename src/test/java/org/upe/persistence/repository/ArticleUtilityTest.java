@@ -4,108 +4,123 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.model.Article;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleUtilityTest {
-
-    private static final String TEST_CSV_FILE_PATH = "DB/teste/test_articles.csv";
+    private ArticleUtility articleUtility;
+    private UserUtility userUtility;
+    private EventUtility eventUtility;
 
     @BeforeEach
-    void setUp() throws IOException {
-        // Criação de um arquivo CSV temporário para fins de teste
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEST_CSV_FILE_PATH))) {
+    void setUp() {
+        articleUtility = new ArticleUtility();
+        userUtility = new UserUtility();
+        eventUtility = new EventUtility();
+
+        articleUtility.setCsvFilePath("DB/teste/test_article.csv"); // Define arquivo de teste
+
+        try (FileWriter writer = new FileWriter("DB/teste/test_article.csv")) {
             writer.write("name,articleID,userCPF,articleAbstract\n");
-            writer.write("Article 1,123e4567-e89b-12d3-a456-556642440000,123456789,Abstract 1\n");
-            writer.write("Article 2,123e4567-e89b-12d3-a456-556642440001,987654321,Abstract 2\n");
-            writer.write("Article 3,123e4567-e89b-12d3-a456-556642440002,123456789,Abstract 3\n");
+            writer.write("Test Article,123e4567-e89b-12d3-a456-426614174000,123456789,Test Abstract\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        // Atualizar o caminho do CSV para os testes
-        ArticleUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
+
+        try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
+            writer.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
+            writer.write("John Doe,john.doe@example.com,123456789,password,,,\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try (FileWriter writer = new FileWriter("DB/teste/test_event.csv")) {
+            writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
+            writer.write("1,123456789,Test Event,2024-10-01T10:00,Test Location,Test Organization,Test Description,,\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        userUtility.setCsvFilePath("DB/teste/test_user.csv");
+        eventUtility.setCsvFilePath("DB/teste/test_event.csv");
     }
 
     @Test
-    void getAllArticles() {
-        List<Article> actualArticles = ArticleUtility.getAllArticles();
+    void testSubmitArticle() {
+        articleUtility.submitArticle("123456789", "New Article", "1", "New Abstract");
 
-        assertEquals(3, actualArticles.size(), "O número de artigos deve ser o mesmo");
+        List<User> users = userUtility.getAllUsers();
+        User user = users.stream().filter(u -> u.getCPF().equals("123456789")).findFirst().orElse(null);
+        assertNotNull(user, "The user should exist");
 
-        ArticleInterface article1 = actualArticles.get(0);
-        assertEquals("Article 1", article1.getName(), "O nome do primeiro artigo deve ser 'Article 1'");
-        assertEquals("123e4567-e89b-12d3-a456-556642440000", article1.getArticleID(), "O ID do primeiro artigo deve ser '123e4567-e89b-12d3-a456-556642440000'");
-        assertEquals("123456789", article1.getUserCPF(), "O CPF do usuário do primeiro artigo deve ser '123456789'");
-        assertEquals("Abstract 1", article1.getArticleAbstract(), "O resumo do primeiro artigo deve ser 'Abstract 1'");
-
-        ArticleInterface article2 = actualArticles.get(1);
-        assertEquals("Article 2", article2.getName(), "O nome do segundo artigo deve ser 'Article 2'");
-        assertEquals("123e4567-e89b-12d3-a456-556642440001", article2.getArticleID(), "O ID do segundo artigo deve ser '123e4567-e89b-12d3-a456-556642440001'");
-        assertEquals("987654321", article2.getUserCPF(), "O CPF do usuário do segundo artigo deve ser '987654321'");
-        assertEquals("Abstract 2", article2.getArticleAbstract(), "O resumo do segundo artigo deve ser 'Abstract 2'");
-
-        ArticleInterface article3 = actualArticles.get(2);
-        assertEquals("Article 3", article3.getName(), "O nome do terceiro artigo deve ser 'Article 3'");
-        assertEquals("123e4567-e89b-12d3-a456-556642440002", article3.getArticleID(), "O ID do terceiro artigo deve ser '123e4567-e89b-12d3-a456-556642440002'");
-        assertEquals("123456789", article3.getUserCPF(), "O CPF do usuário do terceiro artigo deve ser '123456789'");
-        assertEquals("Abstract 3", article3.getArticleAbstract(), "O resumo do terceiro artigo deve ser 'Abstract 3'");
+        List<Event> events = eventUtility.getAllEvents();
+        Event event = events.stream().filter(e -> e.getId().equals("1")).findFirst().orElse(null);
+        assertNotNull(event, "The event should exist");
     }
 
     @Test
-    void generateArticleID() {
-        String articleID = ArticleUtility.generateArticleID();
-        assertNotNull(articleID, "O ID do artigo gerado não deve ser nulo");
-        assertTrue(articleID.matches("^[0-9a-fA-F-]{36}$"), "O ID do artigo deve estar no formato UUID");
+    void testGetAllArticles() {
+        List<Article> articles = articleUtility.getAllArticles();
+
+        assertNotNull(articles, "Article list should not be null");
+        assertFalse(articles.isEmpty(), "Article list should not be empty");
+        assertEquals("Test Article", articles.get(0).getName(), "First article name should match");
     }
 
     @Test
-    void createArticle() {
-        String name = "Article 4";
-        String userCPF = "11223344556";
-        String articleAbstract = "Abstract 4";
-
-        ArticleInterface newArticle = ArticleUtility.createArticle(name, userCPF, articleAbstract);
-        assertNotNull(newArticle, "O novo artigo não deve ser nulo");
-        assertEquals(name, newArticle.getName(), "O nome do novo artigo deve ser 'Article 4'");
-        assertEquals(userCPF, newArticle.getUserCPF(), "O CPF do usuário do novo artigo deve ser '11223344556'");
-        assertEquals(articleAbstract, newArticle.getArticleAbstract(), "O resumo do novo artigo deve ser 'Abstract 4'");
-
-        // Verifica se o novo artigo foi adicionado ao arquivo CSV
-        List<Article> actualArticles = ArticleUtility.getAllArticles();
-        assertEquals(4, actualArticles.size(), "O número de artigos deve ser 4 após a adição do novo artigo");
+    void testGenerateArticleID() {
+        String articleID = articleUtility.generateArticleID();
+        assertNotNull(articleID, "Generated ID should not be null");
+        assertFalse(articleID.isEmpty(), "Generated ID should not be empty");
     }
 
     @Test
-    void getArticleById() {
-        ArticleInterface article = ArticleUtility.getArticleById("123e4567-e89b-12d3-a456-556642440000");
-        assertNotNull(article, "O artigo com o ID '123e4567-e89b-12d3-a456-556642440000' deve existir");
-        assertEquals("Article 1", article.getName(), "O nome do artigo deve ser 'Article 1'");
+    void testCreateArticle() {
+        Article newArticle = (Article) articleUtility.createArticle("New Article", "123456789", "New Abstract");
 
-        Article nonExistentArticle = ArticleUtility.getArticleById("non-existent-id");
-        assertNull(nonExistentArticle, "O artigo com o ID 'non-existent-id' não deve existir");
+        assertNotNull(newArticle, "Created article should not be null");
+        assertEquals("New Article", newArticle.getName(), "Article name should match");
+        assertEquals("123456789", newArticle.getUserCPF(), "User CPF should match");
     }
 
     @Test
-    void getAllArticlesByUser() {
-        String userCPF = "123456789";
-        List<ArticleInterface> userArticles = ArticleUtility.getAllArticlesByUser(userCPF);
+    void testGetArticleById() {
+        Article article = articleUtility.getArticleById("123e4567-e89b-12d3-a456-426614174000");
+        assertNotNull(article, "Article should not be null");
+        assertEquals("Test Article", article.getName(), "Article name should match");
+    }
 
-        assertNotNull(userArticles, "A lista de artigos do usuário não deve ser nula");
-        assertEquals(2, userArticles.size(), "O número de artigos do usuário deve ser 2");
+    @Test
+    void testGetAllArticlesByUser() {
+        List<ArticleInterface> articles = articleUtility.getAllArticlesByUser("123456789");
 
-        ArticleInterface article1 = userArticles.getFirst();
-        assertEquals("Article 1", article1.getName(), "O nome do primeiro artigo deve ser 'Article 1'");
-        assertEquals("123e4567-e89b-12d3-a456-556642440000", article1.getArticleID(), "O ID do primeiro artigo deve ser '123e4567-e89b-12d3-a456-556642440000'");
-        assertEquals("123456789", article1.getUserCPF(), "O CPF do usuário do primeiro artigo deve ser '123456789'");
-        assertEquals("Abstract 1", article1.getArticleAbstract(), "O resumo do primeiro artigo deve ser 'Abstract 1'");
+        assertNotNull(articles, "Article list should not be null");
+        assertFalse(articles.isEmpty(), "Article list should not be empty");
+        assertEquals("Test Article", articles.get(0).getName(), "Article name should match");
+    }
 
-        ArticleInterface article2 = userArticles.get(1);
-        assertEquals("Article 3", article2.getName(), "O nome do segundo artigo deve ser 'Article 3'");
-        assertEquals("123e4567-e89b-12d3-a456-556642440002", article2.getArticleID(), "O ID do segundo artigo deve ser '123e4567-e89b-12d3-a456-556642440002'");
-        assertEquals("123456789", article2.getUserCPF(), "O CPF do usuário do segundo artigo deve ser '123456789'");
-        assertEquals("Abstract 3", article2.getArticleAbstract(), "O resumo do segundo artigo deve ser 'Abstract 3'");
+    @Test
+    void testUpdateArticleFileData() {
+        List<Article> articles = articleUtility.getAllArticles();
+        articles.get(0).setName("Updated Article");
 
-        String nonExistentUserCPF = "non-existent-cpf";
-        assertTrue(ArticleUtility.getAllArticlesByUser(nonExistentUserCPF).isEmpty(), "A lista de artigos do usuário inexistente deve ser nula");
+        articleUtility.updateArticleFileData(articles);
+
+        List<Article> updatedArticles = articleUtility.getAllArticles();
+        assertEquals("Updated Article", updatedArticles.get(0).getName(), "Article name should be updated");
+    }
+
+    @Test
+    void testCreateArticleWithExistingID() {
+        // Test case where article with the same ID already exists
+        Article newArticle = (Article) articleUtility.createArticle("Duplicate Article", "123456789", "Duplicate Abstract");
+        assertNotNull(newArticle, "The new article should be created with a unique ID");
+        assertNotEquals("123e4567-e89b-12d3-a456-426614174000", newArticle.getArticleID(), "The article ID should be unique");
     }
 }

@@ -6,6 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import org.upe.controllers.EventController;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
+
+import java.io.IOException;
 
 public class CreateEventCotroller {
 
@@ -14,6 +20,9 @@ public class CreateEventCotroller {
 
     @FXML
     private StackPane createEventPage;
+
+    @FXML
+    private TextField eventName;
 
     @FXML
     private DatePicker eventBeginDate;
@@ -25,10 +34,10 @@ public class CreateEventCotroller {
     private DatePicker eventEndDate;
 
     @FXML
-    private TextField eventLocation;
+    private TextField eventOrganization;
 
     @FXML
-    private TextField eventName;
+    private TextField eventLocation;
 
     @FXML
     private Button logOutButton;
@@ -46,18 +55,31 @@ public class CreateEventCotroller {
     private Button subscriptionButton;
 
     @FXML
-    void handleScheduleButton(ActionEvent event) {
+    private void moveToScheduleScreem() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void handleCreateEvent() {
+        EventController eventController = new EventController();
+        UserSession userSession = UserSession.getInstance();
+
+        String name = eventName.getText();
+        String description = eventDescription.getText();
+        String location = eventLocation.getText();
+        String beginDate = eventBeginDate.getValue().toString();
+        String endDate = eventEndDate.getValue().toString();
+        String organization = eventOrganization.getText();
+
+        EventInterface event = eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
+    }
+    @FXML
+    private void handleLogOut() {
 
     }
 
     @FXML
-    void handleSubscription(ActionEvent event) {
+    private void handleSubscription() {
 
     }
-
-    @FXML
-    void logOut(ActionEvent event) {
-
-    }
-
 }
