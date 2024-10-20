@@ -8,52 +8,53 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-public interface SubEventController {
+public class SubEventController {
+    private static final SubEventUtility subEventUtility = new SubEventUtility();
 
     static SubEventInterface createSubEvent(EventInterface event, String name, String date, String local, String hour,
                                             String description, String speaker) {
-        return (SubEventInterface) SubEventUtility.createSubEvent(event.getId(), name, date, hour, local, event.getOrganization(),description,
+        return (SubEventInterface) subEventUtility.createSubEvent(event.getId(), name, date, hour, local, event.getOrganization(),description,
                 speaker);
     }
 
     static List<SubEventInterface> showAllSubEvents() {
-        List<SubEvent> subEvents = SubEventUtility.getAllSubEvents();
+        List<SubEvent> subEvents = subEventUtility.getAllSubEvents();
 
         return new ArrayList<>(subEvents);
     }
 
     static ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
-        List<SubEvent> subEventsByEvent = SubEventUtility.getSubEventByEvent(parentID);
+        List<SubEvent> subEventsByEvent = subEventUtility.getSubEventByEvent(parentID);
         return new ArrayList<>(subEventsByEvent);
     }
 
     static boolean editSubEventName(String id, String newName) {
-        SubEventUtility.updateSubEventName(id, newName);
+        subEventUtility.updateSubEventName(id, newName);
         return true;
     }
 
     static boolean editSubEventDate(String id, String newDate) {
-        SubEventUtility.updateSubEventDate(id, newDate);
+        subEventUtility.updateSubEventDate(id, newDate);
         return true;
     }
 
     static boolean editSubEventLocal(String id, String newLocal) {
-        SubEventUtility.updateSubEventLocal(id, newLocal);
+        subEventUtility.updateSubEventLocal(id, newLocal);
         return true;
     }
 
     static boolean editSubEventDescription(String id, String newDescription) {
-        SubEventUtility.updateSubEventDescription(id, newDescription);
+        subEventUtility.updateSubEventDescription(id, newDescription);
         return true;
     }
 
     static boolean editSubEventSpeaker(String id, String newSpeaker) {
-        SubEventUtility.updateSubEventSpeaker(id, newSpeaker);
+        subEventUtility.updateSubEventSpeaker(id, newSpeaker);
         return true;
     }
 
     static boolean deleteSubEvent(String id) {
-        SubEventUtility.deleteSubEvent(id);
+        subEventUtility.deleteSubEvent(id);
         return true;
     }
 }
