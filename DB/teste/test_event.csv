@@ -1,3 +1,2 @@
 id,ownerCPF,name,date,local,organization,description,attendeesList,articleList
-1,123456789,New Event Name,01/01/2024,Local 1,Org 1,Description 1,987654321,
-2,987654321,Sample Event 2,02/01/2024,Local 2,Org 2,Description 2,,
+1,123456789,Test Event,2024-10-01T10:00,Test Location,Test Organization,Test Description,,
