@@ -2,10 +2,7 @@ package org.upe.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.EventController;
 import org.upe.persistence.interfaces.EventInterface;
@@ -81,7 +78,7 @@ public class CreateEventCotroller {
         String endDate = eventEndDate.getValue().toString();
         String organization = eventOrganization.getText();
 
-        EventInterface event = eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
+        eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
 
         eventName.setText("");
         eventDescription.setText("");
@@ -90,6 +87,11 @@ public class CreateEventCotroller {
         eventEndDate.setValue(null);
         eventOrganization.setText("");
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Aviso");
+        alert.setHeaderText(null);
+        alert.setContentText("Evento criado com sucesso!");
+        alert.showAndWait();
     }
     @FXML
     private void handleLogOut() {
