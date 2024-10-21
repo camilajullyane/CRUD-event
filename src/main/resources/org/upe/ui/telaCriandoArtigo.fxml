@@ -4,7 +4,6 @@
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,13 +13,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateArticleCotroller">
+<StackPane fx:id="createArticle" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateArticleCotroller">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
                 <Point3D />
             </rotationAxis></Rectangle>
-        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
+        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -28,7 +27,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -36,7 +35,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscriptionButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -52,7 +51,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+        <Button fx:id="submissionsButton" layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -60,7 +59,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -71,36 +70,25 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Text fx:id="userName" fill="WHITE" layoutX="411.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Text>
-        <AnchorPane layoutX="286.0" layoutY="126.0" prefHeight="348.0" prefWidth="450.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
+        <AnchorPane layoutX="236.0" layoutY="15.0" prefHeight="570.0" prefWidth="545.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
             <children>
-                <Text fill="WHITE" layoutX="126.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do evento:">
+                <Text fill="WHITE" layoutX="176.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do artigo:">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Text>
-                <TextField layoutX="97.0" layoutY="90.0" prefHeight="25.0" prefWidth="256.0" promptText="Nome do evento" style="-fx-background-radius: 25;">
+                <TextField fx:id="articleName" layoutX="10.0" layoutY="50.0" prefHeight="25.0" prefWidth="525.0" promptText="Título do artigo" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="97.0" layoutY="195.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
+                <TextField fx:id="articleText" alignment="TOP_LEFT" layoutX="10.0" layoutY="85.0" prefHeight="360.0" prefWidth="525.0" promptText="Corpo do artigo" style="-fx-background-radius: 25;" />
+                <TextField fx:id="articleKeyWords" layoutX="10.0" layoutY="457.0" prefHeight="25.0" prefWidth="525.0" promptText="Palavras-chave" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="97.0" layoutY="230.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
-                <DatePicker layoutX="97.0" layoutY="125.0" prefHeight="25.0" prefWidth="256.0" promptText="Data de início" style="-fx-background-radius: 25; -fx-border-radius: 25;" />
-                <DatePicker layoutX="97.0" layoutY="160.0" prefHeight="25.0" prefWidth="256.0" promptText="Data do fim" style="-fx-background-radius: 25;" />
-                <Button layoutX="128.0" layoutY="280.0" mnemonicParsing="false" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="PUBLICAR EVENTO" textFill="WHITE">
+                <Button fx:id="articleSave" layoutX="186.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleArticle" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="SALVAR ARTIGO" textFill="WHITE">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -108,6 +96,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
+            <Text fx:id="errorMessage" fill="RED" layoutX="201.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha todos os campos" visible="false" />
             </children>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
