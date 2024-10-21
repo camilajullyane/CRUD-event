@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -118,7 +119,20 @@ public class ScheduleController implements Initializable {
 
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
-        eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
 
+        boolean isAlreadySubscribed = eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(!isAlreadySubscribed) {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Você já está inscrito neste evento!");
+            alert.showAndWait();
+        } else {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Inscrição realizada com sucesso!");
+            alert.showAndWait();
+        }
     }
 }
