@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.EventController;
@@ -40,6 +41,9 @@ public class CreateEventCotroller {
     private TextField eventLocation;
 
     @FXML
+    Label errorMessage;
+
+    @FXML
     private Button logOutButton;
 
     @FXML
@@ -61,6 +65,12 @@ public class CreateEventCotroller {
 
     @FXML
     private void handleCreateEvent() {
+        if(eventName.getText().isEmpty() || eventDescription.getText().isEmpty() || eventLocation.getText().isEmpty() ||
+                eventBeginDate.getValue() == null || eventEndDate.getValue() == null || eventOrganization.getText().isEmpty()) {
+            errorMessage.setVisible(true);
+            return;
+        }
+
         EventController eventController = new EventController();
         UserSession userSession = UserSession.getInstance();
 
@@ -72,6 +82,14 @@ public class CreateEventCotroller {
         String organization = eventOrganization.getText();
 
         EventInterface event = eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
+
+        eventName.setText("");
+        eventDescription.setText("");
+        eventLocation.setText("");
+        eventBeginDate.setValue(null);
+        eventEndDate.setValue(null);
+        eventOrganization.setText("");
+
     }
     @FXML
     private void handleLogOut() {
