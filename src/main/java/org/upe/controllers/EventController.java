@@ -41,6 +41,7 @@ public class EventController {
                 return false;
             }
         }
+
         eventUtility.addAttendeeOnList(user.getCPF(), event.getId());
         userUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
         return true;

@@ -66,7 +66,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <AnchorPane layoutX="286.0" layoutY="126.0" prefHeight="348.0" prefWidth="450.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
+        <AnchorPane layoutX="286.0" layoutY="126.0" prefHeight="377.0" prefWidth="450.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
             <children>
                 <Text fill="WHITE" layoutX="126.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do evento:">
                     <font>
@@ -95,14 +95,15 @@
                 </TextField>
                 <DatePicker fx:id="eventBeginDate" layoutX="97.0" layoutY="125.0" prefHeight="25.0" prefWidth="256.0" promptText="Data de início" style="-fx-background-radius: 25; -fx-border-radius: 25;" />
                 <DatePicker fx:id="eventEndDate" layoutX="97.0" layoutY="160.0" prefHeight="25.0" prefWidth="256.0" promptText="Data do fim" style="-fx-background-radius: 25;" />
-                <Button fx:id="publishEvent" layoutX="128.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleCreateEvent" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="PUBLICAR EVENTO" textFill="WHITE">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
+                <Button fx:id="publishEvent" layoutX="158.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="46.0" prefWidth="135.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Publicar Evento" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
+               <font>
+                  <Font size="14.0" />
+               </font>
                 </Button>
+            <Label fx:id="errorMessage" layoutX="97.0" layoutY="294.0" prefHeight="17.0" prefWidth="147.0" text="Preencha todos os campos" textFill="#ff4949" visible="false" />
             </children>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
