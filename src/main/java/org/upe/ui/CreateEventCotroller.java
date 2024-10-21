@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.EventController;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
@@ -26,10 +27,10 @@ public class CreateEventCotroller {
     private DatePicker eventBeginDate;
 
     @FXML
-    private TextField eventDescription;
+    private DatePicker eventEndDate;
 
     @FXML
-    private DatePicker eventEndDate;
+    private TextField eventDescription;
 
     @FXML
     private TextField eventOrganization;
@@ -54,6 +55,12 @@ public class CreateEventCotroller {
 
     @FXML
     private Button subscriptionButton;
+
+    @FXML
+    public void initialize() {
+        DatePickerUtil.restrictDatePicker(eventBeginDate);
+        DatePickerUtil.restrictDatePicker(eventEndDate);
+    }
 
     @FXML
     private void moveToScheduleScreem() throws IOException {

@@ -63,10 +63,7 @@ public class SubscriptionController implements Initializable {
 
     @FXML
     private void showMyEvents() {
-        System.out.println("showMyEvents called");
-
         List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());
-        System.out.println("Number of events: " + events.size());
 
         subscriptionScroll.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
@@ -166,6 +163,7 @@ public class SubscriptionController implements Initializable {
                 Button cancelButton = new Button("Cancelar Inscrição");
                 cancelButton.setStyle("-fx-background-color: transparent;");
                 cancelButton.setTextFill(Color.web("#cdc7c7"));
+                cancelButton.setOnAction(e -> handleCancelSubscription(event));
 
                 eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton);
                 mainContainer.getChildren().add(eventContainer);
@@ -175,7 +173,12 @@ public class SubscriptionController implements Initializable {
         subscriptionScroll.setContent(mainContainer);
         subscriptionScroll.setFitToWidth(true);
         subscriptionScroll.setFitToHeight(true);
-        System.out.println("Events displayed");
+    }
+
+    private void handleCancelSubscription(EventInterface event) {
+        eventController.deleteAttendeeOnList(UserSession.getInstance().getCurrentUser(), event);
+        showMyEvents();
+
     }
 
 }
