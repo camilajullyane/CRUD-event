@@ -31,7 +31,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -39,7 +39,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreem" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -47,7 +47,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="submissionsButton" layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+        <Button fx:id="submissionsButton" layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionScreen" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -55,7 +55,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" onAction="#moveToCertificateScreen" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>

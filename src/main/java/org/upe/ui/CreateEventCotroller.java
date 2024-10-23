@@ -63,8 +63,23 @@ public class CreateEventCotroller {
     }
 
     @FXML
-    private void moveToScheduleScreem() throws IOException {
+    private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToHomeScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToSubmissionScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToCertificateScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
     }
 
     @FXML
