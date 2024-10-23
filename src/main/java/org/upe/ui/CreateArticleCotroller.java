@@ -2,9 +2,17 @@ package org.upe.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import org.upe.controllers.ArticleController;
+import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
+
+import java.io.IOException;
+
 
 public class CreateArticleCotroller {
 
@@ -21,10 +29,16 @@ public class CreateArticleCotroller {
     private TextField articleText;
 
     @FXML
+    private Text errorMessage;
+
+    @FXML
     private Button certificateButton;
 
     @FXML
     private StackPane createArticle;
+
+    @FXML
+    private Button homeButton;
 
     @FXML
     private Button logOutButton;
@@ -39,18 +53,47 @@ public class CreateArticleCotroller {
     private Button subscriptionButton;
 
     @FXML
-    void handleScheduleButton(ActionEvent event) {
+    void handleArticle() {
+        if(articleName.getText().isEmpty() || articleText.getText().isEmpty()){
+            errorMessage.setVisible(true);
+            return;
+        }
 
+        ArticleController articleController = new ArticleController();
+        UserSession userSession = UserSession.getInstance();
+
+        String name = articleName.getText();
+        String articleAbstract = articleText.getText();
+
+        articleController.createArticle(userSession.getCurrentUser(), name,articleAbstract);
+
+        articleName.setText("");
+        articleText.setText("");
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Aviso");
+        alert.setHeaderText(null);
+        alert.setContentText("Artigo criado com sucesso!");
+        alert.showAndWait();
     }
 
     @FXML
-    void handleSubscription(ActionEvent event) {
-
+    void handleLogOut(ActionEvent event) throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", createArticle);
     }
 
     @FXML
-    void logOut(ActionEvent event) {
-
+    private void handleScheduleButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createArticle);
     }
 
+    @FXML
+    private void handleHomeButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Início", createArticle);
+    }
+
+    @FXML
+    private void handleSubscriptionButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Programação", createArticle);
+    }
 }

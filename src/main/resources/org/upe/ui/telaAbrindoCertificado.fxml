@@ -4,7 +4,6 @@
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,13 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="createArticle" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateArticleCotroller">
+<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
                 <Point3D />
             </rotationAxis></Rectangle>
-        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
+        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -27,15 +26,15 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="15.0" />
+                <Font size="15.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscriptionButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -51,7 +50,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="submissionsButton" layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -59,9 +58,9 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
             <font>
-                <Font size="15.0" />
+                <Font name="System Bold" size="15.0" />
             </font>
             <opaqueInsets>
                 <Insets />
@@ -70,29 +69,27 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <AnchorPane layoutX="236.0" layoutY="15.0" prefHeight="570.0" prefWidth="545.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
+        <Text fx:id="userName" fill="WHITE" layoutX="411.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <AnchorPane accessibleRole="BUTTON" layoutX="242.0" layoutY="106.0" prefHeight="330.0" prefWidth="510.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
             <children>
-                <Text fill="WHITE" layoutX="176.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do artigo:">
+                <Text fill="#2dd4bf" layoutX="243.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="25.0">
                     <font>
-                        <Font size="15.0" />
+                        <Font name="System Bold" size="12.0" />
                     </font>
                 </Text>
-                <TextField fx:id="articleName" layoutX="10.0" layoutY="59.0" prefHeight="25.0" prefWidth="525.0" promptText="Título do artigo" style="-fx-background-radius: 25;">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="articleText" alignment="TOP_LEFT" layoutX="10.0" layoutY="105.0" prefHeight="360.0" prefWidth="525.0" promptText="Corpo do artigo" style="-fx-background-radius: 25;" />
-                <Button fx:id="articleSave" layoutX="187.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleArticle" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="SALVAR ARTIGO" textFill="WHITE">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-            <Text fx:id="errorMessage" fill="RED" layoutX="201.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha todos os campos" visible="false" />
+                <ImageView fitHeight="41.0" fitWidth="44.0" layoutX="235.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/credencial-de-graduacao.png" />
+                    </image>
+                </ImageView>
             </children>
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -124,5 +121,24 @@
                 <Image url="@../../../images/deixar.png" />
             </image>
         </ImageView>
+        <Text fill="WHITE" layoutX="437.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CERTIFICADOS" wrappingWidth="119.19995117187506">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Text>
+      <Button layoutX="481.0" layoutY="489.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="donwload button" />
+      <ImageView fitHeight="41.0" fitWidth="32.0" layoutX="481.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/arrow.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Text fill="WHITE" layoutX="366.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clique no ícone para baixar os arquivos" wrappingWidth="262.39990234375006">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
     </AnchorPane>
 </StackPane>
