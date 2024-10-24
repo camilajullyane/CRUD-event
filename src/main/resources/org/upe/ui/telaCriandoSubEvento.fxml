@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="createSubEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateSubEventController">
+
+    <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
+            <rotationAxis>
+                <Point3D />
+            </rotationAxis></Rectangle>
+        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="submissionsButton" layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionScreen" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" onAction="#moveToCertificateScreen" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <AnchorPane layoutX="286.0" layoutY="126.0" prefHeight="377.0" prefWidth="450.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
+            <children>
+                <Text fill="WHITE" layoutX="126.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do Subevento:">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="subEventName" layoutX="97.0" layoutY="90.0" prefHeight="25.0" prefWidth="256.0" promptText="Nome do Subevento" style="-fx-background-radius: 25;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="subEventParentEventID" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="ID do Evento Pai" style="-fx-background-radius: 25;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="subEventDescription" layoutX="97.0" layoutY="195.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="subEventHour" layoutX="97.0" layoutY="260.0" prefHeight="25.0" prefWidth="256.0" promptText="Hora" style="-fx-background-radius: 25;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="subEventLocation" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="subEventSpeaker" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="Palestrante" style="-fx-background-radius: 25;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="publishSubEvent" layoutX="158.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleCreateSubEvent" prefHeight="46.0" prefWidth="135.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Publicar SubEvento" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+               <font>
+                  <Font size="14.0" />
+               </font>
+                </Button>
+            <Label fx:id="errorMessage" layoutX="97.0" layoutY="294.0" prefHeight="17.0" prefWidth="147.0" text="Preencha todos os campos" textFill="#ff4949" visible="false" />
+            </children>
+        </AnchorPane>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/chamine-de-casa.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/bilhete.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/verificacao-de-calendario.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/upload-de-arquivo.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/credencial-de-graduacao.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="61.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/deixar.png" />
+            </image>
+        </ImageView>
+    </AnchorPane>
+
+</StackPane>

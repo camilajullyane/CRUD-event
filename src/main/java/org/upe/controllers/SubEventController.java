@@ -3,18 +3,20 @@ package org.upe.controllers;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.SubEventUtility;
 import java.util.List;
 
 import java.util.ArrayList;
 
 public class SubEventController {
+    private static final EventUtility eventUtility = new EventUtility();
     private static final SubEventUtility subEventUtility = new SubEventUtility();
 
-    static SubEventInterface createSubEvent(EventInterface event, String name, String date, String local, String hour,
-                                            String description, String speaker) {
-        return (SubEventInterface) subEventUtility.createSubEvent(event.getId(), name, date, hour, local, event.getOrganization(),description,
-                speaker);
+    public static SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour,
+                                                   String description, String speaker) {
+        return (SubEventInterface) subEventUtility.createSubEvent(parentEventID, name, hour, local,
+                eventUtility.getEventById(parentEventID).getOrganization(),description, speaker);
     }
 
     static List<SubEventInterface> showAllSubEvents() {

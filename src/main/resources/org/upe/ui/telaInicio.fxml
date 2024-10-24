@@ -84,6 +84,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button layoutX="91.0" layoutY="100.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um Subevento" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            </Button>
             <Button fx:id="createArticleButton" layoutX="91.0" layoutY="140.0" mnemonicParsing="false" onAction="#createNewArticle" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Realizar Submissão" textFill="WHITE">
                <font>
                   <Font size="15.0" />
@@ -99,6 +107,14 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+            </Button>
+            <Button fx:id="createSubEventButton" layoutX="91.0" layoutY="180.0" mnemonicParsing="false" onAction="#createNewSubEvent" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um Subevento" textFill="WHITE">
+                <font>
+                    <Font size="15.0" />
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
             </Button>
             <Text fill="#aeaeae" layoutX="33.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Você ainda não faz parte de nenhum evento">
                <font>
