@@ -76,7 +76,7 @@
       </Text>
       <AnchorPane layoutX="293.0" layoutY="148.0" prefHeight="313.0" prefWidth="360.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
          <children>
-            <Button layoutX="91.0" layoutY="100.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um evento" textFill="WHITE">
+            <Button layoutX="91.0" layoutY="100.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false"  onAction="#moveToScheduleScreen" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um evento" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
