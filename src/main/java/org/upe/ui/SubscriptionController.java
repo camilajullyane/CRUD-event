@@ -74,7 +74,7 @@ public class SubscriptionController implements Initializable {
         mainContainer.getChildren().clear();
         mainContainer.setSpacing(10);
         mainContainer.setAlignment(Pos.CENTER);
-        VBox.setVgrow(mainContainer, Priority.ALWAYS); // Adicionando o crescimento vertical para mainContainer
+        VBox.setVgrow(mainContainer, Priority.ALWAYS);
 
         if (events.isEmpty()) {
             VBox eventContainer = new VBox();
@@ -101,14 +101,14 @@ public class SubscriptionController implements Initializable {
             events.forEach(event -> {
                 VBox eventContainer = new VBox();
                 eventContainer.setPrefWidth(557);
-                eventContainer.setPrefHeight(260); // Diminuindo a altura preferida de cada contêiner de eventos
-                eventContainer.setMinHeight(200);  // Garantindo que o mínimo seja 50
+                eventContainer.setPrefHeight(260);
+                eventContainer.setMinHeight(200);
                 eventContainer.setMaxHeight(260);
                 eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
                 eventContainer.setSpacing(10);
                 eventContainer.setPadding(new Insets(10, 10, 10, 10));
                 eventContainer.setAlignment(Pos.CENTER);
-                VBox.setVgrow(eventContainer, Priority.ALWAYS); // Adicionando o crescimento vertical para eventContainer
+                VBox.setVgrow(eventContainer, Priority.ALWAYS);
 
                 Label titleLabel = new Label(event.getName());
                 titleLabel.setPrefHeight(100);
@@ -232,7 +232,7 @@ public class SubscriptionController implements Initializable {
 
         subscriptionScroll.setContent(mainContainer);
         subscriptionScroll.setFitToWidth(true);
-        subscriptionScroll.setFitToHeight(true); // Mantendo ajuste ao conteúdo vertical
+        subscriptionScroll.setFitToHeight(true);
         System.out.println("Events displayed");
     }
 
