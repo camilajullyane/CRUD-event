@@ -59,4 +59,9 @@ public class BeginController {
     private void createNewArticle() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCriandoArtigo.fxml", "Criar Artigo", beginPage);
     }
+
+    @FXML
+    private void moveToCertificatePage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Criar Artigo", beginPage);
+    }
 }
