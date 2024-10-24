@@ -1,5 +1,6 @@
 package org.upe.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -33,10 +34,7 @@ public class ScheduleController implements Initializable {
 
     @FXML
     ScrollPane scrollPane;
-
-    @FXML
-    VBox mainContainer;
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showEvents();
@@ -52,13 +50,20 @@ public class ScheduleController implements Initializable {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", schedulePage);
     }
 
-//    private void moveToSubmissionsScreen() throws IOException {
-//        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Submissões", schedulePage);
-//    }
+    @FXML
+    private void moveToSubmissionsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", schedulePage);
+    }
 
-//    private void moveToCertificatesScreen() throws IOException {
-//        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Certificados", schedulePage);
-//    }
+    @FXML
+    private void moveToCertificatesScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", schedulePage);
+    }
+
+    @FXML
+    private void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Login", schedulePage);
+    }
 
     private void showEvents() {
 
