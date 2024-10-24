@@ -65,7 +65,7 @@ public class SubscriptionController implements Initializable {
     private void showMyEvents() {
         System.out.println("showMyEvents called");
 
-        List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());
+        List<EventInterface> events = eventController.getAllEvents();
         System.out.println("Number of events: " + events.size());
 
         subscriptionScroll.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
@@ -77,8 +77,8 @@ public class SubscriptionController implements Initializable {
 
         if (events.isEmpty()) {
             VBox eventContainer = new VBox();
-            eventContainer.setPrefWidth(150);
-            eventContainer.setPrefHeight(160);
+            eventContainer.setPrefWidth(350);
+            eventContainer.setPrefHeight(260);
             eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
             eventContainer.setSpacing(10);
             eventContainer.setPadding(new Insets(10, 10, 10, 10));
@@ -100,72 +100,128 @@ public class SubscriptionController implements Initializable {
             events.forEach(event -> {
                 VBox eventContainer = new VBox();
                 eventContainer.setPrefWidth(557);
-                eventContainer.setPrefHeight(141);
+                eventContainer.setPrefHeight(50);
                 eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
                 eventContainer.setSpacing(10);
                 eventContainer.setPadding(new Insets(10, 10, 10, 10));
+                eventContainer.setAlignment(Pos.CENTER);
 
                 Label titleLabel = new Label(event.getName());
                 titleLabel.setPrefHeight(40);
-                titleLabel.setPrefWidth(133);
-                titleLabel.setTextFill(Color.web("#2dd4bf"));
+                titleLabel.setPrefWidth(557);
+                titleLabel.setStyle("-fx-text-fill: #2dd4bf;" +
+                                    "-fx-font-weight: bold;" +
+                                    "-fx-alignment: top-center;");
+
                 titleLabel.setFont(Font.font("System Bold Italic", 16));
+                titleLabel.setAlignment(Pos.CENTER);
+                titleLabel.setWrapText(true); // Ensure the text wraps instead of truncating
 
                 Label descriptionLabel = new Label(event.getDescription());
                 descriptionLabel.setPrefHeight(20);
-                descriptionLabel.setPrefWidth(133);
+                descriptionLabel.setPrefWidth(557);
                 descriptionLabel.setTextFill(Color.web("#cdc7c7"));
+                descriptionLabel.setAlignment(Pos.CENTER_LEFT);
+                descriptionLabel.setWrapText(true); // Ensure the text wraps instead of truncating
+                descriptionLabel.setLayoutX(10); // Set the X position
+                descriptionLabel.setLayoutY(50); // Set the Y position
 
                 Label startDateLabel = new Label("Data Inicial");
-                startDateLabel.setPrefHeight(17);
-                startDateLabel.setPrefWidth(89);
-                startDateLabel.setTextFill(Color.WHITE);
+                startDateLabel.setStyle("-fx-font-size: 14px;" +
+                                        "-fx-text-fill: #ffffff;" +
+                                        "-fx-font-weight: bold;" +
+                                        "-fx-translate-x:-230;" +
+                                        "-fx-translate-y: 57");
                 startDateLabel.setFont(Font.font("System Bold Italic", 12));
+                startDateLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label startDateValue = new Label(event.getDate());
                 startDateValue.setPrefHeight(20);
                 startDateValue.setPrefWidth(89);
+                startDateValue.setStyle("-fx-font-size: 12px;" +
+                                        "-fx-text-fill: #cdc7c7;" +
+                                        "-fx-translate-x: -220;" +
+                                        "-fx-translate-y: 50");
                 startDateValue.setTextFill(Color.web("#cdc7c7"));
+                startDateValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label endDateLabel = new Label("Data Final");
                 endDateLabel.setPrefHeight(17);
                 endDateLabel.setPrefWidth(89);
-                endDateLabel.setTextFill(Color.WHITE);
+                endDateLabel.setStyle("-fx-font-size: 14px;" +
+                                        "-fx-text-fill: #ffffff;" +
+                                        "-fx-font-weight: bold;" +
+                                        "-fx-translate-x: -100;" +
+                                        "-fx-translate-y: 0");
+
                 endDateLabel.setFont(Font.font("System Bold Italic", 12));
+                endDateLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label endDateValue = new Label(event.getDate());
-                endDateValue.setPrefHeight(20);
-                endDateValue.setPrefWidth(89);
+                endDateValue.setStyle("-fx-font-size: 12px;" +
+                        "-fx-text-fill: #cdc7c7;" +
+                        "-fx-translate-x: -90;" +
+                        "-fx-translate-y:-7");
                 endDateValue.setTextFill(Color.web("#cdc7c7"));
                 endDateValue.setFont(Font.font("System Italic", 12));
+                endDateValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label locationLabel = new Label("Local");
                 locationLabel.setPrefHeight(17);
                 locationLabel.setPrefWidth(127);
+                locationLabel.setStyle("-fx-font-size: 14px;" +
+                        "-fx-text-fill: #ffffff;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-translate-x: 60;" +
+                        "-fx-translate-y: -57");
                 locationLabel.setTextFill(Color.WHITE);
                 locationLabel.setFont(Font.font("System Bold Italic", 12));
+                locationLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label locationValue = new Label(event.getLocal());
                 locationValue.setPrefHeight(20);
                 locationValue.setPrefWidth(127);
+                locationValue.setStyle("-fx-font-size: 12px;" +
+                                        "-fx-text-fill: #cdc7c7;" +
+                                        "-fx-translate-x: 60;" +
+                                        "-fx-translate-y: -67");
                 locationValue.setTextFill(Color.web("#cdc7c7"));
                 locationValue.setFont(Font.font("System Italic", 12));
+                locationValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label ownerLabel = new Label("Dono do Evento");
                 ownerLabel.setPrefHeight(17);
-                ownerLabel.setPrefWidth(89);
+                ownerLabel.setPrefWidth(200);
+                ownerLabel.setStyle("-fx-font-size: 14px;" +
+                                    "-fx-text-fill: #ffffff;" +
+                                    "-fx-font-weight: bold;" +
+                                    "-fx-translate-x: 170;" +
+                                    "-fx-translate-y: -114");
                 ownerLabel.setTextFill(Color.WHITE);
                 ownerLabel.setFont(Font.font("System Bold Italic", 12));
+                ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label ownerValue = new Label(event.getOrganization());
                 ownerValue.setPrefHeight(20);
                 ownerValue.setPrefWidth(157);
+                ownerValue.setStyle("-fx-font-size: 14px;" +
+                                    "-fx-text-fill: #cdc7c7;" +
+                                    "-fx-translate-x: 150;" +
+                                    "-fx-translate-y: -127");
                 ownerValue.setTextFill(Color.web("#cdc7c7"));
                 ownerValue.setFont(Font.font("System Italic", 12));
+                ownerValue.setAlignment(Pos.CENTER_LEFT);
 
                 Button cancelButton = new Button("Cancelar Inscrição");
-                cancelButton.setStyle("-fx-background-color: transparent;");
+                cancelButton.setStyle("-fx-background-color: transparent;  " +
+                        "-fx-font-size: 12px;" +
+                        "-fx-text-fill: #bbbbbb;" +
+                        "-fx-underline: true;" +
+                        "-fx-translate-x: 220;" +
+                        "-fx-translate-y: -280;");
+
                 cancelButton.setTextFill(Color.web("#cdc7c7"));
+                cancelButton.setAlignment(Pos.CENTER_LEFT);
 
                 eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton);
                 mainContainer.getChildren().add(eventContainer);
