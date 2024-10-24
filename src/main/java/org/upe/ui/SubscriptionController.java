@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import org.upe.controllers.EventController;
+import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -23,8 +24,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
-
     EventController eventController = new EventController();
+    UserController userController = new UserController();
 
     @FXML
     ScrollPane subscriptionScroll;
@@ -177,8 +178,8 @@ public class SubscriptionController implements Initializable {
 
     private void handleCancelSubscription(EventInterface event) {
         eventController.deleteAttendeeOnList(UserSession.getInstance().getCurrentUser(), event);
+        UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
         showMyEvents();
-
     }
 
 }

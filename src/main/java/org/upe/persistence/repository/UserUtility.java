@@ -148,13 +148,11 @@ public class UserUtility {
         return true;
     }
 
-    public void addOwnerOnEvent(User currentUser, String eventID) {
+    public void addOwnerOnEvent(String userCPF, String eventID) {
         List<User> users = getAllUsers();
 
-        currentUser.addOwnerOf(eventID);
-
         for (User user : users) {
-            if (user.getCPF().equals(currentUser.getCPF())) {
+            if (user.getCPF().equals(userCPF)) {
                 user.addOwnerOf(eventID);
                 break;
             }

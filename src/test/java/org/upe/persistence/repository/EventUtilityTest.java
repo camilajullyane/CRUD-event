@@ -56,7 +56,7 @@ class EventUtilityTest {
 
     @Test
     void testCreateEvent() {
-        EventInterface newEvent = eventUtility.createEvent(testUser, "New Event", "2023-12-01", "New Location", "New Org", "New Description");
+        EventInterface newEvent = eventUtility.createEvent("123456789", "New Event", "2023-12-01", "New Location", "New Org", "New Description");
         assertNotNull(newEvent, "The new event should not be null");
         assertEquals("New Event", newEvent.getName(), "The event name should match");
     }
