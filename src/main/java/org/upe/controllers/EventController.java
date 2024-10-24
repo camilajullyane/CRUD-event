@@ -20,6 +20,13 @@ public class EventController {
 
     public List<EventInterface> getAllEvents() {
         List<Event> events = eventUtility.getAllEvents();
+
+        return new ArrayList<>(events);
+    }
+
+    public List<EventInterface> getEventsIn(String ownerCPF) {
+        List<Event> events = eventUtility.getEventsIn(ownerCPF);
+
         return new ArrayList<>(events);
     }
 
