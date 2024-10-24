@@ -46,7 +46,7 @@ public class User implements UserInterface {
     }
 
     public void addAttendeeOn(String eventID) {
-        this.attendeeOn = this.attendeeOn.isEmpty() ? eventID : "#" + eventID;
+        this.attendeeOn = this.attendeeOn.isEmpty() ? eventID : this.attendeeOn + "#" + eventID;
     }
 
     public void deleteAttendeeOn(String eventID) {
@@ -64,11 +64,12 @@ public class User implements UserInterface {
     }
 
     public String[] getOwnerOf() {
+
         return this.ownerOf.split("#");
     }
 
     public void addOwnerOf(String eventID) {
-        this.ownerOf = this.ownerOf.isEmpty() ? eventID : "#" + eventID;
+        this.ownerOf = this.ownerOf.isEmpty() ? eventID : this.attendeeOn + "#" + eventID;
     }
 
     public void deleteOwnerOf(String eventID) {
@@ -90,7 +91,7 @@ public class User implements UserInterface {
     }
 
     public void addArticleID(String articleID) {
-        this.articleID = this.articleID.isEmpty() ? articleID : "#" + articleID;
+        this.articleID = this.articleID.isEmpty() ? articleID : this.attendeeOn + "#" + articleID;
     }
 }
 

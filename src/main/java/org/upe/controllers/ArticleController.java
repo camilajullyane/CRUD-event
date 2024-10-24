@@ -13,7 +13,7 @@ public class ArticleController {
     private static final EventUtility eventUtility = new EventUtility();
     private static final ArticleUtility articleUtility = new ArticleUtility();
 
-    static ArticleInterface createArticle(UserInterface user, String name, String articleAbstract) {
+    public ArticleInterface createArticle(UserInterface user, String name, String articleAbstract) {
         ArticleInterface article = articleUtility.createArticle(name, user.getCPF(), articleAbstract);
         userUtility.addUserArticle(user.getCPF(), article.getArticleID());
         return article;

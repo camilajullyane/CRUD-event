@@ -17,6 +17,9 @@ public class BeginController {
     Button createEventButton;
 
     @FXML
+    Button createAicleButton;
+
+    @FXML
     StackPane beginPage;
 
     @FXML
@@ -50,5 +53,10 @@ public class BeginController {
     @FXML
     private void createNewEvent() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Criar Evento", beginPage);
+    }
+
+    @FXML
+    private void createNewArticle() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoArtigo.fxml", "Criar Artigo", beginPage);
     }
 }

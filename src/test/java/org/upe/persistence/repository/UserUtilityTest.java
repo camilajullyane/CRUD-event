@@ -74,7 +74,8 @@ class UserUtilityTest {
 
     @Test
     void testAddAttendeeOnEvent() {
-        userUtility.addAttendeeOnEvent("123456789", "event123");
+        UserInterface userTest = userUtility.findByCPF("123456789");
+        userUtility.addAttendeeOnEvent(userTest, "event123");
         User user = userUtility.findByCPF("123456789");
         assertTrue(Arrays.asList(user.getAttendeeOn()).contains("event123"), "The user should be an attendee of the event");
     }

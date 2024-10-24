@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import org.upe.controllers.EventController;
+import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -23,10 +25,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
+    UserController userController = new UserController();
+    EventController eventController = new EventController();
+
     @FXML
     StackPane schedulePage;
-
-    EventController eventController = new EventController();
 
     @FXML
     ScrollPane scrollPane;
@@ -60,7 +63,6 @@ public class ScheduleController implements Initializable {
     private void showEvents() {
 
         List<EventInterface> events = eventController.getAllEvents();
-
 
         scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
@@ -118,7 +120,21 @@ public class ScheduleController implements Initializable {
 
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
-        eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
 
+        boolean isAlreadySubscribed = eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(!isAlreadySubscribed) {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Você já está inscrito neste evento!");
+            alert.showAndWait();
+        } else {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Inscrição realizada com sucesso!");
+            alert.showAndWait();
+            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+        }
     }
 }
