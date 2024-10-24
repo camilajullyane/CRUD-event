@@ -36,18 +36,28 @@ public class BeginController {
     }
 
     @FXML
-    private void handleSubscription() throws IOException {
+    private void moveToSubscriptionScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", beginPage);
+    }
+
+    @FXML
+    private void moveToScheduleScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
+    }
+
+    @FXML
+    private void moveToSubmissionScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Programação", beginPage);
+    }
+
+    @FXML
+    private void moveToCertificateScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Programação", beginPage);
     }
 
     @FXML
     private void logOut() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", beginPage);
-    }
-
-    @FXML
-    private void handleScheduleButton() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
     }
 
     @FXML

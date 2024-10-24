@@ -34,7 +34,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscription" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -42,7 +42,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#handleScheduleButton" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>

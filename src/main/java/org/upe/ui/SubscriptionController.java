@@ -62,6 +62,16 @@ public class SubscriptionController implements Initializable {
     }
 
     @FXML
+    private void moveToSubmissionScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", mySubscriptionPage);
+    }
+
+    @FXML
+    private void moveToCertificateScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", mySubscriptionPage);
+    }
+
+    @FXML
     private void showMyEvents() {
         System.out.println("showMyEvents called");
 
