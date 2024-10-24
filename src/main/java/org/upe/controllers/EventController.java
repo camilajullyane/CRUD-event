@@ -30,21 +30,7 @@ public class EventController {
     }
 
     public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
-        for (String ownerOf : user.getOwnerOf()) {
-            if (ownerOf.equals(event.getId())) {
-                return false;
-            }
-        }
-
-        for(String attendeeOn : user.getAttendeeOn()) {
-            if(attendeeOn.equals(event.getId())) {
-                return false;
-            }
-        }
-
-        eventUtility.addAttendeeOnList(user.getCPF(), event.getId());
-        userUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
-        return true;
+        return eventUtility.addAttendeeOnList(user, event.getId()) && userUtility.addAttendeeOnEvent(user, event.getId());
     }
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {

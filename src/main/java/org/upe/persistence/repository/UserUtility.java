@@ -91,7 +91,7 @@ public class UserUtility {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
         }
-        return new User(name, cpf, email, password, "","", "");
+        return new User(name, email, cpf, password, "","", "");
     }
 
     public boolean updateUserEmail(String cpf, String newEmail) {
@@ -108,7 +108,6 @@ public class UserUtility {
         }
 
         updateFileData(users);
-
         return true;
     }
 
@@ -124,23 +123,36 @@ public class UserUtility {
         updateFileData(users);
     }
 
-    public void addAttendeeOnEvent(String cpf, String eventID) {
+    public boolean addAttendeeOnEvent(UserInterface user, String eventID) {
+        for (String ownerOf : user.getOwnerOf()) {
+            if (ownerOf.equals(eventID)) {
+                return false;
+            }
+        }
+
+        for(String attendeeOn : user.getAttendeeOn()) {
+            if(attendeeOn.equals(eventID)) {
+                return false;
+            }
+        }
+
         List<User> users = getAllUsers();
 
-        for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
-                user.addAttendeeOn(eventID);
+        for (User userData : users) {
+            if (userData.getCPF().equals(user.getCPF())) {
+                userData.addAttendeeOn(eventID);
                 break;
             }
         }
         updateFileData(users);
+        return true;
     }
 
-    public void addOwnerOnEvent(String cpf, String eventID) {
+    public void addOwnerOnEvent(String userCPF, String eventID) {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getCPF().equals(userCPF)) {
                 user.addOwnerOf(eventID);
                 break;
             }
