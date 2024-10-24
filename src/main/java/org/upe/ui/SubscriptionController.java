@@ -65,7 +65,7 @@ public class SubscriptionController implements Initializable {
     private void showMyEvents() {
         System.out.println("showMyEvents called");
 
-        List<EventInterface> events = eventController.getAllEvents();
+        List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCPF());
         System.out.println("Number of events: " + events.size());
 
         subscriptionScroll.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
