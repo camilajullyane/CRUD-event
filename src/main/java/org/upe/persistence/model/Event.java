@@ -83,7 +83,7 @@ public class Event implements EventInterface {
     }
 
     public void addArticleList(String articleID) {
-        this.articleList = this.articleList.isEmpty() ? articleID : "#" + articleID;
+        this.articleList = this.articleList.isEmpty() ? articleID : this.attendeesList + "#" + articleID;
     }
 
     public String[] getAttendeesList() {
@@ -91,7 +91,7 @@ public class Event implements EventInterface {
     }
 
     public void addAttendeesList(String userCPF) {
-        this.attendeesList = this.attendeesList.isEmpty() ? userCPF : "#" + userCPF;
+        this.attendeesList = this.attendeesList.isEmpty() ? userCPF : this.attendeesList + "#" + userCPF;
     }
 
     public void deleteAttendee(String userCPF) {

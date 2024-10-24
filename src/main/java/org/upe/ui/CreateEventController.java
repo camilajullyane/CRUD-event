@@ -1,10 +1,10 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.EventController;
+import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
@@ -12,7 +12,11 @@ import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
-public class CreateEventCotroller {
+public class CreateEventController {
+    UserSession userSession = UserSession.getInstance();
+    UserController userController = new UserController();
+    EventController eventController = new EventController();
+
 
     @FXML
     private Button certificateButton;
@@ -90,8 +94,6 @@ public class CreateEventCotroller {
             return;
         }
 
-        EventController eventController = new EventController();
-        UserSession userSession = UserSession.getInstance();
 
         String name = eventName.getText();
         String description = eventDescription.getText();
@@ -101,6 +103,7 @@ public class CreateEventCotroller {
         String organization = eventOrganization.getText();
 
         eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
+        UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
 
         eventName.setText("");
         eventDescription.setText("");
