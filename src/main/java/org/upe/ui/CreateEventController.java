@@ -1,6 +1,5 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
@@ -12,7 +11,7 @@ import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
-public class CreateEventCotroller {
+public class CreateEventController {
 
     @FXML
     private Button certificateButton;
