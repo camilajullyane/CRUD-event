@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import org.upe.controllers.EventController;
+import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -24,10 +25,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
+    UserController userController = new UserController();
+    EventController eventController = new EventController();
+
     @FXML
     StackPane schedulePage;
-
-    EventController eventController = new EventController();
 
     @FXML
     ScrollPane scrollPane;
@@ -61,7 +63,6 @@ public class ScheduleController implements Initializable {
     private void showEvents() {
 
         List<EventInterface> events = eventController.getAllEvents();
-
 
         scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
@@ -133,6 +134,7 @@ public class ScheduleController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Inscrição realizada com sucesso!");
             alert.showAndWait();
+            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
         }
     }
 }

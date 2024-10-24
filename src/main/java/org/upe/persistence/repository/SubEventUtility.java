@@ -1,5 +1,6 @@
 package org.upe.persistence.repository;
 
+import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.interfaces.EventInterface;
@@ -13,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SubEventUtility {
-    private static EventUtility instanciaEventutility = new EventUtility();
-    private static SubEventUtility instanciaSubEventutility = new SubEventUtility();
+    private static final EventUtility instanciaEventutility = new EventUtility();
+    private static final SubEventUtility instanciaSubEventutility = new SubEventUtility();
     private static final Logger LOGGER = Logger.getLogger(SubEventUtility.class.getName());
     protected static String csvFilePath = "DB/subevent.csv";
 
@@ -166,17 +167,17 @@ public class SubEventUtility {
     }
 
     // Utility Methods
-    public void addAttendeeOnList(String userCPF, String subEventID) {
+    public void addAttendeeOnList(UserInterface currentUser, String subEventID) {
         EventUtility utility = new EventUtility();
         List<SubEvent> subEvents = getAllSubEvents();
 
         for (SubEvent subEvent : subEvents) {
             if (subEvent.getId().equals(subEventID)) {
-                subEvent.addAttendeesList(userCPF);
+                subEvent.addAttendeesList(currentUser.getCPF());
                 Event event = utility.getEventById(subEvent.getParentEventID());
                 String[] parentEventAttendeeList = event.getAttendeesList();
-                if (!Arrays.asList(parentEventAttendeeList).contains(userCPF)) {
-                    utility.addAttendeeOnList(userCPF, subEvent.getParentEventID());
+                if (!Arrays.asList(parentEventAttendeeList).contains(currentUser.getCPF())) {
+                    utility.addAttendeeOnList(currentUser, subEvent.getParentEventID());
                 }
                 break;
             }
