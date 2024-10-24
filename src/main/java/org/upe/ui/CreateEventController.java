@@ -1,6 +1,5 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
@@ -12,7 +11,7 @@ import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
-public class CreateEventCotroller {
+public class CreateEventController {
 
     @FXML
     private Button certificateButton;
@@ -63,8 +62,23 @@ public class CreateEventCotroller {
     }
 
     @FXML
-    private void moveToScheduleScreem() throws IOException {
+    private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToHomeScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToSubmissionScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToCertificateScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
     }
 
     @FXML

@@ -7,13 +7,13 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.model.User;
+import org.upe.persistence.model.SubEvent;
 
 public class EventUtility {
     private static final UserUtility userUtility = new UserUtility();
+    private static SubEventUtility instanciaSubEventutility = new SubEventUtility();
 
     private final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
     protected String csvFilePath = "DB/event.csv";
@@ -81,19 +81,15 @@ public class EventUtility {
         return eventsIn;
     }
 
-    public EventInterface createEvent(UserInterface currentUser, String name, String date, String local,
-                                      String organization, String description) {
+    public EventInterface createEvent(String ownerCPF, String name, String date, String local,
+                                             String organization, String description) {
+        List<Event> events = this.getAllEvents();
         String id = this.generateEventID();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath, true))) {
-            String newLine = String.format("%s,%s,%s,%s,%s,%s,%s,,",id, currentUser.getCPF(), name, date, local, organization, description);
-            writer.append(System.lineSeparator());
-            writer.append(newLine);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Erro ao escrever no arquivo CSV", e);
-        }
-        userUtility.addOwnerOnEvent((User) currentUser, id);
-        return new Event(id, currentUser.getCPF(), name, date, local, organization, description, "", "");
+        Event newEvent = new Event(id, ownerCPF, name, date, local, organization, description, "", "");
+        events.add(newEvent);
+        this.saveEvents(events);
+        userUtility.addOwnerOnEvent(ownerCPF, id);
+        return newEvent;
     }
 
     public Event getEventById(String id) {
@@ -154,6 +150,8 @@ public class EventUtility {
 
     public boolean updateEventDate(String id, String newDate) {
         List<Event> events = getAllEvents();
+
+        instanciaSubEventutility.updateSubEventDate(id, newDate);
         for (Event event : events) {
             if (event.getId().equals(id)) {
                 event.setDate(newDate);
@@ -176,38 +174,32 @@ public class EventUtility {
     }
 
     // Utility Methods
-    public boolean addAttendeeOnList(UserInterface user, String eventID) {
-        for (String ownerOf : user.getOwnerOf()) {
-            if (ownerOf.equals(eventID)) {
-                return false;
-            }
-        }
-
-        for(String attendeeOn : user.getAttendeeOn()) {
-            if(attendeeOn.equals(eventID)) {
-                return false;
-            }
-        }
-
+    public void addAttendeeOnList(String userCPF, String eventID) {
         List<Event> events = getAllEvents();
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.addAttendeesList(user.getCPF());
+                event.addAttendeesList(userCPF);
                 break;
             }
         }
         saveEvents(events);
-        return true;
     }
 
     public void deleteAttendeeOnList(String userCPF, String eventID) {
         List<Event> events = getAllEvents();
 
         for(Event event : events) {
-            if(event.getId().equals(eventID)) {
-
+            if (event.getId().equals(eventID)) {
                 event.deleteAttendee(userCPF);
+
+                List<SubEvent> subEvents = instanciaSubEventutility.getSubEventByEvent(eventID);
+                for(SubEvent subEvent : subEvents) {
+                    if (subEvent.getParentEventID().equals(eventID)) {
+                        instanciaSubEventutility.deleteAttendeeOnList(userCPF, subEvent.getId());
+                    }
+                }
+                break;
             }
         }
         saveEvents(events);

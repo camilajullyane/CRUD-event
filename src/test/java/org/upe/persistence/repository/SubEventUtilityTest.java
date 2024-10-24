@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubEventUtilityTest {
-
+    private static SubEventUtility instanciaSubEventUtility = new SubEventUtility();
     private static final String TEST_CSV_FILE_PATH = "DB/teste/test_subevent.csv";
 
     @BeforeEach
@@ -23,12 +23,12 @@ class SubEventUtilityTest {
             writer.write("3,1001,SubEvent 3,03/01/2024,12:00,Local 3,Description 3,Speaker 3,987654321\n");
         }
         // Atualizar o caminho do CSV para os testes
-        SubEventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
+        instanciaSubEventUtility.setCsvFilePath(TEST_CSV_FILE_PATH);
     }
 
     @Test
     void getAllSubEvents() {
-        List<SubEvent> actualSubEvents = SubEventUtility.getAllSubEvents();
+        List<SubEvent> actualSubEvents = instanciaSubEventUtility.getAllSubEvents();
 
         assertEquals(3, actualSubEvents.size(), "O número de sub-eventos deve ser o mesmo");
 
@@ -74,18 +74,18 @@ class SubEventUtilityTest {
 
     @Test
     void getSubEventById() {
-        SubEvent subEvent = SubEventUtility.getSubEventById("1");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("1");
         assertNotNull(subEvent, "O sub-evento com o ID '1' deve existir");
         assertEquals("SubEvent 1", subEvent.getName(), "O nome do sub-evento deve ser 'SubEvent 1'");
 
-        SubEvent nonExistentSubEvent = SubEventUtility.getSubEventById("non-existent-id");
+        SubEvent nonExistentSubEvent = instanciaSubEventUtility.getSubEventById("non-existent-id");
         assertNull(nonExistentSubEvent, "O sub-evento com o ID 'non-existent-id' não deve existir");
     }
 
     @Test
     void getSubEventByEvent() {
         String parentEventID = "1001";
-        List<SubEvent> subEvents = SubEventUtility.getSubEventByEvent(parentEventID);
+        List<SubEvent> subEvents = instanciaSubEventUtility.getSubEventByEvent(parentEventID);
 
         assertNotNull(subEvents, "A lista de sub-eventos do evento pai não deve ser nula");
         assertEquals(2, subEvents.size(), "O número de sub-eventos do evento pai deve ser 2");
@@ -119,13 +119,13 @@ class SubEventUtilityTest {
 
     @Test
     void deleteSubEvent() {
-        boolean result = SubEventUtility.deleteSubEvent("2");
+        boolean result = instanciaSubEventUtility.deleteSubEvent("2");
         assertTrue(result, "A exclusão do sub-evento deve ser bem-sucedida");
 
-        SubEvent subEvent = SubEventUtility.getSubEventById("2");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("2");
         assertNull(subEvent, "O sub-evento com o ID '2' não deve existir após a exclusão");
 
-        List<SubEvent> actualSubEvents = SubEventUtility.getAllSubEvents();
+        List<SubEvent> actualSubEvents = instanciaSubEventUtility.getAllSubEvents();
         assertEquals(2, actualSubEvents.size(), "O número de sub-eventos deve ser 2 após a exclusão do sub-evento");
     }
 
@@ -133,46 +133,46 @@ class SubEventUtilityTest {
 
     @Test
     void updateSubEventName() {
-        boolean result = SubEventUtility.updateSubEventName("1", "Updated Name");
+        boolean result = instanciaSubEventUtility.updateSubEventName("1", "Updated Name");
         assertTrue(result, "A atualização do nome do sub-evento deve ser bem-sucedida");
 
-        SubEvent subEvent = SubEventUtility.getSubEventById("1");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("1");
         assertEquals("Updated Name", subEvent.getName(), "O nome do sub-evento deve ser 'Updated Name'");
     }
 
     @Test
     void updateSubEventDate() {
-        boolean result = SubEventUtility.updateSubEventDate("1", "06/01/2024");
+        boolean result = instanciaSubEventUtility.updateSubEventDate("1", "06/01/2024");
         assertTrue(result, "A atualização da data do sub-evento deve ser bem-sucedida");
 
-        SubEvent subEvent = SubEventUtility.getSubEventById("1");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("1");
         assertEquals("06/01/2024", subEvent.getDate(), "A data do sub-evento deve ser '06/01/2024'");
     }
 
     @Test
     void updateSubEventLocal() {
-        boolean result = SubEventUtility.updateSubEventLocal("1", "Updated Local");
+        boolean result = instanciaSubEventUtility.updateSubEventLocal("1", "Updated Local");
         assertTrue(result, "A atualização do local do sub-evento deve ser bem-sucedida");
 
-        SubEvent subEvent = SubEventUtility.getSubEventById("1");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("1");
         assertEquals("Updated Local", subEvent.getLocal(), "O local do sub-evento deve ser 'Updated Local'");
     }
 
     @Test
     void updateSubEventDescription() {
-        boolean result = SubEventUtility.updateSubEventDescription("1", "Updated Description");
+        boolean result = instanciaSubEventUtility.updateSubEventDescription("1", "Updated Description");
         assertTrue(result, "A atualização da descrição do sub-evento deve ser bem-sucedida");
 
-        SubEvent subEvent = SubEventUtility.getSubEventById("1");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("1");
         assertEquals("Updated Description", subEvent.getDescription(), "A descrição do sub-evento deve ser 'Updated Description'");
     }
 
     @Test
     void updateSubEventSpeaker() {
-        boolean result = SubEventUtility.updateSubEventSpeaker("1", "Updated Speaker");
+        boolean result = instanciaSubEventUtility.updateSubEventSpeaker("1", "Updated Speaker");
         assertTrue(result, "A atualização do palestrante do sub-evento deve ser bem-sucedida");
 
-        SubEvent subEvent = SubEventUtility.getSubEventById("1");
+        SubEvent subEvent = instanciaSubEventUtility.getSubEventById("1");
         assertEquals("Updated Speaker", subEvent.getSpeakers(), "O palestrante do sub-evento deve ser 'Updated Speaker'");
     }
 }
