@@ -1,5 +1,6 @@
 package org.upe.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -63,6 +64,11 @@ public class BeginController {
     @FXML
     private void createNewEvent() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Criar Evento", beginPage);
+    }
+
+    @FXML
+    private void createNewSubEvent() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar Evento", beginPage);
     }
 
     @FXML
