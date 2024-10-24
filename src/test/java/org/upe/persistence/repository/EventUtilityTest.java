@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.model.User;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EventUtilityTest {
     private EventUtility eventUtility;
+    private User testUser;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -26,6 +28,8 @@ class EventUtilityTest {
             writer.write("1,123456789,Event One,2023-10-01,Location One,Org One,Description One,,\n");
             writer.write("2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,\n");
         }
+
+        testUser = new User("john doe", "john.doe@email.com", "123456789", "123456789", "","", "" );
     }
 
     @Test
@@ -44,7 +48,7 @@ class EventUtilityTest {
 
     @Test
     void testGetEventsIn() {
-        eventUtility.addAttendeeOnList("123456789", "1");
+        eventUtility.addAttendeeOnList(testUser, "1");
         List<Event> events = eventUtility.getEventsIn("123456789");
         assertNotNull(events, "The event list should not be null");
         assertEquals(1, events.size(), "The user should be an attendee of one event");
@@ -52,7 +56,7 @@ class EventUtilityTest {
 
     @Test
     void testCreateEvent() {
-        EventInterface newEvent = eventUtility.createEvent("123456789", "New Event", "2023-12-01", "New Location", "New Org", "New Description");
+        EventInterface newEvent = eventUtility.createEvent(testUser, "New Event", "2023-12-01", "New Location", "New Org", "New Description");
         assertNotNull(newEvent, "The new event should not be null");
         assertEquals("New Event", newEvent.getName(), "The event name should match");
     }
@@ -114,14 +118,14 @@ class EventUtilityTest {
 
     @Test
     void testAddAttendeeOnList() {
-        eventUtility.addAttendeeOnList("123456789", "2");
+        eventUtility.addAttendeeOnList(testUser, "2");
         Event event = eventUtility.getEventById("2");
         assertTrue(Arrays.asList(event.getAttendeesList()).contains("123456789"), "The user should be an attendee of the event");
     }
 
     @Test
     void testDeleteAttendeeOnList() {
-        eventUtility.addAttendeeOnList("123456789", "2");
+        eventUtility.addAttendeeOnList(testUser, "2");
         eventUtility.deleteAttendeeOnList("123456789", "2");
         Event event = eventUtility.getEventById("2");
         assertFalse(Arrays.asList(event.getAttendeesList()).contains("123456789"), "The user should not be an attendee of the event");
@@ -149,7 +153,7 @@ class EventUtilityTest {
 
     @Test
     void testAddAttendeeToNonExistentEvent() {
-        eventUtility.addAttendeeOnList("123456789", "999");
+        eventUtility.addAttendeeOnList(testUser, "999");
         Event event = eventUtility.getEventById("999");
         assertNull(event, "The event should not exist");
     }

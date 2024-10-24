@@ -3,6 +3,7 @@ package org.upe.controllers;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.UserUtility;
 
@@ -15,7 +16,7 @@ public class EventController {
 
     public EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
                                       String organization) {
-        return eventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
+        return eventUtility.createEvent(user, name, date, local, organization, description);
     }
 
     public List<EventInterface> getAllEvents() {
@@ -30,21 +31,7 @@ public class EventController {
     }
 
     public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
-        for (String ownerOf : user.getOwnerOf()) {
-            if (ownerOf.equals(event.getId())) {
-                return false;
-            }
-        }
-
-        for(String attendeeOn : user.getAttendeeOn()) {
-            if(attendeeOn.equals(event.getId())) {
-                return false;
-            }
-        }
-
-        eventUtility.addAttendeeOnList(user.getCPF(), event.getId());
-        userUtility.addAttendeeOnEvent(user.getCPF(), event.getId());
-        return true;
+        return eventUtility.addAttendeeOnList(user, event.getId()) && userUtility.addAttendeeOnEvent(user, event.getId());
     }
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
