@@ -26,9 +26,6 @@ public class CreateEventController {
     private DatePicker eventBeginDate;
 
     @FXML
-    private DatePicker eventEndDate;
-
-    @FXML
     private TextField eventDescription;
 
     @FXML
@@ -58,7 +55,6 @@ public class CreateEventController {
     @FXML
     public void initialize() {
         DatePickerUtil.restrictDatePicker(eventBeginDate);
-        DatePickerUtil.restrictDatePicker(eventEndDate);
     }
 
     @FXML
@@ -84,7 +80,7 @@ public class CreateEventController {
     @FXML
     private void handleCreateEvent() {
         if(eventName.getText().isEmpty() || eventDescription.getText().isEmpty() || eventLocation.getText().isEmpty() ||
-                eventBeginDate.getValue() == null || eventEndDate.getValue() == null || eventOrganization.getText().isEmpty()) {
+                eventBeginDate.getValue() == null || eventOrganization.getText().isEmpty()) {
             errorMessage.setVisible(true);
             return;
         }
@@ -96,7 +92,6 @@ public class CreateEventController {
         String description = eventDescription.getText();
         String location = eventLocation.getText();
         String beginDate = eventBeginDate.getValue().toString();
-        String endDate = eventEndDate.getValue().toString();
         String organization = eventOrganization.getText();
 
         eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
@@ -105,7 +100,6 @@ public class CreateEventController {
         eventDescription.setText("");
         eventLocation.setText("");
         eventBeginDate.setValue(null);
-        eventEndDate.setValue(null);
         eventOrganization.setText("");
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

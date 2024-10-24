@@ -78,23 +78,22 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="eventDescription" layoutX="97.0" layoutY="195.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
+                <TextField fx:id="eventDescription" layoutX="97.0" layoutY="161.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="eventOrganization" layoutX="97.0" layoutY="260.0" prefHeight="25.0" prefWidth="256.0" promptText="Organização" style="-fx-background-radius: 25;">
+                <TextField fx:id="eventOrganization" layoutX="97.0" layoutY="226.0" prefHeight="25.0" prefWidth="256.0" promptText="Organização" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="eventLocation" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
+                <TextField fx:id="eventLocation" layoutX="97.0" layoutY="194.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
                 <DatePicker fx:id="eventBeginDate" layoutX="97.0" layoutY="125.0" prefHeight="25.0" prefWidth="256.0" promptText="Data de início" style="-fx-background-radius: 25; -fx-border-radius: 25;" />
-                <DatePicker fx:id="eventEndDate" layoutX="97.0" layoutY="160.0" prefHeight="25.0" prefWidth="256.0" promptText="Data do fim" style="-fx-background-radius: 25;" />
                 <Button fx:id="publishEvent" layoutX="158.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="46.0" prefWidth="135.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Publicar Evento" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />

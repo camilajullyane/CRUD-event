@@ -78,27 +78,27 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventParentEventID" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="ID do Evento Pai" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventParentEventID" layoutX="97.0" layoutY="122.0" prefHeight="25.0" prefWidth="256.0" promptText="ID do Evento Pai" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventDescription" layoutX="97.0" layoutY="195.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventDescription" layoutX="98.0" layoutY="251.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventHour" layoutX="97.0" layoutY="260.0" prefHeight="25.0" prefWidth="256.0" promptText="Hora" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventHour" layoutX="97.0" layoutY="186.0" prefHeight="25.0" prefWidth="256.0" promptText="Hora" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventLocation" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventLocation" layoutX="97.0" layoutY="154.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventSpeaker" layoutX="97.0" layoutY="228.0" prefHeight="25.0" prefWidth="256.0" promptText="Palestrante" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventSpeaker" layoutX="98.0" layoutY="219.0" prefHeight="25.0" prefWidth="256.0" promptText="Palestrante" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
