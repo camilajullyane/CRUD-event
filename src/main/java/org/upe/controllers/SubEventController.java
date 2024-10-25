@@ -1,6 +1,5 @@
 package org.upe.controllers;
 
-import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.EventUtility;
@@ -13,29 +12,29 @@ public class SubEventController {
     private static final EventUtility eventUtility = new EventUtility();
     private static final SubEventUtility subEventUtility = new SubEventUtility();
 
-    public static SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour,
-                                                   String description, String speaker) {
+    public SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour, String description, String speaker) {
+
         return (SubEventInterface) subEventUtility.createSubEvent(parentEventID, name, hour, local,
                 eventUtility.getEventById(parentEventID).getOrganization(),description, speaker);
     }
 
-    static List<SubEventInterface> showAllSubEvents() {
+    public List<SubEventInterface> showAllSubEvents() {
         List<SubEvent> subEvents = subEventUtility.getAllSubEvents();
 
         return new ArrayList<>(subEvents);
     }
 
-    static ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
+    public List<SubEventInterface> subEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = subEventUtility.getSubEventByEvent(parentID);
         return new ArrayList<>(subEventsByEvent);
     }
 
-    static boolean editSubEventName(String id, String newName) {
+    public boolean editSubEventName(String id, String newName) {
         subEventUtility.updateSubEventName(id, newName);
         return true;
     }
 
-    static boolean editSubEventDate(String id, String newDate) {
+    public boolean editSubEventDate(String id, String newDate) {
         subEventUtility.updateSubEventDate(id, newDate);
         return true;
     }

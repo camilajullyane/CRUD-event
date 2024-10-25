@@ -5,14 +5,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.SubEventController;
 import org.upe.utils.SceneLoader;
-import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
 public class CreateSubEventController {
-
-    @FXML
-    private Button certificateButton;
 
     @FXML
     private StackPane createSubEventPage;
@@ -39,38 +35,23 @@ public class CreateSubEventController {
     Label errorMessage;
 
     @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button publishSubEvent;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button submissionsButton;
-
-    @FXML
-    private Button subscriptionButton;
-
-    @FXML
     private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createSubEventPage);
     }
 
     @FXML
     private void moveToHomeScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createSubEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", createSubEventPage);
     }
 
     @FXML
     private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createSubEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissão.fxml", "Submissões", createSubEventPage);
     }
 
     @FXML
     private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createSubEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", createSubEventPage);
     }
 
     @FXML
@@ -82,7 +63,6 @@ public class CreateSubEventController {
         }
 
         SubEventController subEventController = new SubEventController();
-        UserSession userSession = UserSession.getInstance();
 
         String name = subEventName.getText();
         String parentEventID = subEventParentEventID.getText();
@@ -91,7 +71,7 @@ public class CreateSubEventController {
         String location = subEventLocation.getText();
         String speaker = subEventSpeaker.getText();
 
-        subEventController.createSubEvent(parentEventID, name, description, hour, location, speaker);
+        subEventController.createSubEvent(parentEventID, name, location, hour, description, speaker);
 
         subEventName.setText("");
         subEventDescription.setText("");
@@ -105,12 +85,12 @@ public class CreateSubEventController {
         alert.showAndWait();
     }
     @FXML
-    private void handleLogOut() {
-
+    private void handleLogOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", createSubEventPage);
     }
 
     @FXML
-    private void handleSubscription() {
-
+    private void moveToSubscriptionButton () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", createSubEventPage);
     }
 }

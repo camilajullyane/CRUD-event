@@ -15,15 +15,11 @@ import java.io.IOException;
 
 
 public class CreateArticleCotroller {
-
     @FXML
-    private TextField articleKeyWords;
+    public Button settingsButton;
 
     @FXML
     private TextField articleName;
-
-    @FXML
-    private Button articleSave;
 
     @FXML
     private TextField articleText;
@@ -32,25 +28,12 @@ public class CreateArticleCotroller {
     private Text errorMessage;
 
     @FXML
-    private Button certificateButton;
-
-    @FXML
     private StackPane createArticle;
 
     @FXML
-    private Button homeButton;
-
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button submissionsButton;
-
-    @FXML
-    private Button subscriptionButton;
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", createArticle);
+    }
 
     @FXML
     void handleArticle() {
@@ -95,5 +78,10 @@ public class CreateArticleCotroller {
     @FXML
     private void handleSubscriptionButton() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Programação", createArticle);
+    }
+
+    @FXML
+    private void handleCertificatonButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", createArticle);
     }
 }

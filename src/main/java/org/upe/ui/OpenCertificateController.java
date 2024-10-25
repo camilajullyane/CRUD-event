@@ -1,24 +1,20 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
 
 
-public class openCertificateController {
+public class OpenCertificateController {
 
 
     @FXML
     private StackPane openCertificatePage;
 
-    @FXML
-    private Button logOutButton;
 
     @FXML
     private Button scheduleButton;
@@ -27,8 +23,14 @@ public class openCertificateController {
     private Button subscriptionButton;
 
     @FXML
-    void logOut(ActionEvent event) {
+    private void moveToSettingsScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", openCertificatePage);
 
+    }
+
+    @FXML
+    private void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", openCertificatePage);
     }
 
     @FXML

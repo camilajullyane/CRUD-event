@@ -14,26 +14,14 @@ import java.io.IOException;
 public class SubmissionsController {
 
     @FXML
-    private Text articleName;
+    public Button settingsButton;
 
     @FXML
     private ScrollPane scrollPane;
 
 
     @FXML
-    private AnchorPane articlePane;
-
-    @FXML
-    private Text articleText;
-
-    @FXML
     private Button certificateButton;
-
-    @FXML
-    private Text date;
-
-    @FXML
-    private Text hour;
 
     @FXML
     private Button logOutButton;
@@ -49,13 +37,6 @@ public class SubmissionsController {
 
     @FXML
     private StackPane submissionsPage;
-
-    @FXML
-    private Button submitArticleButton;
-
-    @FXML
-    private Button subscriptionButton;
-
 
     @FXML
     void handleSubmitArticle(ActionEvent event) {
@@ -75,6 +56,11 @@ public class SubmissionsController {
     @FXML
     private void moveToSubscriptionScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", submissionsPage);
+    }
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", submissionsPage);
     }
 
     @FXML

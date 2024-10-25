@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="subEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.SubEventUIController">
+<StackPane fx:id="settingPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.SettingsController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -22,7 +22,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -30,7 +30,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToSubscriptionButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToSubscriptionScreen" prefHeight="31.0" prefWidth="97.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -40,13 +40,13 @@
         </Button>
         <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="15.0" />
+                <Font size="15.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionsPage" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionScreen" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -54,7 +54,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" onAction="#moveToCertificateScreen" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -65,9 +65,9 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Text fx:id="userName" fill="WHITE" layoutX="411.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0">
+        <Text fill="WHITE" layoutX="411.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edital Perfil" textAlignment="CENTER" wrappingWidth="183.0">
             <font>
-                <Font size="20.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Text>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
@@ -100,26 +100,33 @@
                 <Image url="@../../../images/deixar.png" />
             </image>
         </ImageView>
-        <Text fill="WHITE" layoutX="448.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub Eventos" wrappingWidth="98.40000000000003">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Text>
-        <Button layoutX="481.0" layoutY="489.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="donwload button" />
-        <ImageView fitHeight="52.0" fitWidth="25.0" layoutX="230.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/back.png" />
-            </image>
-        </ImageView>
-        <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
-        <ScrollPane fx:id="scrollPane" layoutX="210.0" layoutY="106.0" prefHeight="495.0" prefWidth="593.0">
-        </ScrollPane>
-      <ImageView fitHeight="27.0" fitWidth="32.0" layoutX="743.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/settings-icon.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="744.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="20.0" prefWidth="26.0" text="Button" />
-
+      <Line endX="278.0" layoutX="468.0" layoutY="96.0" startX="-209.0" stroke="WHITE" />
+      <Button fx:id="deleteButton" layoutX="675.0" layoutY="539.0" mnemonicParsing="false" style="-fx-background-color: #D42D30; -fx-background-radius: 50;" text="Deletar conta" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <PasswordField fx:id="oldPassword" layoutX="270.0" layoutY="274.0" prefHeight="26.0" prefWidth="183.0" promptText="Senha Atual" style="-fx-background-radius: 50;" />
+      <Line endX="-14.0" endY="164.0" layoutX="516.0" layoutY="258.0" startX="-14.0" startY="-21.0" stroke="WHITE" />
+      <PasswordField fx:id="newPassword" layoutX="270.0" layoutY="337.0" prefHeight="26.0" prefWidth="183.0" promptText="Nova Senha" style="-fx-background-radius: 50;" />
+      <Text fill="WHITE" layoutX="270.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Senha" textAlignment="CENTER" wrappingWidth="183.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="newEmail" layoutX="546.0" layoutY="337.0" prefHeight="26.0" prefWidth="183.0" promptText="Novo Email" style="-fx-background-radius: 50;" />
+      <TextField fx:id="oldEmail" layoutX="546.0" layoutY="274.0" prefHeight="26.0" prefWidth="183.0" promptText="Email atual" style="-fx-background-radius: 50;" />
+      <Text fill="WHITE" layoutX="551.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Email" textAlignment="CENTER" wrappingWidth="183.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="changeEmailButton" layoutX="311.0" layoutY="410.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: #2DD4BF; -fx-background-radius: 50;" text="Alterar senha" textFill="WHITE" />
+      <Button fx:id="changePasswordButton" layoutX="594.0" layoutY="410.0" mnemonicParsing="false" onAction="#changeEmail" style="-fx-background-color: #2DD4BF; -fx-background-radius: 50;" text="Alterar Email" textFill="WHITE" />
+      <Label fx:id="emailLabel" layoutX="550.0" layoutY="382.0" prefHeight="18.0" prefWidth="200.0" text="label" textFill="#ee0f0f" visible="false" />
+      <Label fx:id="passwordLabel" layoutX="269.0" layoutY="382.0" prefHeight="18.0" prefWidth="200.0" text="Label" textFill="#ee0f0f" visible="false" />
     </AnchorPane>
 </StackPane>

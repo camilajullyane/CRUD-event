@@ -23,15 +23,15 @@ public class ArticleUtility {
         ArticleUtility.csvFilePath = csvFilePath;
     }
 
-    public void submitArticle(String CPF, String articleName, String eventID, String articleAbstract) {
+    public void submitArticle(String cpf, String articleName, String eventID, String articleAbstract) {
         List<User> users = userUtility.getAllUsers();
         List<Event> events = eventUtility.getAllEvents();
 
         for (Event event : events) {
             if (event.getId().equals(eventID)) {
                 for (User user : users) {
-                    if (user.getCPF().equals(CPF)) {
-                        Article newArticle = new Article(articleName, eventID, CPF, articleAbstract);
+                    if (user.getCPF().equals(cpf)) {
+                        Article newArticle = new Article(articleName, eventID, cpf, articleAbstract);
                         user.addArticleID(newArticle.getArticleID());
                         event.addArticleList(newArticle.getArticleID());
                     }

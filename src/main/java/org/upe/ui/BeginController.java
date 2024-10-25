@@ -1,6 +1,5 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -12,13 +11,13 @@ import java.io.IOException;
 
 public class BeginController {
     @FXML
+    Button settingsButton;
+
+    @FXML
     Button subscriptionButton;
 
     @FXML
     Button createEventButton;
-
-    @FXML
-    Button createAicleButton;
 
     @FXML
     StackPane beginPage;
@@ -42,18 +41,18 @@ public class BeginController {
     }
 
     @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", beginPage);
+    }
+
+    @FXML
     private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
     }
 
     @FXML
     private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Programação", beginPage);
-    }
-
-    @FXML
-    private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Programação", beginPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", beginPage);
     }
 
     @FXML
@@ -67,17 +66,12 @@ public class BeginController {
     }
 
     @FXML
-    private void createNewSubEvent() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar Evento", beginPage);
-    }
-
-    @FXML
     private void createNewArticle() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCriandoArtigo.fxml", "Criar Artigo", beginPage);
     }
 
     @FXML
     private void moveToCertificatePage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Criar Artigo", beginPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", beginPage);
     }
 }

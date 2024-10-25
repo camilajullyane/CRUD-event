@@ -13,7 +13,7 @@ public class UserUtility {
     private static final Logger LOGGER = Logger.getLogger(UserUtility.class.getName());
     protected static String csvFilePath = "DB/user.csv";
 
-    public void setCsvFilePath(String csvFilePath) {
+    public static void setCsvFilePath(String csvFilePath) {
         UserUtility.csvFilePath = csvFilePath;
     }
 
@@ -94,7 +94,7 @@ public class UserUtility {
         return new User(name, email, cpf, password, "","", "");
     }
 
-    public boolean updateUserEmail(String cpf, String newEmail) {
+    public boolean updateUserEmail(String email, String newEmail) {
         List<User> users = getAllUsers();
 
         if (findByEmail(newEmail) != null) {
@@ -102,13 +102,26 @@ public class UserUtility {
         }
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getEmail().equals(email)) {
                 user.setEmail(newEmail);
             }
         }
 
         updateFileData(users);
         return true;
+    }
+
+    public boolean updateUserPassword(String cpf, String currentPassword, String newPassword) {
+        List<User> users = getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(cpf) && user.getPassword().equals(currentPassword)) {
+                user.setPassword(newPassword);
+                updateFileData(users);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void deleteUser(String cpf) {

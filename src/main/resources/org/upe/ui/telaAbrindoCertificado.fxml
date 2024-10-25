@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="openCertificatePage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.openCertificateController">
+<StackPane fx:id="openCertificatePage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.OpenCertificateController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -147,5 +147,11 @@
       </ImageView>
       <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToCertificate" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
       <Button layoutX="481.0" layoutY="487.0" mnemonicParsing="false" onAction="#setAlert" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="alertButton" />
+      <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="736.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/settings-icon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="738.0" layoutY="31.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="Button" />
     </AnchorPane>
 </StackPane>

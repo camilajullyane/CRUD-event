@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
-import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -17,9 +16,8 @@ public class CreateEventController {
     UserController userController = new UserController();
     EventController eventController = new EventController();
 
-
     @FXML
-    private Button certificateButton;
+    public Button settingsButton;
 
     @FXML
     private StackPane createEventPage;
@@ -42,20 +40,6 @@ public class CreateEventController {
     @FXML
     Label errorMessage;
 
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button publishEvent;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button submissionsButton;
-
-    @FXML
-    private Button subscriptionButton;
 
     @FXML
     public void initialize() {
@@ -68,18 +52,23 @@ public class CreateEventController {
     }
 
     @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", createEventPage);
+    }
+
+    @FXML
     private void moveToHomeScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", createEventPage);
     }
 
     @FXML
     private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telasubmissões.fxml", "Submissões", createEventPage);
     }
 
     @FXML
     private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", createEventPage);
     }
 
     @FXML
@@ -113,12 +102,12 @@ public class CreateEventController {
         alert.showAndWait();
     }
     @FXML
-    private void handleLogOut() {
-
+    private void handleLogOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", createEventPage);
     }
 
     @FXML
-    private void handleSubscription() {
-
+    private void moveToSubscriptionButton () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", createEventPage);
     }
 }
