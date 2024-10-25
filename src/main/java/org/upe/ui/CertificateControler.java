@@ -50,21 +50,14 @@ public class CertificateControler {
 
     @FXML
     private void moveToSubmissionsPage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Inscrições", certificatePage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", certificatePage);
     }
 
     @FXML
     private void moveToOpenCertificatePage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaAbrindoCertificado.fxml", "Inscrições", certificatePage);
+        SceneLoader.loadScene("/org/upe/ui/telaAbrindoCertificado.fxml", "Certificado", certificatePage);
     }
 
-
-
-    @FXML
-    void handleSubscription(ActionEvent event) {
-
-
-    }
 
     @FXML
     void initialize(ActionEvent event) {
