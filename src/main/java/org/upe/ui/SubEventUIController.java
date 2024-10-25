@@ -13,7 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import org.upe.controllers.SubEventController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
@@ -28,8 +27,6 @@ public class SubEventUIController implements Initializable {
 
     SubEventController subEventController = new SubEventController();
 
-    @FXML
-    StackPane schedulePage;
 
     @FXML
     ScrollPane scrollPane;
@@ -46,8 +43,6 @@ public class SubEventUIController implements Initializable {
     @FXML
     private Button subscriptionButton;
 
-    @FXML
-    private Text userName;
 
     @FXML
     private void moveToSettingsScreen () throws IOException {
@@ -56,17 +51,17 @@ public class SubEventUIController implements Initializable {
     }
 
     @FXML
-    void backToCertificate(ActionEvent event) {
+    void backToCertificate() {
 
     }
 
     @FXML
-    void logOut(ActionEvent event) {
+    void logOut() {
 
     }
 
     @FXML
-    void moveToHomeScreen(ActionEvent event) {
+    void moveToHomeScreen() {
 
     }
 
