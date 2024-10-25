@@ -59,7 +59,7 @@ class UserUtilityTest {
 
     @Test
     void testUpdateUserEmail() {
-        boolean result = userUtility.updateUserEmail("13545345312", "new.email@upe.br");
+        boolean result = userUtility.updateUserEmail("jane.doe@upe.br", "new.email@upe.br");
         assertTrue(result, "The email should be updated successfully");
         User user = userUtility.findByCPF("13545345312");
         assertEquals("new.email@upe.br", user.getEmail(), "The user email should match the new email");

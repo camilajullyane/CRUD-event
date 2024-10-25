@@ -14,6 +14,9 @@ import java.io.IOException;
 public class SubmissionsController {
 
     @FXML
+    public Button settingsButton;
+
+    @FXML
     private Text articleName;
 
     @FXML
@@ -75,6 +78,11 @@ public class SubmissionsController {
     @FXML
     private void moveToSubscriptionScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", submissionsPage);
+    }
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", submissionsPage);
     }
 
     @FXML

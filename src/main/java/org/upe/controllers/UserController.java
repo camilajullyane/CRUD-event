@@ -36,4 +36,12 @@ public class UserController {
         }
         return false;
     }
+
+    public boolean changeEmail(String userEmail, String newEmail) {
+        return userUtility.updateUserEmail(userEmail, newEmail);
+    }
+
+    public boolean changePassword(String cpf, String currentPassword, String newPassword) {
+        return userUtility.updateUserPassword(cpf, currentPassword, newPassword);
+    }
 }
