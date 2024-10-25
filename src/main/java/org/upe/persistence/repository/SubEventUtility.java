@@ -19,7 +19,7 @@ public class SubEventUtility {
     private static final Logger LOGGER = Logger.getLogger(SubEventUtility.class.getName());
     protected static String csvFilePath = "DB/subevent.csv";
 
-    public void setCsvFilePath(String csvFilePath) {
+    public static void setCsvFilePath(String csvFilePath) {
         SubEventUtility.csvFilePath = csvFilePath;
     }
 

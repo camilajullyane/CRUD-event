@@ -1,9 +1,12 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
@@ -109,7 +113,13 @@ public class ScheduleController implements Initializable {
             Button seeSubEvents= new Button("Ver SubEventos");
             seeSubEvents.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 300;" + "-fx-translate-y: 5");
             seeSubEvents.setFont(Font.font("Arial", 14));
-            seeSubEvents.setOnAction(e -> showSubEvents());
+            seeSubEvents.setOnAction(e -> {
+                try {
+                    showSubEvents(event);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
 
 
             Label locationLabel = new Label(event.getLocal());
@@ -145,7 +155,8 @@ public class ScheduleController implements Initializable {
         }
     }
 
-    private void showSubEvents() {
-
+    private void showSubEvents(EventInterface event) throws IOException {
+        SceneLoader.setEventData(event);
+        SceneLoader.loadScene("/org/upe/ui/telaSubEvento.fxml", "SubEventos", schedulePage);
     }
 }
