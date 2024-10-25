@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.SubEventController;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
@@ -15,9 +16,6 @@ public class CreateSubEventController {
 
     @FXML
     private TextField subEventName;
-
-    @FXML
-    private TextField subEventParentEventID;
 
     @FXML
     private TextField subEventDescription;
@@ -61,7 +59,7 @@ public class CreateSubEventController {
 
     @FXML
     private void handleCreateSubEvent() {
-        if(subEventName.getText().isEmpty() || subEventParentEventID.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
+        if(subEventName.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
                 subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || subEventSpeaker.getText().isEmpty()) {
             errorMessage.setVisible(true);
             return;
@@ -70,24 +68,26 @@ public class CreateSubEventController {
         SubEventController subEventController = new SubEventController();
 
         String name = subEventName.getText();
-        String parentEventID = subEventParentEventID.getText();
         String description = subEventDescription.getText();
         String hour = subEventHour.getText();
         String location = subEventLocation.getText();
         String speaker = subEventSpeaker.getText();
 
-        subEventController.createSubEvent(parentEventID, name, location, hour, description, speaker);
-
-        subEventName.setText("");
-        subEventDescription.setText("");
-        subEventLocation.setText("");
-        subEventSpeaker.setText("");
+        EventInterface currentEvent = SceneLoader.getEventData();
+        subEventController.createSubEvent(currentEvent.getId(), name, location, hour, description, speaker);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");
         alert.setHeaderText(null);
         alert.setContentText("SubEvento criado com sucesso!");
         alert.showAndWait();
+
+        subEventName.setText("");
+        subEventDescription.setText("");
+        subEventHour.setText("");
+        subEventLocation.setText("");
+        subEventSpeaker.setText("");
+
     }
     @FXML
     private void handleLogOut() throws IOException {
