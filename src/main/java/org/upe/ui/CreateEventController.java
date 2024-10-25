@@ -17,6 +17,8 @@ public class CreateEventController {
     UserController userController = new UserController();
     EventController eventController = new EventController();
 
+    @FXML
+    public Button settingsButton;
 
     @FXML
     private Button certificateButton;
@@ -65,6 +67,11 @@ public class CreateEventController {
     @FXML
     private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createEventPage);
+    }
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", createEventPage);
     }
 
     @FXML

@@ -14,6 +14,7 @@ public class StartApp extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Even2");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

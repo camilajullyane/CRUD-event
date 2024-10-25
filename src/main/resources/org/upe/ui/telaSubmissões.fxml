@@ -106,5 +106,12 @@
          </font>
       </Text>
       <ScrollPane fx:id="scrollPane" layoutX="234.0" layoutY="106.0" prefHeight="304.0" prefWidth="537.0" />
+
+        <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="748.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/settings-icon.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="settingsButton" onAction="#moveToSettingsScreen" layoutX="744.0" layoutY="25.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="29.0" />
     </AnchorPane>
 </StackPane>

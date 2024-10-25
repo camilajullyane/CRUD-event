@@ -35,6 +35,9 @@ public class ScheduleController implements Initializable {
 
     @FXML
     ScrollPane scrollPane;
+
+    @FXML
+    Button settingsButton;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,6 +47,11 @@ public class ScheduleController implements Initializable {
     @FXML
     private void moveToHomeScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", schedulePage);
+    }
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", schedulePage);
     }
 
     @FXML
