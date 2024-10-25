@@ -23,6 +23,12 @@ public class openCertificateController {
     private Button subscriptionButton;
 
     @FXML
+    private void moveToSettingsScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", openCertificatePage);
+
+    }
+
+    @FXML
     private void logOut() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", openCertificatePage);
     }
