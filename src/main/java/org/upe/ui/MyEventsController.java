@@ -5,11 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -23,73 +20,28 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SubscriptionController implements Initializable {
+public class MyEventsController implements Initializable {
 
+    EventController eventController = new EventController();
     private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
     private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
 
     @FXML
-    Button settingsButton;
-
-    EventController eventController = new EventController();
+    Button configButton;
 
     @FXML
-    ScrollPane subscriptionScroll;
+    StackPane myEventsPage;
 
     @FXML
-    Button homeButton;
-
-    @FXML
-    Button logOutButton;
-
-    @FXML
-    Button scheduleButton;
-
-    @FXML
-    StackPane mySubscriptionPage;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        showMyEvents();
-    }
-
-    @FXML
-    private void logOut() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", mySubscriptionPage);
-    }
-
-    @FXML
-    private void homePage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", mySubscriptionPage);
-    }
-
-    @FXML
-    private void moveToSettingsScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", mySubscriptionPage);
-    }
-
-    @FXML
-    private void schedulePage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", mySubscriptionPage);
-    }
-
-    @FXML
-    private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", mySubscriptionPage);
-    }
-
-    @FXML
-    private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", mySubscriptionPage);
-    }
+    ScrollPane scrollPane;
 
     @FXML
     private void showMyEvents() {
 
-        List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCPF());
+        List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());;
 
-        subscriptionScroll.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
+        scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
 
         mainContainer.getChildren().clear();
@@ -103,19 +55,19 @@ public class SubscriptionController implements Initializable {
             eventContainer.setPrefHeight(260);
             eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
             eventContainer.setSpacing(10);
-            eventContainer.setPadding(new Insets(10, 10, 10, 10));
+            eventContainer.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
             eventContainer.setAlignment(Pos.CENTER);
 
-            Label title = new Label("Você não tem eventos inscritos");
-            title.setFont(Font.font("Roboto", 16));
-            title.setTextFill(Color.WHITE);
+            javafx.scene.control.Label title = new javafx.scene.control.Label("Você não tem eventos criados");
+            title.setFont(javafx.scene.text.Font.font("Roboto", 16));
+            title.setTextFill(javafx.scene.paint.Color.WHITE);
             VBox.setVgrow(title, Priority.ALWAYS);
             title.setMaxWidth(Double.MAX_VALUE);
             title.setAlignment(Pos.CENTER);
 
             eventContainer.getChildren().add(title);
 
-            mainContainer.setPadding(new Insets(20, 20, 20, 20));
+            mainContainer.setPadding(new javafx.geometry.Insets(20, 20, 20, 20));
             mainContainer.setAlignment(Pos.CENTER);
             mainContainer.getChildren().add(eventContainer);
         } else {
@@ -131,36 +83,36 @@ public class SubscriptionController implements Initializable {
                 eventContainer.setAlignment(Pos.CENTER);
                 VBox.setVgrow(eventContainer, Priority.ALWAYS);
 
-                Label titleLabel = new Label(event.getName());
+                javafx.scene.control.Label titleLabel = new javafx.scene.control.Label(event.getName());
                 titleLabel.setPrefHeight(100);
                 titleLabel.setPrefWidth(557);
                 titleLabel.setStyle("-fx-text-fill: #2dd4bf;" +
-                                    "-fx-font-weight: bold;" +
-                                    "-fx-alignment: top-center;" +
-                                    "-fx-translate-y: 70;");
-                titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
+                        "-fx-font-weight: bold;" +
+                        "-fx-alignment: top-center;" +
+                        "-fx-translate-y: 70;");
+                titleLabel.setFont(javafx.scene.text.Font.font(FONT_STYLE_BOLD_ITALIC, 16));
                 titleLabel.setAlignment(Pos.CENTER);
                 titleLabel.setWrapText(true);
 
-                Label descriptionLabel = new Label(event.getDescription());
+                javafx.scene.control.Label descriptionLabel = new javafx.scene.control.Label(event.getDescription());
                 descriptionLabel.setPrefHeight(20);
                 descriptionLabel.setPrefWidth(550);
                 descriptionLabel.setStyle("-fx-translate-x: 10;" +
-                                          "-fx-translate-y: 80");
+                        "-fx-translate-y: 80");
                 descriptionLabel.setTextFill(color);
                 descriptionLabel.setAlignment(Pos.CENTER_LEFT);
                 descriptionLabel.setWrapText(true);
 
-                Label startDateLabel = new Label("Data Inicial");
+                javafx.scene.control.Label startDateLabel = new javafx.scene.control.Label("Data Inicial");
                 startDateLabel.setStyle("-fx-font-size: 14px;" +
-                                        "-fx-text-fill: #ffffff;" +
-                                        "-fx-font-weight: bold;" +
-                                        "-fx-translate-x:-230;" +
-                                        "-fx-translate-y: 127");
-                startDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
+                        "-fx-text-fill: #ffffff;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-translate-x:-230;" +
+                        "-fx-translate-y: 127");
+                startDateLabel.setFont(javafx.scene.text.Font.font(FONT_STYLE_BOLD_ITALIC));
                 startDateLabel.setAlignment(Pos.CENTER_LEFT);
 
-                Label startDateValue = new Label(event.getDate());
+                javafx.scene.control.Label startDateValue = new javafx.scene.control.Label(event.getDate());
                 startDateValue.setPrefHeight(20);
                 startDateValue.setPrefWidth(89);
                 startDateValue.setStyle("-fx-font-size: 12px;" +
@@ -170,7 +122,7 @@ public class SubscriptionController implements Initializable {
                 startDateValue.setTextFill(color);
                 startDateValue.setAlignment(Pos.CENTER_LEFT);
 
-                Label endDateLabel = new Label("Data Final");
+                javafx.scene.control.Label endDateLabel = new javafx.scene.control.Label("Data Final");
                 endDateLabel.setPrefHeight(17);
                 endDateLabel.setPrefWidth(89);
                 endDateLabel.setStyle("-fx-font-size: 14px;" +
@@ -178,19 +130,19 @@ public class SubscriptionController implements Initializable {
                         "-fx-font-weight: bold;" +
                         "-fx-translate-x: -100;" +
                         "-fx-translate-y: 70");
-                endDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
+                endDateLabel.setFont(javafx.scene.text.Font.font(FONT_STYLE_BOLD_ITALIC));
                 endDateLabel.setAlignment(Pos.CENTER_LEFT);
 
-                Label endDateValue = new Label(event.getDate());
+                javafx.scene.control.Label endDateValue = new javafx.scene.control.Label(event.getDate());
                 endDateValue.setStyle("-fx-font-size: 12px;" +
                         "-fx-text-fill: #cdc7c7;" +
                         "-fx-translate-x: -90;" +
                         "-fx-translate-y:63");
                 endDateValue.setTextFill(color);
-                endDateValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
+                endDateValue.setFont(javafx.scene.text.Font.font(FONT_SYSTEM_ITALIC));
                 endDateValue.setAlignment(Pos.CENTER_LEFT);
 
-                Label locationLabel = new Label("Local");
+                javafx.scene.control.Label locationLabel = new javafx.scene.control.Label("Local");
                 locationLabel.setPrefHeight(17);
                 locationLabel.setPrefWidth(127);
                 locationLabel.setStyle("-fx-font-size: 14px;" +
@@ -198,22 +150,22 @@ public class SubscriptionController implements Initializable {
                         "-fx-font-weight: bold;" +
                         "-fx-translate-x: 60;" +
                         "-fx-translate-y: 13");
-                locationLabel.setTextFill(Color.WHITE);
-                locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
+                locationLabel.setTextFill(javafx.scene.paint.Color.WHITE);
+                locationLabel.setFont(javafx.scene.text.Font.font(FONT_STYLE_BOLD_ITALIC));
                 locationLabel.setAlignment(Pos.CENTER_LEFT);
 
-                Label locationValue = new Label(event.getLocal());
+                javafx.scene.control.Label locationValue = new javafx.scene.control.Label(event.getLocal());
                 locationValue.setPrefHeight(20);
                 locationValue.setPrefWidth(127);
                 locationValue.setStyle("-fx-font-size: 12px;" +
-                                        "-fx-text-fill: #cdc7c7;" +
-                                        "-fx-translate-x: 60;" +
-                                        "-fx-translate-y: 7");
+                        "-fx-text-fill: #cdc7c7;" +
+                        "-fx-translate-x: 60;" +
+                        "-fx-translate-y: 7");
                 locationValue.setTextFill(color);
-                locationValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
+                locationValue.setFont(javafx.scene.text.Font.font(FONT_SYSTEM_ITALIC));
                 locationValue.setAlignment(Pos.CENTER_LEFT);
 
-                Label ownerLabel = new Label("Dono do Evento");
+                javafx.scene.control.Label ownerLabel = new javafx.scene.control.Label("Dono do Evento");
                 ownerLabel.setPrefHeight(17);
                 ownerLabel.setPrefWidth(200);
                 ownerLabel.setStyle("-fx-font-size: 14px;" +
@@ -222,10 +174,10 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: 170;" +
                         "-fx-translate-y: -43");
                 ownerLabel.setTextFill(Color.WHITE);
-                ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
+                ownerLabel.setFont(javafx.scene.text.Font.font(FONT_STYLE_BOLD_ITALIC));
                 ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
-                Label ownerValue = new Label(event.getOrganization());
+                javafx.scene.control.Label ownerValue = new javafx.scene.control.Label(event.getOrganization());
                 ownerValue.setPrefHeight(20);
                 ownerValue.setPrefWidth(157);
                 ownerValue.setStyle("-fx-font-size: 14px;" +
@@ -236,7 +188,7 @@ public class SubscriptionController implements Initializable {
                 ownerValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
                 ownerValue.setAlignment(Pos.CENTER_LEFT);
 
-                Button cancelButton = new Button("Cancelar Inscrição");
+                javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Cancelar Inscrição");
                 cancelButton.setStyle("-fx-background-color: transparent;  " +
                         "-fx-font-size: 12px;" +
                         "-fx-text-fill: #bbbbbb;" +
@@ -251,10 +203,50 @@ public class SubscriptionController implements Initializable {
             });
         }
 
-        subscriptionScroll.setContent(mainContainer);
-        subscriptionScroll.setFitToWidth(true);
-        subscriptionScroll.setFitToHeight(true);
+        scrollPane.setContent(mainContainer);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        showMyEvents();
+    }
+
+    @FXML
+    private void moveToSettingsScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", myEventsPage);
+
+    }
+
+    @FXML
+    private void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", myEventsPage);
+    }
+
+    @FXML
+    private void moveToScheduleScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", myEventsPage);
+    }
+
+    @FXML
+    private void moveToHomeScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", myEventsPage);
+    }
+
+    @FXML
+    private void moveToSubscriptionButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", myEventsPage);
+    }
+
+    @FXML
+    private void moveToSubmissionsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", myEventsPage);
+    }
+
+    @FXML
+    private void backToCertificate() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Submissões", myEventsPage);
+    }
 
 }

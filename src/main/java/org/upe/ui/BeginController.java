@@ -24,6 +24,9 @@ public class BeginController {
 
     @FXML
     Button logOutButton;
+
+    @FXML
+    Button myEventsButton;
   
     @FXML
     Text userName;
@@ -73,5 +76,10 @@ public class BeginController {
     @FXML
     private void moveToCertificatePage() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", beginPage);
+    }
+
+    @FXML
+    private void moveToMyEventsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/myEvents.fxml", "Inscrições", beginPage);
     }
 }
