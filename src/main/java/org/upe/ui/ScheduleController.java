@@ -109,7 +109,7 @@ public class ScheduleController implements Initializable {
             Button seeSubEvents= new Button("Ver SubEventos");
             seeSubEvents.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 300;" + "-fx-translate-y: 5");
             seeSubEvents.setFont(Font.font("Arial", 14));
-            seeSubEvents.setOnAction(e -> showSubEvents(event));
+            seeSubEvents.setOnAction(e -> showSubEvents());
 
 
             Label locationLabel = new Label(event.getLocal());
@@ -145,7 +145,7 @@ public class ScheduleController implements Initializable {
         }
     }
 
-    private void showSubEvents(EventInterface event) {
+    private void showSubEvents() {
 
     }
 }

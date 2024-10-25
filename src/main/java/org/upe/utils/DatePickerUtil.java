@@ -7,6 +7,11 @@ import javafx.util.Callback;
 import java.time.LocalDate;
 
 public class DatePickerUtil {
+
+    private DatePickerUtil() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
     public static void restrictDatePicker(DatePicker datePicker) {
         datePicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
             @Override
@@ -25,5 +30,6 @@ public class DatePickerUtil {
                 };
             }
         });
+
     }
 }
