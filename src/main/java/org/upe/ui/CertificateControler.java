@@ -1,6 +1,5 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -29,11 +28,6 @@ public class CertificateControler {
 
     @FXML
     private Text userName;
-
-    @FXML
-    void handleScheduleButton(ActionEvent event) {
-
-    }
 
         @FXML
         private void logOut() throws IOException {

@@ -60,17 +60,17 @@ public class CreateSubEventController {
 
     @FXML
     private void moveToHomeScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createSubEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", createSubEventPage);
     }
 
     @FXML
     private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createSubEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissão.fxml", "Submissões", createSubEventPage);
     }
 
     @FXML
     private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Programação", createSubEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", createSubEventPage);
     }
 
     @FXML
