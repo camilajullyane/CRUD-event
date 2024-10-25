@@ -111,6 +111,19 @@ public class UserUtility {
         return true;
     }
 
+    public boolean updateUserPassword(String cpf, String currentPassword, String newPassword) {
+        List<User> users = getAllUsers();
+
+        for (User user : users) {
+            if (user.getCPF().equals(cpf) && user.getPassword().equals(currentPassword)) {
+                user.setPassword(newPassword);
+                updateFileData(users);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void deleteUser(String cpf) {
         List<User> users = getAllUsers();
 

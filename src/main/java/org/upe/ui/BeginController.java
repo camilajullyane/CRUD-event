@@ -1,6 +1,5 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -11,6 +10,9 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class BeginController {
+    @FXML
+    Button settingsButton;
+
     @FXML
     Button subscriptionButton;
 
@@ -39,6 +41,11 @@ public class BeginController {
     @FXML
     private void moveToSubscriptionScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", beginPage);
+    }
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", beginPage);
     }
 
     @FXML
