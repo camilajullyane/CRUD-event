@@ -22,6 +22,9 @@ import java.util.ResourceBundle;
 
 public class SubEventUIController implements Initializable {
 
+    private static final String COMMON_LABEL_STYLE = "-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;";
+    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
+
     SubEventController subEventController = new SubEventController();
 
 
@@ -97,7 +100,7 @@ public class SubEventUIController implements Initializable {
             titleLabel.setPrefHeight(30);
             titleLabel.setPrefWidth(500);
             titleLabel.setStyle("-fx-text-fill: #2dd4bf; -fx-font-weight: bold; -fx-alignment: center;");
-            titleLabel.setFont(Font.font("System Bold Italic", 16));
+            titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
             titleLabel.setAlignment(Pos.CENTER);
             titleLabel.setWrapText(true);
 
@@ -112,22 +115,22 @@ public class SubEventUIController implements Initializable {
             Label dateLabel = new Label("Data Inicial: " + subEvent.getDate());
             dateLabel.setPrefHeight(20);
             dateLabel.setPrefWidth(500);
-            dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-            dateLabel.setFont(Font.font("System Bold Italic"));
+            dateLabel.setStyle(COMMON_LABEL_STYLE);
+            dateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
             dateLabel.setAlignment(Pos.CENTER_LEFT);
 
             Label locationLabel = new Label("Local: " + subEvent.getLocal());
             locationLabel.setPrefHeight(20);
             locationLabel.setPrefWidth(500);
-            locationLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-            locationLabel.setFont(Font.font("System Bold Italic"));
+            locationLabel.setStyle(COMMON_LABEL_STYLE);
+            locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
             locationLabel.setAlignment(Pos.CENTER_LEFT);
 
             Label ownerLabel = new Label("Dono do Evento: " + subEvent.getSpeakers());
             ownerLabel.setPrefHeight(20);
             ownerLabel.setPrefWidth(500);
-            ownerLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-            ownerLabel.setFont(Font.font("System Bold Italic"));
+            ownerLabel.setStyle(COMMON_LABEL_STYLE);
+            ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
             ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
             eventContainer.getChildren().addAll(titleLabel, descriptionLabel, dateLabel, locationLabel, ownerLabel);
