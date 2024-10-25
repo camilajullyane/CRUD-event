@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.SubEventController;
 import org.upe.utils.SceneLoader;
-import org.upe.utils.UserSession;
 
 import java.io.IOException;
 
@@ -90,7 +89,7 @@ public class CreateSubEventController {
         String location = subEventLocation.getText();
         String speaker = subEventSpeaker.getText();
 
-        subEventController.createSubEvent(parentEventID, name, hour , location, description, speaker);
+        subEventController.createSubEvent(parentEventID, name, location, hour, description, speaker);
 
         subEventName.setText("");
         subEventDescription.setText("");
