@@ -48,12 +48,7 @@ public class BeginController {
 
     @FXML
     private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Programação", beginPage);
-    }
-
-    @FXML
-    private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Programação", beginPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", beginPage);
     }
 
     @FXML
@@ -68,7 +63,7 @@ public class BeginController {
 
     @FXML
     private void createNewSubEvent() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar Evento", beginPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar Sub Evento", beginPage);
     }
 
     @FXML
@@ -78,6 +73,6 @@ public class BeginController {
 
     @FXML
     private void moveToCertificatePage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Criar Artigo", beginPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", beginPage);
     }
 }

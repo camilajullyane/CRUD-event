@@ -19,7 +19,7 @@ public class ArticleUtility {
     private static final Logger LOGGER = Logger.getLogger(ArticleUtility.class.getName());
     protected static String csvFilePath = "DB/articles.csv";
 
-    public void setCsvFilePath(String csvFilePath) {
+    public static void setCsvFilePath(String csvFilePath) {
         ArticleUtility.csvFilePath = csvFilePath;
     }
 
