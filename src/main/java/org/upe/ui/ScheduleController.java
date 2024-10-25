@@ -27,6 +27,9 @@ public class ScheduleController implements Initializable {
     EventController eventController = new EventController();
 
     @FXML
+    Button settingsButton;
+
+    @FXML
     StackPane schedulePage;
 
     @FXML
@@ -146,7 +149,13 @@ public class ScheduleController implements Initializable {
                 Button seeSubEvents = new Button("Ver SubEventos");
                 seeSubEvents.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 300;" + "-fx-translate-y: -120");
                 seeSubEvents.setFont(Font.font("Arial", 14));
-                seeSubEvents.setOnAction(e -> showSubEvents());
+                seeSubEvents.setOnAction(e -> {
+                    try {
+                        showSubEvents(event);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
 
                 Label locationValue = new Label(event.getLocal());
                 locationValue.setStyle("-fx-font-size: 12px;" + "-fx-text-fill: #cdc7c7;" + "-fx-translate-x: 130;" + "-fx-translate-y: -75");
@@ -183,7 +192,14 @@ public class ScheduleController implements Initializable {
         }
     }
 
-    private void showSubEvents() {
+    @FXML
+    private void showSubEvents(EventInterface event) throws IOException {
+        SceneLoader.setEventData(event);
+        SceneLoader.loadScene("/org/upe/ui/telaSubEvento.fxml", "SubEventos", schedulePage);
+    }
 
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Login", schedulePage);
     }
 }
