@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.upe.utils.SceneLoader;
@@ -37,11 +36,6 @@ public class SubmissionsController {
 
     @FXML
     private StackPane submissionsPage;
-
-    @FXML
-    void handleSubmitArticle(ActionEvent event) {
-
-    }
 
     @FXML
     private void logOut(ActionEvent event) throws IOException {
