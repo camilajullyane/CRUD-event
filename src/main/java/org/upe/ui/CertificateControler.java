@@ -34,6 +34,11 @@ public class CertificateControler {
     }
 
     @FXML
+    private void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", certificatePage);
+    }
+
+    @FXML
     private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", certificatePage);
     }
@@ -65,13 +70,5 @@ public class CertificateControler {
 
 
     }
-
-    @FXML
-    void logOut(ActionEvent event) {
-
-
-    }
-
-
 
 }
