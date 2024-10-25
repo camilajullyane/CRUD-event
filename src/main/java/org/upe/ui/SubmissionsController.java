@@ -3,6 +3,7 @@ package org.upe.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -14,6 +15,10 @@ public class SubmissionsController {
 
     @FXML
     private Text articleName;
+
+    @FXML
+    private ScrollPane scrollPane;
+
 
     @FXML
     private AnchorPane articlePane;
@@ -50,6 +55,7 @@ public class SubmissionsController {
 
     @FXML
     private Button subscriptionButton;
+
 
     @FXML
     void handleSubmitArticle(ActionEvent event) {

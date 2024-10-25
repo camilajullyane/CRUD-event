@@ -105,6 +105,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <ScrollPane layoutX="234.0" layoutY="106.0" prefHeight="304.0" prefWidth="537.0" />
+      <ScrollPane fx:id="scrollPane" layoutX="234.0" layoutY="106.0" prefHeight="304.0" prefWidth="537.0" />
     </AnchorPane>
 </StackPane>
