@@ -19,13 +19,7 @@ public class CreateArticleCotroller {
     public Button settingsButton;
 
     @FXML
-    private TextField articleKeyWords;
-
-    @FXML
     private TextField articleName;
-
-    @FXML
-    private Button articleSave;
 
     @FXML
     private TextField articleText;
@@ -34,25 +28,7 @@ public class CreateArticleCotroller {
     private Text errorMessage;
 
     @FXML
-    private Button certificateButton;
-
-    @FXML
     private StackPane createArticle;
-
-    @FXML
-    private Button homeButton;
-
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button submissionsButton;
-
-    @FXML
-    private Button subscriptionButton;
 
     @FXML
     private void moveToSettingsScreen() throws IOException {

@@ -1,11 +1,9 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Priority;
@@ -17,7 +15,6 @@ import org.upe.controllers.SubEventController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,17 +29,7 @@ public class SubEventUIController implements Initializable {
     ScrollPane scrollPane;
 
     @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
     private StackPane subEventPage;
-
-    @FXML
-    private Button subscriptionButton;
-
 
     @FXML
     private void moveToSettingsScreen () throws IOException {
@@ -51,28 +38,29 @@ public class SubEventUIController implements Initializable {
     }
 
     @FXML
-    void logOut() {
-
+    void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", subEventPage);
     }
 
     @FXML
-    void moveToHomeScreen() {
-
+    private void moveToHomeScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", subEventPage);
     }
 
     @FXML
-    void moveToScheduleScreen(ActionEvent event) {
-
+    private void moveToScheduleScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", subEventPage);
     }
 
     @FXML
-    void moveToSubmissionsPage(ActionEvent event) {
-
+    private void moveToSubmissionsPage () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", subEventPage);
     }
 
-    @FXML
-    void moveToSubscriptionButton(ActionEvent event) {
 
+    @FXML
+    private void moveToSubscriptionButton () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", subEventPage);
     }
 
     @Override
