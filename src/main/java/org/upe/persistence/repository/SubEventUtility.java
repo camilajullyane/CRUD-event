@@ -118,10 +118,10 @@ public class SubEventUtility {
         return false;
     }
 
-    public boolean updateSubEventDate(String ParentEventID, String newDate) {
+    public boolean updateSubEventDate(String parentEventID, String newDate) {
         List<SubEvent> subEvents = getAllSubEvents();
         for (SubEvent subEvent : subEvents) {
-            if (subEvent.getParentEventID().equals(ParentEventID)) {
+            if (subEvent.getParentEventID().equals(parentEventID)) {
                 subEvent.setDate(newDate);
                 saveSubEvents(subEvents);
                 return true;
