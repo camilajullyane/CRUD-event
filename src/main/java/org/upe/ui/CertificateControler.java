@@ -54,7 +54,7 @@ public class CertificateControler {
 
     @FXML
     private void moveToMyEventsPage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaMyEvents.fxml", "Configurações", certificatePage);
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Meus Eventos", certificatePage);
     }
 
 
