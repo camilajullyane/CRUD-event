@@ -1,5 +1,6 @@
 package org.upe.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -36,8 +37,23 @@ public class BeginController {
     }
 
     @FXML
-    private void handleSubscription() throws IOException {
+    private void moveToSubscriptionScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", beginPage);
+    }
+
+    @FXML
+    private void moveToScheduleScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
+    }
+
+    @FXML
+    private void moveToSubmissionScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Programação", beginPage);
+    }
+
+    @FXML
+    private void moveToCertificateScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Programação", beginPage);
     }
 
     @FXML
@@ -46,13 +62,13 @@ public class BeginController {
     }
 
     @FXML
-    private void handleScheduleButton() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", beginPage);
+    private void createNewEvent() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Criar Evento", beginPage);
     }
 
     @FXML
-    private void createNewEvent() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Criar Evento", beginPage);
+    private void createNewSubEvent() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar Evento", beginPage);
     }
 
     @FXML

@@ -19,7 +19,7 @@
             <rotationAxis>
                 <Point3D />
             </rotationAxis></Rectangle>
-        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
+        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -27,7 +27,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -35,7 +35,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSubscriptionButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToSubscriptionScreen" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -43,7 +43,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#handleScheduleButton" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -59,7 +59,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+        <Button fx:id="certificateButton" layoutX="40.0" layoutY="210.0" mnemonicParsing="false" onAction="#moveToCertificateScreen" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>

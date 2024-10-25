@@ -57,30 +57,27 @@ public class SubmissionsController {
     }
 
     @FXML
-    void handleLogOut(ActionEvent event) throws IOException {
+    private void logOut(ActionEvent event) throws IOException {
         SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", submissionsPage);
     }
 
     @FXML
-    private void handleScheduleButton() throws IOException {
+    private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", submissionsPage);
     }
 
     @FXML
-    private void handleSubscriptionButton() throws IOException {
+    private void moveToSubscriptionScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", submissionsPage);
     }
 
     @FXML
-    private void handleHomeButton() throws IOException {
+    private void moveToHomeScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Inicio", submissionsPage);
     }
 
-    //@FXML
-   // private void handleCertificateButton() throws IOException {
-     //   SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", submissionsPage);
-    //}
-
-
-
+    @FXML
+    private void moveToCertificateScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", submissionsPage);
+    }
 }
