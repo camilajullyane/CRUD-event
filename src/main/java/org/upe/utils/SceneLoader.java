@@ -14,6 +14,7 @@ public class SceneLoader {
         Scene scene = new Scene(screen);
         Stage stage = (Stage) currentPage.getScene().getWindow();
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle(title);
     }
 }
