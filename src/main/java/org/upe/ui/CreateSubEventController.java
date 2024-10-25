@@ -53,6 +53,11 @@ public class CreateSubEventController {
     }
 
     @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", createSubEventPage);
+    }
+
+    @FXML
     private void handleCreateSubEvent() {
         if(subEventName.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
                 subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || subEventSpeaker.getText().isEmpty()) {

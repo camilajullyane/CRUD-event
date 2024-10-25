@@ -65,6 +65,11 @@ public class ScheduleController implements Initializable {
         SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Login", schedulePage);
     }
 
+    @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", schedulePage);
+    }
+
     private void showEvents() {
 
         List<EventInterface> events = eventController.getAllEvents();

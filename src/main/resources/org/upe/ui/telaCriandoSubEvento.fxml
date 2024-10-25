@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="createSubEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateSubEventController">
+<StackPane fx:id="createSubEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateSubEventController">
 
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
@@ -139,6 +139,22 @@
                 <Image url="@../../../images/deixar.png" />
             </image>
         </ImageView>
+      <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToMyEventsPage" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/calendar.png" />
+         </image>
+      </ImageView>
     </AnchorPane>
 
 </StackPane>

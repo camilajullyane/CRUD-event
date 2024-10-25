@@ -59,6 +59,11 @@ public class OpenCertificateController {
     }
 
     @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", openCertificatePage);
+    }
+
+    @FXML
     void setAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");
