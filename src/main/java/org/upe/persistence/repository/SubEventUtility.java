@@ -187,22 +187,10 @@ public class SubEventUtility {
 
     public void deleteAttendeeOnList(String userCPF, String subEventID) {
         List<SubEvent> subEvents = getAllSubEvents();
-        //List<SubEvent> subEventsListTemp = new ArrayList<>();
-        //int cont = 0;
 
         for (SubEvent subEvent : subEvents) {
             if (subEvent.getId().equals(subEventID)) {
                 subEvent.deleteAttendee(userCPF);
-        //        Event parentEvent = instanciaEventutility.getEventById(subEvent.getParentEventID());
-        //        List<SubEvent> subEventsList = instanciaEventutility.getAllSubEventsByEvent();
-        //        for (SubEvent subEventInEvent : subEventsList) {
-        //            String[] attendeeList = subEventInEvent.getAttendeesList();
-        //            if (Arrays.asList(attendeeList).contains(userCPF)) {
-        //                cont++;
-        //                subEventsListTemp.add(subEventInEvent);
-        //            }
-        //        }
-        //        if (cont <= 1);
             }
             saveSubEvents(subEvents);
         }
