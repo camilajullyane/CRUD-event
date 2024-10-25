@@ -9,6 +9,8 @@ import org.upe.utils.SceneLoader;
 import java.io.IOException;
 
 public class CertificateControler {
+    @FXML
+    public Button settingsButton;
 
     @FXML
     private StackPane beginPage;
@@ -31,6 +33,11 @@ public class CertificateControler {
     @FXML
     void handleScheduleButton(ActionEvent event) {
 
+    }
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", certificatePage);
     }
 
     @FXML
@@ -61,8 +68,6 @@ public class CertificateControler {
 
     @FXML
     void initialize(ActionEvent event) {
-
-
 
     }
 

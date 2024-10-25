@@ -94,7 +94,7 @@ public class UserUtility {
         return new User(name, email, cpf, password, "","", "");
     }
 
-    public boolean updateUserEmail(String cpf, String newEmail) {
+    public boolean updateUserEmail(String email, String newEmail) {
         List<User> users = getAllUsers();
 
         if (findByEmail(newEmail) != null) {
@@ -102,7 +102,7 @@ public class UserUtility {
         }
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getEmail().equals(email)) {
                 user.setEmail(newEmail);
             }
         }

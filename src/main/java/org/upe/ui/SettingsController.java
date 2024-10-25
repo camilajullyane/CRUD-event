@@ -89,14 +89,14 @@ public class SettingsController {
         String newEmailAddress = newEmail.getText();
 
         if (currentEmail.isEmpty() || newEmailAddress.isEmpty()) {
-            emailLabel.setText("preecha todos os campos");
+            emailLabel.setText("Preecha todos os campos");
             emailLabel.setStyle("-fx-text-fill: red");
             emailLabel.setVisible(true);
             return;
         }
 
         if (!currentEmail.equals(userSession.getCurrentUser().getEmail())) {
-            emailLabel.setText("email atual incorreto.");
+            emailLabel.setText("Email atual incorreto.");
             emailLabel.setStyle("-fx-text-fill: red");
             emailLabel.setVisible(true);
             return;
@@ -127,7 +127,7 @@ public class SettingsController {
         String newPassword = this.newPassword.getText();
 
         if (currentPassword.isEmpty() || newPassword.isEmpty()) {
-            passwordLabel.setText("preencha todos os campos");
+            passwordLabel.setText("Preencha todos os campos");
             passwordLabel.setStyle("-fx-text-fill: red");
             passwordLabel.setVisible(true);
             return;

@@ -101,11 +101,6 @@
             </image>
         </ImageView>
       <Line endX="278.0" layoutX="468.0" layoutY="96.0" startX="-209.0" stroke="WHITE" />
-        <ImageView fx:id="settingIcon" fitHeight="50.0" fitWidth="20.0" layoutX="747.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/settings-icon.png" />
-            </image>
-        </ImageView>
       <Button fx:id="deleteButton" layoutX="675.0" layoutY="539.0" mnemonicParsing="false" style="-fx-background-color: #D42D30; -fx-background-radius: 50;" text="Deletar conta" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -131,7 +126,7 @@
       </Text>
       <Button fx:id="changeEmailButton" layoutX="311.0" layoutY="410.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: #2DD4BF; -fx-background-radius: 50;" text="Alterar senha" textFill="WHITE" />
       <Button fx:id="changePasswordButton" layoutX="594.0" layoutY="410.0" mnemonicParsing="false" onAction="#changeEmail" style="-fx-background-color: #2DD4BF; -fx-background-radius: 50;" text="Alterar Email" textFill="WHITE" />
-      <Label fx:id="emailLabel" layoutX="566.0" layoutY="382.0" prefHeight="18.0" prefWidth="200.0" text="label" textFill="#ee0f0f" visible="false" />
+      <Label fx:id="emailLabel" layoutX="550.0" layoutY="382.0" prefHeight="18.0" prefWidth="200.0" text="label" textFill="#ee0f0f" visible="false" />
       <Label fx:id="passwordLabel" layoutX="269.0" layoutY="382.0" prefHeight="18.0" prefWidth="200.0" text="Label" textFill="#ee0f0f" visible="false" />
     </AnchorPane>
 </StackPane>

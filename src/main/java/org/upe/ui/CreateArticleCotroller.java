@@ -15,6 +15,8 @@ import java.io.IOException;
 
 
 public class CreateArticleCotroller {
+    @FXML
+    public Button settingsButton;
 
     @FXML
     private TextField articleKeyWords;
@@ -51,6 +53,11 @@ public class CreateArticleCotroller {
 
     @FXML
     private Button subscriptionButton;
+
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", createArticle);
+    }
 
     @FXML
     void handleArticle() {
