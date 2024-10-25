@@ -86,6 +86,11 @@ public class SettingsController {
     }
 
     @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", settingPage);
+    }
+
+    @FXML
     private void changeEmail() {
         String currentEmail = oldEmail.getText();
         String newEmailAddress = newEmail.getText();
@@ -157,6 +162,7 @@ public class SettingsController {
 
         userSession.setCurrentUser(userController.getUserByCPF(userSession.getCurrentUser().getCPF()));
     }
+
 
     private boolean isEmailValid(String email) {
         return email.matches("[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+");

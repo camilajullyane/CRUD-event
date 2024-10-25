@@ -66,6 +66,11 @@ public class SubEventUIController implements Initializable {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", subEventPage);
     }
 
+    @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", subEventPage);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showSubEvents();

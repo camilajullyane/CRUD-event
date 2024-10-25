@@ -14,7 +14,7 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 
-public class CreateArticleCotroller {
+public class CreateArticleController {
     @FXML
     public Button settingsButton;
 
@@ -83,5 +83,9 @@ public class CreateArticleCotroller {
     @FXML
     private void handleCertificatonButton() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", createArticle);
+    }
+    @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", createArticle);
     }
 }

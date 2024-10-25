@@ -85,6 +85,11 @@ public class SubscriptionController implements Initializable {
     }
 
     @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", mySubscriptionPage);
+    }
+
+    @FXML
     private void showMyEvents() {
 
         List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCPF());

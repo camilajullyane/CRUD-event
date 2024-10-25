@@ -66,4 +66,9 @@ public class SubmissionsController {
     private void moveToCertificateScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", submissionsPage);
     }
+
+    @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", submissionsPage);
+    }
 }

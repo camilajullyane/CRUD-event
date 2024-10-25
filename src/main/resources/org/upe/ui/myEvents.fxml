@@ -125,7 +125,7 @@
         <Button fx:id="configButton" layoutX="738.0" layoutY="31.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="Button" />
       <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#backToCertificate" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
          <opaqueInsets>
             <Insets />
