@@ -87,7 +87,7 @@ public class SignUpController implements Initializable {
     }
 
     private boolean isCpfValid(String cpf) {
-        return cpf.matches("[0-9]{11}");
+        return cpf.matches("[\\d]{11}");
     }
 
     private boolean isEmailValid(String email) {

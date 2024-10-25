@@ -59,12 +59,6 @@ public class SubmissionsController {
     @FXML
     private Button subscriptionButton;
 
-
-    @FXML
-    void handleSubmitArticle(ActionEvent event) {
-
-    }
-
     @FXML
     private void logOut(ActionEvent event) throws IOException {
         SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", submissionsPage);
