@@ -177,6 +177,22 @@ public class MyEventsController implements Initializable {
                 ownerLabel.setFont(javafx.scene.text.Font.font(FONT_STYLE_BOLD_ITALIC));
                 ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
+                Button createSubEventButton = new Button("Criar SubEvento");
+                createSubEventButton.setStyle("-fx-background-radius: 25;" +
+                        "-fx-background-color: #2DD4BF;" +
+                        "-fx-text-fill: WHITE;"
+                        + "-fx-translate-x: 100;"
+                        + "-fx-translate-y: -74");
+                createSubEventButton.setFont(Font.font("Arial", 14));
+                createSubEventButton.setOnAction(e -> {
+                    try {
+                        handleCreateSubEvent(event);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
+
                 javafx.scene.control.Label ownerValue = new javafx.scene.control.Label(event.getOrganization());
                 ownerValue.setPrefHeight(20);
                 ownerValue.setPrefWidth(157);
@@ -198,7 +214,7 @@ public class MyEventsController implements Initializable {
                 cancelButton.setTextFill(color);
                 cancelButton.setAlignment(Pos.CENTER_LEFT);
 
-                eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton);
+                eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton, createSubEventButton);
                 mainContainer.getChildren().add(eventContainer);
             });
         }
@@ -247,6 +263,12 @@ public class MyEventsController implements Initializable {
     @FXML
     private void backToCertificate() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Submissões", myEventsPage);
+    }
+
+
+    private void handleCreateSubEvent(EventInterface event) throws IOException {
+        SceneLoader.setEventData(event);
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar SubEvento", myEventsPage);
     }
 
 }
