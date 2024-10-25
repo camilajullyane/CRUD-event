@@ -70,12 +70,12 @@ public class SettingsController {
 
     @FXML
     private void moveToSubmissionScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Programação", settingPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", settingPage);
     }
 
     @FXML
     private void moveToCertificateScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Programação", settingPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", settingPage);
     }
 
     @FXML
