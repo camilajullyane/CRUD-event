@@ -101,14 +101,6 @@
             </image>
         </ImageView>
       <Line endX="278.0" layoutX="468.0" layoutY="96.0" startX="-209.0" stroke="WHITE" />
-      <Button fx:id="deleteButton" layoutX="675.0" layoutY="539.0" mnemonicParsing="false" style="-fx-background-color: #D42D30; -fx-background-radius: 50;" text="Deletar conta" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <PasswordField fx:id="oldPassword" layoutX="270.0" layoutY="274.0" prefHeight="26.0" prefWidth="183.0" promptText="Senha Atual" style="-fx-background-radius: 50;" />
       <Line endX="-14.0" endY="164.0" layoutX="516.0" layoutY="258.0" startX="-14.0" startY="-21.0" stroke="WHITE" />
       <PasswordField fx:id="newPassword" layoutX="270.0" layoutY="337.0" prefHeight="26.0" prefWidth="183.0" promptText="Nova Senha" style="-fx-background-radius: 50;" />
