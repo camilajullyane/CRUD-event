@@ -1,12 +1,9 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
@@ -152,7 +148,7 @@ public class ScheduleController implements Initializable {
         if(!isAlreadySubscribed) {
             alert.setTitle("Inscrição");
             alert.setHeaderText(null);
-            alert.setContentText("Você já está inscrito neste evento!");
+            alert.setContentText("Você já está inscrito neste evento ou é dono do evento!");
             alert.showAndWait();
         } else {
             alert.setTitle("Inscrição");
