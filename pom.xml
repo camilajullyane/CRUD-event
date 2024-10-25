@@ -44,6 +44,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>21.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.6.0</version>
+            <type>maven-plugin</type>
+        </dependency>
 
     </dependencies>
 
@@ -98,16 +104,19 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
+                        <!-- Default configuration for running -->
+                        <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.upe.ui.StartApp</mainClass>
+
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <mainClass>org.upe.ui.Main</mainClass>
+
                         </configuration>
                     </execution>
                 </executions>
@@ -123,12 +132,12 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
+                            <minimizeJar>false</minimizeJar>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <finalName>${project.artifactId}-${project.version}</finalName>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.upe.ui.StartApp</mainClass>
+                                    <mainClass>org.upe.ui.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

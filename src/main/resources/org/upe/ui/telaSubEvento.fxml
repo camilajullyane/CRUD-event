@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="openCertificatePage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.openCertificateController">
+<StackPane fx:id="subEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.openCertificateController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -74,19 +74,7 @@
                 <Font size="20.0" />
             </font>
         </Text>
-        <AnchorPane accessibleRole="BUTTON" layoutX="242.0" layoutY="106.0" prefHeight="330.0" prefWidth="510.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
-            <children>
-                <Text fill="#2dd4bf" layoutX="243.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="25.0">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Text>
-                <ImageView fitHeight="41.0" fitWidth="44.0" layoutX="235.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../images/credencial-de-graduacao.png" />
-                    </image>
-                </ImageView>
-            </children>
+        <AnchorPane accessibleRole="BUTTON" layoutX="242.0" layoutY="99.0" prefHeight="123.0" prefWidth="510.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
@@ -121,31 +109,17 @@
                 <Image url="@../../../images/deixar.png" />
             </image>
         </ImageView>
-        <Text fill="WHITE" layoutX="437.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CERTIFICADOS" wrappingWidth="119.19995117187506">
+        <Text fill="WHITE" layoutX="448.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub Eventos" wrappingWidth="98.40000000000003">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
         </Text>
         <Button layoutX="481.0" layoutY="489.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="donwload button" />
-        <ImageView fitHeight="41.0" fitWidth="32.0" layoutX="481.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="52.0" fitWidth="25.0" layoutX="230.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../../../../../../Downloads/arrow.png" />
+                <Image url="@../../../images/back.png" />
             </image>
-            <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
-            </cursor>
         </ImageView>
-        <Text fill="WHITE" layoutX="366.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clique no ícone para baixar os arquivos" wrappingWidth="262.39990234375006">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Text>
-      <ImageView fitHeight="52.0" fitWidth="25.0" layoutX="230.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/back.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToCertificate" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
-      <Button layoutX="481.0" layoutY="487.0" mnemonicParsing="false" onAction="#setAlert" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="alertButton" />
+        <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToCertificate" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
     </AnchorPane>
 </StackPane>
