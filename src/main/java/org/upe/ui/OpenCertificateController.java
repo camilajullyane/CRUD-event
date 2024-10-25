@@ -9,7 +9,7 @@ import org.upe.utils.SceneLoader;
 import java.io.IOException;
 
 
-public class openCertificateController {
+public class OpenCertificateController {
 
 
     @FXML

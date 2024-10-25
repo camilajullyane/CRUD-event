@@ -11,6 +11,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import org.upe.controllers.EventController;
 import org.upe.persistence.interfaces.EventInterface;
@@ -25,7 +26,11 @@ import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
 
+    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
+
     private static final Logger logger = Logger.getLogger(SubscriptionController.class.getName());
+    private static final String fontSystemItalic = "System Italic";
+    private static final Paint color = Color.web("#cdc7c7");
 
     @FXML
     Button settingsButton;
@@ -138,7 +143,7 @@ public class SubscriptionController implements Initializable {
                                     "-fx-font-weight: bold;" +
                                     "-fx-alignment: top-center;" +
                                     "-fx-translate-y: 70;");
-                titleLabel.setFont(Font.font("System Bold Italic", 16));
+                titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
                 titleLabel.setAlignment(Pos.CENTER);
                 titleLabel.setWrapText(true);
 
@@ -147,7 +152,7 @@ public class SubscriptionController implements Initializable {
                 descriptionLabel.setPrefWidth(550);
                 descriptionLabel.setStyle("-fx-translate-x: 10;" +
                                           "-fx-translate-y: 80");
-                descriptionLabel.setTextFill(Color.web("#cdc7c7"));
+                descriptionLabel.setTextFill(color);
                 descriptionLabel.setAlignment(Pos.CENTER_LEFT);
                 descriptionLabel.setWrapText(true);
 
@@ -157,7 +162,7 @@ public class SubscriptionController implements Initializable {
                                         "-fx-font-weight: bold;" +
                                         "-fx-translate-x:-230;" +
                                         "-fx-translate-y: 127");
-                startDateLabel.setFont(Font.font("System Bold Italic"));
+                startDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 startDateLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label startDateValue = new Label(event.getDate());
@@ -167,7 +172,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-text-fill: #cdc7c7;" +
                         "-fx-translate-x: -220;" +
                         "-fx-translate-y: 120");
-                startDateValue.setTextFill(Color.web("#cdc7c7"));
+                startDateValue.setTextFill(color);
                 startDateValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label endDateLabel = new Label("Data Final");
@@ -178,7 +183,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-font-weight: bold;" +
                         "-fx-translate-x: -100;" +
                         "-fx-translate-y: 70");
-                endDateLabel.setFont(Font.font("System Bold Italic"));
+                endDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 endDateLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label endDateValue = new Label(event.getDate());
@@ -186,8 +191,8 @@ public class SubscriptionController implements Initializable {
                         "-fx-text-fill: #cdc7c7;" +
                         "-fx-translate-x: -90;" +
                         "-fx-translate-y:63");
-                endDateValue.setTextFill(Color.web("#cdc7c7"));
-                endDateValue.setFont(Font.font("System Italic"));
+                endDateValue.setTextFill(color);
+                endDateValue.setFont(Font.font(fontSystemItalic));
                 endDateValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label locationLabel = new Label("Local");
@@ -199,7 +204,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: 60;" +
                         "-fx-translate-y: 13");
                 locationLabel.setTextFill(Color.WHITE);
-                locationLabel.setFont(Font.font("System Bold Italic"));
+                locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 locationLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label locationValue = new Label(event.getLocal());
@@ -209,8 +214,8 @@ public class SubscriptionController implements Initializable {
                                         "-fx-text-fill: #cdc7c7;" +
                                         "-fx-translate-x: 60;" +
                                         "-fx-translate-y: 7");
-                locationValue.setTextFill(Color.web("#cdc7c7"));
-                locationValue.setFont(Font.font("System Italic"));
+                locationValue.setTextFill(color);
+                locationValue.setFont(Font.font(fontSystemItalic));
                 locationValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label ownerLabel = new Label("Dono do Evento");
@@ -222,7 +227,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: 170;" +
                         "-fx-translate-y: -43");
                 ownerLabel.setTextFill(Color.WHITE);
-                ownerLabel.setFont(Font.font("System Bold Italic"));
+                ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label ownerValue = new Label(event.getOrganization());
@@ -232,8 +237,8 @@ public class SubscriptionController implements Initializable {
                         "-fx-text-fill: #cdc7c7;" +
                         "-fx-translate-x: 150;" +
                         "-fx-translate-y: -50");
-                ownerValue.setTextFill(Color.web("#cdc7c7"));
-                ownerValue.setFont(Font.font("System Italic"));
+                ownerValue.setTextFill(color);
+                ownerValue.setFont(Font.font(fontSystemItalic));
                 ownerValue.setAlignment(Pos.CENTER_LEFT);
 
                 Button cancelButton = new Button("Cancelar Inscrição");
@@ -243,7 +248,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-underline: true;" +
                         "-fx-translate-x: 220;" +
                         "-fx-translate-y: -230;");
-                cancelButton.setTextFill(Color.web("#cdc7c7"));
+                cancelButton.setTextFill(color);
                 cancelButton.setAlignment(Pos.CENTER_LEFT);
 
                 eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton);
