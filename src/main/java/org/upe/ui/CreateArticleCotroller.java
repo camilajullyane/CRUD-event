@@ -103,4 +103,9 @@ public class CreateArticleCotroller {
     private void handleSubscriptionButton() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Programação", createArticle);
     }
+
+    @FXML
+    private void handleCertificatonButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", createArticle);
+    }
 }
