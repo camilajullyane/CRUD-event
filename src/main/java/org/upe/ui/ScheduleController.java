@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
+    private static final String FONT_FAMILY = "Arial";
     UserController userController = new UserController();
     EventController eventController = new EventController();
 
@@ -90,7 +91,7 @@ public class ScheduleController implements Initializable {
             eventContainer.setPadding(new Insets(20, 20, 20, 20));
 
             Label title = new Label(event.getName());
-            title.setFont(Font.font("Arial", 18));
+            title.setFont(Font.font(FONT_FAMILY, 18));
             title.setTextFill(Color.WHITE);
             title.setAlignment(Pos.TOP_CENTER);
             VBox.setVgrow(title, Priority.ALWAYS);
@@ -99,24 +100,24 @@ public class ScheduleController implements Initializable {
 
 
             Label description = new Label(event.getDescription());
-            description.setFont(Font.font("Arial", 14));
+            description.setFont(Font.font(FONT_FAMILY, 14));
             description.setTextFill(Color.WHITE);
             description.setWrapText(true);
 
 
             Label dateLabel = new Label(event.getDate());
-            dateLabel.setFont(Font.font("Arial", 14));
+            dateLabel.setFont(Font.font(FONT_FAMILY, 14));
             dateLabel.setTextFill(Color.WHITE);
 
 
             Button signUpButton = new Button("Realizar Inscrição");
             signUpButton.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 100;" + "-fx-translate-y: 50");
-            signUpButton.setFont(Font.font("Arial", 14));
+            signUpButton.setFont(Font.font(FONT_FAMILY, 14));
             signUpButton.setOnAction(e -> signUpEvent(event));
 
             Button seeSubEvents= new Button("Ver SubEventos");
             seeSubEvents.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 300;" + "-fx-translate-y: 5");
-            seeSubEvents.setFont(Font.font("Arial", 14));
+            seeSubEvents.setFont(Font.font(FONT_FAMILY, 14));
             seeSubEvents.setOnAction(e -> {
                 try {
                     showSubEvents(event);
@@ -127,7 +128,7 @@ public class ScheduleController implements Initializable {
 
 
             Label locationLabel = new Label(event.getLocal());
-            locationLabel.setFont(Font.font("Arial", 14));
+            locationLabel.setFont(Font.font(FONT_FAMILY, 14));
             locationLabel.setTextFill(Color.WHITE);
 
             eventContainer.getChildren().addAll(title, description, dateLabel, locationLabel, signUpButton, seeSubEvents);

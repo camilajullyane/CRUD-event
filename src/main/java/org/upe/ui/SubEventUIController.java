@@ -1,11 +1,9 @@
 package org.upe.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Priority;
@@ -24,6 +22,9 @@ import java.util.ResourceBundle;
 
 public class SubEventUIController implements Initializable {
 
+    private static final String COMMON_LABEL_STYLE = "-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;";
+    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
+
     SubEventController subEventController = new SubEventController();
 
 
@@ -31,17 +32,7 @@ public class SubEventUIController implements Initializable {
     ScrollPane scrollPane;
 
     @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
     private StackPane subEventPage;
-
-    @FXML
-    private Button subscriptionButton;
-
 
     @FXML
     private void moveToSettingsScreen () throws IOException {
@@ -50,28 +41,29 @@ public class SubEventUIController implements Initializable {
     }
 
     @FXML
-    void logOut() {
-
+    void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", subEventPage);
     }
 
     @FXML
-    void moveToHomeScreen() {
-
+    private void moveToHomeScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", subEventPage);
     }
 
     @FXML
-    void moveToScheduleScreen(ActionEvent event) {
-
+    private void moveToScheduleScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", subEventPage);
     }
 
     @FXML
-    void moveToSubmissionsPage(ActionEvent event) {
-
+    private void moveToSubmissionsPage () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", subEventPage);
     }
 
-    @FXML
-    void moveToSubscriptionButton(ActionEvent event) {
 
+    @FXML
+    private void moveToSubscriptionButton () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", subEventPage);
     }
 
     @Override
@@ -107,7 +99,7 @@ public class SubEventUIController implements Initializable {
             titleLabel.setPrefHeight(30);
             titleLabel.setPrefWidth(500);
             titleLabel.setStyle("-fx-text-fill: #2dd4bf; -fx-font-weight: bold; -fx-alignment: center;");
-            titleLabel.setFont(Font.font("System Bold Italic", 16));
+            titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
             titleLabel.setAlignment(Pos.CENTER);
             titleLabel.setWrapText(true);
 
@@ -122,22 +114,22 @@ public class SubEventUIController implements Initializable {
             Label dateLabel = new Label("Data Inicial: " + subEvent.getDate());
             dateLabel.setPrefHeight(20);
             dateLabel.setPrefWidth(500);
-            dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-            dateLabel.setFont(Font.font("System Bold Italic"));
+            dateLabel.setStyle(COMMON_LABEL_STYLE);
+            dateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
             dateLabel.setAlignment(Pos.CENTER_LEFT);
 
             Label locationLabel = new Label("Local: " + subEvent.getLocal());
             locationLabel.setPrefHeight(20);
             locationLabel.setPrefWidth(500);
-            locationLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-            locationLabel.setFont(Font.font("System Bold Italic"));
+            locationLabel.setStyle(COMMON_LABEL_STYLE);
+            locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
             locationLabel.setAlignment(Pos.CENTER_LEFT);
 
             Label ownerLabel = new Label("Dono do Evento: " + subEvent.getSpeakers());
             ownerLabel.setPrefHeight(20);
             ownerLabel.setPrefWidth(500);
-            ownerLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-            ownerLabel.setFont(Font.font("System Bold Italic"));
+            ownerLabel.setStyle(COMMON_LABEL_STYLE);
+            ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
             ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
             eventContainer.getChildren().addAll(titleLabel, descriptionLabel, dateLabel, locationLabel, ownerLabel);

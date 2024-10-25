@@ -12,6 +12,8 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class SettingsController {
+    private static final String RED_TEXT_STYLE = "-fx-text-fill: red";
+    private static final String GREEN_TEXT_STYLE = "-fx-text-fill: green";
     UserSession userSession = UserSession.getInstance();
     UserController userController = new UserController();
 
@@ -90,33 +92,33 @@ public class SettingsController {
 
         if (currentEmail.isEmpty() || newEmailAddress.isEmpty()) {
             emailLabel.setText("Preecha todos os campos");
-            emailLabel.setStyle("-fx-text-fill: red");
+            emailLabel.setStyle(RED_TEXT_STYLE);
             emailLabel.setVisible(true);
             return;
         }
 
         if (!currentEmail.equals(userSession.getCurrentUser().getEmail())) {
             emailLabel.setText("Email atual incorreto.");
-            emailLabel.setStyle("-fx-text-fill: red");
+            emailLabel.setStyle(RED_TEXT_STYLE);
             emailLabel.setVisible(true);
             return;
         }
 
         if (!isEmailValid(newEmailAddress)) {
             emailLabel.setText("Email inválido");
-            emailLabel.setStyle("-fx-text-fill: red");
+            emailLabel.setStyle(RED_TEXT_STYLE);
             emailLabel.setVisible(true);
             return;
         }
 
         if(userController.changeEmail(currentEmail, newEmailAddress)) {
             emailLabel.setText("Email alterado com sucesso");
-            emailLabel.setStyle("-fx-text-fill: green");
+            emailLabel.setStyle(GREEN_TEXT_STYLE);
             emailLabel.setVisible(true);
             userSession.setCurrentUser(userController.getUserByCPF(userSession.getCurrentUser().getCPF()));
         } else {
             emailLabel.setText("Email já cadastrado");
-            emailLabel.setStyle("-fx-text-fill: red");
+            emailLabel.setStyle(RED_TEXT_STYLE);
             emailLabel.setVisible(true);
         }
     }
@@ -128,26 +130,26 @@ public class SettingsController {
 
         if (currentPassword.isEmpty() || newPassword.isEmpty()) {
             passwordLabel.setText("Preencha todos os campos");
-            passwordLabel.setStyle("-fx-text-fill: red");
+            passwordLabel.setStyle(RED_TEXT_STYLE);
             passwordLabel.setVisible(true);
             return;
         }
 
         if (!isPasswordValid(newPassword)) {
             passwordLabel.setText("Senha inválida");
-            passwordLabel.setStyle("-fx-text-fill: red");
+            passwordLabel.setStyle(RED_TEXT_STYLE);
             passwordLabel.setVisible(true);
             return;
         }
 
         if (userController.changePassword(userSession.getCurrentUser().getCPF(), currentPassword, newPassword)) {
             passwordLabel.setText("Senha alterada com sucesso");
-            passwordLabel.setStyle("-fx-text-fill: green");
+            passwordLabel.setStyle(GREEN_TEXT_STYLE);
             passwordLabel.setVisible(true);
             userSession.setCurrentUser(userController.getUserByCPF(userSession.getCurrentUser().getCPF()));
         } else {
             passwordLabel.setText("Senha atual incorreta");
-            passwordLabel.setStyle("-fx-text-fill: red");
+            passwordLabel.setStyle(RED_TEXT_STYLE);
             passwordLabel.setVisible(true);
             return;
         }

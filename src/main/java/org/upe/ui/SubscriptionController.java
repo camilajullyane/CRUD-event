@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
 
+    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
+
     private static final Logger logger = Logger.getLogger(SubscriptionController.class.getName());
     private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
@@ -141,7 +143,7 @@ public class SubscriptionController implements Initializable {
                                     "-fx-font-weight: bold;" +
                                     "-fx-alignment: top-center;" +
                                     "-fx-translate-y: 70;");
-                titleLabel.setFont(Font.font("System Bold Italic", 16));
+                titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
                 titleLabel.setAlignment(Pos.CENTER);
                 titleLabel.setWrapText(true);
 
@@ -160,7 +162,7 @@ public class SubscriptionController implements Initializable {
                                         "-fx-font-weight: bold;" +
                                         "-fx-translate-x:-230;" +
                                         "-fx-translate-y: 127");
-                startDateLabel.setFont(Font.font("System Bold Italic"));
+                startDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 startDateLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label startDateValue = new Label(event.getDate());
@@ -181,7 +183,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-font-weight: bold;" +
                         "-fx-translate-x: -100;" +
                         "-fx-translate-y: 70");
-                endDateLabel.setFont(Font.font("System Bold Italic"));
+                endDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 endDateLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label endDateValue = new Label(event.getDate());
@@ -202,7 +204,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: 60;" +
                         "-fx-translate-y: 13");
                 locationLabel.setTextFill(Color.WHITE);
-                locationLabel.setFont(Font.font("System Bold Italic"));
+                locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 locationLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label locationValue = new Label(event.getLocal());
@@ -225,7 +227,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: 170;" +
                         "-fx-translate-y: -43");
                 ownerLabel.setTextFill(Color.WHITE);
-                ownerLabel.setFont(Font.font("System Bold Italic"));
+                ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
                 ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
                 Label ownerValue = new Label(event.getOrganization());
