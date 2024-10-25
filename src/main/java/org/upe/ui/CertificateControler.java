@@ -11,27 +11,7 @@ import java.io.IOException;
 public class CertificateControler {
 
     @FXML
-    private StackPane beginPage;
-
-    @FXML
     private StackPane certificatePage;
-
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button subscriptionButton;
-
-    @FXML
-    private Text userName;
-
-    @FXML
-    void handleScheduleButton(ActionEvent event) {
-
-    }
 
     @FXML
     private void moveToScheduleScreen() throws IOException {
@@ -58,27 +38,11 @@ public class CertificateControler {
         SceneLoader.loadScene("/org/upe/ui/telaAbrindoCertificado.fxml", "Inscrições", certificatePage);
     }
 
-
-
-    @FXML
-    void handleSubscription(ActionEvent event) {
-
-
-    }
-
-    @FXML
-    void initialize(ActionEvent event) {
-
-
-
-    }
-
     @FXML
     void logOut(ActionEvent event) {
 
 
     }
-
 
 
 }

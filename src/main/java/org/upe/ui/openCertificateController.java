@@ -18,15 +18,6 @@ public class openCertificateController {
     private StackPane openCertificatePage;
 
     @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button subscriptionButton;
-
-    @FXML
     void logOut(ActionEvent event) {
 
     }

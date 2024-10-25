@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="subEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.openCertificateController">
+<StackPane fx:id="subEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.SubEventControllerUI">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -115,11 +115,5 @@
             </font>
         </Text>
         <Button layoutX="481.0" layoutY="489.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="donwload button" />
-        <ImageView fitHeight="52.0" fitWidth="25.0" layoutX="230.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/back.png" />
-            </image>
-        </ImageView>
-        <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToCertificate" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
     </AnchorPane>
 </StackPane>

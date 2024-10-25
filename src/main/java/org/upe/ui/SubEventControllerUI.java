@@ -13,41 +13,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.upe.controllers.SubEventController;
 import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.utils.SceneLoader;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.ArrayList;
 
-public class SubEventController {
-
-    UserController userController = new UserController();
-    SubEventController subEventController = new SubEventController();
-
-    @FXML
-    StackPane schedulePage;
-
-    @FXML
-    ScrollPane scrollPane;
-
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button scheduleButton;
+public class SubEventControllerUI {
 
     @FXML
     private StackPane subEventPage;
-
-    @FXML
-    private Button subscriptionButton;
-
-    @FXML
-    private Text userName;
-
-    @FXML
-    void backToCertificate(ActionEvent event) {
-
-    }
 
     @FXML
     void logOut(ActionEvent event) {
@@ -55,28 +32,35 @@ public class SubEventController {
     }
 
     @FXML
-    void moveToHomeScreen(ActionEvent event) {
-
+    private void moveToScheduleScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", subEventPage);
     }
 
     @FXML
-    void moveToScheduleScreen(ActionEvent event) {
-
+    private void moveToHomeScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", subEventPage);
     }
 
     @FXML
-    void moveToSubmissionsPage(ActionEvent event) {
-
+    private void moveToSubscriptionButton() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", subEventPage);
     }
 
     @FXML
-    void moveToSubscriptionButton(ActionEvent event) {
-
+    private void moveToSubmissionsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", subEventPage);
     }
 
-//    private List<SubEventInterface> showSubEvents() {
+
+    UserController userController = new UserController();
+    SubEventController subEventController = new SubEventController();
+
+    @FXML
+    ScrollPane scrollPane;
+
+//    private void showSubEvents() {
 //
-//        List<SubEventInterface> subEvents = subEventController.showSubEvents();
+//        ArrayList<SubEventInterface> subEvents = subEventController.subEventsByEvent();
 //
 //        scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
 //        VBox mainContainer = new VBox();
@@ -86,8 +70,7 @@ public class SubEventController {
 //        mainContainer.setAlignment(Pos.CENTER);
 //
 //        subEvents.forEach(event -> {
-//            VBox eventContainer = new VBox();
-//            eventContainer.setPrefWidth(490);
+//            VBox eventContainer = new VBox();eventContainer.setPrefWidth(490);
 //            eventContainer.setPrefHeight(300);
 //            eventContainer.setStyle("-fx-background-color: rgba(217, 217, 217, 0.1); -fx-background-radius: 25px;");
 //            eventContainer.setSpacing(20);
@@ -130,7 +113,6 @@ public class SubEventController {
 //        scrollPane.setContent(mainContainer);
 //        scrollPane.setFitToWidth(true);
 //        scrollPane.setFitToHeight(true);
-//        return subEvents;
 //    }
-//
+
 }
