@@ -10,7 +10,13 @@ import java.io.IOException;
 
 public class SceneLoader {
 
+
     private static EventInterface eventData;
+
+    private SceneLoader() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
 
     public static void loadScene(String path, String title, StackPane currentPage) throws IOException {
         FXMLLoader loader = new FXMLLoader(SceneLoader.class.getResource(path));

@@ -16,6 +16,7 @@ import org.upe.controllers.EventController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
+import java.util.logging.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +24,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
+
+    private static final Logger logger = Logger.getLogger(SubEventController.class.getName());
 
     EventController eventController = new EventController();
 
@@ -73,10 +76,10 @@ public class SubscriptionController implements Initializable {
 
     @FXML
     private void showMyEvents() {
-        System.out.println("showMyEvents called");
+        logger.info("showMyEvents called");
 
         List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCPF());
-        System.out.println("Number of events: " + events.size());
+        logger.info("Number of events: " + events.size());
 
         subscriptionScroll.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
@@ -243,7 +246,7 @@ public class SubscriptionController implements Initializable {
         subscriptionScroll.setContent(mainContainer);
         subscriptionScroll.setFitToWidth(true);
         subscriptionScroll.setFitToHeight(true);
-        System.out.println("Events displayed");
+        logger.info("Events displayed");
     }
 
 
