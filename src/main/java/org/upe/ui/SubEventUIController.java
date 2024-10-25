@@ -15,7 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.upe.controllers.SubEventController;
-import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
@@ -97,7 +96,6 @@ public class SubEventUIController implements Initializable {
         mainContainer.setAlignment(Pos.CENTER);
 
         subEvents.forEach(subEvent -> {
-            System.out.println("SubEvent name: " + subEvent.getName());
             VBox eventContainer = new VBox();
             eventContainer.setPrefWidth(557);
             eventContainer.setPrefHeight(260);

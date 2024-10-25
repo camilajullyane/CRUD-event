@@ -45,11 +45,11 @@ public class SubEventUtility {
                 String id = values[0];
                 String parentID = values[1];
                 String name = values[2];
-                String hour = values[3];
-                String local = values[4];
-                String description = values[5];
-                String speaker = values[6];
-                String attendeesList = values[7] == null ? "" : values[8];
+                String hour = values[4];
+                String local = values[5];
+                String description = values[6];
+                String speaker = values[7];
+                String attendeesList = values[8] == null ? "" : values[8];
 
                 String date = instanciaEventutility.getEventById(parentID).getDate();
                 SubEvent subEvent = new SubEvent(id, parentID, name, date, hour, local,"", description, speaker,
