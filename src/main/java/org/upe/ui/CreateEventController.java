@@ -72,6 +72,11 @@ public class CreateEventController {
     }
 
     @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaMyEvents.fxml", "Configurações", createEventPage);
+    }
+
+    @FXML
     private void handleCreateEvent() {
         if(eventName.getText().isEmpty() || eventDescription.getText().isEmpty() || eventLocation.getText().isEmpty() ||
                 eventBeginDate.getValue() == null || eventOrganization.getText().isEmpty()) {
