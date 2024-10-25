@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
+<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
          <rotationAxis>
@@ -30,7 +30,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToSubscriptionScreen" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+      <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToSubscriptionScreen" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -70,9 +70,9 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="293.0" layoutY="148.0" prefHeight="313.0" prefWidth="360.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
+      <AnchorPane layoutX="293.0" layoutY="133.0" prefHeight="328.0" prefWidth="360.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
          <children>
-            <Button layoutX="91.0" layoutY="100.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um evento" textFill="WHITE">
+            <Button layoutX="91.0" layoutY="124.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um evento" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -80,15 +80,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="77.0" layoutY="140.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Participar de um Subevento" textFill="WHITE">
-            <font>
-                <Font size="15.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-            </Button>
-            <Button fx:id="createArticleButton" layoutX="91.0" layoutY="180.0" mnemonicParsing="false" onAction="#createNewArticle" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Realizar Submissão" textFill="WHITE">
+            <Button fx:id="createArticleButton" layoutX="91.0" layoutY="171.0" mnemonicParsing="false" onAction="#createNewArticle" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Realizar Submissão" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -96,21 +88,13 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="createEventButton" layoutX="91.0" layoutY="180.0" mnemonicParsing="false" onAction="#createNewEvent" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um evento" textFill="WHITE">
+            <Button fx:id="createEventButton" layoutX="91.0" layoutY="222.0" mnemonicParsing="false" onAction="#createNewEvent" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um evento" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </Button>
-            <Button fx:id="createSubEventButton" layoutX="91.0" layoutY="260.0" mnemonicParsing="false" onAction="#createNewSubEvent" prefHeight="31.0" prefWidth="178.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="Criar um Subevento" textFill="WHITE">
-                <font>
-                    <Font size="15.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
             </Button>
             <Text fill="#aeaeae" layoutX="33.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Você ainda não faz parte de nenhum evento">
                <font>
@@ -149,11 +133,5 @@
             <Image url="@../../../images/deixar.png" />
          </image>
       </ImageView>
-        <ImageView fx:id="settingIcon" fitHeight="50.0" fitWidth="20.0" layoutX="747.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/settings-icon.png" />
-            </image>
-        </ImageView>
-      <Button fx:id="settingsButton" layoutX="743.0" layoutY="29.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="29.0" />
     </AnchorPane>
 </StackPane>

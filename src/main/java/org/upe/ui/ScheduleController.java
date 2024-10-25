@@ -102,23 +102,28 @@ public class ScheduleController implements Initializable {
 
 
             Button signUpButton = new Button("Realizar Inscrição");
-            signUpButton.setStyle("-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-text-fill: WHITE;");
+            signUpButton.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 100;" + "-fx-translate-y: 50");
             signUpButton.setFont(Font.font("Arial", 14));
             signUpButton.setOnAction(e -> signUpEvent(event));
+
+            Button seeSubEvents= new Button("Ver SubEventos");
+            seeSubEvents.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 300;" + "-fx-translate-y: 5");
+            seeSubEvents.setFont(Font.font("Arial", 14));
+            seeSubEvents.setOnAction(e -> showSubEvents());
 
 
             Label locationLabel = new Label(event.getLocal());
             locationLabel.setFont(Font.font("Arial", 14));
             locationLabel.setTextFill(Color.WHITE);
 
-            eventContainer.getChildren().addAll(title, description, dateLabel, locationLabel, signUpButton);
+            eventContainer.getChildren().addAll(title, description, dateLabel, locationLabel, signUpButton, seeSubEvents);
             mainContainer.getChildren().add(eventContainer);
         });
 
         scrollPane.setContent(mainContainer);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
-        }
+    }
 
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
@@ -138,5 +143,9 @@ public class ScheduleController implements Initializable {
             alert.showAndWait();
             UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
         }
+    }
+
+    private void showSubEvents() {
+
     }
 }
