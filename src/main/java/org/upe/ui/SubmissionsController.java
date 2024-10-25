@@ -17,26 +17,11 @@ public class SubmissionsController {
     public Button settingsButton;
 
     @FXML
-    private Text articleName;
-
-    @FXML
     private ScrollPane scrollPane;
 
 
     @FXML
-    private AnchorPane articlePane;
-
-    @FXML
-    private Text articleText;
-
-    @FXML
     private Button certificateButton;
-
-    @FXML
-    private Text date;
-
-    @FXML
-    private Text hour;
 
     @FXML
     private Button logOutButton;
@@ -52,13 +37,6 @@ public class SubmissionsController {
 
     @FXML
     private StackPane submissionsPage;
-
-    @FXML
-    private Button submitArticleButton;
-
-    @FXML
-    private Button subscriptionButton;
-
 
     @FXML
     void handleSubmitArticle(ActionEvent event) {

@@ -11,9 +11,6 @@ import java.io.IOException;
 public class CreateSubEventController {
 
     @FXML
-    private Button certificateButton;
-
-    @FXML
     private StackPane createSubEventPage;
 
     @FXML
@@ -36,21 +33,6 @@ public class CreateSubEventController {
 
     @FXML
     Label errorMessage;
-
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    private Button publishSubEvent;
-
-    @FXML
-    private Button scheduleButton;
-
-    @FXML
-    private Button submissionsButton;
-
-    @FXML
-    private Button subscriptionButton;
 
     @FXML
     private void moveToScheduleScreen() throws IOException {
@@ -103,12 +85,12 @@ public class CreateSubEventController {
         alert.showAndWait();
     }
     @FXML
-    private void handleLogOut() {
-
+    private void handleLogOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", createSubEventPage);
     }
 
     @FXML
-    private void handleSubscription() {
-
+    private void moveToSubscriptionButton () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", createSubEventPage);
     }
 }
