@@ -29,7 +29,7 @@ public class SubscriptionController implements Initializable {
     private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
 
     private static final Logger logger = Logger.getLogger(SubscriptionController.class.getName());
-    private static final String fontSystemItalic = "System Italic";
+    private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
 
     @FXML
@@ -192,7 +192,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: -90;" +
                         "-fx-translate-y:63");
                 endDateValue.setTextFill(color);
-                endDateValue.setFont(Font.font(fontSystemItalic));
+                endDateValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
                 endDateValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label locationLabel = new Label("Local");
@@ -215,7 +215,7 @@ public class SubscriptionController implements Initializable {
                                         "-fx-translate-x: 60;" +
                                         "-fx-translate-y: 7");
                 locationValue.setTextFill(color);
-                locationValue.setFont(Font.font(fontSystemItalic));
+                locationValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
                 locationValue.setAlignment(Pos.CENTER_LEFT);
 
                 Label ownerLabel = new Label("Dono do Evento");
@@ -238,7 +238,7 @@ public class SubscriptionController implements Initializable {
                         "-fx-translate-x: 150;" +
                         "-fx-translate-y: -50");
                 ownerValue.setTextFill(color);
-                ownerValue.setFont(Font.font(fontSystemItalic));
+                ownerValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
                 ownerValue.setAlignment(Pos.CENTER_LEFT);
 
                 Button cancelButton = new Button("Cancelar Inscrição");
