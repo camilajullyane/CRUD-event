@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class SceneLoader {
 
-
     private static EventInterface eventData;
 
     private SceneLoader() {

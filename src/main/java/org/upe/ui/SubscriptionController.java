@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
 
-    private static final Logger logger = Logger.getLogger(SubEventController.class.getName());
+    private static final Logger logger = Logger.getLogger(SubscriptionController.class.getName());
 
     EventController eventController = new EventController();
 
