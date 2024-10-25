@@ -102,7 +102,7 @@
                   <Font size="14.0" />
                </font>
                 </Button>
-            <Label fx:id="errorMessage" layoutX="97.0" layoutY="294.0" prefHeight="17.0" prefWidth="147.0" text="Preencha todos os campos" textFill="#ff4949" visible="false" />
+            <Label fx:id="errorMessage" layoutX="98.0" layoutY="275.0" prefHeight="17.0" prefWidth="256.0" text="Preencha todos os campos" textFill="#ff4949" visible="false" />
             </children>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
