@@ -19,6 +19,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -47,6 +48,12 @@ public class SubEventUIController implements Initializable {
 
     @FXML
     private Text userName;
+
+    @FXML
+    private void moveToSettingsScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", subEventPage);
+
+    }
 
     @FXML
     void backToCertificate(ActionEvent event) {

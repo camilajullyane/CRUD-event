@@ -147,5 +147,11 @@
       </ImageView>
       <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToCertificate" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
       <Button layoutX="481.0" layoutY="487.0" mnemonicParsing="false" onAction="#setAlert" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="alertButton" />
+      <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="736.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/settings-icon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="738.0" layoutY="31.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="Button" />
     </AnchorPane>
 </StackPane>
