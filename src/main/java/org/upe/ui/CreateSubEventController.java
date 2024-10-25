@@ -82,7 +82,6 @@ public class CreateSubEventController {
         }
 
         SubEventController subEventController = new SubEventController();
-        UserSession userSession = UserSession.getInstance();
 
         String name = subEventName.getText();
         String parentEventID = subEventParentEventID.getText();
@@ -91,7 +90,7 @@ public class CreateSubEventController {
         String location = subEventLocation.getText();
         String speaker = subEventSpeaker.getText();
 
-        subEventController.createSubEvent(parentEventID, name, description, hour, location, speaker);
+        subEventController.createSubEvent(parentEventID, name, hour , location, description, speaker);
 
         subEventName.setText("");
         subEventDescription.setText("");

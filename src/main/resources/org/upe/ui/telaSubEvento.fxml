@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane fx:id="subEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.openCertificateController">
+<StackPane fx:id="subEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.SubEventUIController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -74,11 +70,6 @@
                 <Font size="20.0" />
             </font>
         </Text>
-        <AnchorPane accessibleRole="BUTTON" layoutX="242.0" layoutY="99.0" prefHeight="123.0" prefWidth="510.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
-            <cursor>
-                <Cursor fx:constant="DEFAULT" />
-            </cursor>
-        </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/chamine-de-casa.png" />
@@ -121,5 +112,8 @@
             </image>
         </ImageView>
         <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToCertificate" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
+        <ScrollPane fx:id="scrollPane" layoutX="210.0" layoutY="106.0" prefHeight="495.0" prefWidth="593.0">
+        </ScrollPane>
+
     </AnchorPane>
 </StackPane>
