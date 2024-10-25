@@ -51,11 +51,6 @@ public class SubEventUIController implements Initializable {
     }
 
     @FXML
-    void backToCertificate() {
-
-    }
-
-    @FXML
     void logOut() {
 
     }
