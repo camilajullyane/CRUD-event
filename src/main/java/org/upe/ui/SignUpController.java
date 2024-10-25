@@ -1,6 +1,7 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,8 +12,10 @@ import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SignUpController {
+public class SignUpController implements Initializable {
     private static final AuthController authController = new AuthController();
 
     @FXML
@@ -35,6 +38,11 @@ public class SignUpController {
 
     @FXML
     Label errorMessage;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        nameField.requestFocus();
+    }
 
     @FXML
     private void handleSignUp() throws IOException {
