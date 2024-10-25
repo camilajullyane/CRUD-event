@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.model.Article;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.model.User;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,13 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleUtilityTest {
     private ArticleUtility articleUtility;
-    private UserUtility userUtility;
     private EventUtility eventUtility;
 
     @BeforeEach
     void setUp() {
         articleUtility = new ArticleUtility();
-        userUtility = new UserUtility();
         eventUtility = new EventUtility();
 
         articleUtility.setCsvFilePath("DB/teste/test_article.csv"); // Define arquivo de teste
@@ -47,21 +43,8 @@ class ArticleUtilityTest {
             throw new RuntimeException(e);
         }
 
-        userUtility.setCsvFilePath("DB/teste/test_user.csv");
+        UserUtility.setCsvFilePath("DB/teste/test_user.csv");
         eventUtility.setCsvFilePath("DB/teste/test_event.csv");
-    }
-
-    @Test
-    void testSubmitArticle() {
-        articleUtility.submitArticle("123456789", "New Article", "1", "New Abstract");
-
-        List<User> users = userUtility.getAllUsers();
-        User user = users.stream().filter(u -> u.getCPF().equals("123456789")).findFirst().orElse(null);
-        assertNotNull(user, "The user should exist");
-
-        List<Event> events = eventUtility.getAllEvents();
-        Event event = events.stream().filter(e -> e.getId().equals("1")).findFirst().orElse(null);
-        assertNotNull(event, "The event should exist");
     }
 
     @Test

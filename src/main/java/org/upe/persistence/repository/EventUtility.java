@@ -10,12 +10,10 @@ import java.util.logging.Logger;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.model.User;
 
 public class EventUtility {
     private static final UserUtility userUtility = new UserUtility();
-
-    private final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
     protected String csvFilePath = "DB/event.csv";
 
     public void setCsvFilePath(String csvFilePath) {

@@ -17,10 +17,9 @@ import org.upe.controllers.SubEventController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SubEventUIController implements Initializable {
@@ -83,7 +82,7 @@ public class SubEventUIController implements Initializable {
     private void showSubEvents() {
         EventInterface parentEventInfo = SceneLoader.getEventData();
 
-        ArrayList<SubEventInterface> subEvents = subEventController.subEventsByEvent(parentEventInfo.getId());
+        List<SubEventInterface> subEvents = subEventController.subEventsByEvent(parentEventInfo.getId());
 
         scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();

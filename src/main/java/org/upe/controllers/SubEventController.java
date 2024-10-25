@@ -24,7 +24,7 @@ public class SubEventController {
         return new ArrayList<>(subEvents);
     }
 
-    public ArrayList<SubEventInterface> subEventsByEvent(String parentID) {
+    public List<SubEventInterface> subEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = subEventUtility.getSubEventByEvent(parentID);
         return new ArrayList<>(subEventsByEvent);
     }
