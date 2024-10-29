@@ -80,6 +80,7 @@ public class UserService {
     }
 
     public void deleteOwnerOf(String cpf, String eventID) {
+
         userUtility.deleteOwnerOf(cpf, eventID);
     }
 

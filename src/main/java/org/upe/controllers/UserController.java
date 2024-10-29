@@ -3,15 +3,15 @@ package org.upe.controllers;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
-import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.service.UserService;
+import org.upe.persistence.service.EventService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
     private static final UserService userService = new UserService();
-    private static final EventUtility eventUtility = new EventUtility();
+    private static final EventService eventService = new EventService();
 
     boolean deleteAttendeeEvent(String userCPF, String eventID) {
         userService.deleteAttendeeEvent(userCPF, eventID);
@@ -23,7 +23,7 @@ public class UserController {
     }
 
     ArrayList<EventInterface> userEventsIn(String ownerCPF) {
-        List<Event> userEventsIn = eventUtility.getEventsIn(ownerCPF);
+        List<Event> userEventsIn = eventService.getEventsIn(ownerCPF);
         return new ArrayList<>(userEventsIn);
     }
 
