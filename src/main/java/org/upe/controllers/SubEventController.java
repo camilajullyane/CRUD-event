@@ -23,12 +23,12 @@ public class SubEventController {
         return new ArrayList<>(subEvents);
     }
 
-    public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
+    public List<SubEventInterface> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
         List<SubEvent> subEvents = subEventUtility.getMySubEventsByParentEventID(parentEventID,userCPF);
         return new ArrayList<>(subEvents);
     }
 
-    public static ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
+    public  ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = subEventUtility.getAllSubEventsByEvent(parentID);
         return new ArrayList<>(subEventsByEvent);
     }

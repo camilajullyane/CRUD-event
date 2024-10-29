@@ -34,4 +34,5 @@ public class ArticleController {
         return eventUtility.addArticleOnList(article.getArticleID(), event.getId());
     }
 
+
 }
