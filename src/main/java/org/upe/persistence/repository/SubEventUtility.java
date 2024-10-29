@@ -83,7 +83,7 @@ public class SubEventUtility {
         return null;
     }
 
-    public List<SubEvent> getSubEventByEvent(String parentEventID) {
+    public List<SubEvent> getAllSubEventsByEvent(String parentEventID) {
         List<SubEvent> subEvents = getAllSubEvents();
         ArrayList<SubEvent> filteredSubEvents = new ArrayList<>();
         for (SubEvent subEvent : subEvents) {
@@ -219,6 +219,14 @@ public class SubEventUtility {
         }
     }
 
+    public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
+        Event event = instanciaEventutility.getEventById(parentEventID);
+        String ownerCPF = event.getOwnerCPF();
+        if (ownerCPF.equals(userCPF)) {
+            return getAllSubEvents();
+        }
+        return null;
+    }
 
     public String generateSubEventID() {
         UUID uuid = UUID.randomUUID();
