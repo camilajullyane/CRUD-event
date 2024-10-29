@@ -82,4 +82,9 @@ public class BeginController {
     private void moveToMyEventsPage() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/myEvents.fxml", "Meus eventos", beginPage);
     }
+
+    @FXML
+    private void moveToMyArticlesPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/myArticles.fxml", "Meus artigos", beginPage);
+    }
 }

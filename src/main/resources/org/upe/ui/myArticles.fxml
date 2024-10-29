@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="myArticlesPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.MyArticlesController">
+    <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
+            <rotationAxis>
+                <Point3D />
+            </rotationAxis></Rectangle>
+        <Button fx:id="logOutButton" layoutX="71.0" layoutY="547.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Sair" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="subscriptionButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#moveToSubscriptionButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: transparent;" text="Inscrições" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionsPage" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" onAction="#backToCertificate" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Text fx:id="userName" fill="WHITE" layoutX="411.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/chamine-de-casa.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/bilhete.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/verificacao-de-calendario.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/upload-de-arquivo.png" />
+            </image>
+        </ImageView>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/credencial-de-graduacao.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="61.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/deixar.png" />
+            </image>
+        </ImageView>
+        <Text fill="WHITE" layoutX="429.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEUS ARTIGOS" wrappingWidth="135.19995117187506">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Text>
+        <Button layoutX="481.0" layoutY="489.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="donwload button" />
+        <ImageView fitHeight="41.0" fitWidth="32.0" layoutX="481.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="736.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/settings-icon.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="configButton" layoutX="738.0" layoutY="31.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="Button" />
+        <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#backToCertificate" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ScrollPane fx:id="scrollPane" layoutX="211.0" layoutY="88.0" prefHeight="512.0" prefWidth="589.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+            </content>
+        </ScrollPane>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/calendar.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="41.0" layoutY="285.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Meus artigos" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/artigo.png" />
+            </image>
+        </ImageView>
+    </AnchorPane>
+</StackPane>
