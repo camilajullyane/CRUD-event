@@ -1,12 +1,13 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -20,25 +21,23 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MyEventsController implements Initializable {
-
+public class MySubEventsController {
     EventController eventController = new EventController();
     private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
     private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
 
     @FXML
-    Button configButton;
+    private ScrollPane scrollPane;
 
     @FXML
-    StackPane myEventsPage;
+    private StackPane mySubEventsPage;
 
-    @FXML
-    ScrollPane scrollPane;
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        showMySubEvents();
+    }
 
-    @FXML
-    private void showMyEvents() {
-
+    private void showMySubEvents() {
         List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());;
 
         scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
@@ -58,7 +57,7 @@ public class MyEventsController implements Initializable {
             eventContainer.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
             eventContainer.setAlignment(Pos.CENTER);
 
-            javafx.scene.control.Label title = new javafx.scene.control.Label("Você não tem eventos criados");
+            javafx.scene.control.Label title = new javafx.scene.control.Label("Você não tem SubEventos criados");
             title.setFont(javafx.scene.text.Font.font("Roboto", 16));
             title.setTextFill(javafx.scene.paint.Color.WHITE);
             VBox.setVgrow(title, Priority.ALWAYS);
@@ -184,13 +183,7 @@ public class MyEventsController implements Initializable {
                         + "-fx-translate-x: 100;"
                         + "-fx-translate-y: -74");
                 createSubEventButton.setFont(Font.font("Arial", 14));
-                createSubEventButton.setOnAction(e -> {
-                    try {
-                        handleCreateSubEvent(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
+
 
                 Button showAllMySubEventsButton = new Button("Ver SubEventos");
                 showAllMySubEventsButton.setStyle("-fx-background-radius: 25;" +
@@ -199,13 +192,7 @@ public class MyEventsController implements Initializable {
                         + "-fx-translate-x: -100;"
                         + "-fx-translate-y: -110");
                 showAllMySubEventsButton.setFont(Font.font("Arial", 14));
-                showAllMySubEventsButton.setOnAction(e -> {
-                    try {
-                        handleShowSubEvents(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
+
 
 
                 javafx.scene.control.Label ownerValue = new javafx.scene.control.Label(event.getOrganization());
@@ -219,19 +206,10 @@ public class MyEventsController implements Initializable {
                 ownerValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
                 ownerValue.setAlignment(Pos.CENTER_LEFT);
 
-                javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Cancelar Inscrição");
-                cancelButton.setStyle("-fx-background-color: transparent;  " +
-                        "-fx-font-size: 12px;" +
-                        "-fx-text-fill: #bbbbbb;" +
-                        "-fx-underline: true;" +
-                        "-fx-translate-x: 220;" +
-                        "-fx-translate-y: -230;");
-                cancelButton.setTextFill(color);
-                cancelButton.setAlignment(Pos.CENTER_LEFT);
 
                 eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue,
                         endDateLabel, endDateValue, locationLabel, locationValue,
-                        ownerLabel, ownerValue, cancelButton, createSubEventButton, showAllMySubEventsButton);
+                        ownerLabel, ownerValue, createSubEventButton, showAllMySubEventsButton);
 
                 mainContainer.getChildren().add(eventContainer);
             });
@@ -242,56 +220,45 @@ public class MyEventsController implements Initializable {
         scrollPane.setFitToHeight(true);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        showMyEvents();
-    }
-
-    @FXML
-    private void moveToSettingsScreen () throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", myEventsPage);
-
-    }
 
     @FXML
     private void logOut() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", myEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", mySubEventsPage);
     }
 
     @FXML
     private void moveToScheduleScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", myEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", mySubEventsPage);
+    }
+
+    @FXML
+    private void moveToMyEventsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/myEvents.fxml", "Meus Eventos", mySubEventsPage);
     }
 
     @FXML
     private void moveToHomeScreen() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", myEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", mySubEventsPage);
     }
 
     @FXML
     private void moveToSubscriptionButton() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", myEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", mySubEventsPage);
     }
 
     @FXML
     private void moveToSubmissionsPage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", myEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", mySubEventsPage);
     }
 
     @FXML
     private void backToCertificate() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Submissões", myEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/telaCertificado.fxml", "Certificados", mySubEventsPage);
     }
 
-
-    private void handleCreateSubEvent(EventInterface event) throws IOException {
-        SceneLoader.setEventData(event);
-        SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar SubEvento", myEventsPage);
-    }
-
-    private void handleShowSubEvents(EventInterface event) throws IOException {
-        SceneLoader.setEventData(event);
-        SceneLoader.loadScene("/org/upe/ui/mySubEvents.fxml", "Meus SubEventos", myEventsPage);
+    @FXML
+    private void moveToSettingsScreen() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", mySubEventsPage);
     }
 
 }

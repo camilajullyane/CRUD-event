@@ -1,5 +1,6 @@
 package org.upe.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,7 +42,7 @@ public class SignUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nameField.requestFocus();
+        Platform.runLater(() -> nameField.requestFocus());
     }
 
     @FXML

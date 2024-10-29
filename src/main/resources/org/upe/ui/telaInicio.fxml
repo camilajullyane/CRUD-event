@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
+<StackPane fx:id="beginPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.BeginController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
          <rotationAxis>
@@ -139,7 +139,7 @@
             </image>
         </ImageView>
       <Button fx:id="settingsButton" layoutX="744.0" layoutY="25.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="29.0" />
-      <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToMyEventsPage" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
+      <Button fx:id="myEventsButton" layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToMyEventsPage" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

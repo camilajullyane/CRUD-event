@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="myEventsPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.MyEventsController">
+<StackPane fx:id="mySubEventsPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.MySubEventsController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -100,7 +100,7 @@
                 <Image url="@../../../images/deixar.png" />
             </image>
         </ImageView>
-        <Text fill="WHITE" layoutX="429.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEUS EVENTOS" wrappingWidth="135.19995117187506">
+        <Text fill="WHITE" layoutX="404.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEUS SUBEVENTOS" wrappingWidth="185.19995117187506">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
@@ -116,33 +116,33 @@
                 <Image url="@../../../images/back.png" />
             </image>
         </ImageView>
-        <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
+        <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToMyEventsScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
         <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="736.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/settings-icon.png" />
             </image>
         </ImageView>
         <Button fx:id="configButton" layoutX="738.0" layoutY="31.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="Button" />
-      <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#backToCertificate" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <ScrollPane fx:id="scrollPane" layoutX="211.0" layoutY="88.0" prefHeight="512.0" prefWidth="589.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
-      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/calendar.png" />
-         </image>
-      </ImageView>
+        <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToMyEventsScreen" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ScrollPane fx:id="scrollPane" layoutX="211.0" layoutY="88.0" prefHeight="512.0" prefWidth="589.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+            </content>
+        </ScrollPane>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/calendar.png" />
+            </image>
+        </ImageView>
     </AnchorPane>
 </StackPane>

@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="createArticle" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateArticleController">
+<StackPane fx:id="createArticle" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateArticleController">
 
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
@@ -73,21 +73,31 @@
                         <Font size="15.0" />
                     </font>
                 </Text>
-                <TextField fx:id="articleName" layoutX="10.0" layoutY="59.0" prefHeight="25.0" prefWidth="525.0" promptText="Título do artigo" style="-fx-background-radius: 25;">
+                <TextField fx:id="articleName" layoutX="10.0" layoutY="70.0" prefHeight="25.0" prefWidth="525.0" promptText="Título do artigo" style="-fx-background-radius: 25; -fx-background-color: #5C5C62; -fx-text-fill: white;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="articleText" alignment="TOP_LEFT" layoutX="10.0" layoutY="105.0" prefHeight="360.0" prefWidth="525.0" promptText="Corpo do artigo" style="-fx-background-radius: 25;" />
-                <Button fx:id="articleSave" layoutX="187.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleArticle" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="SALVAR ARTIGO" textFill="WHITE">
+                <TextField fx:id="articleText" alignment="TOP_LEFT" layoutX="10.0" layoutY="127.0" prefHeight="360.0" prefWidth="525.0" promptText="Corpo do artigo" style="-fx-background-radius: 25; -fx-background-color: #5C5C62; -fx-text-fill: white;" />
+                <Button fx:id="articleSave" layoutX="203.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleArticle" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Salvar Artigo" textFill="WHITE">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="18.0" />
                     </font>
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
             <Text fx:id="errorMessage" fill="RED" layoutX="201.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha todos os campos" visible="false" />
+            <Label layoutX="14.0" layoutY="41.0" prefHeight="17.0" prefWidth="56.0" text="Título" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="103.0" prefHeight="17.0" prefWidth="62.0" text="Conteúdo" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">

@@ -34,42 +34,6 @@ public class SubEventUIController implements Initializable {
     @FXML
     private StackPane subEventPage;
 
-    @FXML
-    private void moveToSettingsScreen () throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", subEventPage);
-
-    }
-
-    @FXML
-    void logOut() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", subEventPage);
-    }
-
-    @FXML
-    private void moveToHomeScreen () throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", subEventPage);
-    }
-
-    @FXML
-    private void moveToScheduleScreen () throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", subEventPage);
-    }
-
-    @FXML
-    private void moveToSubmissionsPage () throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", subEventPage);
-    }
-
-
-    @FXML
-    private void moveToSubscriptionButton () throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", subEventPage);
-    }
-
-    @FXML
-    private void moveToMyEventsPage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", subEventPage);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -144,6 +108,43 @@ public class SubEventUIController implements Initializable {
         scrollPane.setContent(mainContainer);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+    }
+
+    @FXML
+    private void moveToSettingsScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaConfiguracoes.fxml", "Configurações", subEventPage);
+
+    }
+
+    @FXML
+    void logOut() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/start-app.fxml", "Even2", subEventPage);
+    }
+
+    @FXML
+    private void moveToHomeScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", subEventPage);
+    }
+
+    @FXML
+    private void moveToScheduleScreen () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", subEventPage);
+    }
+
+    @FXML
+    private void moveToSubmissionsPage () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", subEventPage);
+    }
+
+
+    @FXML
+    private void moveToSubscriptionButton () throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaInscricoes.fxml", "Inscrições", subEventPage);
+    }
+
+    @FXML
+    private void moveToMyEventsPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", subEventPage);
     }
 
 }

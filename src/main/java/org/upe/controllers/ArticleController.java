@@ -20,12 +20,12 @@ public class ArticleController {
     }
 
 
-    static List<ArticleInterface> getAllArticlesByUser(String userCPF) {
+    public List<ArticleInterface> getAllArticlesByUser(String userCPF) {
         return articleUtility.getAllArticlesByUser(userCPF);
     }
 
 
-    static boolean submitArticle(ArticleInterface article, EventInterface event) {
+    public boolean submitArticle(ArticleInterface article, EventInterface event) {
        for (String articleID : event.getArticleList()) {
            if (articleID.equals(article.getArticleID())) {
                return false;
