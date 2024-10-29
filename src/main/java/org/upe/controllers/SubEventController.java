@@ -24,6 +24,7 @@ public class SubEventController {
         return new ArrayList<>(subEvents);
     }
 
+
     public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
         List<SubEvent> subEvents = subEventService.getMySubEventsByParentEventID(parentEventID,userCPF);
         return new ArrayList<>(subEvents);
@@ -31,6 +32,7 @@ public class SubEventController {
 
     public static ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = subEventService.getAllSubEventsByEvent(parentID);
+
         return new ArrayList<>(subEventsByEvent);
     }
 
