@@ -74,15 +74,6 @@ public class UserUtility {
     }
 
     public UserInterface createUser(String name, String email, String cpf, String password) {
-
-        if(findByCPF(cpf) != null) {
-            return null;
-        }
-
-        if(findByEmail(email) != null) {
-            return null;
-        }
-
         try (FileWriter writer = new FileWriter(csvFilePath, true)) {
             String newLine = String.format("%s,%s,%s,%s,,,", name, email, cpf, password);
 
@@ -96,10 +87,6 @@ public class UserUtility {
 
     public boolean updateUserEmail(String email, String newEmail) {
         List<User> users = getAllUsers();
-
-        if (findByEmail(newEmail) != null) {
-            return false;
-        }
 
         for (User user : users) {
             if (user.getEmail().equals(email)) {
@@ -137,18 +124,6 @@ public class UserUtility {
     }
 
     public boolean addAttendeeOnEvent(UserInterface user, String eventID) {
-        for (String ownerOf : user.getOwnerOf()) {
-            if (ownerOf.equals(eventID)) {
-                return false;
-            }
-        }
-
-        for(String attendeeOn : user.getAttendeeOn()) {
-            if(attendeeOn.equals(eventID)) {
-                return false;
-            }
-        }
-
         List<User> users = getAllUsers();
 
         for (User userData : users) {

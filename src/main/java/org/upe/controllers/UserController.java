@@ -4,22 +4,22 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.repository.EventUtility;
-import org.upe.persistence.repository.UserUtility;
+import org.upe.persistence.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
-    private static final UserUtility userUtility = new UserUtility();
+    private static final UserService userService = new UserService();
     private static final EventUtility eventUtility = new EventUtility();
 
     boolean deleteAttendeeEvent(String userCPF, String eventID) {
-        userUtility.deleteAttendeeEvent(userCPF, eventID);
+        userService.deleteAttendeeEvent(userCPF, eventID);
         return true;
     }
 
     public UserInterface getUserByCPF(String cpf) {
-        return userUtility.findByCPF(cpf);
+        return userService.findByCPF(cpf);
     }
 
     ArrayList<EventInterface> userEventsIn(String ownerCPF) {
@@ -30,7 +30,7 @@ public class UserController {
     boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event) {
         for(String attendeeOn : user.getAttendeeOn()) {
             if(attendeeOn.equals(event.getId())) {
-                userUtility.deleteAttendeeEvent(user.getCPF(), event.getId());
+                userService.deleteAttendeeEvent(user.getCPF(), event.getId());
                 return true;
             }
         }
@@ -38,10 +38,10 @@ public class UserController {
     }
 
     public boolean changeEmail(String userEmail, String newEmail) {
-        return userUtility.updateUserEmail(userEmail, newEmail);
+        return userService.updateUserEmail(userEmail, newEmail);
     }
 
     public boolean changePassword(String cpf, String currentPassword, String newPassword) {
-        return userUtility.updateUserPassword(cpf, currentPassword, newPassword);
+        return userService.updateUserPassword(cpf, currentPassword, newPassword);
     }
 }

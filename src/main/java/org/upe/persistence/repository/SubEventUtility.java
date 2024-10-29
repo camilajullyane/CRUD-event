@@ -63,7 +63,7 @@ public class SubEventUtility {
     }
 
     public EventInterface createSubEvent(String parentEventID, String name, String hour, String local,
-                                                String organization, String description, String speaker) {
+                                                   String organization, String description, String speaker) {
         List<SubEvent> subEvents = instanciaSubEventutility.getAllSubEvents();
         String id = instanciaSubEventutility.generateSubEventID();
         SubEvent newSubEvent = new SubEvent(id, parentEventID, name, instanciaEventutility.getEventById(parentEventID).getDate(), hour, local, organization, description, speaker, "");
