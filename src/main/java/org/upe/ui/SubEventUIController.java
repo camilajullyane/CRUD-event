@@ -43,7 +43,7 @@ public class SubEventUIController implements Initializable {
     private void showSubEvents() {
         EventInterface parentEventInfo = SceneLoader.getEventData();
 
-        List<SubEventInterface> subEvents = subEventController.subEventsByEvent(parentEventInfo.getId());
+        List<SubEventInterface> subEvents = subEventController.getAllSubEventsByEvent(parentEventInfo.getId());
 
         scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
