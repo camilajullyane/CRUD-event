@@ -11,7 +11,7 @@
       <ImageView fitHeight="79.0" fitWidth="110.0" layoutX="325.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/logo.png" />
       </ImageView>
-      <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="328.0" prefHeight="42.0" prefWidth="309.0" promptText="Digite sua senha" style="-fx-background-radius: 25;">
+      <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="338.0" prefHeight="42.0" prefWidth="309.0" promptText="Digite sua senha" style="-fx-background-radius: 25;">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,7 +34,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="errorMessage" layoutX="216.0" layoutY="394.0" prefHeight="17.0" prefWidth="188.0" textFill="#ff4949" visible="false" />
+      <Label fx:id="errorMessage" layoutX="216.0" layoutY="399.0" prefHeight="17.0" prefWidth="188.0" textFill="#ff4949" visible="false" />
       <Button fx:id="signUpButton" layoutX="404.0" layoutY="149.0" mnemonicParsing="false" onAction="#moveToSignUp" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
          <font>
             <Font size="20.0" />
@@ -43,12 +43,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="166.0" layoutY="260.0" prefHeight="27.0" prefWidth="32.0" text="CPF" textFill="WHITE">
+      <Label layoutX="219.0" layoutY="225.0" prefHeight="27.0" prefWidth="32.0" text="CPF" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="163.0" layoutY="339.0" text="Senha" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="216.0" layoutY="318.0" text="Senha" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

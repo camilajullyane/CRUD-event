@@ -73,12 +73,12 @@
                         <Font size="15.0" />
                     </font>
                 </Text>
-                <TextField fx:id="articleName" layoutX="10.0" layoutY="70.0" prefHeight="25.0" prefWidth="525.0" promptText="Título do artigo" style="-fx-background-radius: 25; -fx-background-color: #5C5C62;">
+                <TextField fx:id="articleName" layoutX="10.0" layoutY="70.0" prefHeight="25.0" prefWidth="525.0" promptText="Título do artigo" style="-fx-background-radius: 25; -fx-background-color: #5C5C62; -fx-text-fill: white;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="articleText" alignment="TOP_LEFT" layoutX="10.0" layoutY="127.0" prefHeight="360.0" prefWidth="525.0" promptText="Corpo do artigo" style="-fx-background-radius: 25; -fx-background-color: #5C5C62;" />
+                <TextField fx:id="articleText" alignment="TOP_LEFT" layoutX="10.0" layoutY="127.0" prefHeight="360.0" prefWidth="525.0" promptText="Corpo do artigo" style="-fx-background-radius: 25; -fx-background-color: #5C5C62; -fx-text-fill: white;" />
                 <Button fx:id="articleSave" layoutX="203.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleArticle" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Salvar Artigo" textFill="WHITE">
                     <font>
                         <Font size="18.0" />

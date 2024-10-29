@@ -150,22 +150,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-        <Button layoutX="41.0" layoutY="285.0" mnemonicParsing="false" onAction="#moveToMyArticlesPage" style="-fx-background-color: transparent;" text="Meus artigos" textFill="WHITE">
-            <font>
-                <Font size="15.0" />
-            </font>
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
-        <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/artigo.png" />
-            </image>
-        </ImageView>
       <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/calendar.png" />
