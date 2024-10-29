@@ -20,6 +20,9 @@ public class CreateEventController {
     public Button settingsButton;
 
     @FXML
+    public Button myEventsButton;
+
+    @FXML
     private StackPane createEventPage;
 
     @FXML
@@ -73,7 +76,7 @@ public class CreateEventController {
 
     @FXML
     private void moveToMyEventsPage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/telaMyEvents.fxml", "Configurações", createEventPage);
+        SceneLoader.loadScene("/org/upe/ui/myEvents.fxml", "Meus eventos", createEventPage);
     }
 
     @FXML

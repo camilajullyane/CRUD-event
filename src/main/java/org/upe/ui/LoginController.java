@@ -1,5 +1,6 @@
 package org.upe.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.AuthController;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
@@ -33,6 +35,11 @@ public class LoginController {
 
     @FXML
     Button signUpButton;
+
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> cpfField.requestFocus());
+    }
 
    @FXML
     private void handleLogin() throws IOException {

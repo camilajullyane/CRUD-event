@@ -80,6 +80,6 @@ public class BeginController {
 
     @FXML
     private void moveToMyEventsPage() throws IOException {
-        SceneLoader.loadScene("/org/upe/ui/myEvents.fxml", "Inscrições", beginPage);
+        SceneLoader.loadScene("/org/upe/ui/myEvents.fxml", "Meus eventos", beginPage);
     }
 }

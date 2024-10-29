@@ -6,22 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="loginPage" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.LoginController">
+<StackPane fx:id="loginPage" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.LoginController">
    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.69" prefWidth="729.0" style="-fx-background-color: #3F3F46; -fx-background-position: center;">
       <ImageView fitHeight="79.0" fitWidth="110.0" layoutX="325.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/logo.png" />
       </ImageView>
-      <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="310.0" prefHeight="42.0" prefWidth="309.0" promptText="  Senha" style="-fx-background-radius: 25;">
+      <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="328.0" prefHeight="42.0" prefWidth="309.0" promptText="Digite sua senha" style="-fx-background-radius: 25;">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <TextField fx:id="cpfField" layoutX="210.0" layoutY="244.0" prefHeight="42.0" prefWidth="309.0" promptText="  CPF" style="-fx-background-radius: 25;">
+      <TextField fx:id="cpfField" layoutX="210.0" layoutY="252.0" prefHeight="42.0" prefWidth="309.0" promptText="Digite seu CPF" style="-fx-background-radius: 25;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="signInButton" layoutX="210.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="42.0" prefWidth="309.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Entrar" textFill="WHITE">
+      <Button fx:id="signInButton" layoutX="210.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="42.0" prefWidth="309.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Entrar" textFill="WHITE">
          <font>
             <Font name="Microsoft YaHei Bold" size="20.0" />
          </font>
@@ -34,7 +34,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="errorMessage" layoutX="210.0" layoutY="360.0" textFill="#ff4949" visible="false" />
+      <Label fx:id="errorMessage" layoutX="216.0" layoutY="394.0" prefHeight="17.0" prefWidth="188.0" textFill="#ff4949" visible="false" />
       <Button fx:id="signUpButton" layoutX="404.0" layoutY="149.0" mnemonicParsing="false" onAction="#moveToSignUp" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #3F3F46; " text="Cadastrar" textFill="#fcfcfc">
          <font>
             <Font size="20.0" />
@@ -43,5 +43,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label layoutX="166.0" layoutY="260.0" prefHeight="27.0" prefWidth="32.0" text="CPF" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="163.0" layoutY="339.0" text="Senha" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </AnchorPane>
 </StackPane>

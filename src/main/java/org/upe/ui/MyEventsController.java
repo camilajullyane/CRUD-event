@@ -192,6 +192,21 @@ public class MyEventsController implements Initializable {
                     }
                 });
 
+                Button showAllMySubEventsButton = new Button("Ver SubEventos");
+                showAllMySubEventsButton.setStyle("-fx-background-radius: 25;" +
+                        "-fx-background-color: #2DD4BF;" +
+                        "-fx-text-fill: WHITE;"
+                        + "-fx-translate-x: -100;"
+                        + "-fx-translate-y: -110");
+                showAllMySubEventsButton.setFont(Font.font("Arial", 14));
+                showAllMySubEventsButton.setOnAction(e -> {
+                    try {
+                        handleShowSubEvents(event);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
 
                 javafx.scene.control.Label ownerValue = new javafx.scene.control.Label(event.getOrganization());
                 ownerValue.setPrefHeight(20);
@@ -214,7 +229,10 @@ public class MyEventsController implements Initializable {
                 cancelButton.setTextFill(color);
                 cancelButton.setAlignment(Pos.CENTER_LEFT);
 
-                eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton, createSubEventButton);
+                eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue,
+                        endDateLabel, endDateValue, locationLabel, locationValue,
+                        ownerLabel, ownerValue, cancelButton, createSubEventButton, showAllMySubEventsButton);
+
                 mainContainer.getChildren().add(eventContainer);
             });
         }
@@ -269,6 +287,11 @@ public class MyEventsController implements Initializable {
     private void handleCreateSubEvent(EventInterface event) throws IOException {
         SceneLoader.setEventData(event);
         SceneLoader.loadScene("/org/upe/ui/telaCriandoSubEvento.fxml", "Criar SubEvento", myEventsPage);
+    }
+
+    private void handleShowSubEvents(EventInterface event) throws IOException {
+        SceneLoader.setEventData(event);
+        SceneLoader.loadScene("/org/upe/ui/mySubEvents.fxml", "Meus SubEventos", myEventsPage);
     }
 
 }
