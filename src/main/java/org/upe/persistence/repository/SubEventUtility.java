@@ -196,7 +196,7 @@ public class SubEventUtility {
         }
     }
 
-    private boolean saveSubEvents(List<SubEvent> subEvents) {
+    public boolean saveSubEvents(List<SubEvent> subEvents) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
             for (SubEvent subEvent : subEvents) {
