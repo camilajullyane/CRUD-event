@@ -177,7 +177,7 @@ public class ScheduleController implements Initializable {
         if(!isAlreadySubscribed) {
             alert.setTitle("Inscrição");
             alert.setHeaderText(null);
-            alert.setContentText("Você já está inscrito neste evento!");
+            alert.setContentText("Você já está inscrito neste evento ou é dono do evento!");
             alert.showAndWait();
         } else {
             alert.setTitle("Inscrição");
