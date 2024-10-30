@@ -46,22 +46,22 @@ public class SubEventController {
         return true;
     }
 
-    static boolean editSubEventLocal(String id, String newLocal) {
+    public boolean editSubEventLocal(String id, String newLocal) {
         subEventService.updateSubEventLocal(id, newLocal);
         return true;
     }
 
-    static boolean editSubEventDescription(String id, String newDescription) {
+    public boolean editSubEventDescription(String id, String newDescription) {
         subEventService.updateSubEventDescription(id, newDescription);
         return true;
     }
 
-    static boolean editSubEventSpeaker(String id, String newSpeaker) {
+    public boolean editSubEventSpeaker(String id, String newSpeaker) {
         subEventService.updateSubEventSpeaker(id, newSpeaker);
         return true;
     }
 
-    static boolean deleteSubEvent(String id) {
+    public boolean deleteSubEvent(String id) {
         subEventService.deleteSubEvent(id);
         return true;
     }
