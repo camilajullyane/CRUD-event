@@ -63,7 +63,7 @@ public class SubEventUtility {
     }
 
     public EventInterface createSubEvent(String parentEventID, String name, String hour, String local,
-                                                String organization, String description, String speaker) {
+                                                   String organization, String description, String speaker) {
         List<SubEvent> subEvents = instanciaSubEventutility.getAllSubEvents();
         String id = instanciaSubEventutility.generateSubEventID();
         SubEvent newSubEvent = new SubEvent(id, parentEventID, name, instanciaEventutility.getEventById(parentEventID).getDate(), hour, local, organization, description, speaker, "");
@@ -83,7 +83,7 @@ public class SubEventUtility {
         return null;
     }
 
-    public List<SubEvent> getSubEventByEvent(String parentEventID) {
+    public List<SubEvent> getAllSubEventsByEvent(String parentEventID) {
         List<SubEvent> subEvents = getAllSubEvents();
         ArrayList<SubEvent> filteredSubEvents = new ArrayList<>();
         for (SubEvent subEvent : subEvents) {
@@ -196,7 +196,7 @@ public class SubEventUtility {
         }
     }
 
-    private boolean saveSubEvents(List<SubEvent> subEvents) {
+    public boolean saveSubEvents(List<SubEvent> subEvents) {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
             for (SubEvent subEvent : subEvents) {
@@ -219,6 +219,14 @@ public class SubEventUtility {
         }
     }
 
+    public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
+        Event event = instanciaEventutility.getEventById(parentEventID);
+        String ownerCPF = event.getOwnerCPF();
+        if (ownerCPF.equals(userCPF)) {
+            return getAllSubEvents();
+        }
+        return null;
+    }
 
     public String generateSubEventID() {
         UUID uuid = UUID.randomUUID();
