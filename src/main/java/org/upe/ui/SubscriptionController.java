@@ -11,8 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;

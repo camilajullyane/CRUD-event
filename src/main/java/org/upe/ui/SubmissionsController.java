@@ -9,17 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.upe.controllers.EventController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
-import org.upe.utils.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
