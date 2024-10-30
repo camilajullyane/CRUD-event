@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.AuthController;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 

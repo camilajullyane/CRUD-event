@@ -11,8 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
@@ -27,9 +25,6 @@ import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
 
-    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
-    private static final String FONT_SYSTEM_ITALIC = "System Italic";
-    private static final Paint color = Color.web("#cdc7c7");
 
     @FXML
     Button settingsButton;
