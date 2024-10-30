@@ -74,7 +74,7 @@ public class MyEventsController implements Initializable {
             events.forEach(event -> {
                 VBox eventContainer = new VBox();
                 eventContainer.setPrefWidth(557);
-                eventContainer.setPrefHeight(260);
+                eventContainer.setPrefHeight(290);
                 eventContainer.setMinHeight(200);
                 eventContainer.setMaxHeight(260);
                 eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
@@ -192,6 +192,21 @@ public class MyEventsController implements Initializable {
                     }
                 });
 
+                Button editEventButton = new Button("Editar Evento");
+                editEventButton.setStyle("-fx-background-radius: 25;" +
+                        "-fx-background-color: #2DD4BF;" +
+                        "-fx-text-fill: WHITE;"
+                        + "-fx-translate-x: 100;"
+                        + "-fx-translate-y: -92");
+                editEventButton.setFont(Font.font("Arial", 14));
+                editEventButton.setOnAction(e -> {
+                    try {
+                        handleEditButton(event);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
                 Button showAllMySubEventsButton = new Button("Ver SubEventos");
                 showAllMySubEventsButton.setStyle("-fx-background-radius: 25;" +
                         "-fx-background-color: #2DD4BF;" +
@@ -231,7 +246,7 @@ public class MyEventsController implements Initializable {
 
                 eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue,
                         endDateLabel, endDateValue, locationLabel, locationValue,
-                        ownerLabel, ownerValue, cancelButton, createSubEventButton, showAllMySubEventsButton);
+                        ownerLabel, ownerValue, cancelButton, createSubEventButton, showAllMySubEventsButton, editEventButton);
 
                 mainContainer.getChildren().add(eventContainer);
             });
@@ -292,6 +307,11 @@ public class MyEventsController implements Initializable {
     private void handleShowSubEvents(EventInterface event) throws IOException {
         SceneLoader.setEventData(event);
         SceneLoader.loadScene("/org/upe/ui/mySubEvents.fxml", "Meus SubEventos", myEventsPage);
+    }
+
+    private void handleEditButton(EventInterface event) throws IOException {
+        SceneLoader.setEventData(event);
+        SceneLoader.loadScene("/org/upe/ui/telaEditarEvento.fxml", "Editar Evento", myEventsPage);
     }
 
 }
