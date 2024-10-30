@@ -133,7 +133,7 @@ public class ScheduleController implements Initializable {
 
                 Button seeSubEvents = new Button("Ver SubEventos");
                 seeSubEvents.getStyleClass().add("custom-button");
-                        seeSubEvents.setOnAction(e -> {
+                seeSubEvents.setOnAction(e -> {
                     try {
                         showSubEvents(event);
                     } catch (IOException ex) {

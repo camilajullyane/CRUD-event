@@ -24,9 +24,6 @@ import java.util.Objects;
 
 public class MySubEventsController {
     SubEventController subEventController = new SubEventController();
-    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
-    private static final String FONT_SYSTEM_ITALIC = "System Italic";
-    private static final Paint color = Color.web("#cdc7c7");
 
     @FXML
     private ScrollPane scrollPane;

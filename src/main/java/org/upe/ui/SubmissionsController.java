@@ -28,9 +28,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubmissionsController implements Initializable {
-    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
-    private static final String FONT_SYSTEM_ITALIC = "System Italic";
-    private static final Paint color = Color.web("#cdc7c7");
 
     EventController eventController = new EventController();
 
