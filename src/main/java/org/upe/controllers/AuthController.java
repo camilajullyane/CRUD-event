@@ -1,9 +1,10 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.AuthControllerInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.repository.UserUtility;
 
-public class AuthController {
+public class AuthController implements AuthControllerInterface {
     private static final UserUtility userUtility = new UserUtility();
 
     public UserInterface loginUser(String cpf, String password) {

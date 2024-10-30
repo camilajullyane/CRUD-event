@@ -1,15 +1,16 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.SubEventControllerInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.repository.SubEventUtility;
+
 import java.util.List;
 import org.upe.persistence.service.EventService;
 import org.upe.persistence.service.SubEventService;
 
 import java.util.ArrayList;
 
-public class SubEventController {
+public class SubEventController implements SubEventControllerInterface {
     private static final EventService eventService = new EventService();
     private static final SubEventService subEventService = new SubEventService();
 
@@ -46,22 +47,22 @@ public class SubEventController {
         return true;
     }
 
-    static boolean editSubEventLocal(String id, String newLocal) {
+    public boolean editSubEventLocal(String id, String newLocal) {
         subEventService.updateSubEventLocal(id, newLocal);
         return true;
     }
 
-    static boolean editSubEventDescription(String id, String newDescription) {
+    public boolean editSubEventDescription(String id, String newDescription) {
         subEventService.updateSubEventDescription(id, newDescription);
         return true;
     }
 
-    static boolean editSubEventSpeaker(String id, String newSpeaker) {
+    public boolean editSubEventSpeaker(String id, String newSpeaker) {
         subEventService.updateSubEventSpeaker(id, newSpeaker);
         return true;
     }
 
-    static boolean deleteSubEvent(String id) {
+    public boolean deleteSubEvent(String id) {
         subEventService.deleteSubEvent(id);
         return true;
     }

@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.AuthController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -15,6 +17,8 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class LoginController {
+
+    FacadeInterface facade = new Facade();
     private static final AuthController authController = new AuthController();
 
     @FXML

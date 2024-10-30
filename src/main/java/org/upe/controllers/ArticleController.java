@@ -1,5 +1,6 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.ArticleControllerInterface;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
@@ -9,7 +10,7 @@ import org.upe.persistence.service.UserService;
 
 import java.util.List;
 
-public class ArticleController {
+public class ArticleController implements ArticleControllerInterface {
     private static final UserService userService = new UserService();
     private static final EventUtility eventUtility = new EventUtility();
     private static final ArticleService articleService = new ArticleService();
