@@ -104,7 +104,6 @@ public class SubEventUIController implements Initializable {
             eventContainer.getChildren().addAll(titleLabel, descriptionLabel, dateLabel, locationLabel, ownerLabel);
             mainContainer.getChildren().add(eventContainer);
         });
-
         scrollPane.setContent(mainContainer);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
