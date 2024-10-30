@@ -1,0 +1,76 @@
+.custom-scroll-pane {
+    -fx-background: rgba(63, 63, 70, 0.3); /* Cor de fundo */
+    -fx-background-color: rgba(63, 63, 70, 0.3); /* Cor de fundo */
+}
+
+/* Estilo para o VBox */
+.custom-vbox {
+    -fx-pref-width: 250;
+    -fx-pref-height: 200;
+    -fx-background-color: #4E4E55; /* Cor de fundo */
+    -fx-padding: 10;               /* Espaçamento interno */
+    -fx-spacing: 8;                /* Espaçamento entre elementos */
+    -fx-background-radius: 25;
+    -fx-alignment: center;
+}
+
+/* Estilo para o texto */
+.custom-label {
+    -fx-fill: #C0C0C0;             /* Cor do texto */
+    -fx-font-size: 14px;           /* Tamanho da fonte */
+    -fx-font-style: italic;
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo para o botão */
+.custom-button {
+    -fx-background-color: #2DD4BF; /* Cor de fundo */
+    -fx-text-fill: #ffffff;        /* Cor do texto */
+    -fx-font-size: 14px;           /* Tamanho da fonte */
+    -fx-background-radius: 25;      /* Cantos arredondados */
+    -fx-padding: 7px 20px;
+}
+
+.container {
+    -fx-pref-height: 150;
+    -fx-background-color: #4E4E55; /* Cor de fundo */
+    -fx-padding: 15;               /* Mais espaçamento interno */
+    -fx-spacing: 8;                /* Espaçamento entre elementos */
+    -fx-background-radius: 20;     /* Cantos arredondados */
+}
+
+/* Estilo para o título */
+.title {
+    -fx-text-fill: #2DD4BF;          /* Cor do texto */
+    -fx-font-size: 18px;             /* Tamanho da fonte */
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo para as legendas (rótulos) */
+.caption {
+    -fx-text-fill: #C0C0C0;          /* Cor do texto */
+    -fx-font-size: 14px;             /* Tamanho da fonte */
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-padding: 0 10 0 0;           /* Margem à direita */
+}
+
+/* Estilo para os valores das legendas */
+.subcaption {
+    -fx-text-fill: #C0C0C0;          /* Cor do texto */
+    -fx-font-size: 12px;             /* Tamanho da fonte */
+    -fx-font-style: italic;
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo para o botão de cancelamento */
+.cancel-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 12px;
+    -fx-text-fill: #bbbbbb;
+    -fx-underline: true;
+    -fx-translate-x: 100%; /* Move the button to the right edge */
+    -fx-padding: 10; /* Add some padding */
+}
