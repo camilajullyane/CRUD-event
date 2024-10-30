@@ -116,7 +116,7 @@ public class SubmissionsController implements Initializable {
 
             VBox.setMargin(eventContainer, new Insets(30));
 
-            Label label = new Label("Você não se inscreveu em nenhum evento");
+            Label label = new Label("Você não submeteu nenhum artigo");
             label.getStyleClass().add("custom-label");
 
             Button button = new Button("Ver eventos disponíveis");
