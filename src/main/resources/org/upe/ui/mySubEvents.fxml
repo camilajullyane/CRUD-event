@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="mySubEventsPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.MySubEventsController">
+<StackPane fx:id="mySubEventsPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.MySubEventsController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -134,7 +134,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <ScrollPane fx:id="scrollPane" layoutX="211.0" layoutY="88.0" prefHeight="512.0" prefWidth="589.0">
+        <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="484.0" prefWidth="568.0">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
             </content>

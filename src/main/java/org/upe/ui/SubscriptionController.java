@@ -4,16 +4,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import org.upe.controllers.EventController;
+import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -21,6 +22,7 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
@@ -32,6 +34,7 @@ public class SubscriptionController implements Initializable {
     @FXML
     Button settingsButton;
 
+    UserController userController = new UserController();
     EventController eventController = new EventController();
 
     @FXML
@@ -94,165 +97,78 @@ public class SubscriptionController implements Initializable {
 
         List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCPF());
 
-        subscriptionScroll.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
+        subscriptionScroll.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
+        subscriptionScroll.getStyleClass().add("custom-scroll-pane");
         VBox mainContainer = new VBox();
 
         mainContainer.getChildren().clear();
-        mainContainer.setSpacing(10);
-        mainContainer.setAlignment(Pos.CENTER);
-        VBox.setVgrow(mainContainer, Priority.ALWAYS);
 
         if (events.isEmpty()) {
             VBox eventContainer = new VBox();
-            eventContainer.setPrefWidth(350);
-            eventContainer.setPrefHeight(260);
-            eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
-            eventContainer.setSpacing(10);
-            eventContainer.setPadding(new Insets(10, 10, 10, 10));
-            eventContainer.setAlignment(Pos.CENTER);
+            eventContainer.getStyleClass().add("custom-vbox");
 
-            Label title = new Label("Você não tem eventos inscritos");
-            title.setFont(Font.font("Roboto", 16));
-            title.setTextFill(Color.WHITE);
-            VBox.setVgrow(title, Priority.ALWAYS);
-            title.setMaxWidth(Double.MAX_VALUE);
-            title.setAlignment(Pos.CENTER);
+            VBox.setMargin(eventContainer, new Insets(30));
 
-            eventContainer.getChildren().add(title);
+            Label label = new Label("Você não se inscreveu em nenhum evento");
+            label.getStyleClass().add("custom-label");
 
-            mainContainer.setPadding(new Insets(20, 20, 20, 20));
-            mainContainer.setAlignment(Pos.CENTER);
+            Button button = new Button("Ver eventos disponíveis");
+            button.getStyleClass().add("custom-button");
+            VBox.setMargin(button, new Insets(50, 0, 0, 0));
+
+            eventContainer.getChildren().addAll(label, button);
             mainContainer.getChildren().add(eventContainer);
+            mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
                 VBox eventContainer = new VBox();
-                eventContainer.setPrefWidth(557);
-                eventContainer.setPrefHeight(260);
-                eventContainer.setMinHeight(200);
-                eventContainer.setMaxHeight(260);
-                eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
-                eventContainer.setSpacing(10);
-                eventContainer.setPadding(new Insets(10, 10, 10, 10));
-                eventContainer.setAlignment(Pos.CENTER);
-                VBox.setVgrow(eventContainer, Priority.ALWAYS);
+                eventContainer.getStyleClass().add("container");
 
-                Label titleLabel = new Label(event.getName());
-                titleLabel.setPrefHeight(100);
-                titleLabel.setPrefWidth(557);
-                titleLabel.setStyle("-fx-text-fill: #2dd4bf;" +
-                                    "-fx-font-weight: bold;" +
-                                    "-fx-alignment: top-center;" +
-                                    "-fx-translate-y: 70;");
-                titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
-                titleLabel.setAlignment(Pos.CENTER);
-                titleLabel.setWrapText(true);
+                VBox.setMargin(eventContainer, new Insets(15));
 
-                Label descriptionLabel = new Label(event.getDescription());
-                descriptionLabel.setPrefHeight(20);
-                descriptionLabel.setPrefWidth(550);
-                descriptionLabel.setStyle("-fx-translate-x: 10;" +
-                                          "-fx-translate-y: 80");
-                descriptionLabel.setTextFill(color);
-                descriptionLabel.setAlignment(Pos.CENTER_LEFT);
-                descriptionLabel.setWrapText(true);
+                Label title = new Label(event.getName());
+                title.getStyleClass().add("title");
 
-                Label startDateLabel = new Label("Data Inicial");
-                startDateLabel.setStyle("-fx-font-size: 14px;" +
-                                        "-fx-text-fill: #ffffff;" +
-                                        "-fx-font-weight: bold;" +
-                                        "-fx-translate-x:-230;" +
-                                        "-fx-translate-y: 127");
-                startDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-                startDateLabel.setAlignment(Pos.CENTER_LEFT);
+                Label description = new Label(event.getDescription());
+                description.getStyleClass().add("custom-label");
 
-                Label startDateValue = new Label(event.getDate());
-                startDateValue.setPrefHeight(20);
-                startDateValue.setPrefWidth(89);
-                startDateValue.setStyle("-fx-font-size: 12px;" +
-                        "-fx-text-fill: #cdc7c7;" +
-                        "-fx-translate-x: -220;" +
-                        "-fx-translate-y: 120");
-                startDateValue.setTextFill(color);
-                startDateValue.setAlignment(Pos.CENTER_LEFT);
+                Label date = new Label("Data");
+                date.getStyleClass().add("caption");
 
-                Label endDateLabel = new Label("Data Final");
-                endDateLabel.setPrefHeight(17);
-                endDateLabel.setPrefWidth(89);
-                endDateLabel.setStyle("-fx-font-size: 14px;" +
-                        "-fx-text-fill: #ffffff;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-translate-x: -100;" +
-                        "-fx-translate-y: 70");
-                endDateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-                endDateLabel.setAlignment(Pos.CENTER_LEFT);
+                Label dateValue = new Label(event.getDate());
+                dateValue.getStyleClass().add("subcaption");
 
-                Label endDateValue = new Label(event.getDate());
-                endDateValue.setStyle("-fx-font-size: 12px;" +
-                        "-fx-text-fill: #cdc7c7;" +
-                        "-fx-translate-x: -90;" +
-                        "-fx-translate-y:63");
-                endDateValue.setTextFill(color);
-                endDateValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
-                endDateValue.setAlignment(Pos.CENTER_LEFT);
-
-                Label locationLabel = new Label("Local");
-                locationLabel.setPrefHeight(17);
-                locationLabel.setPrefWidth(127);
-                locationLabel.setStyle("-fx-font-size: 14px;" +
-                        "-fx-text-fill: #ffffff;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-translate-x: 60;" +
-                        "-fx-translate-y: 13");
-                locationLabel.setTextFill(Color.WHITE);
-                locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-                locationLabel.setAlignment(Pos.CENTER_LEFT);
+                Label location = new Label("Local");
+                location.getStyleClass().add("caption");
 
                 Label locationValue = new Label(event.getLocal());
-                locationValue.setPrefHeight(20);
-                locationValue.setPrefWidth(127);
-                locationValue.setStyle("-fx-font-size: 12px;" +
-                                        "-fx-text-fill: #cdc7c7;" +
-                                        "-fx-translate-x: 60;" +
-                                        "-fx-translate-y: 7");
-                locationValue.setTextFill(color);
-                locationValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
-                locationValue.setAlignment(Pos.CENTER_LEFT);
+                locationValue.getStyleClass().add("subcaption");
 
-                Label ownerLabel = new Label("Dono do Evento");
-                ownerLabel.setPrefHeight(17);
-                ownerLabel.setPrefWidth(200);
-                ownerLabel.setStyle("-fx-font-size: 14px;" +
-                        "-fx-text-fill: #ffffff;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-translate-x: 170;" +
-                        "-fx-translate-y: -43");
-                ownerLabel.setTextFill(Color.WHITE);
-                ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-                ownerLabel.setAlignment(Pos.CENTER_LEFT);
+                Label owner = new Label("Dono do Evento");
+                owner.getStyleClass().add("caption");
 
                 Label ownerValue = new Label(event.getOrganization());
-                ownerValue.setPrefHeight(20);
-                ownerValue.setPrefWidth(157);
-                ownerValue.setStyle("-fx-font-size: 14px;" +
-                        "-fx-text-fill: #cdc7c7;" +
-                        "-fx-translate-x: 150;" +
-                        "-fx-translate-y: -50");
-                ownerValue.setTextFill(color);
-                ownerValue.setFont(Font.font(FONT_SYSTEM_ITALIC));
-                ownerValue.setAlignment(Pos.CENTER_LEFT);
+                ownerValue.getStyleClass().add("subcaption");
 
                 Button cancelButton = new Button("Cancelar Inscrição");
-                cancelButton.setStyle("-fx-background-color: transparent;  " +
-                        "-fx-font-size: 12px;" +
-                        "-fx-text-fill: #bbbbbb;" +
-                        "-fx-underline: true;" +
-                        "-fx-translate-x: 220;" +
-                        "-fx-translate-y: -230;");
-                cancelButton.setTextFill(color);
-                cancelButton.setAlignment(Pos.CENTER_LEFT);
+                cancelButton.getStyleClass().add("cancel-button");
+                cancelButton.setOnAction(e -> cancelSubscription(event));
 
-                eventContainer.getChildren().addAll(titleLabel, descriptionLabel, startDateLabel, startDateValue, endDateLabel, endDateValue, locationLabel, locationValue, ownerLabel, ownerValue, cancelButton);
+                VBox descriptionBox = new VBox(5, title, description);
+                VBox dateBox = new VBox(5, date, dateValue);
+                VBox locationBox = new VBox(5, location, locationValue);
+                VBox ownerBox = new VBox(5, owner, ownerValue);
+
+
+                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox headerBox = new HBox(20, descriptionBox, cancelButton);
+                infoBox.setAlignment(Pos.CENTER_LEFT);
+
+                VBox containerBox = new VBox(45, headerBox, infoBox);
+
+                eventContainer.getChildren().addAll(containerBox);
                 mainContainer.getChildren().add(eventContainer);
+                mainContainer.setAlignment(Pos.CENTER);
             });
         }
 
@@ -261,5 +177,23 @@ public class SubscriptionController implements Initializable {
         subscriptionScroll.setFitToHeight(true);
     }
 
+    private void cancelSubscription(EventInterface event) {
+        UserSession userSession = UserSession.getInstance();
 
+        boolean isAlreadySubscribed = eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(!isAlreadySubscribed) {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Você já está inscrito neste evento!");
+            alert.showAndWait();
+        } else {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Inscrição realizada com sucesso!");
+            alert.showAndWait();
+            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+        }
+    }
 }

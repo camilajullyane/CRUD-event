@@ -100,7 +100,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <ScrollPane fx:id="scrollPane" layoutX="234.0" layoutY="106.0" prefHeight="304.0" prefWidth="537.0" />
+      <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="487.0" prefWidth="566.0" />
 
         <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="748.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
             <image>

@@ -134,7 +134,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ScrollPane fx:id="scrollPane" layoutX="211.0" layoutY="88.0" prefHeight="512.0" prefWidth="589.0">
+      <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="486.0" prefWidth="568.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>

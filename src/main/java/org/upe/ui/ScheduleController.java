@@ -20,6 +20,7 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
@@ -70,91 +71,71 @@ public class ScheduleController implements Initializable {
         SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", schedulePage);
     }
 
+
     private void showEvents() {
 
         List<EventInterface> events = eventController.getAllEvents();
 
-        scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
+        scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
+        scrollPane.getStyleClass().add("custom-scroll-pane");
         VBox mainContainer = new VBox();
 
         mainContainer.getChildren().clear();
-        mainContainer.setSpacing(10);
-        mainContainer.setAlignment(Pos.CENTER);
-
 
         if (events.isEmpty()) {
             VBox eventContainer = new VBox();
-            eventContainer.setPrefWidth(350);
-            eventContainer.setPrefHeight(260);
-            eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
-            eventContainer.setSpacing(10);
-            eventContainer.setPadding(new Insets(10, 10, 10, 10));
-            eventContainer.setAlignment(Pos.CENTER);
+            eventContainer.getStyleClass().add("custom-vbox");
 
+            VBox.setMargin(eventContainer, new Insets(30));
 
-            Label title = new Label("Nenhum evento disponível no momento");
-            title.setFont(Font.font("Roboto", 16));
-            title.setTextFill(Color.WHITE);
-            VBox.setVgrow(title, Priority.ALWAYS);
-            title.setMaxWidth(Double.MAX_VALUE);
-            title.setAlignment(Pos.CENTER);
+            Label label = new Label("Não há eventos disponíveis no momento");
+            label.getStyleClass().add("custom-label");
 
-            eventContainer.getChildren().add(title);
+            Button button = new Button("Ver eventos disponíveis");
+            button.getStyleClass().add("custom-button");
+            VBox.setMargin(button, new Insets(50, 0, 0, 0));
 
-            mainContainer.setPadding(new Insets(20, 20, 20, 20));
-            mainContainer.setAlignment(Pos.CENTER);
+            eventContainer.getChildren().addAll(label, button);
             mainContainer.getChildren().add(eventContainer);
+            mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
                 VBox eventContainer = new VBox();
-                eventContainer.setPrefHeight(400);
-                eventContainer.setMinHeight(210);
-                eventContainer.setMaxHeight(400);
-                eventContainer.setStyle("-fx-background-color: rgba(217, 217, 217, 0.1); -fx-background-radius: 25px;");
-                eventContainer.setSpacing(20);
-                eventContainer.setPadding(new Insets(20, 20, 20, 20));
+                eventContainer.getStyleClass().add("container");
+
+                VBox.setMargin(eventContainer, new Insets(15));
 
                 Label title = new Label(event.getName());
-                title.setStyle("-fx-text-fill: #2dd4bf;" + "-fx-font-weight: bold;");
-                title.setFont(Font.font("Arial", 18));
-                title.setTextFill(Color.WHITE);
-                title.setAlignment(Pos.TOP_CENTER);
-                VBox.setVgrow(title, Priority.ALWAYS);
-                title.setMaxWidth(Double.MAX_VALUE);
-                title.setAlignment(Pos.CENTER);
+                title.getStyleClass().add("title");
 
                 Label description = new Label(event.getDescription());
-                description.setFont(Font.font("Arial", 14));
-                description.setTextFill(Color.WHITE);
-                description.setWrapText(true);
+                description.getStyleClass().add("custom-label");
 
-                Label startDateLabel = new Label("Data");
-                startDateLabel.setStyle("-fx-font-size: 14px;" + "-fx-text-fill: #ffffff;" + "-fx-font-weight: bold;" + "-fx-translate-x: 0;" + "-fx-translate-y: 20");
-                startDateLabel.setFont(Font.font("System Bold Italic"));
-                startDateLabel.setTextFill(Color.WHITE);
+                Label date = new Label("Data");
+                date.getStyleClass().add("caption");
 
-                Label locationLabel = new Label("Local");
-                locationLabel.setPrefHeight(17);
-                locationLabel.setPrefWidth(127);
-                locationLabel.setStyle("-fx-font-size: 14px;" +"-fx-text-fill: #ffffff;" + "-fx-font-weight: bold;" + "-fx-translate-x: 130;" + "-fx-translate-y: -53");
-                locationLabel.setTextFill(Color.WHITE);
-                locationLabel.setFont(Font.font("System Bold Italic"));
-                locationLabel.setAlignment(Pos.CENTER_LEFT);
+                Label dateValue = new Label(event.getDate());
+                dateValue.getStyleClass().add("subcaption");
 
-                Label dateLabel = new Label(event.getDate());
-                dateLabel.setFont(Font.font("Arial", 14));
-                dateLabel.setStyle("-fx-font-size: 12px;" +"-fx-text-fill: #cdc7c7;" +"-fx-translate-x: 0;" +"-fx-translate-y:0");
-                dateLabel.setTextFill(Color.WHITE);
+                Label location = new Label("Local");
+                location.getStyleClass().add("caption");
+
+                Label locationValue = new Label(event.getLocal());
+                locationValue.getStyleClass().add("subcaption");
+
+                Label owner = new Label("Dono do Evento");
+                owner.getStyleClass().add("caption");
+
+                Label ownerValue = new Label(event.getOrganization());
+                ownerValue.getStyleClass().add("subcaption");
 
                 Button signUpButton = new Button("Realizar Inscrição");
-                signUpButton.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 100;" + "-fx-translate-y: -74");
-                signUpButton.setFont(Font.font("Arial", 14));
+                signUpButton.getStyleClass().add("custom-button");
                 signUpButton.setOnAction(e -> signUpEvent(event));
 
                 Button seeSubEvents = new Button("Ver SubEventos");
-                seeSubEvents.setStyle("-fx-background-radius: 25;" + "-fx-background-color: #2DD4BF;" + "-fx-text-fill: WHITE;"  + "-fx-translate-x: 300;" + "-fx-translate-y: -120");
-                seeSubEvents.setFont(Font.font("Arial", 14));
-                seeSubEvents.setOnAction(e -> {
+                seeSubEvents.getStyleClass().add("custom-button");
+                        seeSubEvents.setOnAction(e -> {
                     try {
                         showSubEvents(event);
                     } catch (IOException ex) {
@@ -162,13 +143,22 @@ public class ScheduleController implements Initializable {
                     }
                 });
 
-                Label locationValue = new Label(event.getLocal());
-                locationValue.setStyle("-fx-font-size: 12px;" + "-fx-text-fill: #cdc7c7;" + "-fx-translate-x: 130;" + "-fx-translate-y: -75");
-                locationValue.setFont(Font.font("Arial", 14));
-                locationValue.setTextFill(Color.WHITE);
+                VBox descriptionBox = new VBox(5, title, description);
+                VBox dateBox = new VBox(5, date, dateValue);
+                VBox locationBox = new VBox(5, location, locationValue);
+                VBox ownerBox = new VBox(5, owner, ownerValue);
 
-                eventContainer.getChildren().addAll(title, description, startDateLabel, dateLabel, locationLabel, locationValue, signUpButton, seeSubEvents);
+
+                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
+                infoBox.setAlignment(Pos.CENTER_LEFT);
+                bottomBox.setAlignment(Pos.CENTER);
+                VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
+
+
+                eventContainer.getChildren().addAll(containerBox);
                 mainContainer.getChildren().add(eventContainer);
+                mainContainer.setAlignment(Pos.CENTER);
             });
         }
 
@@ -176,6 +166,7 @@ public class ScheduleController implements Initializable {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
     }
+
 
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
