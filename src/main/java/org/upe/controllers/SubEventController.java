@@ -30,7 +30,7 @@ public class SubEventController {
         return new ArrayList<>(subEvents);
     }
 
-    public static ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
+    public ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = subEventService.getAllSubEventsByEvent(parentID);
 
         return new ArrayList<>(subEventsByEvent);
