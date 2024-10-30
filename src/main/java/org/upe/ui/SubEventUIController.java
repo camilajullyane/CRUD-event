@@ -6,11 +6,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import org.upe.controllers.SubEventController;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
@@ -18,12 +16,10 @@ import org.upe.utils.SceneLoader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubEventUIController implements Initializable {
-
-    private static final String COMMON_LABEL_STYLE = "-fx-font-size: 14px; -fx-text-fill: #ffffff; -fx-font-weight: bold;";
-    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
 
     SubEventController subEventController = new SubEventController();
 
@@ -45,66 +41,59 @@ public class SubEventUIController implements Initializable {
 
         List<SubEventInterface> subEvents = subEventController.getAllSubEventsByEvent(parentEventInfo.getId());
 
-        scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
+        scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
+        scrollPane.getStyleClass().add("custom-scroll-pane");
         VBox mainContainer = new VBox();
 
         mainContainer.getChildren().clear();
-        mainContainer.setSpacing(10);
-        mainContainer.setAlignment(Pos.CENTER);
 
         subEvents.forEach(subEvent -> {
             VBox eventContainer = new VBox();
-            eventContainer.setPrefWidth(557);
-            eventContainer.setPrefHeight(260);
-            eventContainer.setMinHeight(200);
-            eventContainer.setMaxHeight(260);
-            eventContainer.setStyle("-fx-background-color: #4E4E55; -fx-background-radius: 25;");
-            eventContainer.setSpacing(10);
-            eventContainer.setPadding(new Insets(10, 10, 10, 10));
-            eventContainer.setAlignment(Pos.CENTER);
-            VBox.setVgrow(eventContainer, Priority.ALWAYS);
+            eventContainer.getStyleClass().add("custom-vbox");
 
-            Label titleLabel = new Label(subEvent.getName());
-            titleLabel.setPrefHeight(30);
-            titleLabel.setPrefWidth(500);
-            titleLabel.setStyle("-fx-text-fill: #2dd4bf; -fx-font-weight: bold; -fx-alignment: center;");
-            titleLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC, 16));
-            titleLabel.setAlignment(Pos.CENTER);
-            titleLabel.setWrapText(true);
+            VBox.setMargin(eventContainer, new Insets(30));
 
-            Label descriptionLabel = new Label(subEvent.getDescription());
-            descriptionLabel.setPrefHeight(50);
-            descriptionLabel.setPrefWidth(500);
-            descriptionLabel.setStyle("-fx-text-fill: #cdc7c7;");
-            descriptionLabel.setTextFill(Color.web("#cdc7c7"));
-            descriptionLabel.setAlignment(Pos.CENTER_LEFT);
-            descriptionLabel.setWrapText(true);
 
-            Label dateLabel = new Label("Data Inicial: " + subEvent.getDate());
-            dateLabel.setPrefHeight(20);
-            dateLabel.setPrefWidth(500);
-            dateLabel.setStyle(COMMON_LABEL_STYLE);
-            dateLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-            dateLabel.setAlignment(Pos.CENTER_LEFT);
+            Label title = new Label(subEvent.getName());
+            title.getStyleClass().add("title");
 
-            Label locationLabel = new Label("Local: " + subEvent.getLocal());
-            locationLabel.setPrefHeight(20);
-            locationLabel.setPrefWidth(500);
-            locationLabel.setStyle(COMMON_LABEL_STYLE);
-            locationLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-            locationLabel.setAlignment(Pos.CENTER_LEFT);
+            Label description = new Label(subEvent.getDescription());
+            description.getStyleClass().add("custom-label");
 
-            Label ownerLabel = new Label("Dono do Evento: " + subEvent.getSpeakers());
-            ownerLabel.setPrefHeight(20);
-            ownerLabel.setPrefWidth(500);
-            ownerLabel.setStyle(COMMON_LABEL_STYLE);
-            ownerLabel.setFont(Font.font(FONT_STYLE_BOLD_ITALIC));
-            ownerLabel.setAlignment(Pos.CENTER_LEFT);
 
-            eventContainer.getChildren().addAll(titleLabel, descriptionLabel, dateLabel, locationLabel, ownerLabel);
+            Label date = new Label("Data");
+            date.getStyleClass().add("caption");
+
+            Label dateValue = new Label(subEvent.getDate());
+            dateValue.getStyleClass().add("subcaption");
+
+            Label location = new Label("Local");
+            location.getStyleClass().add("caption");
+
+            Label locationValue = new Label(subEvent.getLocal());
+            locationValue.getStyleClass().add("subcaption");
+
+            Label owner = new Label("Palestrantes do evento");
+            owner.getStyleClass().add("caption");
+
+            Label ownerValue = new Label(subEvent.getSpeakers());
+            ownerValue.getStyleClass().add("subcaption");
+
+            VBox descriptionBox = new VBox(5, title, description);
+            VBox dateBox = new VBox(5, date, dateValue);
+            VBox locationBox = new VBox(5, location, locationValue);
+            VBox ownerBox = new VBox(5, owner, ownerValue);
+
+            HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+            infoBox.setAlignment(Pos.CENTER_LEFT);
+
+            VBox containerBox = new VBox(45,descriptionBox, infoBox);
+
+            eventContainer.getChildren().addAll(containerBox);
             mainContainer.getChildren().add(eventContainer);
-        });
+            mainContainer.setAlignment(Pos.CENTER);
 
+        });
         scrollPane.setContent(mainContainer);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);

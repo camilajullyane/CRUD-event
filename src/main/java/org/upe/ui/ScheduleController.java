@@ -133,7 +133,7 @@ public class ScheduleController implements Initializable {
 
                 Button seeSubEvents = new Button("Ver SubEventos");
                 seeSubEvents.getStyleClass().add("custom-button");
-                        seeSubEvents.setOnAction(e -> {
+                seeSubEvents.setOnAction(e -> {
                     try {
                         showSubEvents(event);
                     } catch (IOException ex) {
@@ -175,7 +175,7 @@ public class ScheduleController implements Initializable {
         if(!isAlreadySubscribed) {
             alert.setTitle("Inscrição");
             alert.setHeaderText(null);
-            alert.setContentText("Você já está inscrito neste evento!");
+            alert.setContentText("Você já está inscrito neste evento ou é dono do evento!");
             alert.showAndWait();
         } else {
             alert.setTitle("Inscrição");

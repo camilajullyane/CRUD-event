@@ -11,8 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import org.upe.controllers.EventController;
 import org.upe.persistence.interfaces.EventInterface;
@@ -25,9 +23,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubmissionsController implements Initializable {
-    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
-    private static final String FONT_SYSTEM_ITALIC = "System Italic";
-    private static final Paint color = Color.web("#cdc7c7");
 
     EventController eventController = new EventController();
 
@@ -113,7 +108,7 @@ public class SubmissionsController implements Initializable {
 
             VBox.setMargin(eventContainer, new Insets(30));
 
-            Label label = new Label("Você não se inscreveu em nenhum evento");
+            Label label = new Label("Você não submeteu nenhum artigo");
             label.getStyleClass().add("custom-label");
 
             Button button = new Button("Ver eventos disponíveis");
