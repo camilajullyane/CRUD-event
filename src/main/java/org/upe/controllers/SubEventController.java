@@ -1,15 +1,16 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.SubEventControllerInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.repository.SubEventUtility;
+
 import java.util.List;
 import org.upe.persistence.service.EventService;
 import org.upe.persistence.service.SubEventService;
 
 import java.util.ArrayList;
 
-public class SubEventController {
+public class SubEventController implements SubEventControllerInterface {
     private static final EventService eventService = new EventService();
     private static final SubEventService subEventService = new SubEventService();
 
@@ -30,7 +31,7 @@ public class SubEventController {
         return new ArrayList<>(subEvents);
     }
 
-    public static ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
+    public ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
         List<SubEvent> subEventsByEvent = subEventService.getAllSubEventsByEvent(parentID);
 
         return new ArrayList<>(subEventsByEvent);

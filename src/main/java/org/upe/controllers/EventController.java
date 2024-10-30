@@ -1,5 +1,6 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.EventControllerInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
@@ -9,7 +10,7 @@ import org.upe.persistence.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventController {
+public class EventController implements EventControllerInterface {
     private static final UserService userService = new UserService();
     private static final EventService eventService = new EventService();
 

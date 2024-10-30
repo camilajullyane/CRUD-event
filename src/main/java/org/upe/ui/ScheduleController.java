@@ -9,8 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
 import org.upe.persistence.interfaces.EventInterface;

@@ -4,20 +4,23 @@ import org.upe.controllers.AuthController;
 import org.upe.controllers.EventController;
 import org.upe.controllers.SubEventController;
 import org.upe.controllers.UserController;
+import org.upe.controllers.interfaces.AuthControllerInterface;
+import org.upe.controllers.interfaces.EventControllerInterface;
+import org.upe.controllers.interfaces.SubEventControllerInterface;
+import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Facade implements FacadeInterface {
-    private final AuthController authController;
-    private final EventController eventController;
-    private final SubEventController subEventController;
-    private final UserController userController;
+    private final AuthControllerInterface authController;
+    private final EventControllerInterface eventController;
+    private final SubEventControllerInterface subEventController;
+    private final UserControllerInterface userController;
 
     public Facade() {
         this.authController = new AuthController();
@@ -97,8 +100,8 @@ public class Facade implements FacadeInterface {
         return subEventController.getMySubEventsByParentEventID(parentEventID, userCPF);
     }
 
-    public ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
-        return SubEventController.getAllSubEventsByEvent(parentID);
+    public List<SubEventInterface> getAllSubEventsByEvent(String parentID) {
+        return subEventController.getAllSubEventsByEvent(parentID);
     }
 
     public boolean editSubEventName(String id, String newName) {
@@ -134,7 +137,7 @@ public class Facade implements FacadeInterface {
         return userController.getUserByCPF(cpf);
     }
 
-    public ArrayList<EventInterface> userEventsIn(String ownerCPF) {
+    public List<EventInterface> userEventsIn(String ownerCPF) {
         return userController.userEventsIn(ownerCPF);
     }
 

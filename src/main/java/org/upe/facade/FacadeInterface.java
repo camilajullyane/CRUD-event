@@ -3,10 +3,7 @@ package org.upe.facade;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public interface FacadeInterface {
@@ -32,7 +29,7 @@ public interface FacadeInterface {
     SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour, String description, String speaker);
     List<SubEventInterface> showAllSubEvents();
     List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF);
-    ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID);
+    List<SubEventInterface> getAllSubEventsByEvent(String parentID);
     boolean editSubEventName(String id, String newName);
     boolean editSubEventDate(String id, String newDate);
     boolean editSubEventLocal(String id, String newLocal);
@@ -43,7 +40,7 @@ public interface FacadeInterface {
     // UserController methods
     boolean deleteAttendeeEvent(String userCPF, String eventID);
     UserInterface getUserByCPF(String cpf);
-    ArrayList<EventInterface> userEventsIn(String ownerCPF);
+    List<EventInterface> userEventsIn(String ownerCPF);
     boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event);
     boolean changeEmail(String userEmail, String newEmail);
     boolean changePassword(String cpf, String currentPassword, String newPassword);

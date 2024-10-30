@@ -11,7 +11,6 @@ import org.upe.controllers.AuthController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
