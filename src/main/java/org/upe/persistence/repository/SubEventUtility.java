@@ -6,10 +6,7 @@ import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.interfaces.EventInterface;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -225,7 +222,7 @@ public class SubEventUtility {
         if (ownerCPF.equals(userCPF)) {
             return getAllSubEvents();
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public String generateSubEventID() {

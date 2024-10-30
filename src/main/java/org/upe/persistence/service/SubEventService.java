@@ -7,6 +7,7 @@ import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.SubEventUtility;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -89,7 +90,7 @@ public class SubEventService {
         if (event != null && event.getOwnerCPF().equals(userCPF)) {
             return getAllSubEventsByEvent(parentEventID);
         }
-        return null;
+        return Collections.emptyList();
     }
 }
 

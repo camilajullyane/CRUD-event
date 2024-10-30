@@ -13,23 +13,17 @@ public class DatePickerUtil {
     }
 
     public static void restrictDatePicker(DatePicker datePicker) {
-        datePicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+        datePicker.setDayCellFactory(dp -> new DateCell() { // Usando lambda para Callback
             @Override
-            public DateCell call(final DatePicker datePicker) {
-                return new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-                        LocalDate now = LocalDate.now();
-                        LocalDate oneYearLater = now.plusYears(1);
-                        if (item.isBefore(now) || item.isAfter(oneYearLater)) {
-                            setDisable(true);
-                            setStyle("-fx-background-color: #D9D9D9;");
-                        }
-                    }
-                };
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                LocalDate now = LocalDate.now();
+                LocalDate oneYearLater = now.plusYears(1);
+                if (item.isBefore(now) || item.isAfter(oneYearLater)) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #D9D9D9;");
+                }
             }
         });
-
     }
 }

@@ -15,6 +15,7 @@ public class EditEventController {
     EventController eventController = new EventController();
     EventInterface currentEvent = SceneLoader.getEventData();
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private static final String EVENT_EDITED_TITLE = "Evento editado";
 
     @FXML
     private StackPane editEventPage;
@@ -38,7 +39,7 @@ public class EditEventController {
     private void handleNameButton() {
         eventController.editEventName(currentEvent.getId(), newEventName.getText());
         newEventName.setText("");
-        alert.setTitle("Evento editado");
+        alert.setTitle(EVENT_EDITED_TITLE);
         alert.setHeaderText(null);
         alert.setContentText("Nome editado com sucesso!");
         alert.showAndWait();
@@ -49,7 +50,7 @@ public class EditEventController {
     private void handleLocalButton() {
         eventController.editEventLocal(currentEvent.getId(), newEventLocal.getText());
         newEventLocal.setText("");
-        alert.setTitle("Evento editado");
+        alert.setTitle(EVENT_EDITED_TITLE);
         alert.setHeaderText(null);
         alert.setContentText("Local editado com sucesso!");
         alert.showAndWait();
@@ -59,7 +60,7 @@ public class EditEventController {
     private void handleDescriptionButton() {
         eventController.editEventDescription(currentEvent.getId(), newEventDescription.getText());
         newEventDescription.setText("");
-        alert.setTitle("Evento editado");
+        alert.setTitle(EVENT_EDITED_TITLE);
         alert.setHeaderText(null);
         alert.setContentText("Descrição editada com sucesso!");
         alert.showAndWait();
@@ -69,7 +70,7 @@ public class EditEventController {
     private void handleOrganizationButton() {
         eventController.editEventOrganization(currentEvent.getId(), newEventOrganization.getText());
         newEventOrganization.setText("");
-        alert.setTitle("Evento editado");
+        alert.setTitle(EVENT_EDITED_TITLE);
         alert.setHeaderText(null);
         alert.setContentText("Organização editada com sucesso!");
         alert.showAndWait();
@@ -79,7 +80,7 @@ public class EditEventController {
     private void handleDateButton() {
         eventController.editEventDate(currentEvent.getId(), newEventDate.getText());
         newEventDate.setText("");
-        alert.setTitle("Evento editado");
+        alert.setTitle(EVENT_EDITED_TITLE);
         alert.setHeaderText(null);
         alert.setContentText("Data editada com sucesso!");
         alert.showAndWait();

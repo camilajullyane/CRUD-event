@@ -24,6 +24,9 @@ import java.util.ResourceBundle;
 public class ScheduleController implements Initializable {
     UserController userController = new UserController();
     EventController eventController = new EventController();
+    private static final String CAPTION_STYLE_CLASS = "caption";
+    private static final String SUBCAPTION_STYLE_CLASS = "subcaption";
+    private static final String CUSTOMBUTTON_STYLE_CLASS = "custom-button";
 
     @FXML
     Button settingsButton;
@@ -90,7 +93,7 @@ public class ScheduleController implements Initializable {
             label.getStyleClass().add("custom-label");
 
             Button button = new Button("Ver eventos disponíveis");
-            button.getStyleClass().add("custom-button");
+            button.getStyleClass().add(CUSTOMBUTTON_STYLE_CLASS);
             VBox.setMargin(button, new Insets(50, 0, 0, 0));
 
             eventContainer.getChildren().addAll(label, button);
@@ -110,29 +113,29 @@ public class ScheduleController implements Initializable {
                 description.getStyleClass().add("custom-label");
 
                 Label date = new Label("Data");
-                date.getStyleClass().add("caption");
+                date.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label dateValue = new Label(event.getDate());
-                dateValue.getStyleClass().add("subcaption");
+                dateValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Label location = new Label("Local");
-                location.getStyleClass().add("caption");
+                location.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add("subcaption");
+                locationValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Label owner = new Label("Dono do Evento");
-                owner.getStyleClass().add("caption");
+                owner.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add("subcaption");
+                ownerValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Button signUpButton = new Button("Realizar Inscrição");
-                signUpButton.getStyleClass().add("custom-button");
+                signUpButton.getStyleClass().add(CUSTOMBUTTON_STYLE_CLASS);
                 signUpButton.setOnAction(e -> signUpEvent(event));
 
                 Button seeSubEvents = new Button("Ver SubEventos");
-                seeSubEvents.getStyleClass().add("custom-button");
+                seeSubEvents.getStyleClass().add(CUSTOMBUTTON_STYLE_CLASS);
                         seeSubEvents.setOnAction(e -> {
                     try {
                         showSubEvents(event);

@@ -27,6 +27,8 @@ public class MySubEventsController {
     private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
     private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
+    private static final String CAPTION_STYLE_CLASS = "caption";
+    private static final String SUBCAPTION_STYLE_CLASS = "subcaption";
 
     @FXML
     private ScrollPane scrollPane;
@@ -78,23 +80,23 @@ public class MySubEventsController {
                 descriptionLabel.getStyleClass().add("custom-label");
 
                 Label dateLabel = new Label("Data");
-                dateLabel.getStyleClass().add("caption");
+                dateLabel.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label dateValue = new Label(subEvent.getDate());
-                dateValue.getStyleClass().add("subcaption");
+                dateValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
 
                 Label locationLabel = new Label("Local");
-                locationLabel.getStyleClass().add("caption");
+                locationLabel.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label locationValue = new Label(subEvent.getLocal());
-                locationValue.getStyleClass().add("subcaption");
+                locationValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Label speakersLabel = new Label("Palestrantes do Evento");
-                speakersLabel.getStyleClass().add("caption");
+                speakersLabel.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label speakersValue = new Label(subEvent.getSpeakers());
-                speakersValue.getStyleClass().add("subcaption");
+                speakersValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Button editSubEventButton = new Button("Editar SubEvento");
                 editSubEventButton.getStyleClass().add("custom-button");

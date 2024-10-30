@@ -31,6 +31,8 @@ public class SubmissionsController implements Initializable {
     private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
     private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
+    private static final String CAPTION_STYLE_CLASS = "caption";
+    private static final String SUBCAPTION_STYLE_CLASS = "subcaption";
 
     EventController eventController = new EventController();
 
@@ -140,22 +142,22 @@ public class SubmissionsController implements Initializable {
                 description.getStyleClass().add("custom-label");
 
                 Label date = new Label("Data");
-                date.getStyleClass().add("caption");
+                date.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label dateValue = new Label(event.getDate());
-                dateValue.getStyleClass().add("subcaption");
+                dateValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Label location = new Label("Local");
-                location.getStyleClass().add("caption");
+                location.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add("subcaption");
+                locationValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Label owner = new Label("Dono do Evento");
-                owner.getStyleClass().add("caption");
+                owner.getStyleClass().add(CAPTION_STYLE_CLASS);
 
                 Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add("subcaption");
+                ownerValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
 
                 Button cancelButton = new Button("Cancelar Inscrição");
                 cancelButton.getStyleClass().add("cancel-button");

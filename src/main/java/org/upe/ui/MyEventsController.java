@@ -26,6 +26,7 @@ public class MyEventsController implements Initializable {
     private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
     private static final String FONT_SYSTEM_ITALIC = "System Italic";
     private static final Paint color = Color.web("#cdc7c7");
+    private static final String FONT_SYSTEM_ARIAL = "Arial";
 
     @FXML
     Button configButton;
@@ -39,7 +40,7 @@ public class MyEventsController implements Initializable {
     @FXML
     private void showMyEvents() {
 
-        List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());;
+        List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());
 
         scrollPane.setStyle("-fx-background: rgba(63, 63, 70, 0.3); -fx-background-color: rgba(63, 63, 70, 0.3);");
         VBox mainContainer = new VBox();
@@ -183,7 +184,7 @@ public class MyEventsController implements Initializable {
                         "-fx-text-fill: WHITE;"
                         + "-fx-translate-x: 100;"
                         + "-fx-translate-y: -74");
-                createSubEventButton.setFont(Font.font("Arial", 14));
+                createSubEventButton.setFont(Font.font(FONT_SYSTEM_ARIAL, 14));
                 createSubEventButton.setOnAction(e -> {
                     try {
                         handleCreateSubEvent(event);
@@ -198,7 +199,7 @@ public class MyEventsController implements Initializable {
                         "-fx-text-fill: WHITE;"
                         + "-fx-translate-x: 100;"
                         + "-fx-translate-y: -92");
-                editEventButton.setFont(Font.font("Arial", 14));
+                editEventButton.setFont(Font.font(FONT_SYSTEM_ARIAL, 14));
                 editEventButton.setOnAction(e -> {
                     try {
                         handleEditButton(event);
@@ -213,7 +214,7 @@ public class MyEventsController implements Initializable {
                         "-fx-text-fill: WHITE;"
                         + "-fx-translate-x: -100;"
                         + "-fx-translate-y: -110");
-                showAllMySubEventsButton.setFont(Font.font("Arial", 14));
+                showAllMySubEventsButton.setFont(Font.font(FONT_SYSTEM_ARIAL, 14));
                 showAllMySubEventsButton.setOnAction(e -> {
                     try {
                         handleShowSubEvents(event);
