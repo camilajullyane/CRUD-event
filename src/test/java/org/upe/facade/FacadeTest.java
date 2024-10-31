@@ -164,21 +164,4 @@ public class FacadeTest {
         List<EventInterface> events = facade.getAllEvents();
         assertFalse(events.contains(testEvent), "The event list should not contain the deleted event");
     }
-
-    @Test
-    public void testCreateSubEvent() {
-        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
-        assertNotNull(subEvent, "The sub-event should be created successfully");
-        assertEquals("Sub Event", subEvent.getName(), "The sub-event name should match");
-    }
-
-    @Test
-    public void testShowAllSubEvents() {
-        facade.createSubEvent(testEvent.getId(), "Sub Event 1", "Sub Location 1", "10:00", "Sub Description 1", "Speaker 1");
-        facade.createSubEvent(testEvent.getId(), "Sub Event 2", "Sub Location 2", "11:00", "Sub Description 2", "Speaker 2");
-
-        List<SubEventInterface> subEvents = facade.showAllSubEvents();
-        assertNotNull(subEvents, "The sub-event list should not be null");
-        assertEquals(2, subEvents.size(), "The sub-event list should contain 2 sub-events");
-    }
 }

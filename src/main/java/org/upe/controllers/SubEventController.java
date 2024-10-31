@@ -62,6 +62,11 @@ public class SubEventController implements SubEventControllerInterface {
         return true;
     }
 
+    public boolean editSubEventHour(String id, String newHour) {
+        subEventService.updateSubEventHour(id, newHour);
+        return true;
+    }
+
     public boolean deleteSubEvent(String id) {
         subEventService.deleteSubEvent(id);
         return true;

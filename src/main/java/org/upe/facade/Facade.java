@@ -128,6 +128,10 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventSpeaker(id, newSpeaker);
     }
 
+    public boolean editSubEventHour(String id, String newHour) {
+        return subEventController.editSubEventHour(id, newHour);
+    }
+
     public boolean deleteSubEvent(String id) {
         return subEventController.deleteSubEvent(id);
     }

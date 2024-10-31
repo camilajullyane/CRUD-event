@@ -130,6 +130,18 @@ public class SubEventUtility {
         return false;
     }
 
+    public boolean updateSubEventHour(String id, String newHour) {
+        List<SubEvent> subEvents = getAllSubEvents();
+        for (SubEvent subEvent : subEvents) {
+            if (subEvent.getId().equals(id)) {
+                subEvent.setHour(newHour);
+                saveSubEvents(subEvents);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean updateSubEventLocal(String id, String newLocal) {
         List<SubEvent> subEvents = getAllSubEvents();
         for (SubEvent subEvent : subEvents) {

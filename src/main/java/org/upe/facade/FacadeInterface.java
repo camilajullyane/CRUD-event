@@ -36,6 +36,7 @@ public interface FacadeInterface {
     boolean editSubEventLocal(String id, String newLocal);
     boolean editSubEventDescription(String id, String newDescription);
     boolean editSubEventSpeaker(String id, String newSpeaker);
+    boolean editSubEventHour(String id, String newHour);
     boolean deleteSubEvent(String id);
 
     // UserController methods

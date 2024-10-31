@@ -93,7 +93,7 @@ public class MySubEventsController {
                 editSubEventButton.getStyleClass().add("custom-button");
                 editSubEventButton.setOnAction(e -> {
                     try {
-                        handleEditSubEvent(subEvent.getId());
+                        handleEditSubEventButton(subEvent.getId());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -167,8 +167,9 @@ public class MySubEventsController {
     }
 
     @FXML
-    private void handleEditSubEvent(String subEventID) throws IOException {
-//        SceneLoader.loadScene("/org/upe/ui/editSubEvent.fxml", "Editar SubEvento", mySubEventsPage);
+    private void handleEditSubEventButton(String subEventID) throws IOException {
+        SceneLoader.setSubEventData(subEventID);
+        SceneLoader.loadScene("/org/upe/ui/telaEditarSubEvento.fxml", "Editar SubEvento", mySubEventsPage);
     }
 
 }
