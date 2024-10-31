@@ -10,8 +10,6 @@ import java.io.IOException;
 
 
 public class OpenCertificateController {
-
-
     @FXML
     private StackPane openCertificatePage;
 

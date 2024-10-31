@@ -3,13 +3,15 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
-import org.upe.controllers.SubEventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
 
 public class CreateSubEventController {
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     private StackPane createSubEventPage;
@@ -65,8 +67,6 @@ public class CreateSubEventController {
             return;
         }
 
-        SubEventController subEventController = new SubEventController();
-
         String name = subEventName.getText();
         String description = subEventDescription.getText();
         String hour = subEventHour.getText();
@@ -74,7 +74,7 @@ public class CreateSubEventController {
         String speaker = subEventSpeaker.getText();
 
         EventInterface currentEvent = SceneLoader.getEventData();
-        subEventController.createSubEvent(currentEvent.getId(), name, location, hour, description, speaker);
+        facade.createSubEvent(currentEvent.getId(), name, location, hour, description, speaker);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");

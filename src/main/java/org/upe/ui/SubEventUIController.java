@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.upe.controllers.SubEventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
@@ -20,9 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubEventUIController implements Initializable {
-
-    SubEventController subEventController = new SubEventController();
-
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     ScrollPane scrollPane;
@@ -39,7 +39,7 @@ public class SubEventUIController implements Initializable {
     private void showSubEvents() {
         EventInterface parentEventInfo = SceneLoader.getEventData();
 
-        List<SubEventInterface> subEvents = subEventController.getAllSubEventsByEvent(parentEventInfo.getId());
+        List<SubEventInterface> subEvents = facade.getAllSubEventsByEvent(parentEventInfo.getId());
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");

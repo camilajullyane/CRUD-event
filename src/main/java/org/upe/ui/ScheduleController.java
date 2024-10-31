@@ -11,6 +11,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -22,8 +24,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
-    UserController userController = new UserController();
-    EventController eventController = new EventController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     Button settingsButton;
@@ -72,7 +73,7 @@ public class ScheduleController implements Initializable {
 
     private void showEvents() {
 
-        List<EventInterface> events = eventController.getAllEvents();
+        List<EventInterface> events = facade.getAllEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
@@ -169,7 +170,7 @@ public class ScheduleController implements Initializable {
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
 
-        boolean isAlreadySubscribed = eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
+        boolean isAlreadySubscribed = facade.addAttendeeOnList(userSession.getCurrentUser(), event);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if(!isAlreadySubscribed) {
@@ -182,7 +183,7 @@ public class ScheduleController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Inscrição realizada com sucesso!");
             alert.showAndWait();
-            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
         }
     }
 

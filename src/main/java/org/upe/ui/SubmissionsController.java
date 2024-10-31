@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.upe.controllers.EventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 
@@ -23,8 +25,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubmissionsController implements Initializable {
-
-    EventController eventController = new EventController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     public Button settingsButton;
@@ -94,7 +95,7 @@ public class SubmissionsController implements Initializable {
     @FXML
     private void showEvents() {
 
-        List<EventInterface> events = eventController.getAllEvents();
+        List<EventInterface> events = facade.getAllEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
