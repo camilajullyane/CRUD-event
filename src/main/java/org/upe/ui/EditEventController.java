@@ -91,7 +91,7 @@ public class EditEventController {
 
     @FXML
     private void handleHourButton() {
-        eventController.editEventDate(currentEvent.getId(), newEventHour.getText());
+        facade.editEventDate(currentEvent.getId(), newEventHour.getText());
         newEventHour.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
