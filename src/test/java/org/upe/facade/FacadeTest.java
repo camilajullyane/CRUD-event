@@ -3,6 +3,7 @@ package org.upe.facade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
@@ -43,11 +44,13 @@ public class FacadeTest {
 
         // Ensure the test event exists
         testEvent =  new Event("1", "123456789", "Test Event", "2023-10-10", "Location", "Organization", "Description", "12345678910", "");
+        assertNotNull(testEvent, "Test event should be created successfully");
+
         testUser = new User("john doe", "john.doe@email.com", "12345678910", "password", "1","", "" );
         testUser2 = new User("john doe", "john.doe2@email.com", "12345678912", "password", "", "", "");
-
-        assertNotNull(testEvent, "Test event should be created successfully");
         assertNotNull(testUser, "Test user should be created and logged in successfully");
+        assertNotNull(testUser2, "Test user should be created and logged in successfully");
+
     }
 
     @Test
@@ -105,5 +108,44 @@ public class FacadeTest {
         boolean result = facade.deleteAttendeeOnList(testUser, testEvent);
         assertTrue(result, "The attendee should be removed successfully");
         // Additional verification can be done by checking the event's attendee list
+    }
+
+    @Test
+    public void testEditEventName() {
+        boolean result = facade.editEventName(testEvent.getId(), "New Event Name");
+        assertTrue(result, "The event name should be edited successfully");
+    }
+
+    @Test
+    public void testEditEventLocal() {
+        boolean result = facade.editEventLocal(testEvent.getId(), "New Location");
+        assertTrue(result, "The event location should be edited successfully");
+    }
+
+    @Test
+    public void testEditEventDescription() {
+        boolean result = facade.editEventDescription(testEvent.getId(), "New Description");
+        assertTrue(result, "The event description should be edited successfully");
+    }
+
+    @Test
+    public void testEditEventOrganization() {
+        boolean result = facade.editEventOrganization(testEvent.getId(), "New Organization");
+        assertTrue(result, "The event organization should be edited successfully");
+    }
+
+    @Test
+    public void testEditEventDate() {
+        boolean result = facade.editEventDate(testEvent.getId(), "2023-12-12");
+        assertTrue(result, "The event date should be edited successfully");
+    }
+
+    @Test
+    public void testDeleteEvent() {
+        boolean result = facade.deleteEvent(testEvent.getId(), testUser);
+        assertTrue(result, "The event should be deleted successfully");
+
+        List<EventInterface> events = facade.getAllEvents();
+        assertFalse(events.contains(testEvent), "The event list should not contain the deleted event");
     }
 }
