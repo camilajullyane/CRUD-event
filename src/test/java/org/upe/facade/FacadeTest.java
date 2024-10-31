@@ -2,12 +2,15 @@ package org.upe.facade;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.Article;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
 import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.repository.ArticleUtility;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.SubEventUtility;
 import org.upe.persistence.repository.UserUtility;
@@ -24,12 +27,14 @@ public class FacadeTest {
     private UserInterface testUser;
     private UserInterface testUser2;
     private EventInterface testEvent;
+    private ArticleInterface testArticle;
 
     @BeforeEach
     public void setUp() throws IOException {
         UserUtility.setCsvFilePath("DB/teste/test_user.csv");
         EventUtility.setCsvFilePath("DB/teste/test_event.csv");
         SubEventUtility.setCsvFilePath("DB/teste/test_subevent.csv");
+        ArticleUtility.setCsvFilePath("DB/teste/test_article.csv");
 
         facade = new Facade();
         try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
@@ -47,12 +52,17 @@ public class FacadeTest {
         }
 
         try (FileWriter subEventWriter = new FileWriter("DB/teste/test_subevent.csv")) {
-            subEventWriter.write("id,parentEventID,name,local,hour,description,speaker\n");
-            subEventWriter.write("1,1,Sub Event 1,Sub Location 1,10:00,Sub Description 1,Speaker 1\n");
-            subEventWriter.write("2,1,Sub Event 2,Sub Location 2,11:00,Sub Description 2,Speaker 2\n");
+            subEventWriter.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
+            subEventWriter.write("1,1,Sub Event 1,2023-10-10,10:00,Sub Location 1,Sub Description 1,Speaker 1,\n");
+            subEventWriter.write("2,1,Sub Event 2,2023-10-10,11:00,Sub Location 2,Sub Description 2,Speaker 2,\n");
         }
 
-        // Ensure the test event exists
+        try (FileWriter articleWriter = new FileWriter("DB/teste/test_article.csv")) {
+            articleWriter.write("name,articleID,userCPF,articleAbstract\n");
+            articleWriter.write("Test Article,1,12345678910,This is a test article abstract.\n");
+            articleWriter.write("Test Article 2,2,12345678910,This is another test article abstract.\n");
+        }
+
         testEvent =  new Event("1", "123456789", "Test Event", "2023-10-10", "Location", "Organization", "Description", "12345678910", "");
         assertNotNull(testEvent, "Test event should be created successfully");
 
@@ -175,9 +185,6 @@ public class FacadeTest {
 
     @Test
     public void testShowAllSubEvents() {
-        facade.createSubEvent(testEvent.getId(), "Sub Event 1", "Sub Location 1", "10:00", "Sub Description 1", "Speaker 1");
-        facade.createSubEvent(testEvent.getId(), "Sub Event 2", "Sub Location 2", "11:00", "Sub Description 2", "Speaker 2");
-
         List<SubEventInterface> subEvents = facade.showAllSubEvents();
         assertNotNull(subEvents, "The sub-event list should not be null");
         assertEquals(2, subEvents.size(), "The sub-event list should contain 2 sub-events");
@@ -256,7 +263,6 @@ public class FacadeTest {
     public void testUserEventsIn() {
         List<EventInterface> events = facade.userEventsIn(testUser.getCPF());
         assertNotNull(events, "The event list should not be null");
-        // Additional assertions can be added based on expected behavior
     }
 
     @Test
@@ -275,5 +281,21 @@ public class FacadeTest {
     public void testChangePassword() {
         boolean result = facade.changePassword(testUser.getCPF(), "password", "newpassword");
         assertTrue(result, "The password should be changed successfully");
+    }
+
+    @Test
+    public void testCreateArticle() {
+        facade.createArticle(testUser, "Test Article", "This is a test article abstract.");
+        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCPF());
+        assertNotNull(articles, "The article list should not be null");
+        assertEquals(3, articles.size(), "The article list should contain 2 articles");
+        assertEquals("Test Article", articles.getFirst().getName(), "The article name should match");
+    }
+
+    @Test
+    public void testGetAllArticlesByUser() {
+        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCPF());
+        assertNotNull(articles, "The article list should not be null");
+        assertEquals(2, articles.size(), "The article list should contain 2 articles");
     }
 }
