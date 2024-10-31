@@ -108,14 +108,11 @@ public class SubmissionsController implements Initializable {
 
             VBox.setMargin(eventContainer, new Insets(30));
 
-            Label label = new Label("Você não submeteu nenhum artigo");
+            Label label = new Label("Ainda não há eventos disponíveis");
             label.getStyleClass().add("custom-label");
 
-            Button button = new Button("Ver eventos disponíveis");
-            button.getStyleClass().add("custom-button");
-            VBox.setMargin(button, new Insets(50, 0, 0, 0));
 
-            eventContainer.getChildren().addAll(label, button);
+            eventContainer.getChildren().addAll(label);
             mainContainer.getChildren().add(eventContainer);
             mainContainer.setAlignment(Pos.CENTER);
         } else {
@@ -149,8 +146,8 @@ public class SubmissionsController implements Initializable {
                 Label ownerValue = new Label(event.getOrganization());
                 ownerValue.getStyleClass().add("subcaption");
 
-                Button cancelButton = new Button("Cancelar Inscrição");
-                cancelButton.getStyleClass().add("cancel-button");
+                Button subscriptionButton = new Button("Submeter Artigo");
+                subscriptionButton.getStyleClass().add("custom-button");
 
                 VBox descriptionBox = new VBox(5, title, description);
                 VBox dateBox = new VBox(5, date, dateValue);
@@ -159,9 +156,9 @@ public class SubmissionsController implements Initializable {
 
 
                 HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
-                HBox headerBox = new HBox(20, descriptionBox, cancelButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
-                VBox containerBox = new VBox(45, headerBox, infoBox);
+                VBox containerBox = new VBox(45, descriptionBox, infoBox, subscriptionButton);
+                containerBox.setAlignment(Pos.CENTER);
 
                 eventContainer.getChildren().addAll(containerBox);
                 mainContainer.getChildren().add(eventContainer);

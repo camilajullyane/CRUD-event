@@ -7,6 +7,7 @@ import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
+import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.SubEventUtility;
 import org.upe.persistence.repository.UserUtility;
@@ -180,5 +181,99 @@ public class FacadeTest {
         List<SubEventInterface> subEvents = facade.showAllSubEvents();
         assertNotNull(subEvents, "The sub-event list should not be null");
         assertEquals(2, subEvents.size(), "The sub-event list should contain 2 sub-events");
+    }
+
+    @Test
+    public void testGetMySubEventsByParentEventID() {
+        List<SubEvent> subEvents = facade.getMySubEventsByParentEventID(testEvent.getId(), testUser.getCPF());
+        assertNotNull(subEvents, "The sub-event list should not be null");
+        // Additional assertions can be added based on expected behavior
+    }
+
+    @Test
+    public void testGetAllSubEventsByEvent() {
+        List<SubEventInterface> subEvents = facade.getAllSubEventsByEvent(testEvent.getId());
+        assertNotNull(subEvents, "The sub-event list should not be null");
+        // Additional assertions can be added based on expected behavior
+    }
+
+    @Test
+    public void testEditSubEventName() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventName(subEvent.getId(), "New Sub Event Name");
+        assertTrue(result, "The sub-event name should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventDate() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventDate(subEvent.getId(), "2023-12-12");
+        assertTrue(result, "The sub-event date should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventLocal() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventLocal(subEvent.getId(), "New Sub Location");
+        assertTrue(result, "The sub-event location should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventDescription() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventDescription(subEvent.getId(), "New Sub Description");
+        assertTrue(result, "The sub-event description should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventSpeaker() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventSpeaker(subEvent.getId(), "New Speaker");
+        assertTrue(result, "The sub-event speaker should be edited successfully");
+    }
+
+    @Test
+    public void testDeleteSubEvent() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.deleteSubEvent(subEvent.getId());
+        assertTrue(result, "The sub-event should be deleted successfully");
+    }
+
+    @Test
+    public void testDeleteAttendeeEvent() {
+        boolean result = facade.deleteAttendeeEvent(testUser.getCPF(), testEvent.getId());
+        assertTrue(result, "The attendee should be deleted from the event successfully");
+    }
+
+    @Test
+    public void testGetUserByCPF() {
+        UserInterface user = facade.getUserByCPF(testUser.getCPF());
+        assertNotNull(user, "The user should be retrieved successfully");
+        assertEquals(testUser.getCPF(), user.getCPF(), "The user CPF should match");
+    }
+
+    @Test
+    public void testUserEventsIn() {
+        List<EventInterface> events = facade.userEventsIn(testUser.getCPF());
+        assertNotNull(events, "The event list should not be null");
+        // Additional assertions can be added based on expected behavior
+    }
+
+    @Test
+    public void testDeleteAttendeeFromEvent() {
+        boolean result = facade.deleteAttendeeFromEvent(testUser, testEvent);
+        assertTrue(result, "The attendee should be deleted from the event successfully");
+    }
+
+    @Test
+    public void testChangeEmail() {
+        boolean result = facade.changeEmail(testUser.getEmail(), "newemail@example.com");
+        assertTrue(result, "The email should be changed successfully");
+    }
+
+    @Test
+    public void testChangePassword() {
+        boolean result = facade.changePassword(testUser.getCPF(), "password", "newpassword");
+        assertTrue(result, "The password should be changed successfully");
     }
 }
