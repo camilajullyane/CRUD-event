@@ -51,6 +51,10 @@ public class Facade implements FacadeInterface {
         return eventController.getEventsIn(ownerCPF);
     }
 
+    public EventInterface getEventByID(String id) {
+        return eventController.getEventById(id);
+    }
+
     public List<EventInterface> getAllEventsByUser(String ownerCPF) {
         return eventController.getAllEventsByUser(ownerCPF);
     }

@@ -16,6 +16,7 @@ public interface FacadeInterface {
     List<EventInterface> getAllEvents();
     List<EventInterface> getEventsIn(String ownerCPF);
     List<EventInterface> getAllEventsByUser(String ownerCPF);
+    EventInterface getEventByID(String id);
     boolean addAttendeeOnList(UserInterface user, EventInterface event);
     boolean deleteAttendeeOnList(UserInterface user, EventInterface event);
     boolean editEventName(String id, String newName);

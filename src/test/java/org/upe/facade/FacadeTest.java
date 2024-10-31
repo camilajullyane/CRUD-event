@@ -8,6 +8,7 @@ import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
 import org.upe.persistence.repository.EventUtility;
+import org.upe.persistence.repository.SubEventUtility;
 import org.upe.persistence.repository.UserUtility;
 
 import java.io.FileWriter;
@@ -27,6 +28,8 @@ public class FacadeTest {
     public void setUp() throws IOException {
         UserUtility.setCsvFilePath("DB/teste/test_user.csv");
         EventUtility.setCsvFilePath("DB/teste/test_event.csv");
+        SubEventUtility.setCsvFilePath("DB/teste/test_subevent.csv");
+
         facade = new Facade();
         try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
             writer.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
@@ -40,6 +43,12 @@ public class FacadeTest {
             writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             writer.write("1,12345678910,Event One,2023-10-01,Location One,Org One,Description One,,\n");
             writer.write("2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,\n");
+        }
+
+        try (FileWriter subEventWriter = new FileWriter("DB/teste/test_subevent.csv")) {
+            subEventWriter.write("id,parentEventID,name,local,hour,description,speaker\n");
+            subEventWriter.write("1,1,Sub Event 1,Sub Location 1,10:00,Sub Description 1,Speaker 1\n");
+            subEventWriter.write("2,1,Sub Event 2,Sub Location 2,11:00,Sub Description 2,Speaker 2\n");
         }
 
         // Ensure the test event exists
@@ -96,6 +105,13 @@ public class FacadeTest {
     }
 
     @Test
+    public void testGetEventByID() {
+        EventInterface event = facade.getEventByID(testEvent.getId());
+        assertNotNull(event, "The event should be retrieved successfully");
+        assertEquals(testEvent.getId(), event.getId(), "The event ID should match");
+    }
+
+    @Test
     public void testAddAttendeeOnList() {
         boolean result = facade.addAttendeeOnList(testUser2, testEvent);
         assertTrue(result, "The attendee should be added successfully");
@@ -147,5 +163,22 @@ public class FacadeTest {
 
         List<EventInterface> events = facade.getAllEvents();
         assertFalse(events.contains(testEvent), "The event list should not contain the deleted event");
+    }
+
+    @Test
+    public void testCreateSubEvent() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        assertNotNull(subEvent, "The sub-event should be created successfully");
+        assertEquals("Sub Event", subEvent.getName(), "The sub-event name should match");
+    }
+
+    @Test
+    public void testShowAllSubEvents() {
+        facade.createSubEvent(testEvent.getId(), "Sub Event 1", "Sub Location 1", "10:00", "Sub Description 1", "Speaker 1");
+        facade.createSubEvent(testEvent.getId(), "Sub Event 2", "Sub Location 2", "11:00", "Sub Description 2", "Speaker 2");
+
+        List<SubEventInterface> subEvents = facade.showAllSubEvents();
+        assertNotNull(subEvents, "The sub-event list should not be null");
+        assertEquals(2, subEvents.size(), "The sub-event list should contain 2 sub-events");
     }
 }

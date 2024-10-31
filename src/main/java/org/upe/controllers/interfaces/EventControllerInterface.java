@@ -18,4 +18,5 @@ public interface EventControllerInterface {
     boolean editEventOrganization(String id, String newOrganization);
     boolean editEventDate(String id, String newDate);
     boolean deleteEvent(String id, UserInterface user);
+    EventInterface getEventById(String id);
 }
