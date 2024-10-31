@@ -2,11 +2,15 @@ package org.upe.facade;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.Article;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
+import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.repository.ArticleUtility;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.SubEventUtility;
 import org.upe.persistence.repository.UserUtility;
@@ -23,12 +27,14 @@ public class FacadeTest {
     private UserInterface testUser;
     private UserInterface testUser2;
     private EventInterface testEvent;
+    private ArticleInterface testArticle;
 
     @BeforeEach
     public void setUp() throws IOException {
         UserUtility.setCsvFilePath("DB/teste/test_user.csv");
         EventUtility.setCsvFilePath("DB/teste/test_event.csv");
         SubEventUtility.setCsvFilePath("DB/teste/test_subevent.csv");
+        ArticleUtility.setCsvFilePath("DB/teste/test_article.csv");
 
         facade = new Facade();
         try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
@@ -46,12 +52,17 @@ public class FacadeTest {
         }
 
         try (FileWriter subEventWriter = new FileWriter("DB/teste/test_subevent.csv")) {
-            subEventWriter.write("id,parentEventID,name,local,hour,description,speaker\n");
-            subEventWriter.write("1,1,Sub Event 1,Sub Location 1,10:00,Sub Description 1,Speaker 1\n");
-            subEventWriter.write("2,1,Sub Event 2,Sub Location 2,11:00,Sub Description 2,Speaker 2\n");
+            subEventWriter.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
+            subEventWriter.write("1,1,Sub Event 1,2023-10-10,10:00,Sub Location 1,Sub Description 1,Speaker 1,\n");
+            subEventWriter.write("2,1,Sub Event 2,2023-10-10,11:00,Sub Location 2,Sub Description 2,Speaker 2,\n");
         }
 
-        // Ensure the test event exists
+        try (FileWriter articleWriter = new FileWriter("DB/teste/test_article.csv")) {
+            articleWriter.write("name,articleID,userCPF,articleAbstract\n");
+            articleWriter.write("Test Article,1,12345678910,This is a test article abstract.\n");
+            articleWriter.write("Test Article 2,2,12345678910,This is another test article abstract.\n");
+        }
+
         testEvent =  new Event("1", "123456789", "Test Event", "2023-10-10", "Location", "Organization", "Description", "12345678910", "");
         assertNotNull(testEvent, "Test event should be created successfully");
 
@@ -163,5 +174,128 @@ public class FacadeTest {
 
         List<EventInterface> events = facade.getAllEvents();
         assertFalse(events.contains(testEvent), "The event list should not contain the deleted event");
+    }
+
+    @Test
+    public void testCreateSubEvent() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        assertNotNull(subEvent, "The sub-event should be created successfully");
+        assertEquals("Sub Event", subEvent.getName(), "The sub-event name should match");
+    }
+
+    @Test
+    public void testShowAllSubEvents() {
+        List<SubEventInterface> subEvents = facade.showAllSubEvents();
+        assertNotNull(subEvents, "The sub-event list should not be null");
+        assertEquals(2, subEvents.size(), "The sub-event list should contain 2 sub-events");
+    }
+
+    @Test
+    public void testGetMySubEventsByParentEventID() {
+        List<SubEvent> subEvents = facade.getMySubEventsByParentEventID(testEvent.getId(), testUser.getCPF());
+        assertNotNull(subEvents, "The sub-event list should not be null");
+        // Additional assertions can be added based on expected behavior
+    }
+
+    @Test
+    public void testGetAllSubEventsByEvent() {
+        List<SubEventInterface> subEvents = facade.getAllSubEventsByEvent(testEvent.getId());
+        assertNotNull(subEvents, "The sub-event list should not be null");
+        // Additional assertions can be added based on expected behavior
+    }
+
+    @Test
+    public void testEditSubEventName() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventName(subEvent.getId(), "New Sub Event Name");
+        assertTrue(result, "The sub-event name should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventDate() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventDate(subEvent.getId(), "2023-12-12");
+        assertTrue(result, "The sub-event date should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventLocal() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventLocal(subEvent.getId(), "New Sub Location");
+        assertTrue(result, "The sub-event location should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventDescription() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventDescription(subEvent.getId(), "New Sub Description");
+        assertTrue(result, "The sub-event description should be edited successfully");
+    }
+
+    @Test
+    public void testEditSubEventSpeaker() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.editSubEventSpeaker(subEvent.getId(), "New Speaker");
+        assertTrue(result, "The sub-event speaker should be edited successfully");
+    }
+
+    @Test
+    public void testDeleteSubEvent() {
+        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        boolean result = facade.deleteSubEvent(subEvent.getId());
+        assertTrue(result, "The sub-event should be deleted successfully");
+    }
+
+    @Test
+    public void testDeleteAttendeeEvent() {
+        boolean result = facade.deleteAttendeeEvent(testUser.getCPF(), testEvent.getId());
+        assertTrue(result, "The attendee should be deleted from the event successfully");
+    }
+
+    @Test
+    public void testGetUserByCPF() {
+        UserInterface user = facade.getUserByCPF(testUser.getCPF());
+        assertNotNull(user, "The user should be retrieved successfully");
+        assertEquals(testUser.getCPF(), user.getCPF(), "The user CPF should match");
+    }
+
+    @Test
+    public void testUserEventsIn() {
+        List<EventInterface> events = facade.userEventsIn(testUser.getCPF());
+        assertNotNull(events, "The event list should not be null");
+    }
+
+    @Test
+    public void testDeleteAttendeeFromEvent() {
+        boolean result = facade.deleteAttendeeFromEvent(testUser, testEvent);
+        assertTrue(result, "The attendee should be deleted from the event successfully");
+    }
+
+    @Test
+    public void testChangeEmail() {
+        boolean result = facade.changeEmail(testUser.getEmail(), "newemail@example.com");
+        assertTrue(result, "The email should be changed successfully");
+    }
+
+    @Test
+    public void testChangePassword() {
+        boolean result = facade.changePassword(testUser.getCPF(), "password", "newpassword");
+        assertTrue(result, "The password should be changed successfully");
+    }
+
+    @Test
+    public void testCreateArticle() {
+        facade.createArticle(testUser, "Test Article", "This is a test article abstract.");
+        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCPF());
+        assertNotNull(articles, "The article list should not be null");
+        assertEquals(3, articles.size(), "The article list should contain 2 articles");
+        assertEquals("Test Article", articles.getFirst().getName(), "The article name should match");
+    }
+
+    @Test
+    public void testGetAllArticlesByUser() {
+        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCPF());
+        assertNotNull(articles, "The article list should not be null");
+        assertEquals(2, articles.size(), "The article list should contain 2 articles");
     }
 }

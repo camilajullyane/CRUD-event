@@ -87,14 +87,11 @@ public class ScheduleController implements Initializable {
 
             VBox.setMargin(eventContainer, new Insets(30));
 
-            Label label = new Label("Não há eventos disponíveis no momento");
+            Label label = new Label("Ainda não há eventos disponíveis");
             label.getStyleClass().add("custom-label");
 
-            Button button = new Button("Ver eventos disponíveis");
-            button.getStyleClass().add("custom-button");
-            VBox.setMargin(button, new Insets(50, 0, 0, 0));
 
-            eventContainer.getChildren().addAll(label, button);
+            eventContainer.getChildren().addAll(label);
             mainContainer.getChildren().add(eventContainer);
             mainContainer.setAlignment(Pos.CENTER);
         } else {
