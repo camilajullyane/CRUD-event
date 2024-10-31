@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import org.upe.controllers.EventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -20,8 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MyEventsController implements Initializable {
-
-    EventController eventController = new EventController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     Button configButton;
@@ -35,7 +36,7 @@ public class MyEventsController implements Initializable {
     @FXML
     private void showMyEvents() {
 
-        List<EventInterface> events = eventController.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());;
+        List<EventInterface> events = facade.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCPF());;
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
