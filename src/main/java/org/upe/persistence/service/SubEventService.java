@@ -64,6 +64,10 @@ public class SubEventService {
         return subEventUtility.updateSubEventSpeaker(id, newSpeaker);
     }
 
+    public boolean updateSubEventHour(String id, String newHour) {
+        return subEventUtility.updateSubEventHour(id, newHour);
+    }
+
     public boolean deleteSubEvent(String id) {
         return subEventUtility.deleteSubEvent(id);
     }

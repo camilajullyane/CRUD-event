@@ -5,12 +5,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.io.IOException;
 
 public class SceneLoader {
 
     private static EventInterface eventData;
+    private static String subEventData;
 
     private SceneLoader() {
         throw new UnsupportedOperationException("Utility class");
@@ -34,4 +36,13 @@ public class SceneLoader {
     public static EventInterface getEventData() {
         return eventData;
     }
+
+    public static void setSubEventData(String subEventID) {
+        subEventData = subEventID;
+    }
+
+    public static String getSubEventData() {
+        return subEventData;
+    }
+
 }

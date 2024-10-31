@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -12,9 +14,8 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class CreateEventController {
-    UserSession userSession = UserSession.getInstance();
-    UserController userController = new UserController();
-    EventController eventController = new EventController();
+    private final UserSession userSession = UserSession.getInstance();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     public Button settingsButton;
@@ -94,8 +95,8 @@ public class CreateEventController {
         String beginDate = eventBeginDate.getValue().toString();
         String organization = eventOrganization.getText();
 
-        eventController.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
-        UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+        facade.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
+        UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
 
         eventName.setText("");
         eventDescription.setText("");

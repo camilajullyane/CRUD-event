@@ -9,17 +9,18 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.upe.controllers.SubEventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MySubEventsController {
-    SubEventController subEventController = new SubEventController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     private ScrollPane scrollPane;
@@ -33,7 +34,7 @@ public class MySubEventsController {
 
     private void showMySubEvents() {
         EventInterface currentEvent = SceneLoader.getEventData();
-        ArrayList<SubEventInterface> subEvents = subEventController. getAllSubEventsByEvent(currentEvent.getId());
+        List<SubEventInterface> subEvents = facade.getAllSubEventsByEvent(currentEvent.getId());
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
 
@@ -93,7 +94,7 @@ public class MySubEventsController {
                 editSubEventButton.getStyleClass().add("custom-button");
                 editSubEventButton.setOnAction(e -> {
                     try {
-                        handleEditSubEvent(subEvent.getId());
+                        handleEditSubEventButton(subEvent.getId());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -167,8 +168,9 @@ public class MySubEventsController {
     }
 
     @FXML
-    private void handleEditSubEvent(String subEventID) throws IOException {
-//        SceneLoader.loadScene("/org/upe/ui/editSubEvent.fxml", "Editar SubEvento", mySubEventsPage);
+    private void handleEditSubEventButton(String subEventID) throws IOException {
+        SceneLoader.setSubEventData(subEventID);
+        SceneLoader.loadScene("/org/upe/ui/telaEditarSubEvento.fxml", "Editar SubEvento", mySubEventsPage);
     }
 
 }

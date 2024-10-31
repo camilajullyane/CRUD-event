@@ -1,13 +1,8 @@
 package org.upe.facade;
 
-import org.upe.controllers.AuthController;
-import org.upe.controllers.EventController;
-import org.upe.controllers.SubEventController;
-import org.upe.controllers.UserController;
-import org.upe.controllers.interfaces.AuthControllerInterface;
-import org.upe.controllers.interfaces.EventControllerInterface;
-import org.upe.controllers.interfaces.SubEventControllerInterface;
-import org.upe.controllers.interfaces.UserControllerInterface;
+import org.upe.controllers.*;
+import org.upe.controllers.interfaces.*;
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
@@ -21,12 +16,14 @@ public class Facade implements FacadeInterface {
     private final EventControllerInterface eventController;
     private final SubEventControllerInterface subEventController;
     private final UserControllerInterface userController;
+    private final ArticleControllerInterface articleController;
 
     public Facade() {
         this.authController = new AuthController();
         this.eventController = new EventController();
         this.subEventController = new SubEventController();
         this.userController = new UserController();
+        this.articleController = new ArticleController();
     }
 
     // AuthController methods
@@ -128,6 +125,10 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventSpeaker(id, newSpeaker);
     }
 
+    public boolean editSubEventHour(String id, String newHour) {
+        return subEventController.editSubEventHour(id, newHour);
+    }
+
     public boolean deleteSubEvent(String id) {
         return subEventController.deleteSubEvent(id);
     }
@@ -155,5 +156,17 @@ public class Facade implements FacadeInterface {
 
     public boolean changePassword(String cpf, String currentPassword, String newPassword) {
         return userController.changePassword(cpf, currentPassword, newPassword);
+    }
+
+    public void createArticle(UserInterface user, String name, String articleAbstract) {
+        articleController.createArticle(user, name, articleAbstract);
+    }
+
+    public List<ArticleInterface> getAllArticlesByUser(String userCPF) {
+        return articleController.getAllArticlesByUser(userCPF);
+    }
+
+    public boolean submitArticle(ArticleInterface article, EventInterface event) {
+        return articleController.submitArticle(article, event);
     }
 }

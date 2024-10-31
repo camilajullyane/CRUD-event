@@ -1,5 +1,6 @@
 package org.upe.facade;
 
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
@@ -36,6 +37,7 @@ public interface FacadeInterface {
     boolean editSubEventLocal(String id, String newLocal);
     boolean editSubEventDescription(String id, String newDescription);
     boolean editSubEventSpeaker(String id, String newSpeaker);
+    boolean editSubEventHour(String id, String newHour);
     boolean deleteSubEvent(String id);
 
     // UserController methods
@@ -45,4 +47,9 @@ public interface FacadeInterface {
     boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event);
     boolean changeEmail(String userEmail, String newEmail);
     boolean changePassword(String cpf, String currentPassword, String newPassword);
+
+    // ArticleController methods
+    void createArticle(UserInterface user, String name, String articleAbstract);
+    List<ArticleInterface> getAllArticlesByUser(String userCPF);
+    boolean submitArticle(ArticleInterface article, EventInterface event);
 }

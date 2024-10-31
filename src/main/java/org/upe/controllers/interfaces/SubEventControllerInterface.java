@@ -16,4 +16,5 @@ public interface SubEventControllerInterface {
     boolean editSubEventDescription(String id, String newDescription);
     boolean editSubEventSpeaker(String id, String newSpeaker);
     boolean deleteSubEvent(String id);
+    boolean editSubEventHour(String id, String newHour);
 }
