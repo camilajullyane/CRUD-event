@@ -48,6 +48,10 @@ public class Facade implements FacadeInterface {
         return eventController.getEventsIn(ownerCPF);
     }
 
+    public EventInterface getEventByID(String id) {
+        return eventController.getEventById(id);
+    }
+
     public List<EventInterface> getAllEventsByUser(String ownerCPF) {
         return eventController.getAllEventsByUser(ownerCPF);
     }
@@ -119,6 +123,10 @@ public class Facade implements FacadeInterface {
 
     public boolean editSubEventSpeaker(String id, String newSpeaker) {
         return subEventController.editSubEventSpeaker(id, newSpeaker);
+    }
+
+    public boolean editSubEventHour(String id, String newHour) {
+        return subEventController.editSubEventHour(id, newHour);
     }
 
     public boolean deleteSubEvent(String id) {

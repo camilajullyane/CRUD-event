@@ -32,4 +32,6 @@ public class SubEvent extends Event implements SubEventInterface {
     public String getHour() {
         return this.hour;
     }
+
+    public void setHour(String newHour) { this.hour = newHour; }
 }

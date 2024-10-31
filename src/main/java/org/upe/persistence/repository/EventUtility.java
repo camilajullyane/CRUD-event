@@ -14,10 +14,10 @@ import org.upe.persistence.interfaces.EventInterface;
 public class EventUtility {
     private static final UserUtility userUtility = new UserUtility();
     private static final Logger LOGGER = Logger.getLogger(EventUtility.class.getName());
-    protected String csvFilePath = "DB/event.csv";
+    protected static String csvFilePath = "DB/event.csv";
 
-    public void setCsvFilePath(String csvFilePath) {
-        this.csvFilePath = csvFilePath;
+    public static void setCsvFilePath(String csvFilePath) {
+        EventUtility.csvFilePath = csvFilePath;
     }
 
     public List<Event> getAllEvents() {

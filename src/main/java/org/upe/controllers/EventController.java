@@ -87,4 +87,8 @@ public class EventController implements EventControllerInterface {
         userService.deleteAllAttendeesFromEvent(id);
         return true;
     }
+
+    public EventInterface getEventById(String id) {
+        return eventService.getEventById(id);
+    }
 }

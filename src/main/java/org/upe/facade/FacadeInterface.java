@@ -17,6 +17,7 @@ public interface FacadeInterface {
     List<EventInterface> getAllEvents();
     List<EventInterface> getEventsIn(String ownerCPF);
     List<EventInterface> getAllEventsByUser(String ownerCPF);
+    EventInterface getEventByID(String id);
     boolean addAttendeeOnList(UserInterface user, EventInterface event);
     boolean deleteAttendeeOnList(UserInterface user, EventInterface event);
     boolean editEventName(String id, String newName);
@@ -36,6 +37,7 @@ public interface FacadeInterface {
     boolean editSubEventLocal(String id, String newLocal);
     boolean editSubEventDescription(String id, String newDescription);
     boolean editSubEventSpeaker(String id, String newSpeaker);
+    boolean editSubEventHour(String id, String newHour);
     boolean deleteSubEvent(String id);
 
     // UserController methods
