@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.UserController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
@@ -14,8 +16,8 @@ import java.io.IOException;
 public class SettingsController {
     private static final String RED_TEXT_STYLE = "-fx-text-fill: red";
     private static final String GREEN_TEXT_STYLE = "-fx-text-fill: green";
-    UserSession userSession = UserSession.getInstance();
-    UserController userController = new UserController();
+    private final UserSession userSession = UserSession.getInstance();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     public Button scheduleButton;
@@ -116,11 +118,11 @@ public class SettingsController {
             return;
         }
 
-        if(userController.changeEmail(currentEmail, newEmailAddress)) {
+        if(facade.changeEmail(currentEmail, newEmailAddress)) {
             emailLabel.setText("Email alterado com sucesso");
             emailLabel.setStyle(GREEN_TEXT_STYLE);
             emailLabel.setVisible(true);
-            userSession.setCurrentUser(userController.getUserByCPF(userSession.getCurrentUser().getCPF()));
+            userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCPF()));
         } else {
             emailLabel.setText("Email já cadastrado");
             emailLabel.setStyle(RED_TEXT_STYLE);
@@ -147,11 +149,11 @@ public class SettingsController {
             return;
         }
 
-        if (userController.changePassword(userSession.getCurrentUser().getCPF(), currentPassword, newPassword)) {
+        if (facade.changePassword(userSession.getCurrentUser().getCPF(), currentPassword, newPassword)) {
             passwordLabel.setText("Senha alterada com sucesso");
             passwordLabel.setStyle(GREEN_TEXT_STYLE);
             passwordLabel.setVisible(true);
-            userSession.setCurrentUser(userController.getUserByCPF(userSession.getCurrentUser().getCPF()));
+            userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCPF()));
         } else {
             passwordLabel.setText("Senha atual incorreta");
             passwordLabel.setStyle(RED_TEXT_STYLE);
@@ -160,7 +162,7 @@ public class SettingsController {
         }
 
 
-        userSession.setCurrentUser(userController.getUserByCPF(userSession.getCurrentUser().getCPF()));
+        userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCPF()));
     }
 
 

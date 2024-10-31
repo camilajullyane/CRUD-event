@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.upe.controllers.ArticleController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
 
 
 public class CreateArticleController {
+    private final FacadeInterface facade = new Facade();
+
     @FXML
     public Button settingsButton;
 
@@ -42,13 +46,13 @@ public class CreateArticleController {
             return;
         }
 
-        ArticleController articleController = new ArticleController();
+
         UserSession userSession = UserSession.getInstance();
 
         String name = articleName.getText();
         String articleAbstract = articleText.getText();
 
-        articleController.createArticle(userSession.getCurrentUser(), name,articleAbstract);
+        facade.createArticle(userSession.getCurrentUser(), name, articleAbstract);
 
         articleName.setText("");
         articleText.setText("");

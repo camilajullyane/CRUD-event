@@ -17,9 +17,7 @@ import org.upe.utils.UserSession;
 import java.io.IOException;
 
 public class LoginController {
-
-    FacadeInterface facade = new Facade();
-    private static final AuthController authController = new AuthController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     StackPane loginPage;
@@ -49,7 +47,7 @@ public class LoginController {
        String cpf = cpfField.getText();
        String password = passwordField.getText();
 
-        UserInterface isLogged = authController.loginUser(cpf, password);
+        UserInterface isLogged = facade.loginUser(cpf, password);
 
         if(isLogged == null) {
             errorMessage.setText("Credenciais erradas ou não cadastradas");
