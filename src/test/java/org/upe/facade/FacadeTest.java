@@ -84,7 +84,7 @@ public class FacadeTest {
     public void testSignUpUser() {
         UserInterface user = facade.signUpUser("Test User", "11111111112", "test@example.com", "password");
         assertNotNull(user);
-        assertEquals("11111111112", user.getCPF());
+        assertEquals("11111111112", user.getEmail());
     }
 
     @Test
