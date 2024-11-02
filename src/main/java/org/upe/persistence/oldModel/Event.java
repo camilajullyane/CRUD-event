@@ -1,4 +1,4 @@
-package org.upe.persistence.model;
+package org.upe.persistence.oldModel;
 
 import org.upe.persistence.interfaces.EventInterface;
 

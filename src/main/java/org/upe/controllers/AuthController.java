@@ -2,7 +2,7 @@ package org.upe.controllers;
 
 import org.upe.controllers.interfaces.AuthControllerInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.User;
+import org.upe.persistence.oldModel.User;
 import org.upe.persistence.repository.UserUtility;
 
 public class AuthController implements AuthControllerInterface {

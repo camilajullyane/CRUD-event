@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.Event;
+import org.upe.persistence.oldModel.Event;
 import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {

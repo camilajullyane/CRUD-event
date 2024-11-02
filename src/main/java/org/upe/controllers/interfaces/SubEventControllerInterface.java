@@ -1,7 +1,7 @@
 package org.upe.controllers.interfaces;
 
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.oldModel.SubEvent;
 
 import java.util.List;
 

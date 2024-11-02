@@ -4,7 +4,7 @@ import org.upe.controllers.interfaces.EventControllerInterface;
 import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.Event;
+import org.upe.persistence.oldModel.Event;
 import org.upe.persistence.repository.EventUtility;
 
 import java.util.ArrayList;

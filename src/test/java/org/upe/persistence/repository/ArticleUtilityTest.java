@@ -3,7 +3,7 @@ package org.upe.persistence.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.model.Article;
+import org.upe.persistence.oldModel.Article;
 
 import java.io.FileWriter;
 import java.io.IOException;

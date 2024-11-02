@@ -1,99 +1,57 @@
 package org.upe.persistence.model;
 
-import org.upe.persistence.interfaces.UserInterface;
+import jakarta.persistence.*;
+import org.upe.persistence.interfaces.EventInterface;
 
-public class User implements UserInterface {
-    protected String name;
-    protected String userCPF;
-    protected String password;
-    protected String email;
-    protected String attendeeOn;
-    protected String ownerOf;
-    protected String articleID;
+@Entity
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"cpf", "email"}))
+public class User {
+    @Id @GeneratedValue
+    private Long id;
+    private String name;
+    private String cpf;
+    private String email;
+    private String password;
 
-    public User(String name, String email, String userCPF, String password, String attendeeOn, String ownerOf, String articleID) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.userCPF = userCPF;
-        this.attendeeOn = attendeeOn;
-        this.ownerOf = ownerOf;
-        this.articleID = articleID;
+    // Getters
+    public Long getId() {
+        return id;
     }
 
-    public String getCPF() {
-        return this.userCPF;
+    public String getName() {
+        return name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
-    public void setCPF(String userCPF) {this.userCPF = userCPF;}
-
-    public String getEmail() {
-        return this.email;
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setPassword(String password) {this.password = password;}
-
-    public void setEmail(String email) {this.email = email;}
-
-    public String getName() {
-        return this.name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String[] getAttendeeOn() {
-        return this.attendeeOn.split("#");
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void addAttendeeOn(String eventID) {
-        this.attendeeOn = this.attendeeOn.isEmpty() ? eventID : this.attendeeOn + "#" + eventID;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void deleteAttendeeOn(String eventID) {
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < this.getAttendeeOn().length; i++) {
-            String id = this.getAttendeeOn()[i];
-            if (!id.equals(eventID)) {
-                if (!newString.isEmpty()) {
-                    newString.append("#");
-                }
-                newString.append(id);
-            }
-            this.attendeeOn = newString.toString();
-        }
-    }
-
-    public String[] getOwnerOf() {
-
-        return this.ownerOf.split("#");
-    }
-
-    public void addOwnerOf(String eventID) {
-        this.ownerOf = this.ownerOf.isEmpty() ? eventID : this.attendeeOn + "#" + eventID;
-    }
-
-    public void deleteOwnerOf(String eventID) {
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < this.getOwnerOf().length; i++) {
-            String id = this.getOwnerOf()[i];
-            if (!id.equals(eventID)) {
-                if (!newString.isEmpty()) {
-                    newString.append("#");
-                }
-                newString.append(id);
-            }
-        }
-        this.ownerOf = newString.toString();
-    }
-
-    public String[] getArticleID() {
-        return this.articleID.split("#");
-    }
-
-    public void addArticleID(String articleID) {
-        this.articleID = this.articleID.isEmpty() ? articleID : this.attendeeOn + "#" + articleID;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
-

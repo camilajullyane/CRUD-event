@@ -2,7 +2,7 @@ package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.model.User;
+import org.upe.persistence.oldModel.User;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.io.FileWriter;
