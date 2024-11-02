@@ -1,51 +1,52 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.EventControllerInterface;
+import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
-import org.upe.persistence.service.EventService;
-import org.upe.persistence.service.UserService;
+import org.upe.persistence.repository.EventUtility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventController implements EventControllerInterface {
-    private static final UserService userService = new UserService();
-    private static final EventService eventService = new EventService();
+    private static final UserControllerInterface userController = new UserController();
+
+    private static final EventUtility eventUtility = new EventUtility();
 
     public EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
                                       String organization) {
-        return eventService.createEvent(user.getCPF(), name, date, local, organization, description);
+        return eventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
     }
 
     public List<EventInterface> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
+        List<Event> events = eventUtility.getAllEvents();
 
         return new ArrayList<>(events);
     }
 
     public List<EventInterface> getEventsIn(String ownerCPF) {
-        List<Event> events = eventService.getEventsIn(ownerCPF);
+        List<Event> events = eventUtility.getEventsIn(ownerCPF);
 
         return new ArrayList<>(events);
     }
 
     public List<EventInterface> getAllEventsByUser(String ownerCPF) {
-        List<Event> eventByUser = eventService.getAllEventsByUser(ownerCPF);
+        List<Event> eventByUser = eventUtility.getAllEventsByUser(ownerCPF);
 
         return new ArrayList<>(eventByUser);
     }
 
     public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
-        return eventService.addAttendeeOnList(user, event.getId()) && userService.addAttendeeOnEvent(user, event.getId());
+        return eventUtility.addAttendeeOnList(user, event.getId()) && userController.addAttendeeOnEvent(user, event.getId());
     }
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
         for (String attendeeCPF : event.getAttendeesList()) {
             if (attendeeCPF.equals(user.getCPF())) {
-                eventService.deleteAttendeeOnList(user.getCPF(), event.getId());
-                userService.deleteAttendeeEvent(user.getCPF(), event.getId());
+                eventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
+                userController.deleteAttendeeEvent(user.getCPF(), event.getId());
                 return true;
             }
         }
@@ -53,42 +54,47 @@ public class EventController implements EventControllerInterface {
     }
 
     public boolean editEventName(String id, String newName) {
-        eventService.updateEventName(id, newName);
+        eventUtility.updateEventName(id, newName);
 
         return true;
     }
 
     public boolean editEventLocal(String id, String newLocal) {
-        eventService.updateEventLocal(id, newLocal);
+        eventUtility.updateEventLocal(id, newLocal);
 
         return true;
     }
 
     public boolean editEventDescription(String id, String newDescription) {
-        eventService.updateEventDescription(id, newDescription);
+        eventUtility.updateEventDescription(id, newDescription);
 
         return true;
     }
 
     public boolean editEventOrganization(String id, String newOrganization) {
-        eventService.updateEventOrganization(id, newOrganization);
+        eventUtility.updateEventOrganization(id, newOrganization);
         return true;
     }
 
     public boolean editEventDate(String id, String newDate) {
-        eventService.updateEventDate(id, newDate);
+        eventUtility.updateEventDate(id, newDate);
 
         return true;
     }
 
     public boolean deleteEvent(String id, UserInterface user) {
-        eventService.deleteEvent(id);
-        userService.deleteOwnerOf(user.getCPF(), id);
-        userService.deleteAllAttendeesFromEvent(id);
+        eventUtility.deleteEvent(id);
+        userController.deleteOwnerOf(user.getCPF(), id);
+        userController.deleteAllAttendeesFromEvent(id);
         return true;
     }
 
     public EventInterface getEventById(String id) {
-        return eventService.getEventById(id);
+        return eventUtility.getEventById(id);
+    }
+
+
+    public boolean addArticleOnList(String articleID, String eventID) {
+        return eventUtility.addArticleOnList(articleID, eventID);
     }
 }

@@ -12,4 +12,7 @@ public interface UserControllerInterface {
     boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event);
     boolean changeEmail(String userEmail, String newEmail);
     boolean changePassword(String cpf, String currentPassword, String newPassword);
+    boolean addAttendeeOnEvent(UserInterface user, String eventID);
+    void deleteOwnerOf(String ownerCPF, String eventID);
+    boolean deleteAllAttendeesFromEvent(String eventID);
 }
