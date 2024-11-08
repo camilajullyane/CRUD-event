@@ -1,46 +1,32 @@
 package org.upe.persistence.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "subEvent")
-public class SubEvent {
+@Getter @Setter
+public class SubEvent implements SubEventInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private String name;
     protected String speakers;
     protected String hour;
+    protected String description;
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
-    // Getters
-
-    public UUID getId() {
-        return this.id;
-    }
-    public String getSpeakers() {
-        return speakers;
-    }
-
-    public Event getParentEvent() {
-        return parentEvent;
-    }
-
-    public String getHour() {
-        return hour;
-    }
-
-    // Setters
-
-    public void setSpeakers(String speakers) {
+    public SubEvent(String speakers, String hour, Event parentEvent) {
         this.speakers = speakers;
+        this.hour = hour;
+        this.parentEvent = parentEvent;
     }
 
-    public void setHour(String newHour) {
-        this.hour = newHour;
-    }
-
+    public SubEvent() {}
 }

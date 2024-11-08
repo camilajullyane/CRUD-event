@@ -3,12 +3,13 @@ package org.upe.persistence.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.upe.persistence.JPAUtils.EntityManagerFactory;
+import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
 
 public class UserDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
-    public User create(String name, String email, String cpf, String password) {
+    public UserInterface create(String name, String email, String cpf, String password) {
         User user = new User(name, cpf, email, password);
         entityManager.getTransaction().begin();
         entityManager.persist(user);
@@ -27,7 +28,7 @@ public class UserDAO {
         }
     }
 
-    public User findByEmail(String email) {
+    public UserInterface findByEmail(String email) {
         try {
             String jpql = "SELECT u FROM User u WHERE u.email = :email";
             TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
@@ -36,5 +37,18 @@ public class UserDAO {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public UserInterface update(User user) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
+        return user;
+    }
+
+    public void delete(User user) {
+        entityManager.getTransaction().begin();
+        entityManager.remove(user);
+        entityManager.getTransaction().commit();
     }
 }

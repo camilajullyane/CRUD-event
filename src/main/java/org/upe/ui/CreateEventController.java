@@ -3,8 +3,6 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
-import org.upe.controllers.EventController;
-import org.upe.controllers.UserController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.utils.DatePickerUtil;
@@ -96,7 +94,7 @@ public class CreateEventController {
         String organization = eventOrganization.getText();
 
         facade.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
-        UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+        UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
 
         eventName.setText("");
         eventDescription.setText("");

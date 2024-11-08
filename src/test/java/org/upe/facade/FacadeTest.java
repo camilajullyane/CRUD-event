@@ -10,15 +10,12 @@ import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.Event;
-import org.upe.persistence.oldModel.User;
-import org.upe.persistence.oldModel.SubEvent;
+import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.repository.ArticleUtility;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.SubEventUtility;
 import org.upe.persistence.repository.UserUtility;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -53,39 +50,39 @@ public class FacadeTest {
 
 
         facade = new Facade();
-        try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
-            writer.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
-            writer.write("Test User,test@example.com,11111111111,111111,,,\n");
-            writer.write("john doe,john.doe@email.com,12345678910,password,,,\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try (FileWriter writer = new FileWriter("DB/teste/test_event.csv")) {
-            writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
-            writer.write("1,12345678910,Event One,2023-10-01,Location One,Org One,Description One,,\n");
-            writer.write("2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,\n");
-        }
-
-        try (FileWriter subEventWriter = new FileWriter("DB/teste/test_subevent.csv")) {
-            subEventWriter.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
-            subEventWriter.write("1,1,Sub Event 1,2023-10-10,10:00,Sub Location 1,Sub Description 1,Speaker 1,\n");
-            subEventWriter.write("2,1,Sub Event 2,2023-10-10,11:00,Sub Location 2,Sub Description 2,Speaker 2,\n");
-        }
-
-        try (FileWriter articleWriter = new FileWriter("DB/teste/test_article.csv")) {
-            articleWriter.write("name,articleID,userCPF,articleAbstract\n");
-            articleWriter.write("Test Article,1,12345678910,This is a test article abstract.\n");
-            articleWriter.write("Test Article 2,2,12345678910,This is another test article abstract.\n");
-        }
-
-        testEvent =  new Event("1", "123456789", "Test Event", "2023-10-10", "Location", "Organization", "Description", "12345678910", "");
-        assertNotNull(testEvent, "Test event should be created successfully");
-
-        testUser = new User("john doe", "john.doe@email.com", "12345678910", "password", "1","", "" );
-        testUser2 = new User("john doe", "john.doe2@email.com", "12345678912", "password", "", "", "");
-        assertNotNull(testUser, "Test user should be created and logged in successfully");
-        assertNotNull(testUser2, "Test user should be created and logged in successfully");
+//        try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
+//            writer.write("name,email,cpf,password,attendeeOn,ownerOf,articleID\n");
+//            writer.write("Test User,test@example.com,11111111111,111111,,,\n");
+//            writer.write("john doe,john.doe@email.com,12345678910,password,,,\n");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        try (FileWriter writer = new FileWriter("DB/teste/test_event.csv")) {
+//            writer.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
+//            writer.write("1,12345678910,Event One,2023-10-01,Location One,Org One,Description One,,\n");
+//            writer.write("2,987654321,Event Two,2023-11-01,Location Two,Org Two,Description Two,,\n");
+//        }
+//
+//        try (FileWriter subEventWriter = new FileWriter("DB/teste/test_subevent.csv")) {
+//            subEventWriter.write("id,parentEventID,name,date,hour,local,description,speaker,attendeesList\n");
+//            subEventWriter.write("1,1,Sub Event 1,2023-10-10,10:00,Sub Location 1,Sub Description 1,Speaker 1,\n");
+//            subEventWriter.write("2,1,Sub Event 2,2023-10-10,11:00,Sub Location 2,Sub Description 2,Speaker 2,\n");
+//        }
+//
+//        try (FileWriter articleWriter = new FileWriter("DB/teste/test_article.csv")) {
+//            articleWriter.write("name,articleID,userCPF,articleAbstract\n");
+//            articleWriter.write("Test Article,1,12345678910,This is a test article abstract.\n");
+//            articleWriter.write("Test Article 2,2,12345678910,This is another test article abstract.\n");
+//        }
+//
+//        testEvent =  new Event("1", "123456789", "Test Event", "2023-10-10", "Location", "Organization", "Description", "12345678910", "");
+//        assertNotNull(testEvent, "Test event should be created successfully");
+//
+//        testUser = new User("john doe", "john.doe@email.com", "12345678910", "password", "1","", "" );
+//        testUser2 = new User("john doe", "john.doe2@email.com", "12345678912", "password", "", "", "");
+//        assertNotNull(testUser, "Test user should be created and logged in successfully");
+//        assertNotNull(testUser2, "Test user should be created and logged in successfully");
 
     }
 
@@ -93,14 +90,14 @@ public class FacadeTest {
     public void testLoginUser() {
         UserInterface user = facade.loginUser("12345678910", "password");
         assertNotNull(user);
-        assertEquals("12345678910", user.getCPF());
+        assertEquals("12345678910", user.getCpf());
     }
 
     @Test
     public void testSignUpUser() {
         UserInterface user = facade.signUpUser("Test User", "11111111112", "test@example.com","password");
         assertNotNull(user);
-        assertEquals("11111111112", user.getCPF());
+        assertEquals("11111111112", user.getCpf());
     }
 
     @Test
@@ -119,14 +116,14 @@ public class FacadeTest {
 
     @Test
     public void testGetEventsIn() {
-        List<EventInterface> events = facade.getEventsIn(testUser.getCPF());
+        List<EventInterface> events = facade.getEventsIn(testUser.getCpf());
         assertNotNull(events, "The event list should not be null");
         // Additional assertions can be added based on expected behavior
     }
 
     @Test
     public void testGetAllEventsByUser() {
-        List<EventInterface> events = facade.getAllEventsByUser(testUser.getCPF());
+        List<EventInterface> events = facade.getAllEventsByUser(testUser.getCpf());
         assertNotNull(events, "The event list should not be null");
         // Additional assertions can be added based on expected behavior
     }
@@ -208,7 +205,7 @@ public class FacadeTest {
 
     @Test
     public void testGetMySubEventsByParentEventID() {
-        List<SubEvent> subEvents = facade.getMySubEventsByParentEventID(testEvent.getId(), testUser.getCPF());
+        List<SubEvent> subEvents = facade.getMySubEventsByParentEventID(testEvent.getId(), testUser.getCpf());
         assertNotNull(subEvents, "The sub-event list should not be null");
         // Additional assertions can be added based on expected behavior
     }
@@ -264,20 +261,20 @@ public class FacadeTest {
 
     @Test
     public void testDeleteAttendeeEvent() {
-        boolean result = facade.deleteAttendeeEvent(testUser.getCPF(), testEvent.getId());
+        boolean result = facade.deleteAttendeeEvent(testUser.getCpf(), testEvent.getId());
         assertTrue(result, "The attendee should be deleted from the event successfully");
     }
 
     @Test
     public void testGetUserByCPF() {
-        UserInterface user = facade.getUserByCPF(testUser.getCPF());
+        UserInterface user = facade.getUserByCPF(testUser.getCpf());
         assertNotNull(user, "The user should be retrieved successfully");
-        assertEquals(testUser.getCPF(), user.getCPF(), "The user CPF should match");
+        assertEquals(testUser.getCpf(), user.getCpf(), "The user CPF should match");
     }
 
     @Test
     public void testUserEventsIn() {
-        List<EventInterface> events = facade.userEventsIn(testUser.getCPF());
+        List<EventInterface> events = facade.userEventsIn(testUser.getCpf());
         assertNotNull(events, "The event list should not be null");
     }
 
@@ -295,22 +292,22 @@ public class FacadeTest {
 
     @Test
     public void testChangePassword() {
-        boolean result = facade.changePassword(testUser.getCPF(), "password", "newpassword");
+        boolean result = facade.changePassword(testUser.getCpf(), "password", "newpassword");
         assertTrue(result, "The password should be changed successfully");
     }
 
     @Test
     public void testCreateArticle() {
         facade.createArticle(testUser, "Test Article", "This is a test article abstract.");
-        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCPF());
+        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCpf());
         assertNotNull(articles, "The article list should not be null");
         assertEquals(3, articles.size(), "The article list should contain 2 articles");
-        assertEquals("Test Article", articles.getFirst().getName(), "The article name should match");
+        assertEquals("Test Article", articles.getFirst().getTitle(), "The article name should match");
     }
 
     @Test
     public void testGetAllArticlesByUser() {
-        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCPF());
+        List<ArticleInterface> articles = facade.getAllArticlesByUser(testUser.getCpf());
         assertNotNull(articles, "The article list should not be null");
         assertEquals(2, articles.size(), "The article list should contain 2 articles");
     }

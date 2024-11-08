@@ -1,9 +1,9 @@
 package org.upe.persistence.repository;
 
 import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.oldModel.Article;
-import org.upe.persistence.oldModel.Event;
-import org.upe.persistence.oldModel.User;
+import org.upe.persistence.model.Article;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
 
 import java.util.List;
 import java.io.*;
@@ -30,10 +30,10 @@ public class ArticleUtility {
         for (Event event : events) {
             if (event.getId().equals(eventID)) {
                 for (User user : users) {
-                    if (user.getCPF().equals(cpf)) {
+                    if (user.getCpf().equals(cpf)) {
                         Article newArticle = new Article(articleName, eventID, cpf, articleAbstract);
-                        user.addArticleID(newArticle.getArticleID());
-                        event.addArticleList(newArticle.getArticleID());
+                        user.addArticleID(newArticle.getId());
+                        event.addArticleList(newArticle.getId());
                     }
                 }
             }
@@ -93,7 +93,7 @@ public class ArticleUtility {
         List<Article> articles = getAllArticles();
 
         for(Article article : articles) {
-            if(article.getArticleID().equals(articleID)) {
+            if(article.getId().equals(articleID)) {
                 return article;
             }
         }
@@ -104,7 +104,7 @@ public class ArticleUtility {
         try (BufferedWriter write = new BufferedWriter(new FileWriter(csvFilePath))) {
             write.write("name,articleID,userCPF,articleAbstract\n");
             for (Article article : newData) {
-                String line = String.format("%s,%s,%s,%s%n", article.getName(), article.getArticleID(), article.getUserCPF(), article.getArticleAbstract());
+                String line = String.format("%s,%s,%s,%s%n", article.getTitle(), article.getId(), article.getUser(), article.getArticleAbstract());
                 write.write(line);
             }
         } catch (IOException e) {
@@ -117,7 +117,7 @@ public class ArticleUtility {
         ArrayList<ArticleInterface> userArticles = new ArrayList<>();
 
         for (Article article : allArticles) {
-            if (article.getUserCPF().equals(userCPF)) {
+            if (article.getUser().equals(userCPF)) {
                 userArticles.add(article);
             }
         }

@@ -6,7 +6,7 @@ import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.SubEvent;
+import org.upe.persistence.model.SubEvent;
 
 import java.util.List;
 

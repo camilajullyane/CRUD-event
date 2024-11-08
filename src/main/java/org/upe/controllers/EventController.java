@@ -4,7 +4,7 @@ import org.upe.controllers.interfaces.EventControllerInterface;
 import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.Event;
+import org.upe.persistence.model.Event;
 import org.upe.persistence.repository.EventUtility;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class EventController implements EventControllerInterface {
 
     public EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
                                       String organization) {
-        return eventUtility.createEvent(user.getCPF(), name, date, local, organization, description);
+        return eventUtility.createEvent(user.getCpf(), name, date, local, organization, description);
     }
 
     public List<EventInterface> getAllEvents() {
@@ -44,9 +44,9 @@ public class EventController implements EventControllerInterface {
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
         for (String attendeeCPF : event.getAttendeesList()) {
-            if (attendeeCPF.equals(user.getCPF())) {
-                eventUtility.deleteAttendeeOnList(user.getCPF(), event.getId());
-                userController.deleteAttendeeEvent(user.getCPF(), event.getId());
+            if (attendeeCPF.equals(user.getCpf())) {
+                eventUtility.deleteAttendeeOnList(user.getCpf(), event.getId());
+                userController.deleteAttendeeEvent(user.getCpf(), event.getId());
                 return true;
             }
         }
@@ -84,7 +84,7 @@ public class EventController implements EventControllerInterface {
 
     public boolean deleteEvent(String id, UserInterface user) {
         eventUtility.deleteEvent(id);
-        userController.deleteOwnerOf(user.getCPF(), id);
+        userController.deleteOwnerOf(user.getCpf(), id);
         userController.deleteAllAttendeesFromEvent(id);
         return true;
     }

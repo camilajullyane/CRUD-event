@@ -2,7 +2,7 @@ package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.oldModel.User;
+import org.upe.persistence.model.User;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.io.FileWriter;
@@ -47,7 +47,7 @@ class UserUtilityTest {
     void testFindByEmail() {
         User user = userUtility.findByEmail("john.doe@example.com");
         assertNotNull(user, "The user should not be null");
-        assertEquals("123456789", user.getCPF(), "The user CPF should match");
+        assertEquals("123456789", user.getCpf(), "The user CPF should match");
     }
 
     @Test
@@ -112,7 +112,7 @@ class UserUtilityTest {
         assertNotNull(newUser, "The user should be created even with empty fields");
         assertEquals("", newUser.getName(), "The user name should be empty");
         assertEquals("", newUser.getEmail(), "The user email should be empty");
-        assertEquals("", newUser.getCPF(), "The user CPF should be empty");
+        assertEquals("", newUser.getCpf(), "The user CPF should be empty");
     }
 
 //    @Test

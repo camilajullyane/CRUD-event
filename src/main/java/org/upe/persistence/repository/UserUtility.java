@@ -1,6 +1,6 @@
 package org.upe.persistence.repository;
 
-import org.upe.persistence.oldModel.User;
+import org.upe.persistence.model.User;
 import org.upe.persistence.interfaces.UserInterface;
 import java.util.Arrays;
 import java.io.*;
@@ -53,7 +53,7 @@ public class UserUtility {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s%n",
                         user.getName(),
                         user.getEmail(),
-                        user.getCPF(),
+                        user.getCpf(),
                         user.getPassword(),
                         String.join("#", user.getAttendeeOn()),
                         String.join("#", user.getOwnerOf()),
@@ -66,7 +66,7 @@ public class UserUtility {
     }
 
     public User findByCPF(String cpf) {
-        return getAllUsers().stream().filter(user -> user.getCPF().equals(cpf)).findFirst().orElse(null);
+        return getAllUsers().stream().filter(user -> user.getCpf().equals(cpf)).findFirst().orElse(null);
     }
 
     public User findByEmail(String email) {
@@ -102,7 +102,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf) && user.getPassword().equals(currentPassword)) {
+            if (user.getCpf().equals(cpf) && user.getPassword().equals(currentPassword)) {
                 user.setPassword(newPassword);
                 updateFileData(users);
                 return true;
@@ -115,7 +115,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getCpf().equals(cpf)) {
                 users.remove(user);
                 break;
             }
@@ -127,7 +127,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User userData : users) {
-            if (userData.getCPF().equals(user.getCPF())) {
+            if (userData.getCpf().equals(user.getCpf())) {
                 userData.addAttendeeOn(eventID);
                 break;
             }
@@ -140,7 +140,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(userCPF)) {
+            if (user.getCpf().equals(userCPF)) {
                 user.addOwnerOf(eventID);
                 break;
             }
@@ -164,7 +164,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getCpf().equals(cpf)) {
                 user.deleteAttendeeOn(eventID);
                 break;
             }
@@ -177,7 +177,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getCpf().equals(cpf)) {
                 user.deleteOwnerOf(eventID);
                 break;
             }
@@ -189,7 +189,7 @@ public class UserUtility {
         List<User> users = getAllUsers();
 
         for (User user : users) {
-            if (user.getCPF().equals(cpf)) {
+            if (user.getCpf().equals(cpf)) {
                 user.addArticleID(articleID);
                 break;
             }

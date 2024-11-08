@@ -1,8 +1,8 @@
 package org.upe.persistence.interfaces;
 
 public interface ArticleInterface {
-    String getName();
-    String getArticleID();
-    String getUserCPF();
+    String getTitle();
+    String getId();
+    UserInterface getUser();
     String getArticleAbstract();
 }

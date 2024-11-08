@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import org.upe.controllers.UserController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.utils.SceneLoader;
@@ -122,7 +121,7 @@ public class SettingsController {
             emailLabel.setText("Email alterado com sucesso");
             emailLabel.setStyle(GREEN_TEXT_STYLE);
             emailLabel.setVisible(true);
-            userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCPF()));
+            userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCpf()));
         } else {
             emailLabel.setText("Email já cadastrado");
             emailLabel.setStyle(RED_TEXT_STYLE);
@@ -149,11 +148,11 @@ public class SettingsController {
             return;
         }
 
-        if (facade.changePassword(userSession.getCurrentUser().getCPF(), currentPassword, newPassword)) {
+        if (facade.changePassword(userSession.getCurrentUser().getCpf(), currentPassword, newPassword)) {
             passwordLabel.setText("Senha alterada com sucesso");
             passwordLabel.setStyle(GREEN_TEXT_STYLE);
             passwordLabel.setVisible(true);
-            userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCPF()));
+            userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCpf()));
         } else {
             passwordLabel.setText("Senha atual incorreta");
             passwordLabel.setStyle(RED_TEXT_STYLE);
@@ -162,7 +161,7 @@ public class SettingsController {
         }
 
 
-        userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCPF()));
+        userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCpf()));
     }
 
 

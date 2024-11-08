@@ -1,10 +1,10 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.UserControllerInterface;
+import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.Event;
-import org.upe.persistence.oldModel.User;
+import org.upe.persistence.model.Event;
 import org.upe.persistence.repository.EventUtility;
 import org.upe.persistence.repository.UserUtility;
 
@@ -13,10 +13,11 @@ import java.util.List;
 
 public class UserController implements UserControllerInterface {
     private static final UserUtility userUtility = new UserUtility();
+    private static final UserDAO userDAO = new UserDAO();
     private static final EventUtility eventUtility = new EventUtility();
 
     public UserInterface getUserByCPF(String cpf) {
-        return userUtility.findByCPF(cpf);
+        return userDAO.findByCPF(cpf);
     }
 
     public ArrayList<EventInterface> userEventsIn(String ownerCPF) {
@@ -27,7 +28,7 @@ public class UserController implements UserControllerInterface {
     public boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event) {
         for(String attendeeOn : user.getAttendeeOn()) {
             if(attendeeOn.equals(event.getId())) {
-                userUtility.deleteAttendeeEvent(user.getCPF(), event.getId());
+                userUtility.deleteAttendeeEvent(user.getCpf(), event.getId());
                 return true;
             }
         }
@@ -39,8 +40,8 @@ public class UserController implements UserControllerInterface {
     }
 
 
-    public User findByCPF(String cpf) {
-        return userUtility.findByCPF(cpf);
+    public UserInterface findByCPF(String cpf) {
+        return userDAO.findByCPF(cpf);
     }
 
     public boolean changeEmail(String email, String newEmail) {
@@ -90,12 +91,10 @@ public class UserController implements UserControllerInterface {
     }
 
     public void deleteOwnerOf(String cpf, String eventID) {
-
         userUtility.deleteOwnerOf(cpf, eventID);
     }
 
     public void addUserArticle(String cpf, String articleID) {
         userUtility.addUserArticle(cpf, articleID);
     }
-
 }

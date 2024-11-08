@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.Event;
+import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
 
 public class EventUtility {
@@ -56,7 +56,7 @@ public class EventUtility {
         ArrayList<Event> userEvents = new ArrayList<>();
 
         for (Event event : allEvents) {
-            if (event.getOwnerCPF().equals(ownerCPF)) {
+            if (event.getOwnerCpf().equals(ownerCPF)) {
                 userEvents.add(event);
             }
         }
@@ -191,7 +191,7 @@ public class EventUtility {
 
         for(Event event : events) {
             if (event.getId().equals(eventID)) {
-                event.addAttendeesList(user.getCPF());
+                event.addAttendeesList(user.getCpf());
                 break;
             }
         }
@@ -217,7 +217,7 @@ public class EventUtility {
             write.write("id,ownerCPF,name,date,local,organization,description,attendeesList,articleList\n");
             for (Event event : events) {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n", event.getId(),
-                        event.getOwnerCPF(),
+                        event.getOwnerCpf(),
                         event.getName(),
                         event.getDate(),
                         event.getLocal(),

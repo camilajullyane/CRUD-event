@@ -16,8 +16,8 @@ public class ArticleController implements ArticleControllerInterface {
     private static final ArticleUtility articleUtility = new ArticleUtility();
 
     public void createArticle(UserInterface user, String name, String articleAbstract) {
-        ArticleInterface article = articleUtility.createArticle(name, user.getCPF(), articleAbstract);
-        userUtility.addUserArticle(user.getCPF(), article.getArticleID());
+        ArticleInterface article = articleUtility.createArticle(name, user.getCpf(), articleAbstract);
+        userUtility.addUserArticle(user.getCpf(), article.getId());
     }
 
     public List<ArticleInterface> getAllArticlesByUser(String userCPF) {
@@ -27,11 +27,11 @@ public class ArticleController implements ArticleControllerInterface {
 
     public boolean submitArticle(ArticleInterface article, EventInterface event) {
        for (String articleID : event.getArticleList()) {
-           if (articleID.equals(article.getArticleID())) {
+           if (articleID.equals(article.getId())) {
                return false;
            }
        }
-        return eventUtility.addArticleOnList(article.getArticleID(), event.getId());
+        return eventUtility.addArticleOnList(article.getId(), event.getId());
     }
 
 }

@@ -1,7 +1,7 @@
 package org.upe.persistence.interfaces;
 
 public interface UserInterface {
-    String getCPF();
+    String getCpf();
     String[] getAttendeeOn();
     String[] getOwnerOf();
     String getEmail();

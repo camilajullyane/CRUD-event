@@ -2,9 +2,9 @@ package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.oldModel.Event;
+import org.upe.persistence.model.Event;
 import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.oldModel.User;
+import org.upe.persistence.model.User;
 
 import java.io.FileWriter;
 import java.io.IOException;

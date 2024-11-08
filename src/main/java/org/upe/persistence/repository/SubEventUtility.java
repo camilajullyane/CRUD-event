@@ -1,8 +1,8 @@
 package org.upe.persistence.repository;
 
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.Event;
-import org.upe.persistence.oldModel.SubEvent;
+import org.upe.persistence.model.Event;
+import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.interfaces.EventInterface;
 
 import java.io.*;
@@ -87,7 +87,7 @@ public class SubEventUtility {
         List<SubEvent> subEvents = getAllSubEvents();
         ArrayList<SubEvent> filteredSubEvents = new ArrayList<>();
         for (SubEvent subEvent : subEvents) {
-            if (subEvent.getParentEventID().equals(parentEventID)) {
+            if (subEvent.getParentEvent().equals(parentEventID)) {
                 filteredSubEvents.add(subEvent);
             }
         }
@@ -185,11 +185,11 @@ public class SubEventUtility {
 
         for (SubEvent subEvent : subEvents) {
             if (subEvent.getId().equals(subEventID)) {
-                subEvent.addAttendeesList(currentUser.getCPF());
-                Event event = utility.getEventById(subEvent.getParentEventID());
+                subEvent.addAttendeesList(currentUser.getCpf());
+                Event event = utility.getEventById(subEvent.getParentEvent());
                 String[] parentEventAttendeeList = event.getAttendeesList();
-                if (!Arrays.asList(parentEventAttendeeList).contains(currentUser.getCPF())) {
-                    utility.addAttendeeOnList(currentUser, subEvent.getParentEventID());
+                if (!Arrays.asList(parentEventAttendeeList).contains(currentUser.getCpf())) {
+                    utility.addAttendeeOnList(currentUser, subEvent.getParentEvent());
                 }
                 break;
             }
@@ -214,7 +214,7 @@ public class SubEventUtility {
             for (SubEvent subEvent : subEvents) {
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s%n",
                         subEvent.getId(),
-                        subEvent.getParentEventID(),
+                        subEvent.getParentEvent(),
                         subEvent.getName(),
                         subEvent.getDate(),
                         subEvent.getHour(),
@@ -233,7 +233,7 @@ public class SubEventUtility {
 
     public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
         Event event = instanciaEventutility.getEventById(parentEventID);
-        String ownerCPF = event.getOwnerCPF();
+        String ownerCPF = event.getOwnerCpf();
         if (ownerCPF.equals(userCPF)) {
             return getAllSubEvents();
         }

@@ -3,7 +3,7 @@ package org.upe.controllers;
 import org.upe.controllers.interfaces.SubEventControllerInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.SubEvent;
+import org.upe.persistence.model.SubEvent;
 
 import java.util.List;
 import org.upe.persistence.repository.EventUtility;

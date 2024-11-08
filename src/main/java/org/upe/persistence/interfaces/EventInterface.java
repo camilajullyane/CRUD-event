@@ -9,5 +9,5 @@ public interface EventInterface {
     String[] getAttendeesList();
     String[] getArticleList();
     String getLocal();
-    String getOwnerCPF();
+    String getOwnerCpf();
 }

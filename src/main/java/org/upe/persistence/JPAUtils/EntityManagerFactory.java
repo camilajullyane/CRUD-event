@@ -1,8 +1,10 @@
 package org.upe.persistence.JPAUtils;
 
 import jakarta.persistence.EntityManager;
+import lombok.Getter;
 
 public class EntityManagerFactory {
+    @Getter
     private static final EntityManager entityManager;
 
     static {
@@ -11,10 +13,6 @@ public class EntityManagerFactory {
         } else {
             entityManager = new DefaultEntityManager().getEntityManager();
         }
-    }
-
-    public static EntityManager getEntityManager() {
-        return entityManager;
     }
 
     private static boolean isRunningTest() {

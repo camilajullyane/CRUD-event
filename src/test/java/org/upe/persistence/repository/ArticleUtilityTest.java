@@ -3,7 +3,7 @@ package org.upe.persistence.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.oldModel.Article;
+import org.upe.persistence.model.Article;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,7 +53,7 @@ class ArticleUtilityTest {
 
         assertNotNull(articles, "Article list should not be null");
         assertFalse(articles.isEmpty(), "Article list should not be empty");
-        assertEquals("Test Article", articles.get(0).getName(), "First article name should match");
+        assertEquals("Test Article", articles.get(0).getTitle(), "First article name should match");
     }
 
     @Test
@@ -68,15 +68,15 @@ class ArticleUtilityTest {
         Article newArticle = (Article) articleUtility.createArticle("New Article", "123456789", "New Abstract");
 
         assertNotNull(newArticle, "Created article should not be null");
-        assertEquals("New Article", newArticle.getName(), "Article name should match");
-        assertEquals("123456789", newArticle.getUserCPF(), "User CPF should match");
+        assertEquals("New Article", newArticle.getTitle(), "Article name should match");
+        assertEquals("123456789", newArticle.getUser(), "User CPF should match");
     }
 
     @Test
     void testGetArticleById() {
         Article article = articleUtility.getArticleById("123e4567-e89b-12d3-a456-426614174000");
         assertNotNull(article, "Article should not be null");
-        assertEquals("Test Article", article.getName(), "Article name should match");
+        assertEquals("Test Article", article.getTitle(), "Article name should match");
     }
 
     @Test
@@ -85,7 +85,7 @@ class ArticleUtilityTest {
 
         assertNotNull(articles, "Article list should not be null");
         assertFalse(articles.isEmpty(), "Article list should not be empty");
-        assertEquals("Test Article", articles.get(0).getName(), "Article name should match");
+        assertEquals("Test Article", articles.get(0).getTitle(), "Article name should match");
     }
 
     @Test
@@ -96,7 +96,7 @@ class ArticleUtilityTest {
         articleUtility.updateArticleFileData(articles);
 
         List<Article> updatedArticles = articleUtility.getAllArticles();
-        assertEquals("Updated Article", updatedArticles.get(0).getName(), "Article name should be updated");
+        assertEquals("Updated Article", updatedArticles.get(0).getTitle(), "Article name should be updated");
     }
 
     @Test
@@ -104,6 +104,6 @@ class ArticleUtilityTest {
         // Test case where article with the same ID already exists
         Article newArticle = (Article) articleUtility.createArticle("Duplicate Article", "123456789", "Duplicate Abstract");
         assertNotNull(newArticle, "The new article should be created with a unique ID");
-        assertNotEquals("123e4567-e89b-12d3-a456-426614174000", newArticle.getArticleID(), "The article ID should be unique");
+        assertNotEquals("123e4567-e89b-12d3-a456-426614174000", newArticle.getId(), "The article ID should be unique");
     }
 }

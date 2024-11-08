@@ -90,7 +90,7 @@ public class SubscriptionController implements Initializable {
     @FXML
     private void showMyEvents() {
 
-        List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCPF());
+        List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCpf());
 
         subscriptionScroll.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         subscriptionScroll.getStyleClass().add("custom-scroll-pane");
@@ -188,7 +188,7 @@ public class SubscriptionController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Inscrição realizada com sucesso!");
             alert.showAndWait();
-            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
         }
     }
 }
