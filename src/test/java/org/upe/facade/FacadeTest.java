@@ -1,9 +1,11 @@
 package org.upe.facade;
 
-import org.junit.jupiter.api.AfterAll;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.JPAUtils.JPAUtils;
+import org.upe.persistence.JPAUtils.EntityManagerFactory;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
@@ -24,19 +26,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FacadeTest {
 
-    private FacadeInterface facade;
-    private UserInterface testUser;
-    private UserInterface testUser2;
-    private EventInterface testEvent;
-    private ArticleInterface testArticle;
+    private static FacadeInterface facade;
+    private static UserInterface testUser;
+    private static UserInterface testUser2;
+    private static EventInterface testEvent;
+    private static ArticleInterface testArticle;
+
+    @BeforeAll
+    public static void setUP() {
+        EntityManager entityManager = EntityManagerFactory.getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        UserInterface userBD = new org.upe.persistence.model.User("john doe", "12345678910", "john.doe@email.com","password");
+
+        entityManager.persist(userBD);
+        transaction.commit();
+    }
 
     @BeforeEach
     public void setUp() throws IOException {
+        // parte dos arquivos a serem apagadas
         UserUtility.setCsvFilePath("DB/teste/test_user.csv");
         EventUtility.setCsvFilePath("DB/teste/test_event.csv");
         SubEventUtility.setCsvFilePath("DB/teste/test_subevent.csv");
         ArticleUtility.setCsvFilePath("DB/teste/test_article.csv");
-        JPAUtils.setPersistenceUnitName("teste-jpa");
+
 
         facade = new Facade();
         try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
@@ -73,11 +87,6 @@ public class FacadeTest {
         assertNotNull(testUser, "Test user should be created and logged in successfully");
         assertNotNull(testUser2, "Test user should be created and logged in successfully");
 
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        JPAUtils.close();
     }
 
     @Test

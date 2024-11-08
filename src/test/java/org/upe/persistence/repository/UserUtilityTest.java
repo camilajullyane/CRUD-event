@@ -2,7 +2,6 @@ package org.upe.persistence.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.upe.persistence.JPAUtils.JPAUtils;
 import org.upe.persistence.oldModel.User;
 import org.upe.persistence.interfaces.UserInterface;
 
@@ -18,8 +17,6 @@ class UserUtilityTest {
 
     @BeforeEach
     void setUp() {
-        JPAUtils.setPersistenceUnitName("teste-jpa");
-
         userUtility = new UserUtility();
         userUtility.setCsvFilePath("DB/teste/test_user.csv"); // Use a test CSV file to avoid modifying the real data
 

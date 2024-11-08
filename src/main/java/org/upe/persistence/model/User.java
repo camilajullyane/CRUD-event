@@ -27,6 +27,14 @@ public class User implements UserInterface {
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
 
+    public User(String nome, String cpf, String email, String password) {
+        this.name = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User() {}
 
     // Getters
     public Long getId() {

@@ -2,23 +2,17 @@ package org.upe.persistence.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import org.upe.persistence.JPAUtils.JPAUtils;
+import org.upe.persistence.JPAUtils.EntityManagerFactory;
 import org.upe.persistence.model.User;
 
 public class UserDAO {
-    private final EntityManager entityManager = JPAUtils.getEntityManagerFactory();
+    private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
     public User create(String name, String email, String cpf, String password) {
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setCpf(cpf);
-        user.setPassword(password);
-
+        User user = new User(name, cpf, email, password);
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
-
         return user;
     }
 
