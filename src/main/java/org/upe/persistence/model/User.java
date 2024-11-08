@@ -1,17 +1,32 @@
 package org.upe.persistence.model;
 
 import jakarta.persistence.*;
-import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"cpf", "email"}))
-public class User {
+public class User implements UserInterface {
     @Id @GeneratedValue
     private Long id;
     private String name;
     private String cpf;
     private String email;
     private String password;
+    @ManyToMany
+    @JoinTable(
+        name = "events_users",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> events = new ArrayList<>();
+    @OneToMany
+    private List<Event> eventsOwnered;
+    @OneToMany(mappedBy = "user")
+    private List<Article> articles = new ArrayList<>();
+
 
     // Getters
     public Long getId() {
@@ -22,7 +37,7 @@ public class User {
         return name;
     }
 
-    public String getCpf() {
+    public String getCPF() {
         return cpf;
     }
 
@@ -35,9 +50,6 @@ public class User {
     }
 
     // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -53,5 +65,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String[] getAttendeeOn() {
+        return new String[0];
+    }
+
+    @Override
+    public String[] getOwnerOf() {
+        return new String[0];
     }
 }

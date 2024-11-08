@@ -1,7 +1,9 @@
 package org.upe.facade;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.upe.persistence.JPAUtils.JPAUtils;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
@@ -34,6 +36,7 @@ public class FacadeTest {
         EventUtility.setCsvFilePath("DB/teste/test_event.csv");
         SubEventUtility.setCsvFilePath("DB/teste/test_subevent.csv");
         ArticleUtility.setCsvFilePath("DB/teste/test_article.csv");
+        JPAUtils.setPersistenceUnitName("teste-jpa");
 
         facade = new Facade();
         try (FileWriter writer = new FileWriter("DB/teste/test_user.csv")) {
@@ -72,6 +75,11 @@ public class FacadeTest {
 
     }
 
+    @AfterAll
+    public static void tearDown() {
+        JPAUtils.close();
+    }
+
     @Test
     public void testLoginUser() {
         UserInterface user = facade.loginUser("12345678910", "password");
@@ -81,9 +89,9 @@ public class FacadeTest {
 
     @Test
     public void testSignUpUser() {
-        UserInterface user = facade.signUpUser("Test User", "11111111112", "test@example.com", "password");
+        UserInterface user = facade.signUpUser("Test User", "11111111112", "test@example.com","password");
         assertNotNull(user);
-        assertEquals("11111111112", user.getEmail());
+        assertEquals("11111111112", user.getCPF());
     }
 
     @Test

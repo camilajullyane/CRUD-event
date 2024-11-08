@@ -9,6 +9,7 @@ module crudEvent {
 
     opens org.upe.ui to javafx.fxml;
     exports org.upe.ui;
+    exports org.upe.persistence.model;
 
     opens org.upe.persistence.model to jakarta.persistence, org.hibernate.orm.core;
 }

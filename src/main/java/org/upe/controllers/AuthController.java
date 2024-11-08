@@ -1,15 +1,15 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.AuthControllerInterface;
+import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.oldModel.User;
-import org.upe.persistence.repository.UserUtility;
+import org.upe.persistence.model.User;
 
 public class AuthController implements AuthControllerInterface {
-    private static final UserUtility userUtility = new UserUtility();
+    private static final UserDAO userDAO = new UserDAO();
 
     public UserInterface loginUser(String cpf, String password) {
-        User user = userUtility.findByCPF(cpf);
+        User user = userDAO.findByCPF(cpf);
         if (user == null) {
             return null;
         }
@@ -20,15 +20,15 @@ public class AuthController implements AuthControllerInterface {
         return null;
     }
 
-    public UserInterface signUpUser(String name, String email, String cpf, String password) {
-        if(userUtility.findByCPF(cpf) != null) {
+    public UserInterface signUpUser(String name, String cpf, String email, String password) {
+        if(userDAO.findByCPF(cpf) != null) {
             return null;
         }
 
-        if(userUtility.findByEmail(email) != null) {
+        if(userDAO.findByEmail(email) != null) {
             return null;
         }
 
-        return userUtility.createUser(name, email, cpf, password);
+        return userDAO.create(name, email, cpf, password);
     }
 }

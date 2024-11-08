@@ -53,7 +53,6 @@ public class SignUpController implements Initializable {
         String name = nameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
-
         if (!isCpfValid(cpf)) {
             errorMessage.setText("CPF em formato inválido");
             errorMessage.setVisible(true);
