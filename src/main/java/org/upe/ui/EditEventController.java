@@ -3,7 +3,6 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
-import org.upe.controllers.EventController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
