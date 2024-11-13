@@ -5,7 +5,10 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.SubEvent;
+
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public interface FacadeInterface {
     // AuthController methods
@@ -13,19 +16,18 @@ public interface FacadeInterface {
     UserInterface signUpUser(String name, String cpf, String email, String password);
 
     // EventController methods
-    EventInterface createEvent(UserInterface user, String name, String description, String date, String local, String organization);
+    EventInterface createEvent(UserInterface user, String name, String description, Date date, String hour, String local, String organization);
     List<EventInterface> getAllEvents();
-    List<EventInterface> getEventsIn(String ownerCPF);
-    List<EventInterface> getAllEventsByUser(String ownerCPF);
-    EventInterface getEventByID(String id);
+    EventInterface getEventByID(UUID id);
     boolean addAttendeeOnList(UserInterface user, EventInterface event);
     boolean deleteAttendeeOnList(UserInterface user, EventInterface event);
-    boolean editEventName(String id, String newName);
-    boolean editEventLocal(String id, String newLocal);
-    boolean editEventDescription(String id, String newDescription);
-    boolean editEventOrganization(String id, String newOrganization);
-    boolean editEventDate(String id, String newDate);
-    boolean deleteEvent(String id, UserInterface user);
+    boolean editEventName(EventInterface event, String newName);
+    boolean editEventLocal(EventInterface event, String newLocal);
+    boolean editEventDescription(EventInterface event, String newDescription);
+    boolean editEventOrganization(EventInterface event, String newOrganization);
+    boolean editEventDate(EventInterface event, Date newDate);
+    boolean editEventHour(EventInterface event, String newHour);
+    boolean deleteEvent(EventInterface event, UserInterface user);
 
     // SubEventController methods
     SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour, String description, String speaker);
