@@ -24,6 +24,7 @@ public class Event implements EventInterface {
     private Date date;
     private String local;
     private String organization;
+    private String hour;
     private String description;
     @ManyToMany(mappedBy = "events")
     private List<User> attendeesList = new ArrayList<>();
@@ -32,22 +33,15 @@ public class Event implements EventInterface {
     @ManyToMany(mappedBy = "submitted_articles")
     private List<Article> articles = new ArrayList<>();
 
-    public Event(String name, String description, String date, UserInterface user) {
+    public Event(String name, String description, Date date, String hour, String local, String organization , UserInterface user) {
         this.name = name;
         this.description = description;
-        this.date = new Date();
+        this.date = date;
+        this.hour = hour;
         this.owner = (User) user;
+        this.local = local;
+        this.organization = organization;
     }
 
     public Event() {}
-
-    @Override
-    public String[] getArticleList() {
-        return new String[0];
-    }
-
-    @Override
-    public String getOwnerCpf() {
-        return "";
-    }
 }

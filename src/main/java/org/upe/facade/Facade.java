@@ -6,9 +6,12 @@ import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Facade implements FacadeInterface {
     private final AuthControllerInterface authController;
@@ -35,24 +38,16 @@ public class Facade implements FacadeInterface {
     }
 
     // EventController methods
-    public EventInterface createEvent(UserInterface user, String name, String description, String date, String local, String organization) {
-        return eventController.createEvent(user, name, description, date, local, organization);
+    public EventInterface createEvent(UserInterface user, String name, String description, Date date,String hour, String local, String organization) {
+        return eventController.createEvent(user, name, description, date, hour, local, organization);
     }
 
     public List<EventInterface> getAllEvents() {
         return eventController.getAllEvents();
     }
 
-    public List<EventInterface> getEventsIn(String ownerCPF) {
-        return eventController.getEventsIn(ownerCPF);
-    }
-
-    public EventInterface getEventByID(String id) {
+    public EventInterface getEventByID(UUID id) {
         return eventController.getEventById(id);
-    }
-
-    public List<EventInterface> getAllEventsByUser(String ownerCPF) {
-        return eventController.getAllEventsByUser(ownerCPF);
     }
 
     public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
@@ -63,28 +58,32 @@ public class Facade implements FacadeInterface {
         return eventController.deleteAttendeeOnList(user, event);
     }
 
-    public boolean editEventName(String id, String newName) {
-        return eventController.editEventName(id, newName);
+    public boolean editEventName(EventInterface event, String newName) {
+        return eventController.updateName(event, newName);
     }
 
-    public boolean editEventLocal(String id, String newLocal) {
-        return eventController.editEventLocal(id, newLocal);
+    public boolean editEventLocal(EventInterface event, String newLocal) {
+        return eventController.updateLocal(event, newLocal);
     }
 
-    public boolean editEventDescription(String id, String newDescription) {
-        return eventController.editEventDescription(id, newDescription);
+    public boolean editEventDescription(EventInterface event, String newDescription) {
+        return eventController.updateDescription(event, newDescription);
     }
 
-    public boolean editEventOrganization(String id, String newOrganization) {
-        return eventController.editEventOrganization(id, newOrganization);
+    public boolean editEventOrganization(EventInterface event, String newOrganization) {
+        return eventController.updateOrganization(event, newOrganization);
     }
 
-    public boolean editEventDate(String id, String newDate) {
-        return eventController.editEventDate(id, newDate);
+    public boolean editEventDate(EventInterface event, Date newDate) {
+        return eventController.updateDate(event, newDate);
     }
 
-    public boolean deleteEvent(String id, UserInterface user) {
-        return eventController.deleteEvent(id, user);
+    public boolean editEventHour(EventInterface event, String newHour) {
+        return eventController.updateHour(event, newHour);
+    }
+
+    public boolean deleteEvent(EventInterface event, UserInterface user) {
+        return eventController.deleteEvent(event, user);
     }
 
     // SubEventController methods

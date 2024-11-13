@@ -39,7 +39,7 @@ public class EditEventController {
 
     @FXML
     private void handleNameButton() {
-        facade.editEventName(currentEvent.getId(), newEventName.getText());
+        facade.editEventName(currentEvent, newEventName.getText());
         newEventName.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
@@ -50,7 +50,7 @@ public class EditEventController {
 
     @FXML
     private void handleLocalButton() {
-        facade.editEventLocal(currentEvent.getId(), newEventLocal.getText());
+        facade.editEventLocal(currentEvent, newEventLocal.getText());
         newEventLocal.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
@@ -60,7 +60,7 @@ public class EditEventController {
 
     @FXML
     private void handleDescriptionButton() {
-        facade.editEventDescription(currentEvent.getId(), newEventDescription.getText());
+        facade.editEventDescription(currentEvent, newEventDescription.getText());
         newEventDescription.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
@@ -70,7 +70,7 @@ public class EditEventController {
 
     @FXML
     private void handleOrganizationButton() {
-        facade.editEventOrganization(currentEvent.getId(), newEventOrganization.getText());
+        facade.editEventOrganization(currentEvent, newEventOrganization.getText());
         newEventOrganization.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
@@ -80,7 +80,7 @@ public class EditEventController {
 
     @FXML
     private void handleDateButton() {
-        facade.editEventDate(currentEvent.getId(), newEventDate.getText());
+        facade.editEventDate(currentEvent, newEventDate.getText());
         newEventDate.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
@@ -90,7 +90,7 @@ public class EditEventController {
 
     @FXML
     private void handleHourButton() {
-        facade.editEventDate(currentEvent.getId(), newEventHour.getText());
+        facade.editEventHour(currentEvent, newEventHour.getText());
         newEventHour.setText("");
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
