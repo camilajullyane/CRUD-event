@@ -148,7 +148,7 @@ public class SettingsController {
             return;
         }
 
-        if (facade.changePassword(userSession.getCurrentUser().getCpf(), currentPassword, newPassword)) {
+        if (facade.changePassword(userSession.getCurrentUser(), currentPassword, newPassword)) {
             passwordLabel.setText("Senha alterada com sucesso");
             passwordLabel.setStyle(GREEN_TEXT_STYLE);
             passwordLabel.setVisible(true);

@@ -29,6 +29,8 @@ public class Event implements EventInterface {
     private List<User> attendeesList = new ArrayList<>();
     @OneToMany(mappedBy = "parentEvent")
     private List<SubEvent> subEvents = new ArrayList<>();
+    @ManyToMany(mappedBy = "submitted_articles")
+    private List<Article> articles = new ArrayList<>();
 
     public Event(String name, String description, String date, UserInterface user) {
         this.name = name;

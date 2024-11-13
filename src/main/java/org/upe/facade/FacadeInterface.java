@@ -41,12 +41,9 @@ public interface FacadeInterface {
     boolean deleteSubEvent(String id);
 
     // UserController methods
-    boolean deleteAttendeeEvent(String userCPF, String eventID);
-    UserInterface getUserByCPF(String cpf);
-    List<EventInterface> userEventsIn(String ownerCPF);
-    boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event);
     boolean changeEmail(String userEmail, String newEmail);
-    boolean changePassword(String cpf, String currentPassword, String newPassword);
+    boolean changePassword(UserInterface user, String currentPassword, String newPassword);
+    UserInterface getUserByCPF(String cpf);
 
     // ArticleController methods
     void createArticle(UserInterface user, String name, String articleAbstract);

@@ -25,7 +25,8 @@ public class ArticleController implements ArticleControllerInterface {
                return false;
            }
        }
-        article.getAllEvents().add(event);
+       article.getSubmittedIn().add(event);
        articleDAO.update(article);
+       return true;
     }
 }

@@ -133,29 +133,20 @@ public class Facade implements FacadeInterface {
     }
 
     // UserController methods
-    public boolean deleteAttendeeEvent(String userCPF, String eventID) {
-        return userController.deleteAttendeeEvent(userCPF, eventID);
-    }
 
     public UserInterface getUserByCPF(String cpf) {
         return userController.getUserByCPF(cpf);
-    }
-
-    public List<EventInterface> userEventsIn(String ownerCPF) {
-        return userController.userEventsIn(ownerCPF);
-    }
-
-    public boolean deleteAttendeeFromEvent(UserInterface user, EventInterface event) {
-        return userController.deleteAttendeeFromEvent(user, event);
     }
 
     public boolean changeEmail(String userEmail, String newEmail) {
         return userController.changeEmail(userEmail, newEmail);
     }
 
-    public boolean changePassword(String cpf, String currentPassword, String newPassword) {
-        return userController.changePassword(cpf, currentPassword, newPassword);
+    public boolean changePassword(UserInterface user, String currentPassword, String newPassword) {
+        return userController.changePassword(user, currentPassword, newPassword);
     }
+
+    // ArticlesController methods
 
     public void createArticle(UserInterface user, String name, String articleAbstract) {
         articleController.createArticle(user, name, articleAbstract);

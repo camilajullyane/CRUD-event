@@ -28,7 +28,7 @@ public class UserDAO {
         }
     }
 
-    public UserInterface findByEmail(String email) {
+    public User findByEmail(String email) {
         try {
             String jpql = "SELECT u FROM User u WHERE u.email = :email";
             TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
@@ -46,7 +46,7 @@ public class UserDAO {
         return user;
     }
 
-    public void delete(User user) {
+    public void delete(UserInterface user) {
         entityManager.getTransaction().begin();
         entityManager.remove(user);
         entityManager.getTransaction().commit();

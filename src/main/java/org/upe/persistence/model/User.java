@@ -23,9 +23,9 @@ public class User implements UserInterface {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private List<Event> events = new ArrayList<>();
+    private List<Event> attendeeOn = new ArrayList<>();
     @OneToMany
-    private List<Event> eventsOwnered;
+    private List<Event> ownerOf = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
 
@@ -36,15 +36,5 @@ public class User implements UserInterface {
         this.cpf = cpf;
         this.email = email;
         this.password = password;
-    }
-
-    @Override
-    public String[] getAttendeeOn() {
-        return new String[0];
-    }
-
-    @Override
-    public String[] getOwnerOf() {
-        return new String[0];
     }
 }

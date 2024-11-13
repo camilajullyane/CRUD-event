@@ -26,7 +26,7 @@ public class Article implements ArticleInterface {
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private List<Event> event;
+    private List<Event> submittedIn;
 
     public Article(String title, String articleAbstract, UserInterface user) {
         this.title = title;
