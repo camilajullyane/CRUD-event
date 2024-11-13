@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.upe.persistence.interfaces.SubEventInterface;
-
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +18,7 @@ public class SubEvent implements SubEventInterface {
     protected String speakers;
     protected String hour;
     protected String description;
+    protected Date date;
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
@@ -28,5 +29,6 @@ public class SubEvent implements SubEventInterface {
         this.parentEvent = parentEvent;
     }
 
-    public SubEvent() {}
+    public SubEvent(String name, String speakers, String hour, String description,Date date, Event parentEvent) {
+    }
 }
