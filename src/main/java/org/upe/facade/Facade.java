@@ -152,11 +152,10 @@ public class Facade implements FacadeInterface {
         articleController.createArticle(user, name, articleAbstract);
     }
 
-    public List<ArticleInterface> getAllArticlesByUser(String userCPF) {
-        return articleController.getAllArticlesByUser(userCPF);
-    }
-
     public boolean submitArticle(ArticleInterface article, EventInterface event) {
         return articleController.submitArticle(article, event);
     }
+
+
+
 }

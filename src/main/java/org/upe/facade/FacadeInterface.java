@@ -47,6 +47,5 @@ public interface FacadeInterface {
 
     // ArticleController methods
     void createArticle(UserInterface user, String name, String articleAbstract);
-    List<ArticleInterface> getAllArticlesByUser(String userCPF);
     boolean submitArticle(ArticleInterface article, EventInterface event);
 }

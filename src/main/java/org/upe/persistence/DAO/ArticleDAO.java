@@ -1,6 +1,7 @@
 package org.upe.persistence.DAO;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.upe.persistence.JPAUtils.EntityManagerFactory;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.UserInterface;
