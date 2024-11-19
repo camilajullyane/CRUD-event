@@ -132,9 +132,6 @@ public class SubmissionsController implements Initializable {
                 Label date = new Label("Data");
                 date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate().toString());
-                dateValue.getStyleClass().add("subcaption");
-
                 Label location = new Label("Local");
                 location.getStyleClass().add("caption");
 
@@ -151,12 +148,11 @@ public class SubmissionsController implements Initializable {
                 subscriptionButton.getStyleClass().add("custom-button");
 
                 VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, date, dateValue);
                 VBox locationBox = new VBox(5, location, locationValue);
                 VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox infoBox = new HBox(50, locationBox, ownerBox);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 VBox containerBox = new VBox(45, descriptionBox, infoBox, subscriptionButton);
                 containerBox.setAlignment(Pos.CENTER);

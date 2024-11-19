@@ -108,9 +108,6 @@ public class ScheduleController implements Initializable {
                 Label date = new Label("Data");
                 date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate().toString());
-                dateValue.getStyleClass().add("subcaption");
-
                 Label location = new Label("Local");
                 location.getStyleClass().add("caption");
 
@@ -138,12 +135,11 @@ public class ScheduleController implements Initializable {
                 });
 
                 VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, date, dateValue);
                 VBox locationBox = new VBox(5, location, locationValue);
                 VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox infoBox = new HBox(50, locationBox, ownerBox);
                 HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);

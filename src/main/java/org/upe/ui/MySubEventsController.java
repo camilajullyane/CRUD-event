@@ -18,6 +18,7 @@ import org.upe.utils.SceneLoader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class MySubEventsController {
     private final FacadeInterface facade = new Facade();
@@ -34,7 +35,7 @@ public class MySubEventsController {
 
     private void showMySubEvents() {
         EventInterface currentEvent = SceneLoader.getEventData();
-        List<SubEventInterface> subEvents = facade.getAllSubEventsByEvent(currentEvent.getId());
+        List<SubEventInterface> subEvents = SceneLoader.getEventData().getSubEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
 
@@ -81,9 +82,6 @@ public class MySubEventsController {
                 Label locationLabel = new Label("Local");
                 locationLabel.getStyleClass().add("caption");
 
-                Label locationValue = new Label(subEvent.getLocal());
-                locationValue.getStyleClass().add("subcaption");
-
                 Label speakersLabel = new Label("Palestrantes do Evento");
                 speakersLabel.getStyleClass().add("caption");
 
@@ -94,7 +92,7 @@ public class MySubEventsController {
                 editSubEventButton.getStyleClass().add("custom-button");
                 editSubEventButton.setOnAction(e -> {
                     try {
-                        handleEditSubEventButton(subEvent.getId());
+                        handleEditSubEventButton(subEvent);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -102,11 +100,10 @@ public class MySubEventsController {
 
                 VBox descriptionBox = new VBox(5, titleLabel, descriptionLabel);
                 VBox dateBox = new VBox(5, dateLabel, dateValue);
-                VBox locationBox = new VBox(5, locationLabel, locationValue);
                 VBox ownerBox = new VBox(5, speakersLabel, speakersValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox infoBox = new HBox(50, dateBox, ownerBox);
                 HBox bottomBox = new HBox(50, editSubEventButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);
@@ -168,8 +165,8 @@ public class MySubEventsController {
     }
 
     @FXML
-    private void handleEditSubEventButton(String subEventID) throws IOException {
-        SceneLoader.setSubEventData(subEventID);
+    private void handleEditSubEventButton(SubEventInterface subEvent) throws IOException {
+        SceneLoader.setSubEventData(subEvent);
         SceneLoader.loadScene("/org/upe/ui/telaEditarSubEvento.fxml", "Editar SubEvento", mySubEventsPage);
     }
 

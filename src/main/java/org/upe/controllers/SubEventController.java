@@ -1,82 +1,47 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.SubEventControllerInterface;
+import org.upe.persistence.DAO.SubEventDAO;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.SubEvent;
 
-import java.util.List;
-import org.upe.persistence.repository.EventUtility;
-import org.upe.persistence.repository.SubEventUtility;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.UUID;
 
 public class SubEventController implements SubEventControllerInterface {
-    private static final EventUtility eventUtiliy = new EventUtility();
-    private static final SubEventUtility subEventUtility = new SubEventUtility();
+    public static final SubEventDAO subEventDAO = new SubEventDAO();
 
-    public SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour, String description, String speaker) {
-
-        return (SubEventInterface) subEventUtility.createSubEvent(parentEventID, name, hour, local,
-                eventUtiliy.getEventById(parentEventID).getOrganization(),description, speaker);
+    // falta regras de negocio
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, Date date, String description, String speaker) {
+        return subEventDAO.create(name, speaker, description, date, parentEvent);
     }
 
-    public List<SubEventInterface> showAllSubEvents() {
-        List<SubEvent> subEvents = subEventUtility.getAllSubEvents();
-        return new ArrayList<>(subEvents);
-    }
-
-
-    public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
-        List<SubEvent> subEvents = subEventUtility.getMySubEventsByParentEventID(parentEventID,userCPF);
-        return new ArrayList<>(subEvents);
-    }
-
-    public ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
-        List<SubEvent> subEventsByEvent = subEventUtility.getAllSubEventsByEvent(parentID);
-
-        return new ArrayList<>(subEventsByEvent);
-    }
-
-    public boolean editSubEventName(String id, String newName) {
-        subEventUtility.updateSubEventName(id, newName);
+    public boolean editSubEventName(SubEventInterface subEvent, String newName) {
+        subEvent.setName(newName);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    public boolean editSubEventDate(String id, String newDate) {
-        subEventUtility.updateSubEventDate(id, newDate);
+    public boolean editSubEventDate(SubEventInterface subEvent, Date newDate) {
+        subEvent.setDate(newDate);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    public boolean editSubEventLocal(String id, String newLocal) {
-        subEventUtility.updateSubEventLocal(id, newLocal);
+    public boolean editSubEventDescription(SubEventInterface subEvent, String newDescription) {
+        subEvent.setDescription(newDescription);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    public boolean editSubEventDescription(String id, String newDescription) {
-        subEventUtility.updateSubEventDescription(id, newDescription);
+    public boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker) {
+        subEvent.setSpeakers(newSpeaker);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    public boolean editSubEventSpeaker(String id, String newSpeaker) {
-        subEventUtility.updateSubEventSpeaker(id, newSpeaker);
+    public boolean deleteSubEvent(UUID id) {
+        subEventDAO.delete(id);
         return true;
-    }
-
-    public boolean editSubEventHour(String id, String newHour) {
-        subEventUtility.updateSubEventHour(id, newHour);
-        return true;
-    }
-
-    public boolean deleteSubEvent(String id) {
-        subEventUtility.deleteSubEvent(id);
-        return true;
-    }
-
-    public void addAttendeeOnList(UserInterface user, String subEventID) {
-        subEventUtility.addAttendeeOnList(user, subEventID);
-    }
-
-    public void deleteAttendeeOnList(String userCPF, String subEventID) {
-        subEventUtility.deleteAttendeeOnList(userCPF, subEventID);
     }
 }

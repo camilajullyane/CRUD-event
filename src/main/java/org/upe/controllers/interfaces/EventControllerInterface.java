@@ -20,6 +20,4 @@ public interface EventControllerInterface {
     boolean updateLocal(EventInterface event, String local);
     boolean updateDescription(EventInterface event, String description);
     boolean updateOrganization(EventInterface event, String organization);
-    boolean updateDate(EventInterface event, LocalDate newDate);
-    boolean updateHour(EventInterface event, String Hour);
 }

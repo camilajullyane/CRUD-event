@@ -39,7 +39,7 @@ public class SubEventUIController implements Initializable {
     private void showSubEvents() {
         EventInterface parentEventInfo = SceneLoader.getEventData();
 
-        List<SubEventInterface> subEvents = facade.getAllSubEventsByEvent(parentEventInfo.getId());
+        List<SubEventInterface> subEvents = parentEventInfo.getSubEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
@@ -70,9 +70,6 @@ public class SubEventUIController implements Initializable {
             Label location = new Label("Local");
             location.getStyleClass().add("caption");
 
-            Label locationValue = new Label(subEvent.getLocal());
-            locationValue.getStyleClass().add("subcaption");
-
             Label owner = new Label("Palestrantes do evento");
             owner.getStyleClass().add("caption");
 
@@ -81,10 +78,9 @@ public class SubEventUIController implements Initializable {
 
             VBox descriptionBox = new VBox(5, title, description);
             VBox dateBox = new VBox(5, date, dateValue);
-            VBox locationBox = new VBox(5, location, locationValue);
             VBox ownerBox = new VBox(5, owner, ownerValue);
 
-            HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+            HBox infoBox = new HBox(50, dateBox, ownerBox);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 
             VBox containerBox = new VBox(45,descriptionBox, infoBox);

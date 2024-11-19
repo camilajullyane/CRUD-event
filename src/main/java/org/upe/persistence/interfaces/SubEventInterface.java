@@ -1,11 +1,20 @@
 package org.upe.persistence.interfaces;
 
-import java.time.LocalDate;
+import org.upe.persistence.model.Event;
+
+import java.util.Date;
+import java.util.UUID;
 
 public interface SubEventInterface {
-    // Métodos para obter detalhes do sub-evento
-    String getId();
-    EventInterface getParentEvent();
-    LocalDate getDate();
-
+    UUID getId();
+    String getName();
+    void setName(String name);
+    String getSpeakers();
+    void setSpeakers(String speakers);
+    String getDescription();
+    void setDescription(String description);
+    Date getDate();
+    void setDate(Date date);
+    Event getParentEvent();
+    void setParentEvent(Event parentEvent);
 }

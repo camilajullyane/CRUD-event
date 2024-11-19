@@ -68,18 +68,6 @@ public class EventController implements EventControllerInterface {
         return true;
     }
 
-    public boolean updateDate(EventInterface event, LocalDate newDate) {
-        event.setDate(newDate);
-        eventDAO.update(event);
-        return true;
-    }
-
-    public boolean updateHour(EventInterface event, String hour) {
-        event.setHour(hour);
-        eventDAO.update(event);
-        return true;
-    }
-
     public boolean deleteEvent(EventInterface event, UserInterface user) {
         eventDAO.delete(event.getId());
         return true;

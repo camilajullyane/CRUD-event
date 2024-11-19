@@ -2,6 +2,8 @@ package org.upe.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.util.ArrayList;
@@ -36,5 +38,17 @@ public class User implements UserInterface {
         this.cpf = cpf;
         this.email = email;
         this.password = password;
+    }
+
+    public List<EventInterface> getAttendeeOn() {
+        return new ArrayList<>(attendeeOn);
+    }
+
+    public List<EventInterface> getOwnerOf() {
+        return new ArrayList<>(ownerOf);
+    }
+
+    public List<ArticleInterface> getArticles() {
+        return new ArrayList<>(articles);
     }
 }

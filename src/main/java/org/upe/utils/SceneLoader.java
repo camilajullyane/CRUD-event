@@ -4,15 +4,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.io.IOException;
 
 public class SceneLoader {
-
+    @Getter @Setter
     private static EventInterface eventData;
-    private static String subEventData;
+    @Getter @Setter
+    private static SubEventInterface subEventData;
 
     private SceneLoader() {
         throw new UnsupportedOperationException("Utility class");
@@ -27,22 +30,6 @@ public class SceneLoader {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle(title);
-    }
-
-    public static void setEventData(EventInterface data) {
-        eventData = data;
-    }
-
-    public static EventInterface getEventData() {
-        return eventData;
-    }
-
-    public static void setSubEventData(String subEventID) {
-        subEventData = subEventID;
-    }
-
-    public static String getSubEventData() {
-        return subEventData;
     }
 
 }

@@ -3,6 +3,7 @@ package org.upe.persistence.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import java.util.Date;
 import java.util.UUID;
@@ -16,19 +17,19 @@ public class SubEvent implements SubEventInterface {
     private UUID id;
     private String name;
     protected String speakers;
-    protected String hour;
     protected String description;
     protected Date date;
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
-    public SubEvent(String speakers, String hour, Event parentEvent) {
+    public SubEvent(String name, String speakers, String description, Date date, EventInterface parentEvent) {
+        this.name = name;
         this.speakers = speakers;
-        this.hour = hour;
-        this.parentEvent = parentEvent;
+        this.description = description;
+        this.date = date;
+        this.parentEvent = (Event) parentEvent;
     }
 
-    public SubEvent(String name, String speakers, String hour, String description,Date date, Event parentEvent) {
-    }
+    public SubEvent() {}
 }

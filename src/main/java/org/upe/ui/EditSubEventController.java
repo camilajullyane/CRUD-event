@@ -3,9 +3,8 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
-import org.upe.controllers.EventController;
 import org.upe.controllers.SubEventController;
-import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
 import javafx.scene.control.TextField;
 
@@ -14,7 +13,7 @@ import java.io.IOException;
 public class EditSubEventController {
     SubEventController subEventController = new SubEventController();
 
-    String subEventID = SceneLoader.getSubEventData();
+    SubEventInterface subEvent = SceneLoader.getSubEventData();
 
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -39,7 +38,7 @@ public class EditSubEventController {
 
     @FXML
     private void handleNameButton() {
-        subEventController.editSubEventName(subEventID, newSubEventName.getText());
+        subEventController.editSubEventName(subEvent, newSubEventName.getText());
         newSubEventName.setText("");
         alert.setTitle("SubEvento editado");
         alert.setHeaderText(null);
@@ -49,18 +48,8 @@ public class EditSubEventController {
     }
 
     @FXML
-    private void handleLocalButton() {
-        subEventController.editSubEventLocal(subEventID, newSubEventLocal.getText());
-        newSubEventLocal.setText("");
-        alert.setTitle("SubEvento editado");
-        alert.setHeaderText(null);
-        alert.setContentText("Local editado com sucesso!");
-        alert.showAndWait();
-    }
-
-    @FXML
     private void handleDescriptionButton() {
-        subEventController.editSubEventDescription(subEventID, newSubEventDescription.getText());
+        subEventController.editSubEventDescription(subEvent, newSubEventDescription.getText());
         newSubEventDescription.setText("");
         alert.setTitle("SubEvento editado");
         alert.setHeaderText(null);
@@ -70,21 +59,11 @@ public class EditSubEventController {
 
     @FXML
     private void handleOrganizationButton() {
-        subEventController.editSubEventSpeaker(subEventID, newSubEventSpeaker.getText());
+        subEventController.editSubEventSpeaker(subEvent, newSubEventSpeaker.getText());
         newSubEventSpeaker.setText("");
         alert.setTitle("SubEvento editado");
         alert.setHeaderText(null);
         alert.setContentText("Palestrante editado com sucesso!");
-        alert.showAndWait();
-    }
-
-    @FXML
-    private void handleHourButton() {
-        subEventController.editSubEventHour(subEventID, newSubEventHour.getText());
-        newSubEventHour.setText("");
-        alert.setTitle("SubEvento editado");
-        alert.setHeaderText(null);
-        alert.setContentText("Horário editado com sucesso!");
         alert.showAndWait();
     }
 

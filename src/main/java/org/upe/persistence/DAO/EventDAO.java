@@ -25,7 +25,7 @@ public class EventDAO {
 
     public void delete(UUID id) {
         entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.find(Event.class, id));
+        entityManager.remove(findById(id));
         entityManager.getTransaction().commit();
     }
 
@@ -37,7 +37,6 @@ public class EventDAO {
         entityManager.getTransaction().begin();
         entityManager.merge(event);
         entityManager.getTransaction().commit();
-
     }
 
     public List<EventInterface> getAll() {

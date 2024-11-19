@@ -75,60 +75,32 @@ public class Facade implements FacadeInterface {
         return eventController.updateOrganization(event, newOrganization);
     }
 
-    public boolean editEventDate(EventInterface event, LocalDate newDate) {
-        return eventController.updateDate(event, newDate);
-    }
-
-    public boolean editEventHour(EventInterface event, String newHour) {
-        return eventController.updateHour(event, newHour);
-    }
-
     public boolean deleteEvent(EventInterface event, UserInterface user) {
         return eventController.deleteEvent(event, user);
     }
 
     // SubEventController methods
-    public SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour, String description, String speaker) {
-        return subEventController.createSubEvent(parentEventID, name, local, hour, description, speaker);
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, Date date, String description, String speaker) {
+        return subEventController.createSubEvent(parentEvent, name, date, description, speaker);
     }
 
-    public List<SubEventInterface> showAllSubEvents() {
-        return subEventController.showAllSubEvents();
+    public boolean editSubEventName(SubEventInterface subEvent, String newName) {
+        return subEventController.editSubEventName(subEvent, newName);
     }
 
-    public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
-        return subEventController.getMySubEventsByParentEventID(parentEventID, userCPF);
+    public boolean editSubEventDate(SubEventInterface subEvent, Date newDate) {
+        return subEventController.editSubEventDate(subEvent, newDate);
     }
 
-    public List<SubEventInterface> getAllSubEventsByEvent(String parentID) {
-        return subEventController.getAllSubEventsByEvent(parentID);
+    public boolean editSubEventDescription(SubEventInterface subEvent, String newDescription) {
+        return subEventController.editSubEventDescription(subEvent, newDescription);
     }
 
-    public boolean editSubEventName(String id, String newName) {
-        return subEventController.editSubEventName(id, newName);
+    public boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker) {
+        return subEventController.editSubEventSpeaker(subEvent, newSpeaker);
     }
 
-    public boolean editSubEventDate(String id, String newDate) {
-        return subEventController.editSubEventDate(id, newDate);
-    }
-
-    public boolean editSubEventLocal(String id, String newLocal) {
-        return subEventController.editSubEventLocal(id, newLocal);
-    }
-
-    public boolean editSubEventDescription(String id, String newDescription) {
-        return subEventController.editSubEventDescription(id, newDescription);
-    }
-
-    public boolean editSubEventSpeaker(String id, String newSpeaker) {
-        return subEventController.editSubEventSpeaker(id, newSpeaker);
-    }
-
-    public boolean editSubEventHour(String id, String newHour) {
-        return subEventController.editSubEventHour(id, newHour);
-    }
-
-    public boolean deleteSubEvent(String id) {
+    public boolean deleteSubEvent(UUID id) {
         return subEventController.deleteSubEvent(id);
     }
 

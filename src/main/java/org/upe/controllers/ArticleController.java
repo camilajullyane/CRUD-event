@@ -21,8 +21,8 @@ public class ArticleController implements ArticleControllerInterface {
 
 
     public boolean submitArticle(ArticleInterface article, EventInterface event) {
-       for (String articleID : event.getArticleList()) {
-           if (articleID.equals(article.getId())) {
+       for (ArticleInterface a : event.getArticles()) {
+           if (a.getId().equals(article.getId())) {
                return false;
            }
        }

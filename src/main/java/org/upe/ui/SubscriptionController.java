@@ -90,7 +90,7 @@ public class SubscriptionController implements Initializable {
     @FXML
     private void showMyEvents() {
 
-        List<EventInterface> events = eventController.getEventsIn(UserSession.getInstance().getCurrentUser().getCpf());
+        List<EventInterface> events = UserSession.getInstance().getCurrentUser().getAttendeeOn();
 
         subscriptionScroll.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         subscriptionScroll.getStyleClass().add("custom-scroll-pane");
@@ -130,9 +130,6 @@ public class SubscriptionController implements Initializable {
                 Label date = new Label("Data");
                 date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate().toString());
-                dateValue.getStyleClass().add("subcaption");
-
                 Label location = new Label("Local");
                 location.getStyleClass().add("caption");
 
@@ -150,12 +147,11 @@ public class SubscriptionController implements Initializable {
                 cancelButton.setOnAction(e -> cancelSubscription(event));
 
                 VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, date, dateValue);
                 VBox locationBox = new VBox(5, location, locationValue);
                 VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox infoBox = new HBox(50, locationBox, ownerBox);
                 HBox headerBox = new HBox(20, descriptionBox, cancelButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
 

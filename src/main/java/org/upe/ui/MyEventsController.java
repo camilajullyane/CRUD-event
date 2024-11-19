@@ -35,7 +35,7 @@ public class MyEventsController implements Initializable {
     @FXML
     private void showMyEvents() {
 
-        List<EventInterface> events = facade.getAllEventsByUser(UserSession.getInstance().getCurrentUser().getCpf());;
+        List<EventInterface> events = UserSession.getInstance().getCurrentUser().getOwnerOf();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
@@ -71,11 +71,6 @@ public class MyEventsController implements Initializable {
 
                 Label dateLabel = new Label("Data");
                 dateLabel.getStyleClass().add("caption");
-
-
-                Label dateValue = new Label(event.getDate().toString());
-                dateValue.getStyleClass().add("subcaption");
-
 
                 Label locationLabel = new Label("Local");
                 locationLabel.getStyleClass().add("caption");
@@ -134,12 +129,11 @@ public class MyEventsController implements Initializable {
 //                cancelButton.setAlignment(Pos.CENTER_LEFT);
 
                 VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, dateLabel, dateValue);
                 VBox locationBox = new VBox(5, locationLabel, locationValue);
                 VBox ownerBox = new VBox(5, ownerLabel, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox infoBox = new HBox(50, locationBox, ownerBox);
                 HBox bottomBox = new HBox(50, createSubEventButton, showAllMySubEventsButton, editEventButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);
