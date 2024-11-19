@@ -10,6 +10,7 @@ import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class CreateEventController {
     private final UserSession userSession = UserSession.getInstance();
@@ -29,6 +30,10 @@ public class CreateEventController {
 
     @FXML
     private DatePicker eventBeginDate;
+
+    @FXML
+    private DatePicker eventEndDate;
+
 
     @FXML
     private TextField eventDescription;
@@ -90,16 +95,18 @@ public class CreateEventController {
         String name = eventName.getText();
         String description = eventDescription.getText();
         String location = eventLocation.getText();
-        String beginDate = eventBeginDate.getValue().toString();
+        LocalDate beginDate = eventBeginDate.getValue();
+        LocalDate endDate = eventEndDate.getValue();
         String organization = eventOrganization.getText();
 
-        facade.createEvent(userSession.getCurrentUser(), name, description, beginDate, location, organization);
+        facade.createEvent(userSession.getCurrentUser(), name, description, beginDate, endDate, location, organization);
         UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
 
         eventName.setText("");
         eventDescription.setText("");
         eventLocation.setText("");
         eventBeginDate.setValue(null);
+        eventEndDate.setValue(null);
         eventOrganization.setText("");
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

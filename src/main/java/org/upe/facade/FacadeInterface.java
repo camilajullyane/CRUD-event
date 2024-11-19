@@ -6,7 +6,7 @@ import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.SubEvent;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ public interface FacadeInterface {
     UserInterface signUpUser(String name, String cpf, String email, String password);
 
     // EventController methods
-    EventInterface createEvent(UserInterface user, String name, String description, Date date, String hour, String local, String organization);
+    EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization);
     List<EventInterface> getAllEvents();
     EventInterface getEventByID(UUID id);
     boolean addAttendeeOnList(UserInterface user, EventInterface event);
@@ -25,7 +25,7 @@ public interface FacadeInterface {
     boolean editEventLocal(EventInterface event, String newLocal);
     boolean editEventDescription(EventInterface event, String newDescription);
     boolean editEventOrganization(EventInterface event, String newOrganization);
-    boolean editEventDate(EventInterface event, Date newDate);
+    boolean editEventDate(EventInterface event, LocalDate newDate);
     boolean editEventHour(EventInterface event, String newHour);
     boolean deleteEvent(EventInterface event, UserInterface user);
 

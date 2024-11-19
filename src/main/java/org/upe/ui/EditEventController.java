@@ -2,6 +2,7 @@ package org.upe.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.StackPane;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
@@ -32,7 +33,10 @@ public class EditEventController {
     private TextField newEventOrganization;
 
     @FXML
-    private TextField newEventDate;
+    private DatePicker newBeginDate;
+
+    @FXML
+    private DatePicker newEndDate;
 
     @FXML
     private TextField newEventHour;
@@ -79,9 +83,17 @@ public class EditEventController {
     }
 
     @FXML
-    private void handleDateButton() {
-        facade.editEventDate(currentEvent, newEventDate.getText());
-        newEventDate.setText("");
+    private void handleBeginDateButton() {
+        facade.editEventDate(currentEvent, newBeginDate.getValue());
+        alert.setTitle("Evento editado");
+        alert.setHeaderText(null);
+        alert.setContentText("Data editada com sucesso!");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleEndDateButton() {
+        facade.editEventDate(currentEvent, newEndDate.getValue());
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
         alert.setContentText("Data editada com sucesso!");

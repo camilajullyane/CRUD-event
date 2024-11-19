@@ -6,6 +6,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.UUID;
 public class EventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
-    public Event create(String name, String description, Date date,String hour, String local, String organization, UserInterface user) {
-        Event event = new Event(name, description, date, hour, local, organization, user);
+    public Event create(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization, UserInterface user) {
+        Event event = new Event(name, description, beginDate, endDate, local, organization, user);
         entityManager.getTransaction().begin();
         entityManager.persist(event);
         entityManager.getTransaction().commit();

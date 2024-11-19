@@ -74,7 +74,7 @@ public class MySubEventsController {
                 Label dateLabel = new Label("Data");
                 dateLabel.getStyleClass().add("caption");
 
-                Label dateValue = new Label(subEvent.getDate());
+                Label dateValue = new Label(subEvent.getDate().toString());
                 dateValue.getStyleClass().add("subcaption");
 
 

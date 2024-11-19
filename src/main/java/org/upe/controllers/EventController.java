@@ -6,6 +6,7 @@ import org.upe.persistence.DAO.EventDAO;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class EventController implements EventControllerInterface {
@@ -14,9 +15,9 @@ public class EventController implements EventControllerInterface {
     private static final EventDAO eventDAO = new EventDAO();
 
 
-    public EventInterface createEvent(UserInterface user, String name, String description, Date date,String hour, String local,
+    public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
                                       String organization) {
-        return eventDAO.create(name, description, date, hour, local, organization, user);
+        return eventDAO.create(name, description, beginDate, endDate, local, organization, user);
     }
 
     public List<EventInterface> getAllEvents() {
@@ -67,7 +68,7 @@ public class EventController implements EventControllerInterface {
         return true;
     }
 
-    public boolean updateDate(EventInterface event, Date newDate) {
+    public boolean updateDate(EventInterface event, LocalDate newDate) {
         event.setDate(newDate);
         eventDAO.update(event);
         return true;

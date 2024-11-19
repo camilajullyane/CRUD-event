@@ -9,6 +9,7 @@ import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -38,8 +39,8 @@ public class Facade implements FacadeInterface {
     }
 
     // EventController methods
-    public EventInterface createEvent(UserInterface user, String name, String description, Date date,String hour, String local, String organization) {
-        return eventController.createEvent(user, name, description, date, hour, local, organization);
+    public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization) {
+        return eventController.createEvent(user, name, description, beginDate, endDate, local, organization);
     }
 
     public List<EventInterface> getAllEvents() {
@@ -74,7 +75,7 @@ public class Facade implements FacadeInterface {
         return eventController.updateOrganization(event, newOrganization);
     }
 
-    public boolean editEventDate(EventInterface event, Date newDate) {
+    public boolean editEventDate(EventInterface event, LocalDate newDate) {
         return eventController.updateDate(event, newDate);
     }
 

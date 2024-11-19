@@ -130,7 +130,7 @@ public class SubscriptionController implements Initializable {
                 Label date = new Label("Data");
                 date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate());
+                Label dateValue = new Label(event.getDate().toString());
                 dateValue.getStyleClass().add("subcaption");
 
                 Label location = new Label("Local");
