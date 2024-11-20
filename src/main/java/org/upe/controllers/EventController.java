@@ -28,6 +28,10 @@ public class EventController implements EventControllerInterface {
     }
 
     public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
+        if (event.getOwner().getId() == user.getId()) {
+            return false;
+        }
+
         Optional<UserInterface> attendee = event.getAttendeesList()
                 .stream()
                 .filter(u -> u.getCpf().equals(user.getCpf()))
@@ -35,8 +39,9 @@ public class EventController implements EventControllerInterface {
         if(attendee.isPresent()) {
             return false;
         }
+
         user.subscribeToEvent(event);
-        event.getAttendeesList().add(user);
+        event.addAttendeeOnEvent(user);
         eventDAO.update(event);
         userDAO.update((User) user);
         return true;

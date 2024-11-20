@@ -11,6 +11,7 @@ public interface EventInterface {
     String getName();
     String getOrganization();
     String getDescription();
+    UserInterface getOwner();
     List<UserInterface> getAttendeesList();
     List<SubEventInterface> getSubEvents();
     List<ArticleInterface> getArticles();
@@ -21,4 +22,5 @@ public interface EventInterface {
     void setName(String name);
     void setBeginDate(LocalDate newBeginDate);
     void setEndDate(LocalDate newEndDate);
+    void addAttendeeOnEvent(UserInterface user);
 }

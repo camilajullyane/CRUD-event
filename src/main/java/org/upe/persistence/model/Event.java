@@ -58,4 +58,8 @@ public class Event implements EventInterface {
     public List<ArticleInterface> getArticles() {
         return new ArrayList<>(articles);
     }
+
+    public void addAttendeeOnEvent(UserInterface user) {
+        this.attendeesList.add((User) user);
+    }
 }
