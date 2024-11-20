@@ -18,7 +18,9 @@ public class EventController implements EventControllerInterface {
 
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
                                       String organization) {
-        return eventDAO.create(name, description, beginDate, endDate, local, organization, user);
+        EventInterface event = eventDAO.create(name, description, beginDate, endDate, local, organization, user);
+        user.addMyEventAsOwner(event);
+        return event;
     }
 
     public List<EventInterface> getAllEvents() {

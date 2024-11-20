@@ -11,4 +11,5 @@ public interface UserInterface {
     String getEmail();
     String getName();
     void subscribeToEvent(EventInterface event);
+    void addMyEventAsOwner(EventInterface event);
 }
