@@ -21,12 +21,12 @@ public class User implements UserInterface {
     private String password;
     @ManyToMany
     @JoinTable(
-            name = "events_users",
+            name = "event_subscriptions",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> attendeeOn = new ArrayList<>();
-    @OneToMany
+    @OneToMany(mappedBy = "owner")
     private List<Event> ownerOf = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
@@ -50,5 +50,9 @@ public class User implements UserInterface {
 
     public List<ArticleInterface> getArticles() {
         return new ArrayList<>(articles);
+    }
+
+    public void subscribeToEvent(EventInterface event) {
+        this.attendeeOn.add((Event) event);
     }
 }

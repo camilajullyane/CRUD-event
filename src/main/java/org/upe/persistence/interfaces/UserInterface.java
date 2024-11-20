@@ -9,5 +9,5 @@ public interface UserInterface {
     List<ArticleInterface> getArticles();
     String getEmail();
     String getName();
-
+    void subscribeToEvent(EventInterface event);
 }

@@ -3,16 +3,17 @@ package org.upe.controllers;
 import org.upe.controllers.interfaces.EventControllerInterface;
 import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.DAO.EventDAO;
+import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.User;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class EventController implements EventControllerInterface {
-    private static final UserControllerInterface userController = new UserController();
-
     private static final EventDAO eventDAO = new EventDAO();
+    private static final UserDAO userDAO = new UserDAO();
 
 
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
@@ -34,8 +35,10 @@ public class EventController implements EventControllerInterface {
         if(attendee.isPresent()) {
             return false;
         }
+        user.subscribeToEvent(event);
         event.getAttendeesList().add(user);
         eventDAO.update(event);
+        userDAO.update((User) user);
         return true;
     }
 

@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.upe.controllers.EventController;
 import org.upe.controllers.UserController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -24,13 +26,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
-
+    FacadeInterface facade = new Facade();
 
     @FXML
     Button settingsButton;
-
-    UserController userController = new UserController();
-    EventController eventController = new EventController();
 
     @FXML
     ScrollPane subscriptionScroll;
@@ -171,7 +170,7 @@ public class SubscriptionController implements Initializable {
     private void cancelSubscription(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
 
-        boolean isAlreadySubscribed = eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
+        boolean isAlreadySubscribed = facade.addAttendeeOnList(userSession.getCurrentUser(), event);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if(!isAlreadySubscribed) {
@@ -184,7 +183,7 @@ public class SubscriptionController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Inscrição realizada com sucesso!");
             alert.showAndWait();
-            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
+            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
         }
     }
 }

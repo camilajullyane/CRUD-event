@@ -91,7 +91,6 @@ public class CreateEventController {
             return;
         }
 
-
         String name = eventName.getText();
         String description = eventDescription.getText();
         String location = eventLocation.getText();
