@@ -7,6 +7,7 @@ module crudEvent {
     requires org.hibernate.orm.core;
     requires io.github.cdimascio.dotenv.java;
     requires static lombok;
+    requires spring.security.crypto;
 
     opens org.upe.ui to javafx.fxml;
     exports org.upe.ui;

@@ -4,6 +4,7 @@ import org.upe.controllers.interfaces.AuthControllerInterface;
 import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
+import org.upe.utils.PasswordUtil;
 
 public class AuthController implements AuthControllerInterface {
     private static final UserDAO userDAO = new UserDAO();
@@ -14,7 +15,7 @@ public class AuthController implements AuthControllerInterface {
             return null;
         }
 
-        if(user.getPassword().equals(password)) {
+        if(PasswordUtil.matches(password, user.getPassword())) {
             return user;
         }
         return null;

@@ -4,6 +4,7 @@ import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
+import org.upe.utils.PasswordUtil;
 
 public class UserController implements UserControllerInterface {
     private static final UserDAO userDAO = new UserDAO();
@@ -15,8 +16,9 @@ public class UserController implements UserControllerInterface {
     public boolean changePassword(UserInterface user, String currentPassword, String newPassword) {
         User utilityUser = userDAO.findByCPF(user.getCpf());
 
-        if(utilityUser != null && utilityUser.getPassword().equals(currentPassword)) {
-            utilityUser.setPassword(newPassword);
+        if(utilityUser != null && PasswordUtil.matches(currentPassword, utilityUser.getPassword())) {
+            String newEncodedPassword = PasswordUtil.encodePassword(newPassword);
+            utilityUser.setPassword(newEncodedPassword);
             userDAO.update(utilityUser);
             return true;
         }

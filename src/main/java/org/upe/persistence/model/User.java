@@ -5,6 +5,7 @@ import lombok.*;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.utils.PasswordUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class User implements UserInterface {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
-        this.password = password;
+        this.password = PasswordUtil.encodePassword(password);
     }
 
     public List<EventInterface> getAttendeeOn() {
