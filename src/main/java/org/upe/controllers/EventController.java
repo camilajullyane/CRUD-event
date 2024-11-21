@@ -50,7 +50,7 @@ public class EventController implements EventControllerInterface {
     }
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
-        event.getAttendeesList().remove(user);
+        event.removeAttendeeOnEvent(user);
         eventDAO.update(event);
         return true;
     }

@@ -23,4 +23,5 @@ public interface EventInterface {
     void setBeginDate(LocalDate newBeginDate);
     void setEndDate(LocalDate newEndDate);
     void addAttendeeOnEvent(UserInterface user);
+    void removeAttendeeOnEvent(UserInterface user);
 }

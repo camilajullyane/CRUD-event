@@ -17,7 +17,7 @@ public class EntityManagerFactory {
 
     private static boolean isRunningTest() {
         try {
-            Class.forName("org.junit.Test");
+            Class.forName("org.junit.jupiter.api.Test");
         } catch (ClassNotFoundException e) {
             return false;
         }

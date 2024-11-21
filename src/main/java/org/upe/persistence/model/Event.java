@@ -62,4 +62,8 @@ public class Event implements EventInterface {
     public void addAttendeeOnEvent(UserInterface user) {
         this.attendeesList.add((User) user);
     }
+
+    public void removeAttendeeOnEvent(UserInterface user) {
+        this.attendeesList.remove((User) user);
+    }
 }
