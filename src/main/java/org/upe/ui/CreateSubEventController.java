@@ -9,7 +9,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CreateSubEventController {
     private final FacadeInterface facade = new Facade();
@@ -75,7 +75,7 @@ public class CreateSubEventController {
         String speaker = subEventSpeaker.getText();
 
         EventInterface currentEvent = SceneLoader.getEventData();
-        facade.createSubEvent(currentEvent, name, new Date(), description, speaker);
+        facade.createSubEvent(currentEvent, name, LocalDate.now(), description, speaker);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");

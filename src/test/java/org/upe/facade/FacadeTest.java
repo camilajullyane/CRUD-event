@@ -17,6 +17,7 @@ import org.upe.persistence.repository.SubEventUtility;
 import org.upe.persistence.repository.UserUtility;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -191,7 +192,7 @@ public class FacadeTest {
 
     @Test
     public void testCreateSubEvent() {
-        SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
+        SubEventInterface subEvent = facade.createSubEvent(testEvent, "Sub Event", LocalDate.now(), "Sub Description", "Speaker");
         assertNotNull(subEvent, "The sub-event should be created successfully");
         assertEquals("Sub Event", subEvent.getName(), "The sub-event name should match");
     }
@@ -227,7 +228,7 @@ public class FacadeTest {
     @Test
     public void testEditSubEventDate() {
         SubEventInterface subEvent = facade.createSubEvent(testEvent.getId(), "Sub Event", "Sub Location", "10:00", "Sub Description", "Speaker");
-        boolean result = facade.editSubEventDate(subEvent.getId(), "2023-12-12");
+        boolean result = facade.editSubEventDate(subEvent, LocalDate.now());
         assertTrue(result, "The sub-event date should be edited successfully");
     }
 

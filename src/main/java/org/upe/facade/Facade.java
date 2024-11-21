@@ -6,11 +6,8 @@ import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.model.SubEvent;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -80,7 +77,7 @@ public class Facade implements FacadeInterface {
     }
 
     // SubEventController methods
-    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, Date date, String description, String speaker) {
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker) {
         return subEventController.createSubEvent(parentEvent, name, date, description, speaker);
     }
 
@@ -88,7 +85,7 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventName(subEvent, newName);
     }
 
-    public boolean editSubEventDate(SubEventInterface subEvent, Date newDate) {
+    public boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate) {
         return subEventController.editSubEventDate(subEvent, newDate);
     }
 

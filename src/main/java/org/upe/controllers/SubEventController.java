@@ -5,14 +5,14 @@ import org.upe.persistence.DAO.SubEventDAO;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class SubEventController implements SubEventControllerInterface {
     public static final SubEventDAO subEventDAO = new SubEventDAO();
 
     // falta regras de negocio
-    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, Date date, String description, String speaker) {
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker) {
         return subEventDAO.create(name, speaker, description, date, parentEvent);
     }
 
@@ -22,7 +22,7 @@ public class SubEventController implements SubEventControllerInterface {
         return true;
     }
 
-    public boolean editSubEventDate(SubEventInterface subEvent, Date newDate) {
+    public boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate) {
         subEvent.setDate(newDate);
         subEventDAO.update(subEvent);
         return true;

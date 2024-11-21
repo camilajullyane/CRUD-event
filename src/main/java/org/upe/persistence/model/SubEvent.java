@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import java.util.Date;
+
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,14 +17,14 @@ public class SubEvent implements SubEventInterface {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    protected String speakers;
-    protected String description;
-    protected Date date;
+    private String speakers;
+    private String description;
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
-    public SubEvent(String name, String speakers, String description, Date date, EventInterface parentEvent) {
+    public SubEvent(String name, String speakers, String description, LocalDate date, EventInterface parentEvent) {
         this.name = name;
         this.speakers = speakers;
         this.description = description;

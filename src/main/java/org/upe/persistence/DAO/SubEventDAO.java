@@ -5,17 +5,16 @@ import org.upe.persistence.JPAUtils.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.model.Event;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class SubEventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
-    public SubEvent create(String name, String speakers, String description, Date date, EventInterface parentEvent) {
+    public SubEvent create(String name, String speakers, String description, LocalDate date, EventInterface parentEvent) {
         SubEvent subEvent = new SubEvent(name, speakers, description, date, parentEvent);
         entityManager.getTransaction().begin();
         entityManager.persist(subEvent);
