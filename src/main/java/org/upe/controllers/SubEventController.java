@@ -44,4 +44,8 @@ public class SubEventController implements SubEventControllerInterface {
         subEventDAO.delete(id);
         return true;
     }
+
+    public SubEventInterface getSubEventByID(UUID id) {
+        return subEventDAO.getById(id);
+    }
 }
