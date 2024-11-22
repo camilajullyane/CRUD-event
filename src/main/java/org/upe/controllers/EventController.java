@@ -38,6 +38,7 @@ public class EventController implements EventControllerInterface {
                 .stream()
                 .filter(u -> u.getCpf().equals(user.getCpf()))
                 .findFirst();
+
         if(attendee.isPresent()) {
             return false;
         }
