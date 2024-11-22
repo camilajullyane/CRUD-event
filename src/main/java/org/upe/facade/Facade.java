@@ -97,6 +97,10 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventSpeaker(subEvent, newSpeaker);
     }
 
+    public SubEventInterface getSubEventByID(UUID id) {
+        return subEventController.getSubEventByID(id);
+    }
+
     public boolean deleteSubEvent(UUID id) {
         return subEventController.deleteSubEvent(id);
     }

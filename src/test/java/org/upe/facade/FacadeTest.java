@@ -14,11 +14,11 @@ import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.model.User;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.utils.PasswordUtil;
 
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -215,32 +215,42 @@ public class FacadeTest {
 
     @Test
     public void testCreateSubEvent() {
-
+        SubEventInterface subEvent = facade.createSubEvent(testEvent, "Test SubEvent", LocalDate.now(), "Test SubEvent Description", "Test Speaker");
+        assertNotNull(subEvent);
+        assertEquals("Test SubEvent", subEvent.getName());
     }
 
     @Test
     public void testEditSubEventName() {
-
+        boolean result = facade.editSubEventName(testSubEvent, "New SubEvent Name");
+        assertTrue(result);
+        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
+        assertEquals("New SubEvent Name", subEvent.getName());
     }
 
     @Test
     public void testEditSubEventDate() {
-
-    }
-
-    @Test
-    public void testEditSubEventLocal() {
-
+        LocalDate newDate = LocalDate.now().plusDays(1);
+        boolean result = facade.editSubEventDate(testSubEvent, newDate);
+        assertTrue(result);
+        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
+        assertEquals(newDate, subEvent.getDate());
     }
 
     @Test
     public void testEditSubEventDescription() {
-
+        boolean result = facade.editSubEventDescription(testSubEvent, "New Description");
+        assertTrue(result);
+        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
+        assertEquals("New Description", subEvent.getDescription());
     }
 
     @Test
     public void testEditSubEventSpeaker() {
-
+        boolean result = facade.editSubEventSpeaker(testSubEvent, "New Speaker");
+        assertTrue(result);
+        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
+        assertEquals("New Speaker", subEvent.getSpeakers());
     }
 
     @Test
@@ -250,17 +260,30 @@ public class FacadeTest {
 
     @Test
     public void testGetUserByCPF() {
-
+        UserInterface user = facade.getUserByCPF("12345678910");
+        assertNotNull(user);
+        assertEquals("12345678910", user.getCpf());
+    }
+    @Test
+    public void testGetUserByCPFWithWrongCPF() {
+        UserInterface user = facade.getUserByCPF("12345568911");
+        assertNull(user);
     }
 
     @Test
     public void testChangeEmail() {
-
+        boolean result = facade.changeEmail(userWithEvent.getEmail(), "newemail@gmail.com");
+        assertTrue(result);
+        UserInterface user = facade.getUserByCPF(userWithEvent.getCpf());
+        assertEquals("newemail@gmail.com", user.getEmail());
     }
 
     @Test
     public void testChangePassword() {
-
+        boolean result = facade.changePassword(userWithEvent, "password", "newpassword");
+        assertTrue(result);
+        User user = (User) facade.getUserByCPF(userWithEvent.getCpf());
+        assertTrue(PasswordUtil.matches("newpassword", user.getPassword()));
     }
 
     @Test

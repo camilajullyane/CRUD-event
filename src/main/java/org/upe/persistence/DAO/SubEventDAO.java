@@ -43,4 +43,8 @@ public class SubEventDAO {
         List<SubEvent> subEvents = entityManager.createQuery("SELECT s FROM SubEvent s", SubEvent.class).getResultList();
         return new ArrayList<>(subEvents);
     }
+
+    public SubEventInterface getById(UUID id) {
+        return entityManager.find(SubEvent.class, id);
+    }
 }
