@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="createEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateEventController">
+<StackPane fx:id="createEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateEventController">
 
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
@@ -78,17 +78,17 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="eventDescription" layoutX="97.0" layoutY="161.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
+                <TextField fx:id="eventDescription" layoutX="97.0" layoutY="189.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="eventOrganization" layoutX="97.0" layoutY="226.0" prefHeight="25.0" prefWidth="256.0" promptText="Organização" style="-fx-background-radius: 25;">
+                <TextField fx:id="eventOrganization" layoutX="98.0" layoutY="263.0" prefHeight="25.0" prefWidth="256.0" promptText="Organização" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="eventLocation" layoutX="97.0" layoutY="194.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
+                <TextField fx:id="eventLocation" layoutX="98.0" layoutY="229.0" prefHeight="25.0" prefWidth="256.0" promptText="Local" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
@@ -103,6 +103,7 @@
                </font>
                 </Button>
             <Label fx:id="errorMessage" layoutX="98.0" layoutY="275.0" prefHeight="17.0" prefWidth="256.0" text="Preencha todos os campos" textFill="#ff4949" visible="false" />
+            <DatePicker fx:id="eventEndDate" layoutX="99.0" layoutY="157.0" prefHeight="25.0" prefWidth="256.0" promptText="Data de Término" />
             </children>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">

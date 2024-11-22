@@ -1,110 +1,69 @@
 package org.upe.persistence.model;
-
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "events")
+@Getter @Setter
 public class Event implements EventInterface {
-    protected String ownerCPF;
-    protected String id;
-    protected String name;
-    protected String date;
-    protected String local;
-    protected String organization;
-    protected String description;
-    protected String articleList;
-    protected String attendeesList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+    private String name;
+    private LocalDate beginDate;
+    private LocalDate endDate;
+    private String local;
+    private String organization;
+    private String description;
+    @ManyToMany(mappedBy = "attendeeOn")
+    private List<User> attendeesList = new ArrayList<>();
+    @OneToMany(mappedBy = "parentEvent")
+    private List<SubEvent> subEvents = new ArrayList<>();
+    @ManyToMany(mappedBy = "submittedIn")
+    private List<Article> articles = new ArrayList<>();
 
-    public Event(String id, String ownerCPF, String name, String date, String local, String organization,
-                 String description, String attendeesList, String articleList) {
-        this.ownerCPF = ownerCPF;
-        this.id = id;
+    public Event(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization , UserInterface user) {
         this.name = name;
-        this.date = date;
+        this.description = description;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.owner = (User) user;
         this.local = local;
         this.organization = organization;
-        this.description = description;
-        this.articleList = articleList;
-        this.attendeesList = attendeesList;
     }
 
-    public String getId() {
-        return id;
+    public Event() {}
+
+    public List<UserInterface> getAttendeesList() {
+        return new ArrayList<>(attendeesList);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public List<SubEventInterface> getSubEvents() {
+        return new ArrayList<>(subEvents);
     }
 
-    public String getName() {
-        return name;
+    public List<ArticleInterface> getArticles() {
+        return new ArrayList<>(articles);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void addAttendeeOnEvent(UserInterface user) {
+        this.attendeesList.add((User) user);
     }
 
-    public String getOwnerCPF() {
-        return this.ownerCPF;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public String getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String[] getArticleList() {
-        return this.articleList.split("#");
-    }
-
-    public void addArticleList(String articleID) {
-        this.articleList = this.articleList.isEmpty() ? articleID : this.attendeesList + "#" + articleID;
-    }
-
-    public String[] getAttendeesList() {
-        return this.attendeesList.split("#");
-    }
-
-    public void addAttendeesList(String userCPF) {
-        this.attendeesList = this.attendeesList.isEmpty() ? userCPF : this.attendeesList + "#" + userCPF;
-    }
-
-    public void deleteAttendee(String userCPF) {
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < this.getAttendeesList().length; i++) {
-            String cpf = this.getAttendeesList()[i];
-            if (!cpf.equals(userCPF)) {
-                if (!newString.isEmpty()) {
-                    newString.append("#");
-                }
-                newString.append(id);
-            }
-        }
-        this.attendeesList = newString.toString();
+    public void removeAttendeeOnEvent(UserInterface user) {
+        this.attendeesList.remove((User) user);
     }
 }

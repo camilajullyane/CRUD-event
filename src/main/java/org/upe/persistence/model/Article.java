@@ -1,38 +1,48 @@
 package org.upe.persistence.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Getter @Setter
 public class Article implements ArticleInterface {
-    private String name;
-    private final String articleID;
-    private final String userCPF;
-    private final String articleAbstract;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    private String title;
+    private String articleAbstract;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User user;
+    @ManyToMany
+    @JoinTable(
+            name = "article_event",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> submittedIn;
 
-    public Article(String name, String eventID, String userCPF, String articleAbstract) {
-        this.name = name;
-        this.articleID = eventID;
-        this.userCPF = userCPF;
+    public Article(String title, String articleAbstract, UserInterface user) {
+        this.title = title;
         this.articleAbstract = articleAbstract;
+        this.user = (User) user;
     }
 
-    // Getters e setters, se necessário
-    public String getName() {
-        return this.name;
+    public Article() {}
+
+    public List<EventInterface> getSubmittedIn() {
+        return new ArrayList<>(submittedIn);
     }
 
-    public String getArticleID() {
-        return this.articleID;
-    }
-
-    public String getUserCPF() {
-        return this.userCPF;
-    }
-
-    public String getArticleAbstract() {
-        return this.articleAbstract;
-    }
-
-    public void setName(String updatedName) {
-        this.name = updatedName;
+    public UserInterface getUser() {
+        return user;
     }
 }

@@ -9,8 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import org.upe.controllers.EventController;
-import org.upe.controllers.UserController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
@@ -110,9 +108,6 @@ public class ScheduleController implements Initializable {
                 Label date = new Label("Data");
                 date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate());
-                dateValue.getStyleClass().add("subcaption");
-
                 Label location = new Label("Local");
                 location.getStyleClass().add("caption");
 
@@ -140,12 +135,11 @@ public class ScheduleController implements Initializable {
                 });
 
                 VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, date, dateValue);
                 VBox locationBox = new VBox(5, location, locationValue);
                 VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
+                HBox infoBox = new HBox(50, locationBox, ownerBox);
                 HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);
@@ -180,7 +174,7 @@ public class ScheduleController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Inscrição realizada com sucesso!");
             alert.showAndWait();
-            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
         }
     }
 

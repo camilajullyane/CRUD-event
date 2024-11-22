@@ -1,3 +1,0 @@
-id,parentEventID,name,local,hour,description,speaker
-1,1,Sub Event 1,Sub Location 1,10:00,Sub Description 1,Speaker 1
-2,1,Sub Event 2,Sub Location 2,11:00,Sub Description 2,Speaker 2

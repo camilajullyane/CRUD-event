@@ -1,37 +1,36 @@
 package org.upe.persistence.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 
-public class SubEvent extends Event implements SubEventInterface {
-    protected String parentEventID;
-    protected String speakers;
-    protected String hour;
+import java.time.LocalDate;
+import java.util.UUID;
 
-    // Construtor
-    public SubEvent(String id, String parentEventID, String name, String date, String hour, String local, String organization,
-                    String description, String speakers, String attendeesList) {
-        super(id, "", name, date, local, organization, description, attendeesList, "");
-        this.parentEventID = parentEventID;
+@Entity
+@Table(name = "subEvent")
+@Getter @Setter
+public class SubEvent implements SubEventInterface {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    private String name;
+    private String speakers;
+    private String description;
+    private LocalDate date;
+    @ManyToOne
+    @JoinColumn(name = "parentEvent_id")
+    protected Event parentEvent;
+
+    public SubEvent(String name, String speakers, String description, LocalDate date, EventInterface parentEvent) {
+        this.name = name;
         this.speakers = speakers;
-        this.hour = hour;
+        this.description = description;
+        this.date = date;
+        this.parentEvent = (Event) parentEvent;
     }
 
-    // Getters e Setters
-    public String getSpeakers() {
-        return this.speakers;
-    }
-
-    public void setSpeakers(String speakers) {
-        this.speakers = speakers;
-    }
-
-    public String getParentEventID() {
-        return this.parentEventID;
-    }
-
-    public String getHour() {
-        return this.hour;
-    }
-
-    public void setHour(String newHour) { this.hour = newHour; }
+    public SubEvent() {}
 }
