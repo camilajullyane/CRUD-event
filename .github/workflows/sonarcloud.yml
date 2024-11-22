@@ -23,9 +23,9 @@ jobs:
       - name: Create dotenv File
         run: |
           touch /home/runner/work/crud-event/crud-event/.env
-          echo DB_URL="${{ secrets.DB_URL_DEFAULT }}" >> /home/runner/work/crud-event/crud-event/.env
-          echo DB_URL="${{ secrets.DB_URL_TEST }}" >> /home/runner/work/crud-event/crud-event/.env
-          echo DB_URL="${{ secrets.DB_DRIVER }}" >> /home/runner/work/crud-event/crud-event/.env
+          echo DB_URL_DEFAULT="${{ secrets.DB_URL_DEFAULT }}" >> /home/runner/work/crud-event/crud-event/.env
+          echo DB_URL_TEST="${{ secrets.DB_URL_TEST }}" >> /home/runner/work/crud-event/crud-event/.env
+          echo DB_DRIVER="${{ secrets.DB_DRIVER }}" >> /home/runner/work/crud-event/crud-event/.env
           echo DB_USER="${{ secrets.DB_USER }}" >> /home/runner/workcrud-event/crud-event/.env
           echo DB_PASSWORD="${{ secrets.DB_PASSWORD }}" >> /home/runner/work/crud-event/crud-event/.env
           cat /home/runner/work/crud-event/crud-event/.env
