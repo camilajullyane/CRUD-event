@@ -1,4 +1,4 @@
-package org.upe.persistence.JPAUtils;
+package org.upe.persistence.DBStrategy;
 
 import jakarta.persistence.EntityManager;
 import lombok.Getter;
@@ -8,11 +8,13 @@ public class EntityManagerFactory {
     private static final EntityManager entityManager;
 
     static {
-        if(isRunningTest()) {
-            entityManager = new TestEntityManager().getEntityManager();
+        ConnectionStrategy strategy;
+        if (isRunningTest()) {
+            strategy = new TestConnectionStrategy();
         } else {
-            entityManager = new DefaultEntityManager().getEntityManager();
+            strategy = new DefaultConnectionStrategy();
         }
+        entityManager = strategy.getEntityManager();
     }
 
     private static boolean isRunningTest() {

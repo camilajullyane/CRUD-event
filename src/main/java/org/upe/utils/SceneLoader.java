@@ -21,7 +21,6 @@ public class SceneLoader {
         throw new UnsupportedOperationException("Utility class");
     }
 
-
     public static void loadScene(String path, String title, StackPane currentPage) throws IOException {
         FXMLLoader loader = new FXMLLoader(SceneLoader.class.getResource(path));
         StackPane screen = loader.load();
@@ -31,5 +30,4 @@ public class SceneLoader {
         stage.setResizable(false);
         stage.setTitle(title);
     }
-
 }
