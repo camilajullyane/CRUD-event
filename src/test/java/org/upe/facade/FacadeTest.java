@@ -46,7 +46,15 @@ public class FacadeTest {
         userSubscribedToEvent2 = new User("Jim Halpert", "15348964855", "jim@dundermifflin.com", "password");
         userDontSubscribedToEvent = new User("Michael Scott", "12345678913", "scott@dundermifflin.com", "password");
 
-        testEvent = new Event("Google I/O", "A Google Event", LocalDate.now(), LocalDate.now(), "Google HQ", "Google", userWithEvent);
+        testEvent = Event.builder()
+                .withName("Google I/O")
+                .withDescription("A Google Event")
+                .withBeginDate(LocalDate.now())
+                .withEndDate(LocalDate.now())
+                .withLocal("Google HQ")
+                .withOrganization("Google")
+                .withOwner((User) userWithEvent)
+                .build();
 
         testSubEvent = new SubEvent("Google I/O - Day 1", "Sundar Pichai", "Google HQ", LocalDate.now(), testEvent);
 
