@@ -15,7 +15,14 @@ public class SubEventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
     public SubEvent create(String name, String speakers, String description, LocalDate date, EventInterface parentEvent) {
-        SubEvent subEvent = new SubEvent(name, speakers, description, date, parentEvent);
+        SubEvent subEvent = new SubEvent.Builder()
+                .withName(name)
+                .withSpeakers(speakers)
+                .withDescription(description)
+                .withDate(date)
+                .withParentEvent(parentEvent)
+                .build();
+
         entityManager.getTransaction().begin();
         entityManager.persist(subEvent);
         entityManager.getTransaction().commit();

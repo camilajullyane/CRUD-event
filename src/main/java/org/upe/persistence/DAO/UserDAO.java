@@ -10,7 +10,13 @@ public class UserDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
     public UserInterface create(String name, String email, String cpf, String password) {
-        User user = new User(name, cpf, email, password);
+        User user = new User.Builder()
+                .withName(name)
+                .withCpf(cpf)
+                .withEmail(email)
+                .withPassword(password)
+                .build();
+
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
