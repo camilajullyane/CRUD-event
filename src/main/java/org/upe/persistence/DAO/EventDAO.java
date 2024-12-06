@@ -1,14 +1,13 @@
 package org.upe.persistence.DAO;
 
 import jakarta.persistence.EntityManager;
-import org.upe.persistence.JPAUtils.EntityManagerFactory;
+import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
