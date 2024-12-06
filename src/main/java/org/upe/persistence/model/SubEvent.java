@@ -33,4 +33,44 @@ public class SubEvent implements SubEventInterface {
     }
 
     public SubEvent() {}
+
+    // Implementação do padrão Builder
+    public static class Builder {
+        private String name;
+        private String speakers;
+        private String description;
+        private LocalDate date;
+        private EventInterface parentEvent;
+
+        public Builder() {}
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withSpeakers(String speakers) {
+            this.speakers = speakers;
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder withDate(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder withParentEvent(EventInterface parentEvent) {
+            this.parentEvent = parentEvent;
+            return this;
+        }
+
+        public SubEvent build() {
+            return new SubEvent(name, speakers, description, date, parentEvent);
+        }
+    }
 }
