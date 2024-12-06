@@ -6,6 +6,7 @@ import org.upe.persistence.JPAUtils.EntityManagerFactory;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Article;
+import org.upe.persistence.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,21 @@ public class ArticleDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
     public ArticleInterface create(String title, String articleAbstract, UserInterface user) {
-        Article article = new Article(title, articleAbstract, user);
+        // Usando o Builder para criar o Article
+        Article article = Article.builder()
+                .withTitle(title)
+                .withArticleAbstract(articleAbstract)
+                .withUser((User) user)  // Casting de UserInterface para User
+                .build();
+
+        // Iniciando transação e persistindo o artigo
         entityManager.getTransaction().begin();
         entityManager.persist(article);
         entityManager.getTransaction().commit();
+
         return article;
     }
+
 
     public void delete(String id) {
         entityManager.getTransaction().begin();
