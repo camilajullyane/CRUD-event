@@ -137,10 +137,8 @@ public class FacadeTest {
         EventInterface event = facade.getEventByID(UUID.randomUUID());
         assertNull(event);
     }
-//QUENGO
     @Test
     public void testAddAttendeeOnListWithAttendeeAlreadyOnList() {
-//        UserInterface user = new User("Test User", "10987654321", "user.test@gmail.com", "wordpass");
         boolean result = facade.addAttendeeOnList(userSubscribedToEvent, testEvent);
         assertFalse(result);
     }
@@ -209,7 +207,8 @@ public class FacadeTest {
 
     @Test
     public void testDeleteEvent() {
-
+        boolean result = facade.deleteEvent(testEvent, userWithEvent);
+        assertTrue(result);
     }
 
     @Test

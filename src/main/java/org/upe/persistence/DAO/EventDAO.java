@@ -5,6 +5,7 @@ import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
+import org.upe.persistence.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,7 +25,14 @@ public class EventDAO {
 
     public void delete(UUID id) {
         entityManager.getTransaction().begin();
-        entityManager.remove(findById(id));
+        Event event = entityManager.find(Event.class, id);
+        if (event != null) {
+            for (UserInterface attendee : event.getAttendeesList()) {
+                attendee.getAttendeeOn().remove(event);
+                entityManager.merge(attendee);
+            }
+            entityManager.remove(event);
+        }
         entityManager.getTransaction().commit();
     }
 

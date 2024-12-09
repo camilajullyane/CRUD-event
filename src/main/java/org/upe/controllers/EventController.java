@@ -52,7 +52,9 @@ public class EventController implements EventControllerInterface {
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
         event.removeAttendeeOnEvent(user);
+//        user.getAttendeeOn().remove(event);
         eventDAO.update(event);
+        userDAO.update((User) user);
         return true;
     }
 

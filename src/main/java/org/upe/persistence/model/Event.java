@@ -28,9 +28,9 @@ public class Event implements EventInterface {
     private String local;
     private String organization;
     private String description;
-    @ManyToMany(mappedBy = "attendeeOn")
+    @ManyToMany(mappedBy = "attendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> attendeesList = new ArrayList<>();
-    @OneToMany(mappedBy = "parentEvent")
+    @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubEvent> subEvents = new ArrayList<>();
     @ManyToMany(mappedBy = "submittedIn")
     private List<Article> articles = new ArrayList<>();
@@ -65,5 +65,6 @@ public class Event implements EventInterface {
 
     public void removeAttendeeOnEvent(UserInterface user) {
         this.attendeesList.remove((User) user);
+        user.getAttendeeOn().remove(this);
     }
 }

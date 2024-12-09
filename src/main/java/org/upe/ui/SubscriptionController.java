@@ -170,20 +170,14 @@ public class SubscriptionController implements Initializable {
     private void cancelSubscription(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
 
-        boolean isAlreadySubscribed = facade.addAttendeeOnList(userSession.getCurrentUser(), event);
+        facade.deleteAttendeeOnList(userSession.getCurrentUser(), event);
+        userSession.setCurrentUser(facade.getUserByCPF(userSession.getCurrentUser().getCpf()));
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if(!isAlreadySubscribed) {
-            alert.setTitle("Inscrição");
-            alert.setHeaderText(null);
-            alert.setContentText("Você já está inscrito neste evento!");
-            alert.showAndWait();
-        } else {
-            alert.setTitle("Inscrição");
-            alert.setHeaderText(null);
-            alert.setContentText("Inscrição realizada com sucesso!");
-            alert.showAndWait();
-            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
-        }
+        alert.setTitle("Cancelar Inscrição");
+        alert.setHeaderText(null);
+        alert.setContentText("Inscrição cancelada com sucesso!");
+        alert.showAndWait();
+
     }
 }
