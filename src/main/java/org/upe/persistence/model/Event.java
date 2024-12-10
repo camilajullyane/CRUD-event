@@ -1,4 +1,5 @@
 package org.upe.persistence.model;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "events")
-@Getter @Setter
+@Getter
+@Setter
 public class Event implements EventInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,16 +37,18 @@ public class Event implements EventInterface {
     @ManyToMany(mappedBy = "submittedIn")
     private List<Article> articles = new ArrayList<>();
 
-    public Event(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization , UserInterface user) {
+    // Construtor privado para garantir o uso do Builder
+    private Event(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization , User owner) {
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;
         this.endDate = endDate;
-        this.owner = (User) user;
+        this.owner = owner;
         this.local = local;
         this.organization = organization;
     }
 
+    // Construtor padrão
     public Event() {}
 
     public List<UserInterface> getAttendeesList() {
@@ -66,5 +70,60 @@ public class Event implements EventInterface {
     public void removeAttendeeOnEvent(UserInterface user) {
         this.attendeesList.remove((User) user);
         user.getAttendeeOn().remove(this);
+    }
+
+    // Builder interno
+    public static class EventBuilder {
+        private String name;
+        private String description;
+        private LocalDate beginDate;
+        private LocalDate endDate;
+        private String local;
+        private String organization;
+        private User owner;
+
+        public EventBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public EventBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public EventBuilder withBeginDate(LocalDate beginDate) {
+            this.beginDate = beginDate;
+            return this;
+        }
+
+        public EventBuilder withEndDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public EventBuilder withLocal(String local) {
+            this.local = local;
+            return this;
+        }
+
+        public EventBuilder withOrganization(String organization) {
+            this.organization = organization;
+            return this;
+        }
+
+        public EventBuilder withOwner(User owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public Event build() {
+            return new Event(name, description, beginDate, endDate, local, organization, owner);
+        }
+    }
+
+    // Exemplo de uso do Builder
+    public static EventBuilder builder() {
+        return new EventBuilder();
     }
 }

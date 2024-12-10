@@ -6,7 +6,6 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +15,28 @@ public class EventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
     public Event create(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization, UserInterface user) {
-        Event event = new Event(name, description, beginDate, endDate, local, organization, user);
+        // Usando o Builder para criar o Event
+        Event event = Event.builder()
+                .withName(name)
+                .withDescription(description)
+                .withBeginDate(beginDate)
+                .withEndDate(endDate)
+                .withLocal(local)
+                .withOrganization(organization)
+                .withOwner((User) user)
+                .build();
+
+        // Persistindo o evento no banco de dados
         entityManager.getTransaction().begin();
         entityManager.persist(event);
         entityManager.getTransaction().commit();
         return event;
     }
 
+
     public void delete(UUID id) {
         entityManager.getTransaction().begin();
-        Event event = entityManager.find(Event.class, id);
-        if (event != null) {
-            for (UserInterface attendee : event.getAttendeesList()) {
-                attendee.getAttendeeOn().remove(event);
-                entityManager.merge(attendee);
-            }
-            entityManager.remove(event);
-        }
+        entityManager.remove(findById(id));
         entityManager.getTransaction().commit();
     }
 
