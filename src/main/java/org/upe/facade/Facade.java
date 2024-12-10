@@ -77,8 +77,8 @@ public class Facade implements FacadeInterface {
     }
 
     // SubEventController methods
-    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker) {
-        return subEventController.createSubEvent(parentEvent, name, date, description, speaker);
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate, LocalDate endDate, String description) {
+        return subEventController.createSubEvent(parentEvent, name, beginDate,endDate, description);
     }
 
     public boolean editSubEventName(SubEventInterface subEvent, String newName) {
@@ -93,9 +93,6 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventDescription(subEvent, newDescription);
     }
 
-    public boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker) {
-        return subEventController.editSubEventSpeaker(subEvent, newSpeaker);
-    }
 
     public SubEventInterface getSubEventByID(UUID id) {
         return subEventController.getSubEventByID(id);

@@ -12,8 +12,8 @@ public class SubEventController implements SubEventControllerInterface {
     public static final SubEventDAO subEventDAO = new SubEventDAO();
 
     // falta regras de negocio
-    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker) {
-        return subEventDAO.create(name, speaker, description, date, parentEvent);
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate,LocalDate endDate, String description) {
+        return subEventDAO.create(name, description, beginDate, endDate,parentEvent);
     }
 
     public boolean editSubEventName(SubEventInterface subEvent, String newName) {
@@ -23,7 +23,7 @@ public class SubEventController implements SubEventControllerInterface {
     }
 
     public boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate) {
-        subEvent.setDate(newDate);
+        subEvent.setBeginDate(newDate);
         subEventDAO.update(subEvent);
         return true;
     }
@@ -34,11 +34,6 @@ public class SubEventController implements SubEventControllerInterface {
         return true;
     }
 
-    public boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker) {
-        subEvent.setSpeakers(newSpeaker);
-        subEventDAO.update(subEvent);
-        return true;
-    }
 
     public boolean deleteSubEvent(UUID id) {
         subEventDAO.delete(id);

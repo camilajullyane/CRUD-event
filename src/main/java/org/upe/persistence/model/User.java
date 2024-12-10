@@ -27,6 +27,15 @@ public class User implements UserInterface {
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> attendeeOn = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "sub_event_subscriptions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "sub_event_id")
+    )
+    private List<SubEvent> subEventAttendeeOn = new ArrayList<>();
+
     @OneToMany(mappedBy = "owner")
     private List<Event> ownerOf = new ArrayList<>();
     @OneToMany(mappedBy = "user")

@@ -55,7 +55,7 @@ public class FacadeTest {
                 .withOwner((User) userWithEvent)
                 .build();
 
-        testSubEvent = new SubEvent("Google I/O - Day 1", "Sundar Pichai", "Google HQ", LocalDate.now(), testEvent);
+        testSubEvent = new SubEvent("Google I/O - Day 1", "Google HQ", LocalDate.now(),LocalDate.now(), testEvent);
 
         entityManager.persist(userWithEvent);
         entityManager.persist(userDontSubscribedToEvent);
@@ -221,7 +221,7 @@ public class FacadeTest {
 
     @Test
     public void testCreateSubEvent() {
-        SubEventInterface subEvent = facade.createSubEvent(testEvent, "Test SubEvent", LocalDate.now(), "Test SubEvent Description", "Test Speaker");
+        SubEventInterface subEvent = facade.createSubEvent(testEvent, "Test SubEvent", LocalDate.now(), LocalDate.now(),"Test SubEvent Description");
         assertNotNull(subEvent);
         assertEquals("Test SubEvent", subEvent.getName());
     }
@@ -240,7 +240,7 @@ public class FacadeTest {
         boolean result = facade.editSubEventDate(testSubEvent, newDate);
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
-        assertEquals(newDate, subEvent.getDate());
+        assertEquals(newDate, subEvent.getBeginDate());
     }
 
     @Test
@@ -251,13 +251,6 @@ public class FacadeTest {
         assertEquals("New Description", subEvent.getDescription());
     }
 
-    @Test
-    public void testEditSubEventSpeaker() {
-        boolean result = facade.editSubEventSpeaker(testSubEvent, "New Speaker");
-        assertTrue(result);
-        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
-        assertEquals("New Speaker", subEvent.getSpeakers());
-    }
 
     @Test
     public void testDeleteSubEvent() {

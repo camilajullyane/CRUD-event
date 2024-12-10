@@ -57,15 +57,6 @@ public class EditSubEventController {
         alert.showAndWait();
     }
 
-    @FXML
-    private void handleOrganizationButton() {
-        subEventController.editSubEventSpeaker(subEvent, newSubEventSpeaker.getText());
-        newSubEventSpeaker.setText("");
-        alert.setTitle("SubEvento editado");
-        alert.setHeaderText(null);
-        alert.setContentText("Palestrante editado com sucesso!");
-        alert.showAndWait();
-    }
 
     @FXML
     private void moveToSettingsScreen () throws IOException {

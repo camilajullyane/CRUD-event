@@ -14,12 +14,12 @@ import java.util.UUID;
 public class SubEventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
-    public SubEvent create(String name, String speakers, String description, LocalDate date, EventInterface parentEvent) {
+    public SubEvent create(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
         SubEvent subEvent = new SubEvent.Builder()
                 .withName(name)
-                .withSpeakers(speakers)
                 .withDescription(description)
-                .withDate(date)
+                .withBeginDate(beginDate)
+                .withEndDate(endDate)
                 .withParentEvent(parentEvent)
                 .build();
 

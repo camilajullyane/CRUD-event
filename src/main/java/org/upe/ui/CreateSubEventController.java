@@ -3,9 +3,11 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import org.springframework.cglib.core.Local;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 
 public class CreateSubEventController {
     private final FacadeInterface facade = new Facade();
+    EventInterface currentEvent = SceneLoader.getEventData();
 
     @FXML
     private StackPane createSubEventPage;
@@ -33,7 +36,18 @@ public class CreateSubEventController {
     private TextField subEventSpeaker;
 
     @FXML
+    private DatePicker beginDate;
+
+    @FXML
+    private DatePicker endDate;
+
+    @FXML
     Label errorMessage;
+
+    @FXML
+    public void initialize() {
+
+    }
 
     @FXML
     private void moveToScheduleScreen() throws IOException {
@@ -63,19 +77,18 @@ public class CreateSubEventController {
     @FXML
     private void handleCreateSubEvent() {
         if(subEventName.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
-                subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || subEventSpeaker.getText().isEmpty()) {
+                subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || beginDate.getValue() == null || endDate.getValue() == null) {
             errorMessage.setVisible(true);
             return;
         }
 
         String name = subEventName.getText();
         String description = subEventDescription.getText();
-        String hour = subEventHour.getText();
-        String location = subEventLocation.getText();
-        String speaker = subEventSpeaker.getText();
+        LocalDate begin = beginDate.getValue();
+        LocalDate end = endDate.getValue();
 
         EventInterface currentEvent = SceneLoader.getEventData();
-        facade.createSubEvent(currentEvent, name, LocalDate.now(), description, speaker);
+        facade.createSubEvent(currentEvent, name, begin, end,description);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");
