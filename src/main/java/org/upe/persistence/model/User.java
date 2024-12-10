@@ -60,4 +60,38 @@ public class User implements UserInterface {
     public void addMyEventAsOwner(EventInterface event) {
         this.ownerOf.add((Event) event);
     }
+
+    // Implementação do padrão Builder
+    public static class Builder {
+        private String name;
+        private String cpf;
+        private String email;
+        private String password;
+
+        public Builder() {}
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withCpf(String cpf) {
+            this.cpf = cpf;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder withPassword(String password) {
+            this.password = PasswordUtil.encodePassword(password);
+            return this;
+        }
+
+        public User build() {
+            return new User(name, cpf, email, password);
+        }
+    }
 }
