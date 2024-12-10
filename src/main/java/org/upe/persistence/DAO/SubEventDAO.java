@@ -1,7 +1,7 @@
 package org.upe.persistence.DAO;
 
 import jakarta.persistence.EntityManager;
-import org.upe.persistence.JPAUtils.EntityManagerFactory;
+import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
