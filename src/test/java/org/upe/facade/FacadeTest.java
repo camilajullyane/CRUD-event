@@ -31,6 +31,9 @@ public class FacadeTest {
     private static UserInterface userSubscribedToEvent;
     private static UserInterface userDontSubscribedToEvent;
     private static UserInterface userSubscribedToEvent2;
+
+    private static UserInterface userSubscribedToSubEvent;
+    private static UserInterface userDontSubscribedToSubEvent;
     private static SubEventInterface testSubEvent;
     private static EventInterface testEvent;
     private static ArticleInterface testArticle;
@@ -44,6 +47,9 @@ public class FacadeTest {
         userSubscribedToEvent = new User("Dwight Schrute", "15348964812", "shrute@dundermifflin.com", "password");
         userSubscribedToEvent2 = new User("Jim Halpert", "15348964855", "jim@dundermifflin.com", "password");
         userDontSubscribedToEvent = new User("Michael Scott", "12345678913", "scott@dundermifflin.com", "password");
+
+        userSubscribedToSubEvent = new User("Pam Beesly", "15348964813", "beesly@example.com", "password");
+        userDontSubscribedToSubEvent = new User("Ryan Howard", "15348964892", "howard@example.com", "password");
 
         testEvent = Event.builder()
                 .withName("Google I/O")
@@ -62,8 +68,13 @@ public class FacadeTest {
         entityManager.persist(userSubscribedToEvent);
         entityManager.persist(userSubscribedToEvent2);
         entityManager.persist(testEvent);
-        entityManager.persist(testSubEvent);
 
+        entityManager.persist(testSubEvent);
+        entityManager.persist(userSubscribedToSubEvent);
+        entityManager.persist(userDontSubscribedToSubEvent);
+        testSubEvent.addAttendeeOnSubEvent(userSubscribedToSubEvent);
+        entityManager.merge(userSubscribedToSubEvent);
+        entityManager.merge(testSubEvent);
 
         userSubscribedToEvent.subscribeToEvent(testEvent);
         userSubscribedToEvent2.subscribeToEvent(testEvent);
@@ -73,6 +84,8 @@ public class FacadeTest {
         entityManager.merge(userSubscribedToEvent);
         entityManager.merge(userSubscribedToEvent2);
         entityManager.merge(testEvent);
+
+
         transaction.commit();
     }
 
@@ -118,6 +131,8 @@ public class FacadeTest {
         UserInterface user = facade.signUpUser("test", "12345678910", "john.doe@email.com", "password");
         assertNull(user);
     }
+
+    //Testes Event
 
     @Test
     public void testCreateEvent() {
@@ -219,11 +234,32 @@ public class FacadeTest {
         assertTrue(result);
     }
 
+    //Testes SubEvent
+
     @Test
     public void testCreateSubEvent() {
         SubEventInterface subEvent = facade.createSubEvent(testEvent, "Test SubEvent", LocalDate.now(), LocalDate.now(),"Test SubEvent Description");
         assertNotNull(subEvent);
         assertEquals("Test SubEvent", subEvent.getName());
+    }
+
+    @Test
+    public void testAddAttendeeOnSubEventList() {
+        boolean result = facade.addAttendeeSubEventOnList(userDontSubscribedToSubEvent, testSubEvent);
+        assertTrue(result);
+        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
+        Optional<UserInterface> attendee = subEvent.getSubEventAttendeesList()
+                .stream()
+                .filter(u -> u.getCpf().equals(userDontSubscribedToSubEvent.getCpf()))
+                .findFirst();
+        assertTrue(attendee.isPresent());
+
+    }
+
+    @Test
+    public void testAddAttendeeOnSubEventListWithAttendeeAlreadyOnList() {
+        boolean result = facade.addAttendeeSubEventOnList(userSubscribedToSubEvent, testSubEvent);
+        assertFalse(result);
     }
 
     @Test
