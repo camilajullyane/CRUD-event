@@ -48,7 +48,7 @@ public class User implements UserInterface {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
-        this.password = PasswordUtil.encodePassword(password);
+        this.password = password;
     }
 
     public List<EventInterface> getAttendeeOn() {
