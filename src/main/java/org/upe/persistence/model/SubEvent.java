@@ -30,6 +30,9 @@ public class SubEvent implements SubEventInterface {
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
+    @OneToMany(mappedBy = "parentSubEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Session> sessions = new ArrayList<>();
+
 
     public SubEvent(String name,String description, LocalDate beginDate,LocalDate endDate, EventInterface parentEvent) {
         this.name = name;
