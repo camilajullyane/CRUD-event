@@ -106,8 +106,11 @@ public class Facade implements FacadeInterface {
         return subEventController.deleteSubEvent(id);
     }
 
-    // UserController methods
+    public void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent) {
+        subEventController.removeAttendeeSubEventOnList(user,subEvent);
+    }
 
+    // UserController methods
     public UserInterface getUserByCPF(String cpf) {
         return userController.getUserByCPF(cpf);
     }

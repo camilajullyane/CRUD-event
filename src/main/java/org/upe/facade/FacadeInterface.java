@@ -34,6 +34,7 @@ public interface FacadeInterface {
     SubEventInterface getSubEventByID(UUID id);
     boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
     boolean deleteSubEvent(UUID id);
+    void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent);
 
     // UserController methods
     boolean changeEmail(String userEmail, String newEmail);

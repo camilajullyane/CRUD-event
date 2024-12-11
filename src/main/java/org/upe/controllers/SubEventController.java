@@ -39,6 +39,14 @@ public class SubEventController implements SubEventControllerInterface {
         return true;
     }
 
+    public boolean removeAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
+        user.unsubscribeToSubEvent(subEvent);
+        subEvent.removeAttendeeOnSubEvent(user);
+        subEventDAO.update(subEvent);
+        userDAO.update((User) user);
+        return true;
+    }
+
     public boolean editSubEventName(SubEventInterface subEvent, String newName) {
         subEvent.setName(newName);
         subEventDAO.update(subEvent);

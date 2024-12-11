@@ -71,6 +71,10 @@ public class User implements UserInterface {
         this.subEventAttendeeOn.add((SubEvent) subEvent);
     }
 
+    public void unsubscribeToSubEvent(SubEventInterface subEvent) {
+        this.subEventAttendeeOn.remove((SubEvent) subEvent);
+    }
+
     public void unsubscribeToEvent(EventInterface event) {
         this.attendeeOn.remove((Event) event);
     }

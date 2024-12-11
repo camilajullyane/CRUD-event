@@ -18,4 +18,6 @@ public interface SubEventInterface {
     void setParentEvent(Event parentEvent);
     void addAttendeeOnSubEvent(UserInterface user);
     List<UserInterface> getSubEventAttendeesList();
+    void removeAttendeeOnSubEvent(UserInterface user);
+    boolean isPrivateSubEvent();
 }

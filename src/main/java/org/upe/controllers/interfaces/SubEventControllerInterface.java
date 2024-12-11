@@ -13,6 +13,7 @@ public interface SubEventControllerInterface {
     boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
     boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
+    boolean removeAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
 
     SubEventInterface getSubEventByID(UUID id);
     boolean deleteSubEvent(UUID id);

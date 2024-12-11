@@ -23,6 +23,7 @@ public class SubEvent implements SubEventInterface {
     private String description;
     private LocalDate beginDate;
     private LocalDate endDate;
+    private boolean privateSubEvent;
     @ManyToMany(mappedBy = "subEventAttendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> subEventAttendeesList = new ArrayList<>();
     @ManyToOne
@@ -45,6 +46,10 @@ public class SubEvent implements SubEventInterface {
 
     public void addAttendeeOnSubEvent(UserInterface user) {
         this.subEventAttendeesList.add((User) user);
+    }
+
+    public void removeAttendeeOnSubEvent(UserInterface user) {
+        this.subEventAttendeesList.remove((User) user);
     }
 
     public SubEvent() {}
