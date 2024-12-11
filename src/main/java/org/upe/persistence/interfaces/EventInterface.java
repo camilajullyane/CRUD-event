@@ -16,6 +16,8 @@ public interface EventInterface {
     List<SubEventInterface> getSubEvents();
     List<ArticleInterface> getArticles();
     String getLocal();
+    LocalDate getBeginDate();
+    LocalDate getEndDate();
     void setLocal(String local);
     void setOrganization(String organization);
     void setDescription(String description);
@@ -24,4 +26,5 @@ public interface EventInterface {
     void setEndDate(LocalDate newEndDate);
     void addAttendeeOnEvent(UserInterface user);
     void removeAttendeeOnEvent(UserInterface user);
+    boolean isPrivateEvent();
 }

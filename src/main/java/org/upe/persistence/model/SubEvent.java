@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,19 +20,36 @@ public class SubEvent implements SubEventInterface {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    private String speakers;
     private String description;
-    private LocalDate date;
+    private LocalDate beginDate;
+    private LocalDate endDate;
+    private boolean privateSubEvent;
+    @ManyToMany(mappedBy = "subEventAttendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<User> subEventAttendeesList = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
-    public SubEvent(String name, String speakers, String description, LocalDate date, EventInterface parentEvent) {
+
+    public SubEvent(String name,String description, LocalDate beginDate,LocalDate endDate, EventInterface parentEvent) {
         this.name = name;
-        this.speakers = speakers;
         this.description = description;
-        this.date = date;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
         this.parentEvent = (Event) parentEvent;
+    }
+
+
+    public List<UserInterface> getSubEventAttendeesList() {
+        return new ArrayList<>(subEventAttendeesList);
+    }
+
+    public void addAttendeeOnSubEvent(UserInterface user) {
+        this.subEventAttendeesList.add((User) user);
+    }
+
+    public void removeAttendeeOnSubEvent(UserInterface user) {
+        this.subEventAttendeesList.remove((User) user);
     }
 
     public SubEvent() {}
@@ -37,10 +57,10 @@ public class SubEvent implements SubEventInterface {
     // Implementação do padrão Builder
     public static class Builder {
         private String name;
-        private String speakers;
         private String description;
-        private LocalDate date;
+        private LocalDate beginDate;
         private EventInterface parentEvent;
+        private  LocalDate endDate;
 
         public Builder() {}
 
@@ -49,18 +69,18 @@ public class SubEvent implements SubEventInterface {
             return this;
         }
 
-        public Builder withSpeakers(String speakers) {
-            this.speakers = speakers;
-            return this;
-        }
-
         public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder withDate(LocalDate date) {
-            this.date = date;
+        public Builder withBeginDate(LocalDate date) {
+            this.beginDate = date;
+            return this;
+        }
+
+        public Builder withEndDate(LocalDate date) {
+            this.endDate = date;
             return this;
         }
 
@@ -70,7 +90,7 @@ public class SubEvent implements SubEventInterface {
         }
 
         public SubEvent build() {
-            return new SubEvent(name, speakers, description, date, parentEvent);
+            return new SubEvent(name, description, beginDate, endDate,parentEvent);
         }
     }
 }

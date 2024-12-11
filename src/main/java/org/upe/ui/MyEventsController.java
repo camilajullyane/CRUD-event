@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +12,7 @@ import javafx.scene.layout.*;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class MyEventsController implements Initializable {
     private final FacadeInterface facade = new Facade();
+    private final UserInterface currentUser = UserSession.getInstance().getCurrentUser();
 
     @FXML
     Button configButton;
@@ -57,94 +60,96 @@ public class MyEventsController implements Initializable {
             mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
-                VBox eventContainer = new VBox();
-                eventContainer.getStyleClass().add("container");
+                if(!event.isPrivateEvent()) {
+                    VBox eventContainer = new VBox();
+                    eventContainer.getStyleClass().add("container");
 
-                VBox.setMargin(eventContainer, new Insets(15));
+                    VBox.setMargin(eventContainer, new Insets(15));
 
-                Label title = new Label(event.getName());
-                title.getStyleClass().add("title");
+                    Label title = new Label(event.getName());
+                    title.getStyleClass().add("title");
 
-                Label description = new Label(event.getDescription());
-                description.getStyleClass().add("custom-label");
-
-
-                Label dateLabel = new Label("Data");
-                dateLabel.getStyleClass().add("caption");
-
-                Label locationLabel = new Label("Local");
-                locationLabel.getStyleClass().add("caption");
+                    Label description = new Label(event.getDescription());
+                    description.getStyleClass().add("custom-label");
 
 
-                Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add("subcaption");
+                    Label dateLabel = new Label("Data");
+                    dateLabel.getStyleClass().add("caption");
+
+                    Label locationLabel = new Label("Local");
+                    locationLabel.getStyleClass().add("caption");
 
 
-                Label ownerLabel = new Label("Dono do Evento");
-                ownerLabel.getStyleClass().add("caption");
-
-                Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add("subcaption");
+                    Label locationValue = new Label(event.getLocal());
+                    locationValue.getStyleClass().add("subcaption");
 
 
-                Button createSubEventButton = new Button("Criar SubEvento");
-                createSubEventButton.getStyleClass().add("custom-button");
-                createSubEventButton.setOnAction(e -> {
-                    try {
-                        handleCreateSubEvent(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
+                    Label ownerLabel = new Label("Dono do Evento");
+                    ownerLabel.getStyleClass().add("caption");
 
-                Button showAllMySubEventsButton = new Button("Ver SubEventos");
-                showAllMySubEventsButton.getStyleClass().add("custom-button");
-                showAllMySubEventsButton.setOnAction(e -> {
-                    try {
-                        handleShowSubEvents(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-
-                Button editEventButton = new Button("Editar Evento");
-                editEventButton.getStyleClass().add("custom-button");
-                editEventButton.setOnAction(e -> {
-                    try {
-                        handleEditButton(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-
-                // Botão de apagar evento
-//                Button cancelButton = new Button("Apagar evento");
-//                cancelButton.setStyle("-fx-background-color: transparent;  " +
-//                        "-fx-font-size: 12px;" +
-//                        "-fx-text-fill: #bbbbbb;" +
-//                        "-fx-underline: true;" +
-//                        "-fx-translate-x: 220;" +
-//                        "-fx-translate-y: -230;");
-//                cancelButton.setTextFill(color);
-//                cancelButton.setAlignment(Pos.CENTER_LEFT);
-
-                VBox descriptionBox = new VBox(5, title, description);
-                VBox locationBox = new VBox(5, locationLabel, locationValue);
-                VBox ownerBox = new VBox(5, ownerLabel, ownerValue);
+                    Label ownerValue = new Label(event.getOrganization());
+                    ownerValue.getStyleClass().add("subcaption");
 
 
-                HBox infoBox = new HBox(50, locationBox, ownerBox);
-                HBox bottomBox = new HBox(50, createSubEventButton, showAllMySubEventsButton, editEventButton);
-                infoBox.setAlignment(Pos.CENTER_LEFT);
-                bottomBox.setAlignment(Pos.CENTER);
-                VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
+                    Button createSubEventButton = new Button("Criar SubEvento");
+                    createSubEventButton.getStyleClass().add("custom-button");
+                    createSubEventButton.setOnAction(e -> {
+                        try {
+                            handleCreateSubEvent(event);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+
+                    Button showAllMySubEventsButton = new Button("Ver SubEventos");
+                    showAllMySubEventsButton.getStyleClass().add("custom-button");
+                    showAllMySubEventsButton.setOnAction(e -> {
+                        try {
+                            handleShowSubEvents(event);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+
+                    Button editEventButton = new Button("Editar Evento");
+                    editEventButton.getStyleClass().add("custom-button");
+                    editEventButton.setOnAction(e -> {
+                        try {
+                            handleEditButton(event);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+
+                    Button cancelButton = new Button("Cancelar Evento");
+                    cancelButton.getStyleClass().add("custom-button");
+                    cancelButton.setOnAction(e -> {
+                        try {
+                            handleCancelButton(event);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+
+                    VBox descriptionBox = new VBox(5, title, description);
+                    VBox locationBox = new VBox(5, locationLabel, locationValue);
+                    VBox ownerBox = new VBox(5, ownerLabel, ownerValue);
+
+
+                    HBox infoBox = new HBox(50, locationBox, ownerBox);
+                    HBox bottomBox = new HBox(50, createSubEventButton, showAllMySubEventsButton, editEventButton, cancelButton);
+                    infoBox.setAlignment(Pos.CENTER_LEFT);
+                    bottomBox.setAlignment(Pos.CENTER);
+                    VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
 
 
 
 
-                eventContainer.getChildren().addAll(containerBox);
-                mainContainer.getChildren().add(eventContainer);
-                mainContainer.setAlignment(Pos.CENTER);
+                    eventContainer.getChildren().addAll(containerBox);
+                    mainContainer.getChildren().add(eventContainer);
+                    mainContainer.setAlignment(Pos.CENTER);
+                }
+
             });
         }
 
@@ -208,6 +213,17 @@ public class MyEventsController implements Initializable {
     private void handleEditButton(EventInterface event) throws IOException {
         SceneLoader.setEventData(event);
         SceneLoader.loadScene("/org/upe/ui/telaEditarEvento.fxml", "Editar Evento", myEventsPage);
+    }
+
+    private void handleCancelButton(EventInterface event) throws IOException {
+        System.out.println("entrou");
+        facade.deleteEvent(event, currentUser);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cancelar Evento");
+        alert.setHeaderText("Evento cancelado com sucesso");
+        alert.showAndWait();
+        showMyEvents();
+
     }
 
 }

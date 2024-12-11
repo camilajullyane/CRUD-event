@@ -27,13 +27,14 @@ public interface FacadeInterface {
     boolean deleteEvent(EventInterface event, UserInterface user);
 
     // SubEventController methods
-    SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker);
+    SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date,LocalDate endDate, String description);
     boolean editSubEventName(SubEventInterface subEvent, String newName);
     boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
-    boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker);
     SubEventInterface getSubEventByID(UUID id);
+    boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
     boolean deleteSubEvent(UUID id);
+    void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent);
 
     // UserController methods
     boolean changeEmail(String userEmail, String newEmail);

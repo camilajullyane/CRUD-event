@@ -77,8 +77,12 @@ public class Facade implements FacadeInterface {
     }
 
     // SubEventController methods
-    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker) {
-        return subEventController.createSubEvent(parentEvent, name, date, description, speaker);
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate, LocalDate endDate, String description) {
+        return subEventController.createSubEvent(parentEvent, name, beginDate,endDate, description);
+    }
+
+    public boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
+        return subEventController.addAttendeeSubEventOnList(user, subEvent);
     }
 
     public boolean editSubEventName(SubEventInterface subEvent, String newName) {
@@ -93,9 +97,6 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventDescription(subEvent, newDescription);
     }
 
-    public boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker) {
-        return subEventController.editSubEventSpeaker(subEvent, newSpeaker);
-    }
 
     public SubEventInterface getSubEventByID(UUID id) {
         return subEventController.getSubEventByID(id);
@@ -105,8 +106,11 @@ public class Facade implements FacadeInterface {
         return subEventController.deleteSubEvent(id);
     }
 
-    // UserController methods
+    public void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent) {
+        subEventController.removeAttendeeSubEventOnList(user,subEvent);
+    }
 
+    // UserController methods
     public UserInterface getUserByCPF(String cpf) {
         return userController.getUserByCPF(cpf);
     }

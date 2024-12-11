@@ -9,7 +9,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.upe.controllers.SubEventController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
@@ -64,7 +63,7 @@ public class SubEventUIController implements Initializable {
             Label date = new Label("Data");
             date.getStyleClass().add("caption");
 
-            Label dateValue = new Label(subEvent.getDate().toString());
+            Label dateValue = new Label(subEvent.getBeginDate().toString());
             dateValue.getStyleClass().add("subcaption");
 
             Label location = new Label("Local");
@@ -73,14 +72,12 @@ public class SubEventUIController implements Initializable {
             Label owner = new Label("Palestrantes do evento");
             owner.getStyleClass().add("caption");
 
-            Label ownerValue = new Label(subEvent.getSpeakers());
-            ownerValue.getStyleClass().add("subcaption");
 
             VBox descriptionBox = new VBox(5, title, description);
             VBox dateBox = new VBox(5, date, dateValue);
-            VBox ownerBox = new VBox(5, owner, ownerValue);
 
-            HBox infoBox = new HBox(50, dateBox, ownerBox);
+
+            HBox infoBox = new HBox(50, dateBox);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 
             VBox containerBox = new VBox(45,descriptionBox, infoBox);

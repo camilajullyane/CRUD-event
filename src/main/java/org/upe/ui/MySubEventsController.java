@@ -18,7 +18,6 @@ import org.upe.utils.SceneLoader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class MySubEventsController {
     private final FacadeInterface facade = new Facade();
@@ -75,7 +74,7 @@ public class MySubEventsController {
                 Label dateLabel = new Label("Data");
                 dateLabel.getStyleClass().add("caption");
 
-                Label dateValue = new Label(subEvent.getDate().toString());
+                Label dateValue = new Label(subEvent.getBeginDate().toString());
                 dateValue.getStyleClass().add("subcaption");
 
 
@@ -85,8 +84,6 @@ public class MySubEventsController {
                 Label speakersLabel = new Label("Palestrantes do Evento");
                 speakersLabel.getStyleClass().add("caption");
 
-                Label speakersValue = new Label(subEvent.getSpeakers());
-                speakersValue.getStyleClass().add("subcaption");
 
                 Button editSubEventButton = new Button("Editar SubEvento");
                 editSubEventButton.getStyleClass().add("custom-button");
@@ -100,10 +97,9 @@ public class MySubEventsController {
 
                 VBox descriptionBox = new VBox(5, titleLabel, descriptionLabel);
                 VBox dateBox = new VBox(5, dateLabel, dateValue);
-                VBox ownerBox = new VBox(5, speakersLabel, speakersValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, ownerBox);
+                HBox infoBox = new HBox(50, dateBox);
                 HBox bottomBox = new HBox(50, editSubEventButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.PasswordUtil;
 
@@ -27,6 +28,15 @@ public class User implements UserInterface {
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> attendeeOn = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "sub_event_subscriptions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "sub_event_id")
+    )
+    private List<SubEvent> subEventAttendeeOn = new ArrayList<>();
+
     @OneToMany(mappedBy = "owner")
     private List<Event> ownerOf = new ArrayList<>();
     @OneToMany(mappedBy = "user")
@@ -38,7 +48,7 @@ public class User implements UserInterface {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
-        this.password = PasswordUtil.encodePassword(password);
+        this.password = password;
     }
 
     public List<EventInterface> getAttendeeOn() {
@@ -55,6 +65,18 @@ public class User implements UserInterface {
 
     public void subscribeToEvent(EventInterface event) {
         this.attendeeOn.add((Event) event);
+    }
+
+    public void subscribeToSubEvent(SubEventInterface subEvent) {
+        this.subEventAttendeeOn.add((SubEvent) subEvent);
+    }
+
+    public void unsubscribeToSubEvent(SubEventInterface subEvent) {
+        this.subEventAttendeeOn.remove((SubEvent) subEvent);
+    }
+
+    public void unsubscribeToEvent(EventInterface event) {
+        this.attendeeOn.remove((Event) event);
     }
 
     public void addMyEventAsOwner(EventInterface event) {
