@@ -3,19 +3,19 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
-import org.upe.controllers.EventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class EditEventController {
-
-    EventController eventController = new EventController();
-    EventInterface currentEvent = SceneLoader.getEventData();
+    private final FacadeInterface facade = new Facade();
+    private final EventInterface currentEvent = SceneLoader.getEventData();
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    private static final String EVENT_EDITED_TITLE = "Evento editado";
 
     @FXML
     private StackPane editEventPage;
@@ -36,10 +36,13 @@ public class EditEventController {
     private TextField newEventDate;
 
     @FXML
+    private TextField newEventHour;
+
+    @FXML
     private void handleNameButton() {
-        eventController.editEventName(currentEvent.getId(), newEventName.getText());
+        facade.editEventName(currentEvent, newEventName.getText());
         newEventName.setText("");
-        alert.setTitle(EVENT_EDITED_TITLE);
+        alert.setTitle("Evento editado");
         alert.setHeaderText(null);
         alert.setContentText("Nome editado com sucesso!");
         alert.showAndWait();
@@ -48,9 +51,9 @@ public class EditEventController {
 
     @FXML
     private void handleLocalButton() {
-        eventController.editEventLocal(currentEvent.getId(), newEventLocal.getText());
+        facade.editEventLocal(currentEvent, newEventLocal.getText());
         newEventLocal.setText("");
-        alert.setTitle(EVENT_EDITED_TITLE);
+        alert.setTitle("Evento editado");
         alert.setHeaderText(null);
         alert.setContentText("Local editado com sucesso!");
         alert.showAndWait();
@@ -58,9 +61,9 @@ public class EditEventController {
 
     @FXML
     private void handleDescriptionButton() {
-        eventController.editEventDescription(currentEvent.getId(), newEventDescription.getText());
+        facade.editEventDescription(currentEvent, newEventDescription.getText());
         newEventDescription.setText("");
-        alert.setTitle(EVENT_EDITED_TITLE);
+        alert.setTitle("Evento editado");
         alert.setHeaderText(null);
         alert.setContentText("Descrição editada com sucesso!");
         alert.showAndWait();
@@ -68,23 +71,14 @@ public class EditEventController {
 
     @FXML
     private void handleOrganizationButton() {
-        eventController.editEventOrganization(currentEvent.getId(), newEventOrganization.getText());
+        facade.editEventOrganization(currentEvent, newEventOrganization.getText());
         newEventOrganization.setText("");
-        alert.setTitle(EVENT_EDITED_TITLE);
+        alert.setTitle("Evento editado");
         alert.setHeaderText(null);
         alert.setContentText("Organização editada com sucesso!");
         alert.showAndWait();
     }
 
-    @FXML
-    private void handleDateButton() {
-        eventController.editEventDate(currentEvent.getId(), newEventDate.getText());
-        newEventDate.setText("");
-        alert.setTitle(EVENT_EDITED_TITLE);
-        alert.setHeaderText(null);
-        alert.setContentText("Data editada com sucesso!");
-        alert.showAndWait();
-    }
 
     @FXML
     private void moveToSettingsScreen () throws IOException {

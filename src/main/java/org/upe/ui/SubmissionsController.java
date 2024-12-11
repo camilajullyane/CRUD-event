@@ -9,17 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.upe.controllers.EventController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
-import org.upe.utils.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,13 +25,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SubmissionsController implements Initializable {
-    private static final String FONT_STYLE_BOLD_ITALIC = "System Bold Italic";
-    private static final String FONT_SYSTEM_ITALIC = "System Italic";
-    private static final Paint color = Color.web("#cdc7c7");
-    private static final String CAPTION_STYLE_CLASS = "caption";
-    private static final String SUBCAPTION_STYLE_CLASS = "subcaption";
-
-    EventController eventController = new EventController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     public Button settingsButton;
@@ -104,7 +95,7 @@ public class SubmissionsController implements Initializable {
     @FXML
     private void showEvents() {
 
-        List<EventInterface> events = eventController.getAllEvents();
+        List<EventInterface> events = facade.getAllEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
@@ -118,64 +109,59 @@ public class SubmissionsController implements Initializable {
 
             VBox.setMargin(eventContainer, new Insets(30));
 
-            Label label = new Label("Você não submeteu nenhum artigo");
+            Label label = new Label("Ainda não há eventos disponíveis");
             label.getStyleClass().add("custom-label");
 
-            Button button = new Button("Ver eventos disponíveis");
-            button.getStyleClass().add("custom-button");
-            VBox.setMargin(button, new Insets(50, 0, 0, 0));
 
-            eventContainer.getChildren().addAll(label, button);
+            eventContainer.getChildren().addAll(label);
             mainContainer.getChildren().add(eventContainer);
             mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
-                VBox eventContainer = new VBox();
-                eventContainer.getStyleClass().add("container");
+                if(!event.isPrivateEvent()) {
+                    VBox eventContainer = new VBox();
+                    eventContainer.getStyleClass().add("container");
 
-                VBox.setMargin(eventContainer, new Insets(15));
+                    VBox.setMargin(eventContainer, new Insets(15));
 
-                Label title = new Label(event.getName());
-                title.getStyleClass().add("title");
+                    Label title = new Label(event.getName());
+                    title.getStyleClass().add("title");
 
-                Label description = new Label(event.getDescription());
-                description.getStyleClass().add("custom-label");
+                    Label description = new Label(event.getDescription());
+                    description.getStyleClass().add("custom-label");
 
-                Label date = new Label("Data");
-                date.getStyleClass().add(CAPTION_STYLE_CLASS);
+                    Label date = new Label("Data");
+                    date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate());
-                dateValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
+                    Label location = new Label("Local");
+                    location.getStyleClass().add("caption");
 
-                Label location = new Label("Local");
-                location.getStyleClass().add(CAPTION_STYLE_CLASS);
+                    Label locationValue = new Label(event.getLocal());
+                    locationValue.getStyleClass().add("subcaption");
 
-                Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
+                    Label owner = new Label("Dono do Evento");
+                    owner.getStyleClass().add("caption");
 
-                Label owner = new Label("Dono do Evento");
-                owner.getStyleClass().add(CAPTION_STYLE_CLASS);
+                    Label ownerValue = new Label(event.getOrganization());
+                    ownerValue.getStyleClass().add("subcaption");
 
-                Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
+                    Button subscriptionButton = new Button("Submeter Artigo");
+                    subscriptionButton.getStyleClass().add("custom-button");
 
-                Button cancelButton = new Button("Cancelar Inscrição");
-                cancelButton.getStyleClass().add("cancel-button");
-
-                VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, date, dateValue);
-                VBox locationBox = new VBox(5, location, locationValue);
-                VBox ownerBox = new VBox(5, owner, ownerValue);
+                    VBox descriptionBox = new VBox(5, title, description);
+                    VBox locationBox = new VBox(5, location, locationValue);
+                    VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
-                HBox headerBox = new HBox(20, descriptionBox, cancelButton);
-                infoBox.setAlignment(Pos.CENTER_LEFT);
-                VBox containerBox = new VBox(45, headerBox, infoBox);
+                    HBox infoBox = new HBox(50, locationBox, ownerBox);
+                    infoBox.setAlignment(Pos.CENTER_LEFT);
+                    VBox containerBox = new VBox(45, descriptionBox, infoBox, subscriptionButton);
+                    containerBox.setAlignment(Pos.CENTER);
 
-                eventContainer.getChildren().addAll(containerBox);
-                mainContainer.getChildren().add(eventContainer);
-                mainContainer.setAlignment(Pos.CENTER);
+                    eventContainer.getChildren().addAll(containerBox);
+                    mainContainer.getChildren().add(eventContainer);
+                    mainContainer.setAlignment(Pos.CENTER);
+                }
             });
         }
 

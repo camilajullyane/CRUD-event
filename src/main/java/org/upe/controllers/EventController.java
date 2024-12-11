@@ -1,89 +1,93 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.EventControllerInterface;
+import org.upe.controllers.interfaces.UserControllerInterface;
+import org.upe.persistence.DAO.EventDAO;
+import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.service.EventService;
-import org.upe.persistence.service.UserService;
+import org.upe.persistence.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
-public class EventController {
-    private static final UserService userService = new UserService();
-    private static final EventService eventService = new EventService();
+public class EventController implements EventControllerInterface {
+    private static final EventDAO eventDAO = new EventDAO();
+    private static final UserDAO userDAO = new UserDAO();
 
-    public EventInterface createEvent(UserInterface user, String name, String description, String date, String local,
+
+    public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
                                       String organization) {
-        return eventService.createEvent(user.getCPF(), name, date, local, organization, description);
+        EventInterface event = eventDAO.create(name, description, beginDate, endDate, local, organization, user);
+        user.addMyEventAsOwner(event);
+        return event;
     }
 
     public List<EventInterface> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
+        List<EventInterface> events = eventDAO.getAll();
 
         return new ArrayList<>(events);
-    }
-
-    public List<EventInterface> getEventsIn(String ownerCPF) {
-        List<Event> events = eventService.getEventsIn(ownerCPF);
-
-        return new ArrayList<>(events);
-    }
-
-    public List<EventInterface> getAllEventsByUser(String ownerCPF) {
-        List<Event> eventByUser = eventService.getAllEventsByUser(ownerCPF);
-
-        return new ArrayList<>(eventByUser);
     }
 
     public boolean addAttendeeOnList(UserInterface user, EventInterface event) {
-        return eventService.addAttendeeOnList(user, event.getId()) && userService.addAttendeeOnEvent(user, event.getId());
+        if (event.getOwner().getId() == user.getId()) {
+            return false;
+        }
+
+        Optional<UserInterface> attendee = event.getAttendeesList()
+                .stream()
+                .filter(u -> u.getCpf().equals(user.getCpf()))
+                .findFirst();
+
+        if(attendee.isPresent()) {
+            return false;
+        }
+
+        user.subscribeToEvent(event);
+        event.addAttendeeOnEvent(user);
+        eventDAO.update(event);
+        userDAO.update((User) user);
+        return true;
     }
+
 
     public boolean deleteAttendeeOnList(UserInterface user, EventInterface event) {
-        for (String attendeeCPF : event.getAttendeesList()) {
-            if (attendeeCPF.equals(user.getCPF())) {
-                eventService.deleteAttendeeOnList(user.getCPF(), event.getId());
-                userService.deleteAttendeeEvent(user.getCPF(), event.getId());
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean editEventName(String id, String newName) {
-        eventService.updateEventName(id, newName);
-
+        event.removeAttendeeOnEvent(user);
+        user.unsubscribeToEvent(event);
+        eventDAO.update(event);
+        userDAO.update((User) user);
         return true;
     }
 
-    public boolean editEventLocal(String id, String newLocal) {
-        eventService.updateEventLocal(id, newLocal);
-
+    public boolean updateName(EventInterface event, String newName) {
+        event.setName(newName);
+        eventDAO.update(event);
         return true;
     }
 
-    public boolean editEventDescription(String id, String newDescription) {
-        eventService.updateEventDescription(id, newDescription);
-
+    public boolean updateLocal(EventInterface event, String newLocal) {
+        event.setLocal(newLocal);
+        eventDAO.update(event);
         return true;
     }
 
-    public boolean editEventOrganization(String id, String newOrganization) {
-        eventService.updateEventOrganization(id, newOrganization);
+    public boolean updateDescription(EventInterface event, String newDescription) {
+        event.setDescription(newDescription);
+        eventDAO.update(event);
         return true;
     }
 
-    public boolean editEventDate(String id, String newDate) {
-        eventService.updateEventDate(id, newDate);
-
+    public boolean updateOrganization(EventInterface event, String newOrganization) {
+        event.setOrganization(newOrganization);
         return true;
     }
 
-    public boolean deleteEvent(String id, UserInterface user) {
-        eventService.deleteEvent(id);
-        userService.deleteOwnerOf(user.getCPF(), id);
-        userService.deleteAllAttendeesFromEvent(id);
+    public boolean deleteEvent(EventInterface event, UserInterface user) {
+        eventDAO.delete(event.getId());
         return true;
+    }
+
+    public EventInterface getEventById(UUID id) {
+        return eventDAO.findById(id);
     }
 }

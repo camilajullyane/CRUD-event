@@ -1,68 +1,77 @@
 package org.upe.controllers;
 
+import org.upe.controllers.interfaces.SubEventControllerInterface;
+import org.upe.persistence.DAO.SubEventDAO;
+import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.repository.SubEventUtility;
-import java.util.List;
-import org.upe.persistence.service.EventService;
-import org.upe.persistence.service.SubEventService;
+import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.model.User;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Optional;
+import java.util.UUID;
 
-public class SubEventController {
-    private static final EventService eventService = new EventService();
-    private static final SubEventService subEventService = new SubEventService();
+public class SubEventController implements SubEventControllerInterface {
+    public static final SubEventDAO subEventDAO = new SubEventDAO();
+    public static final UserDAO userDAO = new UserDAO();
 
-    public SubEventInterface createSubEvent(String parentEventID, String name, String local, String hour, String description, String speaker) {
-
-        return (SubEventInterface) subEventService.createSubEvent(parentEventID, name, hour, local,
-                eventService.getEventById(parentEventID).getOrganization(),description, speaker);
+    // falta regras de negocio
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate,LocalDate endDate, String description) {
+        return subEventDAO.create(name, description, beginDate, endDate,parentEvent);
     }
 
-    public List<SubEventInterface> showAllSubEvents() {
-        List<SubEvent> subEvents = subEventService.getAllSubEvents();
-        return new ArrayList<>(subEvents);
-    }
+    public boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
 
+        Optional<UserInterface> attendee = subEvent.getSubEventAttendeesList()
+                .stream()
+                .filter(u -> u.getCpf().equals(user.getCpf()))
+                .findFirst();
 
-    public List<SubEvent> getMySubEventsByParentEventID(String parentEventID, String userCPF) {
-        List<SubEvent> subEvents = subEventService.getMySubEventsByParentEventID(parentEventID,userCPF);
-        return new ArrayList<>(subEvents);
-    }
+        if(attendee.isPresent()) {
+            return false;
+        }
 
-    public ArrayList<SubEventInterface> getAllSubEventsByEvent(String parentID) {
-        List<SubEvent> subEventsByEvent = subEventService.getAllSubEventsByEvent(parentID);
-
-        return new ArrayList<>(subEventsByEvent);
-    }
-
-    public boolean editSubEventName(String id, String newName) {
-        subEventService.updateSubEventName(id, newName);
+        user.subscribeToSubEvent(subEvent);
+        subEvent.addAttendeeOnSubEvent(user);
+        subEventDAO.update(subEvent);
+        userDAO.update((User) user);
         return true;
     }
 
-    public boolean editSubEventDate(String id, String newDate) {
-        subEventService.updateSubEventDate(id, newDate);
+    public boolean removeAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
+        user.unsubscribeToSubEvent(subEvent);
+        subEvent.removeAttendeeOnSubEvent(user);
+        subEventDAO.update(subEvent);
+        userDAO.update((User) user);
         return true;
     }
 
-    static boolean editSubEventLocal(String id, String newLocal) {
-        subEventService.updateSubEventLocal(id, newLocal);
+    public boolean editSubEventName(SubEventInterface subEvent, String newName) {
+        subEvent.setName(newName);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    static boolean editSubEventDescription(String id, String newDescription) {
-        subEventService.updateSubEventDescription(id, newDescription);
+    public boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate) {
+        subEvent.setBeginDate(newDate);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    static boolean editSubEventSpeaker(String id, String newSpeaker) {
-        subEventService.updateSubEventSpeaker(id, newSpeaker);
+    public boolean editSubEventDescription(SubEventInterface subEvent, String newDescription) {
+        subEvent.setDescription(newDescription);
+        subEventDAO.update(subEvent);
         return true;
     }
 
-    static boolean deleteSubEvent(String id) {
-        subEventService.deleteSubEvent(id);
+
+    public boolean deleteSubEvent(UUID id) {
+        subEventDAO.delete(id);
         return true;
+    }
+
+    public SubEventInterface getSubEventByID(UUID id) {
+        return subEventDAO.getById(id);
     }
 }

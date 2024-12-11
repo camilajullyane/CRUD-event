@@ -9,8 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import org.upe.controllers.EventController;
-import org.upe.controllers.UserController;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
@@ -22,11 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
-    UserController userController = new UserController();
-    EventController eventController = new EventController();
-    private static final String CAPTION_STYLE_CLASS = "caption";
-    private static final String SUBCAPTION_STYLE_CLASS = "subcaption";
-    private static final String CUSTOMBUTTON_STYLE_CLASS = "custom-button";
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     Button settingsButton;
@@ -75,7 +71,7 @@ public class ScheduleController implements Initializable {
 
     private void showEvents() {
 
-        List<EventInterface> events = eventController.getAllEvents();
+        List<EventInterface> events = facade.getAllEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
         scrollPane.getStyleClass().add("custom-scroll-pane");
@@ -89,77 +85,73 @@ public class ScheduleController implements Initializable {
 
             VBox.setMargin(eventContainer, new Insets(30));
 
-            Label label = new Label("Não há eventos disponíveis no momento");
+            Label label = new Label("Ainda não há eventos disponíveis");
             label.getStyleClass().add("custom-label");
 
-            Button button = new Button("Ver eventos disponíveis");
-            button.getStyleClass().add(CUSTOMBUTTON_STYLE_CLASS);
-            VBox.setMargin(button, new Insets(50, 0, 0, 0));
 
-            eventContainer.getChildren().addAll(label, button);
+            eventContainer.getChildren().addAll(label);
             mainContainer.getChildren().add(eventContainer);
             mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
-                VBox eventContainer = new VBox();
-                eventContainer.getStyleClass().add("container");
+                if(!event.isPrivateEvent()) {
+                    VBox eventContainer = new VBox();
+                    eventContainer.getStyleClass().add("container");
 
-                VBox.setMargin(eventContainer, new Insets(15));
+                    VBox.setMargin(eventContainer, new Insets(15));
 
-                Label title = new Label(event.getName());
-                title.getStyleClass().add("title");
+                    Label title = new Label(event.getName());
+                    title.getStyleClass().add("title");
 
-                Label description = new Label(event.getDescription());
-                description.getStyleClass().add("custom-label");
+                    Label description = new Label(event.getDescription());
+                    description.getStyleClass().add("custom-label");
 
-                Label date = new Label("Data");
-                date.getStyleClass().add(CAPTION_STYLE_CLASS);
+                    Label date = new Label("Data");
+                    date.getStyleClass().add("caption");
 
-                Label dateValue = new Label(event.getDate());
-                dateValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
+                    Label location = new Label("Local");
+                    location.getStyleClass().add("caption");
 
-                Label location = new Label("Local");
-                location.getStyleClass().add(CAPTION_STYLE_CLASS);
+                    Label locationValue = new Label(event.getLocal());
+                    locationValue.getStyleClass().add("subcaption");
 
-                Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
+                    Label owner = new Label("Dono do Evento");
+                    owner.getStyleClass().add("caption");
 
-                Label owner = new Label("Dono do Evento");
-                owner.getStyleClass().add(CAPTION_STYLE_CLASS);
+                    Label ownerValue = new Label(event.getOrganization());
+                    ownerValue.getStyleClass().add("subcaption");
 
-                Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add(SUBCAPTION_STYLE_CLASS);
+                    Button signUpButton = new Button("Realizar Inscrição");
+                    signUpButton.getStyleClass().add("custom-button");
+                    signUpButton.setOnAction(e -> signUpEvent(event));
 
-                Button signUpButton = new Button("Realizar Inscrição");
-                signUpButton.getStyleClass().add(CUSTOMBUTTON_STYLE_CLASS);
-                signUpButton.setOnAction(e -> signUpEvent(event));
+                    Button seeSubEvents = new Button("Ver SubEventos");
+                    seeSubEvents.getStyleClass().add("custom-button");
+                    seeSubEvents.setOnAction(e -> {
+                        try {
+                            showSubEvents(event);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
 
-                Button seeSubEvents = new Button("Ver SubEventos");
-                seeSubEvents.getStyleClass().add(CUSTOMBUTTON_STYLE_CLASS);
-                        seeSubEvents.setOnAction(e -> {
-                    try {
-                        showSubEvents(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-
-                VBox descriptionBox = new VBox(5, title, description);
-                VBox dateBox = new VBox(5, date, dateValue);
-                VBox locationBox = new VBox(5, location, locationValue);
-                VBox ownerBox = new VBox(5, owner, ownerValue);
+                    VBox descriptionBox = new VBox(5, title, description);
+                    VBox locationBox = new VBox(5, location, locationValue);
+                    VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, locationBox, ownerBox);
-                HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
-                infoBox.setAlignment(Pos.CENTER_LEFT);
-                bottomBox.setAlignment(Pos.CENTER);
-                VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
+                    HBox infoBox = new HBox(50, locationBox, ownerBox);
+                    HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
+                    infoBox.setAlignment(Pos.CENTER_LEFT);
+                    bottomBox.setAlignment(Pos.CENTER);
+                    VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
 
 
-                eventContainer.getChildren().addAll(containerBox);
-                mainContainer.getChildren().add(eventContainer);
-                mainContainer.setAlignment(Pos.CENTER);
+                    eventContainer.getChildren().addAll(containerBox);
+                    mainContainer.getChildren().add(eventContainer);
+                    mainContainer.setAlignment(Pos.CENTER);
+                }
+
             });
         }
 
@@ -172,7 +164,7 @@ public class ScheduleController implements Initializable {
     private void signUpEvent(EventInterface event) {
         UserSession userSession = UserSession.getInstance();
 
-        boolean isAlreadySubscribed = eventController.addAttendeeOnList(userSession.getCurrentUser(), event);
+        boolean isAlreadySubscribed = facade.addAttendeeOnList(userSession.getCurrentUser(), event);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if(!isAlreadySubscribed) {
@@ -185,7 +177,7 @@ public class ScheduleController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Inscrição realizada com sucesso!");
             alert.showAndWait();
-            UserSession.getInstance().setCurrentUser(userController.getUserByCPF(UserSession.getInstance().getCurrentUser().getCPF()));
+            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
         }
     }
 

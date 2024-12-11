@@ -1,110 +1,130 @@
 package org.upe.persistence.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "events")
+@Getter
+@Setter
 public class Event implements EventInterface {
-    protected String ownerCPF;
-    protected String id;
-    protected String name;
-    protected String date;
-    protected String local;
-    protected String organization;
-    protected String description;
-    protected String articleList;
-    protected String attendeesList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+    private String name;
+    private LocalDate beginDate;
+    private LocalDate endDate;
+    private String local;
+    private String organization;
+    private String description;
+    private boolean privateEvent;
+    @ManyToMany(mappedBy = "attendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<User> attendeesList = new ArrayList<>();
+    @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SubEvent> subEvents = new ArrayList<>();
+    @ManyToMany(mappedBy = "submittedIn")
+    private List<Article> articles = new ArrayList<>();
 
-    public Event(String id, String ownerCPF, String name, String date, String local, String organization,
-                 String description, String attendeesList, String articleList) {
-        this.ownerCPF = ownerCPF;
-        this.id = id;
+    // Construtor privado para garantir o uso do Builder
+    private Event(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization , User owner) {
         this.name = name;
-        this.date = date;
+        this.description = description;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.owner = owner;
         this.local = local;
         this.organization = organization;
-        this.description = description;
-        this.articleList = articleList;
-        this.attendeesList = attendeesList;
     }
 
-    public String getId() {
-        return id;
+    // Construtor padrão
+    public Event() {}
+
+    public List<UserInterface> getAttendeesList() {
+        return new ArrayList<>(attendeesList);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public List<SubEventInterface> getSubEvents() {
+        return new ArrayList<>(subEvents);
     }
 
-    public String getName() {
-        return name;
+    public List<ArticleInterface> getArticles() {
+        return new ArrayList<>(articles);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void addAttendeeOnEvent(UserInterface user) {
+        this.attendeesList.add((User) user);
     }
 
-    public String getOwnerCPF() {
-        return this.ownerCPF;
+    public void removeAttendeeOnEvent(UserInterface user) {
+        this.attendeesList.remove((User) user);
+        user.getAttendeeOn().remove(this);
     }
 
-    public String getDate() {
-        return date;
-    }
+    // Builder interno
+    public static class EventBuilder {
+        private String name;
+        private String description;
+        private LocalDate beginDate;
+        private LocalDate endDate;
+        private String local;
+        private String organization;
+        private User owner;
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public String getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String[] getArticleList() {
-        return this.articleList.split("#");
-    }
-
-    public void addArticleList(String articleID) {
-        this.articleList = this.articleList.isEmpty() ? articleID : this.attendeesList + "#" + articleID;
-    }
-
-    public String[] getAttendeesList() {
-        return this.attendeesList.split("#");
-    }
-
-    public void addAttendeesList(String userCPF) {
-        this.attendeesList = this.attendeesList.isEmpty() ? userCPF : this.attendeesList + "#" + userCPF;
-    }
-
-    public void deleteAttendee(String userCPF) {
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < this.getAttendeesList().length; i++) {
-            String cpf = this.getAttendeesList()[i];
-            if (!cpf.equals(userCPF)) {
-                if (!newString.isEmpty()) {
-                    newString.append("#");
-                }
-                newString.append(id);
-            }
+        public EventBuilder withName(String name) {
+            this.name = name;
+            return this;
         }
-        this.attendeesList = newString.toString();
+
+        public EventBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public EventBuilder withBeginDate(LocalDate beginDate) {
+            this.beginDate = beginDate;
+            return this;
+        }
+
+        public EventBuilder withEndDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public EventBuilder withLocal(String local) {
+            this.local = local;
+            return this;
+        }
+
+        public EventBuilder withOrganization(String organization) {
+            this.organization = organization;
+            return this;
+        }
+
+        public EventBuilder withOwner(User owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public Event build() {
+            return new Event(name, description, beginDate, endDate, local, organization, owner);
+        }
+    }
+
+    // Exemplo de uso do Builder
+    public static EventBuilder builder() {
+        return new EventBuilder();
     }
 }

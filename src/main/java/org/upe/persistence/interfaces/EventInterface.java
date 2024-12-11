@@ -1,13 +1,30 @@
 package org.upe.persistence.interfaces;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import org.upe.persistence.interfaces.UserInterface;
+
 public interface EventInterface {
-    String getId();
+    UUID getId();
     String getName();
-    String getDate();
     String getOrganization();
     String getDescription();
-    String[] getAttendeesList();
-    String[] getArticleList();
+    UserInterface getOwner();
+    List<UserInterface> getAttendeesList();
+    List<SubEventInterface> getSubEvents();
+    List<ArticleInterface> getArticles();
     String getLocal();
-    String getOwnerCPF();
+    LocalDate getBeginDate();
+    LocalDate getEndDate();
+    void setLocal(String local);
+    void setOrganization(String organization);
+    void setDescription(String description);
+    void setName(String name);
+    void setBeginDate(LocalDate newBeginDate);
+    void setEndDate(LocalDate newEndDate);
+    void addAttendeeOnEvent(UserInterface user);
+    void removeAttendeeOnEvent(UserInterface user);
+    boolean isPrivateEvent();
 }

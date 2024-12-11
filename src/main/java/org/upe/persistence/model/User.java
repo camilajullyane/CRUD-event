@@ -1,99 +1,119 @@
 package org.upe.persistence.model;
 
+import jakarta.persistence.*;
+import lombok.*;
+import org.upe.persistence.interfaces.ArticleInterface;
+import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
+import org.upe.utils.PasswordUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"cpf", "email"}))
+@Getter @Setter
 public class User implements UserInterface {
-    protected String name;
-    protected String userCPF;
-    protected String password;
-    protected String email;
-    protected String attendeeOn;
-    protected String ownerOf;
-    protected String articleID;
+    @Id @GeneratedValue
+    private long id;
+    private String name;
+    private String cpf;
+    private String email;
+    private String password;
+    @ManyToMany
+    @JoinTable(
+            name = "event_subscriptions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> attendeeOn = new ArrayList<>();
 
-    public User(String name, String email, String userCPF, String password, String attendeeOn, String ownerOf, String articleID) {
+    @ManyToMany
+    @JoinTable(
+            name = "sub_event_subscriptions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "sub_event_id")
+    )
+    private List<SubEvent> subEventAttendeeOn = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner")
+    private List<Event> ownerOf = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Article> articles = new ArrayList<>();
+
+    public User() {}
+
+    public User(String name, String cpf, String email, String password) {
         this.name = name;
-        this.password = password;
+        this.cpf = cpf;
         this.email = email;
-        this.userCPF = userCPF;
-        this.attendeeOn = attendeeOn;
-        this.ownerOf = ownerOf;
-        this.articleID = articleID;
+        this.password = password;
     }
 
-    public String getCPF() {
-        return this.userCPF;
+    public List<EventInterface> getAttendeeOn() {
+        return new ArrayList<>(attendeeOn);
     }
 
-    public String getPassword() {
-        return this.password;
+    public List<EventInterface> getOwnerOf() {
+        return new ArrayList<>(ownerOf);
     }
 
-    public void setCPF(String userCPF) {this.userCPF = userCPF;}
-
-    public String getEmail() {
-        return this.email;
+    public List<ArticleInterface> getArticles() {
+        return new ArrayList<>(articles);
     }
 
-    public void setPassword(String password) {this.password = password;}
-
-    public void setEmail(String email) {this.email = email;}
-
-    public String getName() {
-        return this.name;
+    public void subscribeToEvent(EventInterface event) {
+        this.attendeeOn.add((Event) event);
     }
 
-    public String[] getAttendeeOn() {
-        return this.attendeeOn.split("#");
+    public void subscribeToSubEvent(SubEventInterface subEvent) {
+        this.subEventAttendeeOn.add((SubEvent) subEvent);
     }
 
-    public void addAttendeeOn(String eventID) {
-        this.attendeeOn = this.attendeeOn.isEmpty() ? eventID : this.attendeeOn + "#" + eventID;
+    public void unsubscribeToSubEvent(SubEventInterface subEvent) {
+        this.subEventAttendeeOn.remove((SubEvent) subEvent);
     }
 
-    public void deleteAttendeeOn(String eventID) {
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < this.getAttendeeOn().length; i++) {
-            String id = this.getAttendeeOn()[i];
-            if (!id.equals(eventID)) {
-                if (!newString.isEmpty()) {
-                    newString.append("#");
-                }
-                newString.append(id);
-            }
-            this.attendeeOn = newString.toString();
+    public void unsubscribeToEvent(EventInterface event) {
+        this.attendeeOn.remove((Event) event);
+    }
+
+    public void addMyEventAsOwner(EventInterface event) {
+        this.ownerOf.add((Event) event);
+    }
+
+    // Implementação do padrão Builder
+    public static class Builder {
+        private String name;
+        private String cpf;
+        private String email;
+        private String password;
+
+        public Builder() {}
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
         }
-    }
 
-    public String[] getOwnerOf() {
-
-        return this.ownerOf.split("#");
-    }
-
-    public void addOwnerOf(String eventID) {
-        this.ownerOf = this.ownerOf.isEmpty() ? eventID : this.attendeeOn + "#" + eventID;
-    }
-
-    public void deleteOwnerOf(String eventID) {
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < this.getOwnerOf().length; i++) {
-            String id = this.getOwnerOf()[i];
-            if (!id.equals(eventID)) {
-                if (!newString.isEmpty()) {
-                    newString.append("#");
-                }
-                newString.append(id);
-            }
+        public Builder withCpf(String cpf) {
+            this.cpf = cpf;
+            return this;
         }
-        this.ownerOf = newString.toString();
-    }
 
-    public String[] getArticleID() {
-        return this.articleID.split("#");
-    }
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
 
-    public void addArticleID(String articleID) {
-        this.articleID = this.articleID.isEmpty() ? articleID : this.attendeeOn + "#" + articleID;
+        public Builder withPassword(String password) {
+            this.password = PasswordUtil.encodePassword(password);
+            return this;
+        }
+
+        public User build() {
+            return new User(name, cpf, email, password);
+        }
     }
 }
-

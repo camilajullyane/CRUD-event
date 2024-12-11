@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import org.upe.facade.Facade;
+import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.controllers.AuthController;
 import org.upe.utils.SceneLoader;
@@ -17,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
-    private static final AuthController authController = new AuthController();
+    private final FacadeInterface facade = new Facade();
 
     @FXML
     TextField cpfField;
@@ -51,7 +53,6 @@ public class SignUpController implements Initializable {
         String name = nameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
-
         if (!isCpfValid(cpf)) {
             errorMessage.setText("CPF em formato inválido");
             errorMessage.setVisible(true);
@@ -70,7 +71,7 @@ public class SignUpController implements Initializable {
             return;
         }
 
-        UserInterface isCreated = authController.signUpUser(name, cpf, email, password);
+        UserInterface isCreated = facade.signUpUser(name, cpf, email, password);
 
         if(isCreated == null) {
             errorMessage.setText("Usuário já cadastrado");

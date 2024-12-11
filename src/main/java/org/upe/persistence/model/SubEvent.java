@@ -1,35 +1,96 @@
 package org.upe.persistence.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
-public class SubEvent extends Event implements SubEventInterface {
-    protected String parentEventID;
-    protected String speakers;
-    protected String hour;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-    // Construtor
-    public SubEvent(String id, String parentEventID, String name, String date, String hour, String local, String organization,
-                    String description, String speakers, String attendeesList) {
-        super(id, "", name, date, local, organization, description, attendeesList, "");
-        this.parentEventID = parentEventID;
-        this.speakers = speakers;
-        this.hour = hour;
+@Entity
+@Table(name = "subEvent")
+@Getter @Setter
+public class SubEvent implements SubEventInterface {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    private String name;
+    private String description;
+    private LocalDate beginDate;
+    private LocalDate endDate;
+    private boolean privateSubEvent;
+    @ManyToMany(mappedBy = "subEventAttendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<User> subEventAttendeesList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "parentEvent_id")
+    protected Event parentEvent;
+
+
+    public SubEvent(String name,String description, LocalDate beginDate,LocalDate endDate, EventInterface parentEvent) {
+        this.name = name;
+        this.description = description;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.parentEvent = (Event) parentEvent;
     }
 
-    // Getters e Setters
-    public String getSpeakers() {
-        return this.speakers;
+
+    public List<UserInterface> getSubEventAttendeesList() {
+        return new ArrayList<>(subEventAttendeesList);
     }
 
-    public void setSpeakers(String speakers) {
-        this.speakers = speakers;
+    public void addAttendeeOnSubEvent(UserInterface user) {
+        this.subEventAttendeesList.add((User) user);
     }
 
-    public String getParentEventID() {
-        return this.parentEventID;
+    public void removeAttendeeOnSubEvent(UserInterface user) {
+        this.subEventAttendeesList.remove((User) user);
     }
 
-    public String getHour() {
-        return this.hour;
+    public SubEvent() {}
+
+    // Implementação do padrão Builder
+    public static class Builder {
+        private String name;
+        private String description;
+        private LocalDate beginDate;
+        private EventInterface parentEvent;
+        private  LocalDate endDate;
+
+        public Builder() {}
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder withBeginDate(LocalDate date) {
+            this.beginDate = date;
+            return this;
+        }
+
+        public Builder withEndDate(LocalDate date) {
+            this.endDate = date;
+            return this;
+        }
+
+        public Builder withParentEvent(EventInterface parentEvent) {
+            this.parentEvent = parentEvent;
+            return this;
+        }
+
+        public SubEvent build() {
+            return new SubEvent(name, description, beginDate, endDate,parentEvent);
+        }
     }
 }
