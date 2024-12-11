@@ -98,13 +98,23 @@ public class MySubEventsController {
                     }
                 });
 
+                Button seeSessionsButton = new Button("Ver Sessões");
+                seeSessionsButton.getStyleClass().add("custom-button");
+                seeSessionsButton.setOnAction(e -> {
+                    try {
+                        handleSeeSession(subEvent);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
                 VBox descriptionBox = new VBox(5, titleLabel, descriptionLabel);
                 VBox dateBox = new VBox(5, dateLabel, dateValue);
                 VBox ownerBox = new VBox(5, speakersLabel, speakersValue);
 
 
                 HBox infoBox = new HBox(50, dateBox, ownerBox);
-                HBox bottomBox = new HBox(50, editSubEventButton);
+                HBox bottomBox = new HBox(50, editSubEventButton, seeSessionsButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);
                 VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
@@ -168,6 +178,12 @@ public class MySubEventsController {
     private void handleEditSubEventButton(SubEventInterface subEvent) throws IOException {
         SceneLoader.setSubEventData(subEvent);
         SceneLoader.loadScene("/org/upe/ui/telaEditarSubEvento.fxml", "Editar SubEvento", mySubEventsPage);
+    }
+
+    @FXML
+    private void handleSeeSession(SubEventInterface subEvent) throws IOException {
+        SceneLoader.setSubEventData(subEvent);
+        SceneLoader.loadScene("/org/upe/ui/telaSessao.fxml", "Sessões", mySubEventsPage);
     }
 
 }

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -76,14 +77,24 @@ public class SubEventUIController implements Initializable {
             Label ownerValue = new Label(subEvent.getSpeakers());
             ownerValue.getStyleClass().add("subcaption");
 
+            Button seeSessionsButton = new Button("Ver Sessões");
+            seeSessionsButton.getStyleClass().add("custom-button");
+            seeSessionsButton.setOnAction(e -> {
+                try {
+                    handleSeeSession(subEvent);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+
             VBox descriptionBox = new VBox(5, title, description);
             VBox dateBox = new VBox(5, date, dateValue);
             VBox ownerBox = new VBox(5, owner, ownerValue);
-
             HBox infoBox = new HBox(50, dateBox, ownerBox);
+            HBox bottomBox = new HBox(50, seeSessionsButton);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 
-            VBox containerBox = new VBox(45,descriptionBox, infoBox);
+            VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
 
             eventContainer.getChildren().addAll(containerBox);
             mainContainer.getChildren().add(eventContainer);
@@ -130,6 +141,12 @@ public class SubEventUIController implements Initializable {
     @FXML
     private void moveToMyEventsPage() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", subEventPage);
+    }
+
+    @FXML
+    private void handleSeeSession(SubEventInterface subEvent) throws IOException {
+        SceneLoader.setSubEventData(subEvent);
+        SceneLoader.loadScene("/org/upe/ui/telaSessao.fxml", "Sessões", subEventPage);
     }
 
 }
