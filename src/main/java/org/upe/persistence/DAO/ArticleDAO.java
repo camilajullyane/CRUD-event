@@ -9,26 +9,34 @@ import org.upe.persistence.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ArticleDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+    private final Logger LOGGER = Logger.getLogger(ArticleDAO.class.getName());
 
     public ArticleInterface create(String title, String articleAbstract, UserInterface user) {
-        // Usando o Builder para criar o Article
-        Article article = Article.builder()
-                .withTitle(title)
-                .withArticleAbstract(articleAbstract)
-                .withUser((User) user)  // Casting de UserInterface para User
-                .build();
-
-        // Iniciando transação e persistindo o artigo
-        entityManager.getTransaction().begin();
-        entityManager.persist(article);
-        entityManager.getTransaction().commit();
-
-        return article;
+        try {
+            Article article = Article.builder()
+                    .withTitle(title)
+                    .withArticleAbstract(articleAbstract)
+                    .withUser((User) user)
+                    .build();
+            
+            entityManager.getTransaction().begin();
+            entityManager.persist(article);
+            entityManager.getTransaction().commit();
+    
+            return article;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
     }
-
 
     public void delete(String id) {
         entityManager.getTransaction().begin();
@@ -37,18 +45,32 @@ public class ArticleDAO {
     }
 
     public ArticleInterface findById(String id) {
-        return entityManager.find(Article.class, id);
+        try {
+            return entityManager.find(Article.class, id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public ArticleInterface update(ArticleInterface article) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(article);
-        entityManager.getTransaction().commit();
-        return article;
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(article);
+            entityManager.getTransaction().commit();
+            return article;
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
     }
 
     public List<ArticleInterface> getAll() {
-        List<Article> articles = entityManager.createQuery("SELECT a FROM Article a", Article.class).getResultList();
-        return new ArrayList<>(articles);
+        try {
+            List<Article> articles = entityManager.createQuery("SELECT a FROM Article a", Article.class).getResultList();
+            return new ArrayList<>(articles);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
     }
 }
