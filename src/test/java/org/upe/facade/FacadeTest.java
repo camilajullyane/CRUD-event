@@ -290,7 +290,8 @@ public class FacadeTest {
 
     @Test
     public void testDeleteSubEvent() {
-
+        boolean result = facade.deleteSubEvent(testSubEvent.getId());
+        assertTrue(result);
     }
 
     @Test

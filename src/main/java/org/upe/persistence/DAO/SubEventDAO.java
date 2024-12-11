@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 
 import java.time.LocalDate;
@@ -50,9 +51,15 @@ public class SubEventDAO {
     }
 
     public void delete(UUID id) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(getById(id));
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            SubEvent subEventToBeDeleted = (SubEvent)  getById(id);
+            subEventToBeDeleted.setPrivateSubEvent(true);
+            entityManager.merge(subEventToBeDeleted);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 
     public List<SubEventInterface> getAllSubEvents() {
