@@ -16,6 +16,7 @@ public interface EventControllerInterface {
     boolean deleteEvent(EventInterface event, UserInterface user);
     EventInterface getEventById(UUID id);
 
+
     boolean updateName(EventInterface event, String name);
     boolean updateLocal(EventInterface event, String local);
     boolean updateDescription(EventInterface event, String description);

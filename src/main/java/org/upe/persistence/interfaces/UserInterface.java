@@ -13,4 +13,5 @@ public interface UserInterface {
     void subscribeToEvent(EventInterface event);
     void subscribeToSubEvent(SubEventInterface subEvent);
     void addMyEventAsOwner(EventInterface event);
+    void unsubscribeToEvent(EventInterface event);
 }

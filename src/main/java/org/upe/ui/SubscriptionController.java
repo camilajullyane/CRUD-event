@@ -181,5 +181,7 @@ public class SubscriptionController implements Initializable {
         alert.setContentText("Inscrição cancelada com sucesso!");
         alert.showAndWait();
 
+        showMyEvents();
+
     }
 }
