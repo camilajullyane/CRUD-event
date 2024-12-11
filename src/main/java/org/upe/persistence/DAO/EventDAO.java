@@ -35,9 +35,16 @@ public class EventDAO {
 
 
     public void delete(UUID id) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(findById(id));
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            Event eventToBeDeleted = (Event) findById(id);
+            eventToBeDeleted.setPrivateEvent(true);
+            entityManager.merge(eventToBeDeleted);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+
     }
 
     public EventInterface findById(UUID id) {

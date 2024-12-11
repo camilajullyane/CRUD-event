@@ -115,50 +115,52 @@ public class SubscriptionController implements Initializable {
             mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
-                VBox eventContainer = new VBox();
-                eventContainer.getStyleClass().add("container");
+                if (!event.isPrivateEvent()) {
+                    VBox eventContainer = new VBox();
+                    eventContainer.getStyleClass().add("container");
 
-                VBox.setMargin(eventContainer, new Insets(15));
+                    VBox.setMargin(eventContainer, new Insets(15));
 
-                Label title = new Label(event.getName());
-                title.getStyleClass().add("title");
+                    Label title = new Label(event.getName());
+                    title.getStyleClass().add("title");
 
-                Label description = new Label(event.getDescription());
-                description.getStyleClass().add("custom-label");
+                    Label description = new Label(event.getDescription());
+                    description.getStyleClass().add("custom-label");
 
-                Label date = new Label("Data");
-                date.getStyleClass().add("caption");
+                    Label date = new Label("Data");
+                    date.getStyleClass().add("caption");
 
-                Label location = new Label("Local");
-                location.getStyleClass().add("caption");
+                    Label location = new Label("Local");
+                    location.getStyleClass().add("caption");
 
-                Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add("subcaption");
+                    Label locationValue = new Label(event.getLocal());
+                    locationValue.getStyleClass().add("subcaption");
 
-                Label owner = new Label("Dono do Evento");
-                owner.getStyleClass().add("caption");
+                    Label owner = new Label("Dono do Evento");
+                    owner.getStyleClass().add("caption");
 
-                Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add("subcaption");
+                    Label ownerValue = new Label(event.getOrganization());
+                    ownerValue.getStyleClass().add("subcaption");
 
-                Button cancelButton = new Button("Cancelar Inscrição");
-                cancelButton.getStyleClass().add("cancel-button");
-                cancelButton.setOnAction(e -> cancelSubscription(event));
+                    Button cancelButton = new Button("Cancelar Inscrição");
+                    cancelButton.getStyleClass().add("cancel-button");
+                    cancelButton.setOnAction(e -> cancelSubscription(event));
 
-                VBox descriptionBox = new VBox(5, title, description);
-                VBox locationBox = new VBox(5, location, locationValue);
-                VBox ownerBox = new VBox(5, owner, ownerValue);
+                    VBox descriptionBox = new VBox(5, title, description);
+                    VBox locationBox = new VBox(5, location, locationValue);
+                    VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                HBox infoBox = new HBox(50, locationBox, ownerBox);
-                HBox headerBox = new HBox(20, descriptionBox, cancelButton);
-                infoBox.setAlignment(Pos.CENTER_LEFT);
+                    HBox infoBox = new HBox(50, locationBox, ownerBox);
+                    HBox headerBox = new HBox(20, descriptionBox, cancelButton);
+                    infoBox.setAlignment(Pos.CENTER_LEFT);
 
-                VBox containerBox = new VBox(45, headerBox, infoBox);
+                    VBox containerBox = new VBox(45, headerBox, infoBox);
 
-                eventContainer.getChildren().addAll(containerBox);
-                mainContainer.getChildren().add(eventContainer);
-                mainContainer.setAlignment(Pos.CENTER);
+                    eventContainer.getChildren().addAll(containerBox);
+                    mainContainer.getChildren().add(eventContainer);
+                    mainContainer.setAlignment(Pos.CENTER);
+                }
             });
         }
 

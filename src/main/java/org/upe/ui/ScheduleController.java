@@ -94,61 +94,64 @@ public class ScheduleController implements Initializable {
             mainContainer.setAlignment(Pos.CENTER);
         } else {
             events.forEach(event -> {
-                VBox eventContainer = new VBox();
-                eventContainer.getStyleClass().add("container");
+                if(!event.isPrivateEvent()) {
+                    VBox eventContainer = new VBox();
+                    eventContainer.getStyleClass().add("container");
 
-                VBox.setMargin(eventContainer, new Insets(15));
+                    VBox.setMargin(eventContainer, new Insets(15));
 
-                Label title = new Label(event.getName());
-                title.getStyleClass().add("title");
+                    Label title = new Label(event.getName());
+                    title.getStyleClass().add("title");
 
-                Label description = new Label(event.getDescription());
-                description.getStyleClass().add("custom-label");
+                    Label description = new Label(event.getDescription());
+                    description.getStyleClass().add("custom-label");
 
-                Label date = new Label("Data");
-                date.getStyleClass().add("caption");
+                    Label date = new Label("Data");
+                    date.getStyleClass().add("caption");
 
-                Label location = new Label("Local");
-                location.getStyleClass().add("caption");
+                    Label location = new Label("Local");
+                    location.getStyleClass().add("caption");
 
-                Label locationValue = new Label(event.getLocal());
-                locationValue.getStyleClass().add("subcaption");
+                    Label locationValue = new Label(event.getLocal());
+                    locationValue.getStyleClass().add("subcaption");
 
-                Label owner = new Label("Dono do Evento");
-                owner.getStyleClass().add("caption");
+                    Label owner = new Label("Dono do Evento");
+                    owner.getStyleClass().add("caption");
 
-                Label ownerValue = new Label(event.getOrganization());
-                ownerValue.getStyleClass().add("subcaption");
+                    Label ownerValue = new Label(event.getOrganization());
+                    ownerValue.getStyleClass().add("subcaption");
 
-                Button signUpButton = new Button("Realizar Inscrição");
-                signUpButton.getStyleClass().add("custom-button");
-                signUpButton.setOnAction(e -> signUpEvent(event));
+                    Button signUpButton = new Button("Realizar Inscrição");
+                    signUpButton.getStyleClass().add("custom-button");
+                    signUpButton.setOnAction(e -> signUpEvent(event));
 
-                Button seeSubEvents = new Button("Ver SubEventos");
-                seeSubEvents.getStyleClass().add("custom-button");
-                seeSubEvents.setOnAction(e -> {
-                    try {
-                        showSubEvents(event);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
+                    Button seeSubEvents = new Button("Ver SubEventos");
+                    seeSubEvents.getStyleClass().add("custom-button");
+                    seeSubEvents.setOnAction(e -> {
+                        try {
+                            showSubEvents(event);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
 
-                VBox descriptionBox = new VBox(5, title, description);
-                VBox locationBox = new VBox(5, location, locationValue);
-                VBox ownerBox = new VBox(5, owner, ownerValue);
-
-
-                HBox infoBox = new HBox(50, locationBox, ownerBox);
-                HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
-                infoBox.setAlignment(Pos.CENTER_LEFT);
-                bottomBox.setAlignment(Pos.CENTER);
-                VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
+                    VBox descriptionBox = new VBox(5, title, description);
+                    VBox locationBox = new VBox(5, location, locationValue);
+                    VBox ownerBox = new VBox(5, owner, ownerValue);
 
 
-                eventContainer.getChildren().addAll(containerBox);
-                mainContainer.getChildren().add(eventContainer);
-                mainContainer.setAlignment(Pos.CENTER);
+                    HBox infoBox = new HBox(50, locationBox, ownerBox);
+                    HBox bottomBox = new HBox(50, signUpButton, seeSubEvents);
+                    infoBox.setAlignment(Pos.CENTER_LEFT);
+                    bottomBox.setAlignment(Pos.CENTER);
+                    VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
+
+
+                    eventContainer.getChildren().addAll(containerBox);
+                    mainContainer.getChildren().add(eventContainer);
+                    mainContainer.setAlignment(Pos.CENTER);
+                }
+
             });
         }
 

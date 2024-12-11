@@ -30,6 +30,7 @@ public class Event implements EventInterface {
     private String local;
     private String organization;
     private String description;
+    private boolean privateEvent;
     @ManyToMany(mappedBy = "attendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> attendeesList = new ArrayList<>();
     @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL, orphanRemoval = true)

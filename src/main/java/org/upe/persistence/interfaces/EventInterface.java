@@ -26,4 +26,5 @@ public interface EventInterface {
     void setEndDate(LocalDate newEndDate);
     void addAttendeeOnEvent(UserInterface user);
     void removeAttendeeOnEvent(UserInterface user);
+    boolean isPrivateEvent();
 }
