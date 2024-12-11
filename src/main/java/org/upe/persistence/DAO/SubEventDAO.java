@@ -51,6 +51,8 @@ public class SubEventDAO {
         return new ArrayList<>(subEvents);
     }
 
+
+
     public SubEventInterface getById(UUID id) {
         return entityManager.find(SubEvent.class, id);
     }

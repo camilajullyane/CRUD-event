@@ -81,6 +81,10 @@ public class Facade implements FacadeInterface {
         return subEventController.createSubEvent(parentEvent, name, beginDate,endDate, description);
     }
 
+    public boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
+        return subEventController.addAttendeeSubEventOnList(user, subEvent);
+    }
+
     public boolean editSubEventName(SubEventInterface subEvent, String newName) {
         return subEventController.editSubEventName(subEvent, newName);
     }

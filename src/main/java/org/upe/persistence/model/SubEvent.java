@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,6 +36,15 @@ public class SubEvent implements SubEventInterface {
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.parentEvent = (Event) parentEvent;
+    }
+
+
+    public List<UserInterface> getSubEventAttendeesList() {
+        return new ArrayList<>(subEventAttendeesList);
+    }
+
+    public void addAttendeeOnSubEvent(UserInterface user) {
+        this.subEventAttendeesList.add((User) user);
     }
 
     public SubEvent() {}

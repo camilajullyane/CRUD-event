@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.PasswordUtil;
 
@@ -64,6 +65,10 @@ public class User implements UserInterface {
 
     public void subscribeToEvent(EventInterface event) {
         this.attendeeOn.add((Event) event);
+    }
+
+    public void subscribeToSubEvent(SubEventInterface subEvent) {
+        this.subEventAttendeeOn.add((SubEvent) subEvent);
     }
 
     public void addMyEventAsOwner(EventInterface event) {

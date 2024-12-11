@@ -3,6 +3,7 @@ package org.upe.persistence.interfaces;
 import org.upe.persistence.model.Event;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public interface SubEventInterface {
@@ -15,4 +16,6 @@ public interface SubEventInterface {
     void setBeginDate(LocalDate beginDate);
     Event getParentEvent();
     void setParentEvent(Event parentEvent);
+    void addAttendeeOnSubEvent(UserInterface user);
+    List<UserInterface> getSubEventAttendeesList();
 }
