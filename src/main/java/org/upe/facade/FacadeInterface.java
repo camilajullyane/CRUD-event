@@ -32,6 +32,7 @@ public interface FacadeInterface {
     boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
     SubEventInterface getSubEventByID(UUID id);
+    boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
     boolean deleteSubEvent(UUID id);
 
     // UserController methods
