@@ -1,5 +1,7 @@
 package org.upe.controllers;
 
+import jakarta.inject.Inject;
+import lombok.ToString;
 import org.upe.controllers.interfaces.ArticleControllerInterface;
 import org.upe.persistence.DAO.ArticleDAO;
 import org.upe.persistence.interfaces.ArticleInterface;
@@ -10,8 +12,8 @@ import org.upe.persistence.interfaces.UserInterface;
 
 
 public class ArticleController implements ArticleControllerInterface {
-
-    private static final ArticleDAO articleDAO = new ArticleDAO();
+    @Inject
+    private ArticleDAO articleDAO;
 
 
     public void createArticle(UserInterface user, String name, String articleAbstract) {

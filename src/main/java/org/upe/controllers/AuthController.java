@@ -5,9 +5,11 @@ import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
 import org.upe.utils.PasswordUtil;
+import jakarta.inject.Inject;
 
 public class AuthController implements AuthControllerInterface {
-    private static final UserDAO userDAO = new UserDAO();
+    @Inject
+    private UserDAO userDAO;
 
     public UserInterface loginUser(String cpf, String password) {
         User user = userDAO.findByCPF(cpf);

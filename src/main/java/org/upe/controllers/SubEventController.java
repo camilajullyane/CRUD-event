@@ -1,5 +1,6 @@
 package org.upe.controllers;
 
+import jakarta.inject.Inject;
 import org.upe.controllers.interfaces.SubEventControllerInterface;
 import org.upe.persistence.DAO.SubEventDAO;
 import org.upe.persistence.DAO.UserDAO;
@@ -13,8 +14,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class SubEventController implements SubEventControllerInterface {
-    public static final SubEventDAO subEventDAO = new SubEventDAO();
-    public static final UserDAO userDAO = new UserDAO();
+    @Inject
+    public SubEventDAO subEventDAO;
+    @Inject
+    public UserDAO userDAO;
 
     // falta regras de negocio
     public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate,LocalDate endDate, String description) {

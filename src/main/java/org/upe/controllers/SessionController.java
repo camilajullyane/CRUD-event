@@ -1,5 +1,6 @@
 package org.upe.controllers;
 
+import jakarta.inject.Inject;
 import org.upe.controllers.interfaces.SessionControllerInterface;
 import org.upe.persistence.DAO.SessionDAO;
 import org.upe.persistence.DAO.SubEventDAO;
@@ -12,7 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class SessionController implements SessionControllerInterface {
-    private final SessionDAO sessionDAO = new SessionDAO();
+    @Inject
+    private SessionDAO sessionDAO;
 
     public SessionInterface create(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
         return sessionDAO.create(name, date, beginHour, endHour, local, description, speaker, parentSubEvent);

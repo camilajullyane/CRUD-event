@@ -1,5 +1,6 @@
 package org.upe.controllers;
 
+import jakarta.inject.Inject;
 import org.upe.controllers.interfaces.EventControllerInterface;
 import org.upe.persistence.DAO.EventDAO;
 import org.upe.persistence.DAO.UserDAO;
@@ -11,9 +12,10 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class EventController implements EventControllerInterface {
-    private static final EventDAO eventDAO = new EventDAO();
-    private static final UserDAO userDAO = new UserDAO();
-
+    @Inject
+    private EventDAO eventDAO;
+    @Inject
+    private UserDAO userDAO;
 
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
                                       String organization) {
