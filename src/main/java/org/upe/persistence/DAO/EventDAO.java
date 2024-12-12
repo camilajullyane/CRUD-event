@@ -18,7 +18,7 @@ public class EventDAO {
 
     public Event create(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization, UserInterface user) {
         try {
-            Event event = Event.builder()
+            Event event = Event.Builder()
                     .withName(name)
                     .withDescription(description)
                     .withBeginDate(beginDate)

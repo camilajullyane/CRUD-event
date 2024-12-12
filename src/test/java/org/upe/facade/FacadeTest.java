@@ -43,15 +43,15 @@ public class FacadeTest {
         EntityManager entityManager = EntityManagerFactory.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        userWithEvent = new User("john doe", "12345678910", "john.doe@email.com","password");
-        userSubscribedToEvent = new User("Dwight Schrute", "15348964812", "shrute@dundermifflin.com", "password");
-        userSubscribedToEvent2 = new User("Jim Halpert", "15348964855", "jim@dundermifflin.com", "password");
-        userDontSubscribedToEvent = new User("Michael Scott", "12345678913", "scott@dundermifflin.com", "password");
+        userWithEvent =  User.Builder().withName("John doe").withCpf("12345678910").withEmail("john.doe@email.com").withPassword("password").build();
+        userSubscribedToEvent = User.Builder().withName("Dwight Schrute").withCpf("15348964812").withEmail("shrute@dundermifflin.com").withPassword("password").build();
+        userSubscribedToEvent2 = User.Builder().withName("Jim Halpert").withCpf("15348964855").withEmail("jim@dundermifflin.com").withPassword("password").build();
+        userDontSubscribedToEvent = User.Builder().withName("Michael Scott").withCpf("12345678913").withEmail("scott@dundermifflin.com").withPassword("password").build();
 
-        userSubscribedToSubEvent = new User("Pam Beesly", "15348964813", "beesly@example.com", "password");
-        userDontSubscribedToSubEvent = new User("Ryan Howard", "15348964892", "howard@example.com", "password");
+        userSubscribedToSubEvent = User.Builder().withName("Pam Beesly").withCpf("15348964813").withEmail("beesly@example.com").withPassword("password").build();
+        userDontSubscribedToSubEvent = User.Builder().withName("Ryan Howard").withCpf("15348964892").withEmail("howard@example.com").withPassword("password").build();
 
-        testEvent = Event.builder()
+        testEvent = Event.Builder()
                 .withName("Google I/O")
                 .withDescription("A Google Event")
                 .withBeginDate(LocalDate.now())
@@ -61,7 +61,7 @@ public class FacadeTest {
                 .withOwner((User) userWithEvent)
                 .build();
 
-        testSubEvent = new SubEvent("Google I/O - Day 1", "Google HQ", LocalDate.now(),LocalDate.now(), testEvent);
+        testSubEvent = SubEvent.Builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
 
         entityManager.persist(userWithEvent);
         entityManager.persist(userDontSubscribedToEvent);
