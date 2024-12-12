@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 
 import java.time.LocalDate;
@@ -20,7 +19,7 @@ public class SubEventDAO {
 
     public SubEvent create(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
         try {
-            SubEvent subEvent = new SubEvent.Builder()
+            SubEvent subEvent = SubEvent.Builder()
                     .withName(name)
                     .withDescription(description)
                     .withBeginDate(beginDate)

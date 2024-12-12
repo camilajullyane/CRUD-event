@@ -31,7 +31,7 @@ public class SubEvent implements SubEventInterface {
     protected Event parentEvent;
 
 
-    public SubEvent(String name,String description, LocalDate beginDate,LocalDate endDate, EventInterface parentEvent) {
+    public SubEvent(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;
@@ -54,37 +54,35 @@ public class SubEvent implements SubEventInterface {
 
     public SubEvent() {}
 
-    // Implementação do padrão Builder
-    public static class Builder {
+    // Implementação do padrão UserBuilder
+    public static class SubEventBuilder {
         private String name;
         private String description;
         private LocalDate beginDate;
         private EventInterface parentEvent;
         private  LocalDate endDate;
 
-        public Builder() {}
-
-        public Builder withName(String name) {
+        public SubEventBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder withDescription(String description) {
+        public SubEventBuilder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder withBeginDate(LocalDate date) {
+        public SubEventBuilder withBeginDate(LocalDate date) {
             this.beginDate = date;
             return this;
         }
 
-        public Builder withEndDate(LocalDate date) {
+        public SubEventBuilder withEndDate(LocalDate date) {
             this.endDate = date;
             return this;
         }
 
-        public Builder withParentEvent(EventInterface parentEvent) {
+        public SubEventBuilder withParentEvent(EventInterface parentEvent) {
             this.parentEvent = parentEvent;
             return this;
         }
@@ -92,5 +90,9 @@ public class SubEvent implements SubEventInterface {
         public SubEvent build() {
             return new SubEvent(name, description, beginDate, endDate,parentEvent);
         }
+    }
+
+    public static SubEventBuilder Builder() {
+        return new SubEventBuilder();
     }
 }

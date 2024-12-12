@@ -15,7 +15,7 @@ public class UserDAO {
 
     public UserInterface create(String name, String email, String cpf, String password) {
         try {
-            User user = new User.Builder()
+            User user = User.Builder()
                     .withName(name)
                     .withCpf(cpf)
                     .withEmail(email)
