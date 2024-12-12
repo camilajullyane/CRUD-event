@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.SessionInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
@@ -24,13 +25,13 @@ public class SubEvent implements SubEventInterface {
     private LocalDate beginDate;
     private LocalDate endDate;
     private boolean privateSubEvent;
-    @ManyToMany(mappedBy = "subEventAttendeeOn", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "subEventAttendeeOn")
     private List<User> subEventAttendeesList = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
-    @OneToMany(mappedBy = "parentSubEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "parentSubEvent")
     private List<Session> sessions = new ArrayList<>();
 
 
@@ -53,6 +54,10 @@ public class SubEvent implements SubEventInterface {
 
     public void removeAttendeeOnSubEvent(UserInterface user) {
         this.subEventAttendeesList.remove((User) user);
+    }
+
+    public List<SessionInterface> getAllSessions() {
+        return new ArrayList<>(sessions);
     }
 
     public SubEvent() {}

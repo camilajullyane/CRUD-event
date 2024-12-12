@@ -18,7 +18,9 @@ import java.util.logging.Logger;
 public class SessionDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
     private final Logger LOGGER = Logger.getLogger(SessionDAO.class.getName());
-    public Session create(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEvent parentSubEvent) {
+
+
+    public SessionInterface create(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
         try {
             Session session = new Session.Builder()
                     .withName(name)
@@ -67,17 +69,4 @@ public class SessionDAO {
     public SessionInterface getById(UUID id) {
         return entityManager.find(Session.class, id);
     }
-
-    public List<SessionInterface> getAllSessions() {
-        try {
-            List<Session> sessions = entityManager.createQuery("SELECT s FROM Session s", Session.class).getResultList();
-            return new ArrayList<>(sessions);
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
-            return null;
-        }
-    }
-
-
-
 }

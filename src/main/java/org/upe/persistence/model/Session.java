@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.upe.persistence.interfaces.SessionInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 
 @Entity
 @Getter
@@ -28,7 +32,7 @@ public class Session implements SessionInterface {
     @JoinColumn(name = "parentSubEvent_id")
     SubEvent parentSubEvent;
 
-    public Session(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEvent parentSubEvent) {
+    public Session(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
         this.name = name;
         this.date = date;
         this.beginHour = beginHour;
@@ -36,7 +40,7 @@ public class Session implements SessionInterface {
         this.local = local;
         this.description = description;
         this.speaker = speaker;
-        this.parentSubEvent = parentSubEvent;
+        this.parentSubEvent = (SubEvent) parentSubEvent;
     }
 
     public Session() {}
@@ -49,7 +53,7 @@ public class Session implements SessionInterface {
         private String local;
         private String description;
         private String speaker;
-        private SubEvent parentSubEvent;
+        private SubEventInterface parentSubEvent;
 
         public Builder withName(String name) {
             this.name = name;
@@ -86,7 +90,7 @@ public class Session implements SessionInterface {
             return this;
         }
 
-        public Builder withParentSubEvent(SubEvent parentSubEvent) {
+        public Builder withParentSubEvent(SubEventInterface parentSubEvent) {
             this.parentSubEvent = parentSubEvent;
             return this;
         }
@@ -95,6 +99,5 @@ public class Session implements SessionInterface {
             return new Session(name, date, beginHour, endHour, local, description, speaker, parentSubEvent);
         }
     }
-
 
 }
