@@ -6,19 +6,13 @@ import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
-
-
-
 public class ArticleController implements ArticleControllerInterface {
 
     private static final ArticleDAO articleDAO = new ArticleDAO();
 
-
     public void createArticle(UserInterface user, String name, String articleAbstract) {
         articleDAO.create(name, articleAbstract, user);
     }
-
-
 
     public boolean submitArticle(ArticleInterface article, EventInterface event) {
        for (ArticleInterface a : event.getArticles()) {
@@ -29,5 +23,10 @@ public class ArticleController implements ArticleControllerInterface {
        article.getSubmittedIn().add(event);
        articleDAO.update(article);
        return true;
+    }
+
+    public boolean deleteArticle(ArticleInterface article) {
+        articleDAO.delete(article.getId());
+        return true;
     }
 }

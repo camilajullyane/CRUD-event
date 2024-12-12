@@ -26,6 +26,8 @@ public class Facade implements FacadeInterface {
         this.sessionController = new SessionController();
     }
 
+
+
     // AuthController methods
     public UserInterface loginUser(String cpf, String password) {
         return authController.loginUser(cpf, password);
@@ -34,6 +36,8 @@ public class Facade implements FacadeInterface {
     public UserInterface signUpUser(String name, String cpf, String email, String password) {
         return authController.signUpUser(name, cpf, email, password);
     }
+
+
 
     // EventController methods
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization) {
@@ -76,6 +80,8 @@ public class Facade implements FacadeInterface {
         return eventController.deleteEvent(event, user);
     }
 
+
+
     // SubEventController methods
     public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate, LocalDate endDate, String description) {
         return subEventController.createSubEvent(parentEvent, name, beginDate,endDate, description);
@@ -97,7 +103,6 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventDescription(subEvent, newDescription);
     }
 
-
     public SubEventInterface getSubEventByID(UUID id) {
         return subEventController.getSubEventByID(id);
     }
@@ -109,6 +114,8 @@ public class Facade implements FacadeInterface {
     public void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent) {
         subEventController.removeAttendeeSubEventOnList(user,subEvent);
     }
+
+
 
     // UserController methods
     public UserInterface getUserByCPF(String cpf) {
@@ -123,8 +130,9 @@ public class Facade implements FacadeInterface {
         return userController.changePassword(user, currentPassword, newPassword);
     }
 
-    // ArticlesController methods
 
+
+    // ArticlesController methods
     public void createArticle(UserInterface user, String name, String articleAbstract) {
         articleController.createArticle(user, name, articleAbstract);
     }
@@ -133,15 +141,19 @@ public class Facade implements FacadeInterface {
         return articleController.submitArticle(article, event);
     }
 
+    public boolean deleteArticle(ArticleInterface article) {
+        return articleController.deleteArticle(article);
+    }
+
+
+
+    //SessionController methods
     public SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
         return sessionController.create(name,date, beginHour, endHour, local, description, speaker, parentSubEvent);
     }
 
-
     public boolean deleteSession(UUID id) {
         return sessionController.delete(id);
     }
-
-
 
 }

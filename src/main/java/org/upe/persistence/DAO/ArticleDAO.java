@@ -9,6 +9,7 @@ import org.upe.persistence.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,11 +39,13 @@ public class ArticleDAO {
         }
     }
 
-    public void delete(String id) {
+    public void delete(UUID id) {
         entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.find(Article.class, id));
+        Article article = entityManager.find(Article.class, id);
+        entityManager.remove(article);
         entityManager.getTransaction().commit();
     }
+
 
     public ArticleInterface findById(String id) {
         try {

@@ -42,6 +42,7 @@ public interface FacadeInterface {
     // ArticleController methods
     void createArticle(UserInterface user, String name, String articleAbstract);
     boolean submitArticle(ArticleInterface article, EventInterface event);
+    boolean deleteArticle(ArticleInterface article);
 
     //SessionController methods
     SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent);
