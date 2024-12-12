@@ -20,4 +20,5 @@ public interface SubEventInterface {
     List<UserInterface> getSubEventAttendeesList();
     void removeAttendeeOnSubEvent(UserInterface user);
     boolean isPrivateSubEvent();
+    List<SessionInterface> getAllSessions();
 }

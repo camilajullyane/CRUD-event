@@ -1,11 +1,9 @@
 package org.upe.facade;
 
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,4 +42,8 @@ public interface FacadeInterface {
     // ArticleController methods
     void createArticle(UserInterface user, String name, String articleAbstract);
     boolean submitArticle(ArticleInterface article, EventInterface event);
+
+    //SessionController methods
+    SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent);
+    boolean deleteSession(UUID id);
 }

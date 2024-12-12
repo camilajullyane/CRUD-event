@@ -6,13 +6,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.*;
 import org.upe.persistence.model.Event;
+import org.upe.persistence.model.Session;
 import org.upe.persistence.model.SubEvent;
 import org.upe.persistence.model.User;
-import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.PasswordUtil;
 
 
@@ -37,6 +35,7 @@ public class FacadeTest {
     private static SubEventInterface testSubEvent;
     private static EventInterface testEvent;
     private static ArticleInterface testArticle;
+    private static SessionInterface testSession;
 
     @BeforeAll
     public static void setUP() {
@@ -62,6 +61,17 @@ public class FacadeTest {
                 .build();
 
         testSubEvent = SubEvent.Builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
+
+        testSession = Session.Builder()
+                .withName("Test Session")
+                .withDate(LocalDate.now())
+                .withBeginHour(LocalDate.now().atStartOfDay())
+                .withEndHour(LocalDate.now().atStartOfDay().plusHours(1))
+                .withLocal("Test Local")
+                .withDescription("Test Description")
+                .withSpeaker("Test Speaker")
+                .withParentSubEvent(testSubEvent)
+                .build();
 
         entityManager.persist(userWithEvent);
         entityManager.persist(userDontSubscribedToEvent);
@@ -325,5 +335,17 @@ public class FacadeTest {
     @Test
     public void testCreateArticle() {
 
+    }
+    @Test
+    public void testCreateSession() {
+        SessionInterface session = facade.createSession("Test Session", LocalDate.now(), LocalDate.now().atStartOfDay(), LocalDate.now().atStartOfDay().plusHours(1), "Test Local", "Test Description", "Test Speaker", testSubEvent);
+        assertNotNull(session);
+        assertEquals("Test Session", session.getName());
+    }
+
+    @Test
+    public void testDeleteSession() {
+        boolean result = facade.deleteSession(testSession.getId());
+        assertTrue(result);
     }
 }
