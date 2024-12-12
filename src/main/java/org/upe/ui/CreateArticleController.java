@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import org.upe.controllers.ArticleController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.utils.SceneLoader;

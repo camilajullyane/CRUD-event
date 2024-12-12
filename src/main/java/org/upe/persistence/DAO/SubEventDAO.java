@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.model.Event;
 import org.upe.persistence.model.SubEvent;
 
 import java.time.LocalDate;

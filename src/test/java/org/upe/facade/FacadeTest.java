@@ -95,39 +95,39 @@ public class FacadeTest {
     }
 
     @Test
-    public void testLoginUser() {
+    void testLoginUser() {
         UserInterface user = facade.loginUser("12345678910", "password");
         assertNotNull(user);
         assertEquals("12345678910", user.getCpf());
     }
 
     @Test
-    public void testLoginUserWithWrongPassword() {
+    void testLoginUserWithWrongPassword() {
         UserInterface user = facade.loginUser("12345678910", "wrongpassword");
         assertNull(user);
     }
 
     @Test
-    public void TestLoginUserWithWrongCPF() {
+    void TestLoginUserWithWrongCPF() {
         UserInterface user = facade.loginUser("12345678911", "password");
         assertNull(user);
     }
 
     @Test
-    public void testSignUpUser() {
+    void testSignUpUser() {
         UserInterface user = facade.signUpUser("Jane Doe", "10987654321", "jane.doe@test.com", "password");
         assertNotNull(user);
         assertEquals("10987654321", user.getCpf());
     }
 
     @Test
-    public void testSignUpUserWithAExistingCPF() {
+    void testSignUpUserWithAExistingCPF() {
         UserInterface user = facade.signUpUser("test", "12345678910", "test@gmail.com", "password");
         assertNull(user);
     }
 
     @Test
-    public void testSignUpUserWithAExistingEmail() {
+    void testSignUpUserWithAExistingEmail() {
         UserInterface user = facade.signUpUser("test", "12345678910", "john.doe@email.com", "password");
         assertNull(user);
     }
@@ -135,45 +135,45 @@ public class FacadeTest {
     //Testes Event
 
     @Test
-    public void testCreateEvent() {
+    void testCreateEvent() {
         EventInterface event = facade.createEvent(userWithEvent, "Test Event", "Test Event Description", LocalDate.now(), LocalDate.now(), "Test Local", "Test Organization");
         assertNotNull(event);
         assertEquals("Test Event", event.getName());
     }
 
     @Test
-    public void testGetAllEvents() {
+    void testGetAllEvents() {
         List<EventInterface> events = facade.getAllEvents();
         assertNotNull(events);
         assertFalse(events.isEmpty());
     }
 
     @Test
-    public void testGetEventByID() {
+    void testGetEventByID() {
         EventInterface event = facade.getEventByID(testEvent.getId());
         assertNotNull(event);
         assertEquals(testEvent.getId(), event.getId());
     }
 
     @Test
-    public void testGetEventByIDWithWrongID() {
+    void testGetEventByIDWithWrongID() {
         EventInterface event = facade.getEventByID(UUID.randomUUID());
         assertNull(event);
     }
     @Test
-    public void testAddAttendeeOnListWithAttendeeAlreadyOnList() {
+    void testAddAttendeeOnListWithAttendeeAlreadyOnList() {
         boolean result = facade.addAttendeeOnList(userSubscribedToEvent, testEvent);
         assertFalse(result);
     }
 
     @Test
-    public void testAddOwnerOnHisOwnEvent() {
+    void testAddOwnerOnHisOwnEvent() {
         boolean result = facade.addAttendeeOnList(userWithEvent, testEvent);
         assertFalse(result);
     }
 
     @Test
-    public void testAddAttendeeOnList() {
+    void testAddAttendeeOnList() {
         boolean result = facade.addAttendeeOnList(userDontSubscribedToEvent, testEvent);
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -185,7 +185,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testDeleteAttendeeOnList() {
+    void testDeleteAttendeeOnList() {
         boolean result = facade.deleteAttendeeOnList(userSubscribedToEvent2, testEvent);
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -197,7 +197,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventName() {
+    void testEditEventName() {
         boolean result = facade.editEventName(testEvent, "New Event Name");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -205,7 +205,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventLocal() {
+    void testEditEventLocal() {
         boolean result = facade.editEventLocal(testEvent, "New Local");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -213,7 +213,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventDescription() {
+    void testEditEventDescription() {
         boolean result = facade.editEventDescription(testEvent, "New Description");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -221,7 +221,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventOrganization() {
+    void testEditEventOrganization() {
         boolean result = facade.editEventOrganization(testEvent, "New Organization");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -229,7 +229,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testDeleteEvent() {
+    void testDeleteEvent() {
         boolean result = facade.deleteEvent(testEvent, userWithEvent);
         assertTrue(result);
     }
@@ -237,14 +237,14 @@ public class FacadeTest {
     //Testes SubEvent
 
     @Test
-    public void testCreateSubEvent() {
+    void testCreateSubEvent() {
         SubEventInterface subEvent = facade.createSubEvent(testEvent, "Test SubEvent", LocalDate.now(), LocalDate.now(),"Test SubEvent Description");
         assertNotNull(subEvent);
         assertEquals("Test SubEvent", subEvent.getName());
     }
 
     @Test
-    public void testAddAttendeeOnSubEventList() {
+    void testAddAttendeeOnSubEventList() {
         boolean result = facade.addAttendeeSubEventOnList(userDontSubscribedToSubEvent, testSubEvent);
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
@@ -257,13 +257,13 @@ public class FacadeTest {
     }
 
     @Test
-    public void testAddAttendeeOnSubEventListWithAttendeeAlreadyOnList() {
+    void testAddAttendeeOnSubEventListWithAttendeeAlreadyOnList() {
         boolean result = facade.addAttendeeSubEventOnList(userSubscribedToSubEvent, testSubEvent);
         assertFalse(result);
     }
 
     @Test
-    public void testEditSubEventName() {
+    void testEditSubEventName() {
         boolean result = facade.editSubEventName(testSubEvent, "New SubEvent Name");
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
@@ -271,7 +271,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditSubEventDate() {
+    void testEditSubEventDate() {
         LocalDate newDate = LocalDate.now().plusDays(1);
         boolean result = facade.editSubEventDate(testSubEvent, newDate);
         assertTrue(result);
@@ -280,7 +280,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditSubEventDescription() {
+    void testEditSubEventDescription() {
         boolean result = facade.editSubEventDescription(testSubEvent, "New Description");
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
@@ -289,25 +289,25 @@ public class FacadeTest {
 
 
     @Test
-    public void testDeleteSubEvent() {
+    void testDeleteSubEvent() {
         boolean result = facade.deleteSubEvent(testSubEvent.getId());
         assertTrue(result);
     }
 
     @Test
-    public void testGetUserByCPF() {
+    void testGetUserByCPF() {
         UserInterface user = facade.getUserByCPF("12345678910");
         assertNotNull(user);
         assertEquals("12345678910", user.getCpf());
     }
     @Test
-    public void testGetUserByCPFWithWrongCPF() {
+    void testGetUserByCPFWithWrongCPF() {
         UserInterface user = facade.getUserByCPF("12345568911");
         assertNull(user);
     }
 
     @Test
-    public void testChangeEmail() {
+    void testChangeEmail() {
         boolean result = facade.changeEmail(userWithEvent.getEmail(), "newemail@gmail.com");
         assertTrue(result);
         UserInterface user = facade.getUserByCPF(userWithEvent.getCpf());
@@ -315,7 +315,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testChangePassword() {
+    void testChangePassword() {
         boolean result = facade.changePassword(userWithEvent, "password", "newpassword");
         assertTrue(result);
         User user = (User) facade.getUserByCPF(userWithEvent.getCpf());
@@ -323,7 +323,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateArticle() {
+    void testCreateArticle() {
 
     }
 }
