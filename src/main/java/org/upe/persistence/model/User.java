@@ -51,6 +51,8 @@ public class User implements UserInterface {
         this.password = password;
     }
 
+
+
     public List<EventInterface> getAttendeeOn() {
         return new ArrayList<>(attendeeOn);
     }
@@ -81,6 +83,10 @@ public class User implements UserInterface {
 
     public void addMyEventAsOwner(EventInterface event) {
         this.ownerOf.add((Event) event);
+    }
+
+    public void addArticle(ArticleInterface article) {
+        this.articles.add((Article) article);
     }
 
     // Implementação do padrão UserBuilder

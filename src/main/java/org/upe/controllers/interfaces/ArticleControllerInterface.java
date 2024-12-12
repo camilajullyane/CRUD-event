@@ -5,6 +5,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 public interface ArticleControllerInterface {
-    void createArticle(UserInterface user, String name, String articleAbstract);
+    ArticleInterface createArticle(UserInterface user, String name, String articleAbstract);
     boolean submitArticle(ArticleInterface article, EventInterface event);
+    boolean deleteArticle(ArticleInterface article);
 }

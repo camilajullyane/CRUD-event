@@ -25,4 +25,5 @@ public interface EventInterface {
     void addAttendeeOnEvent(UserInterface user);
     void removeAttendeeOnEvent(UserInterface user);
     boolean isPrivateEvent();
+    void addArticleOnEvent(ArticleInterface article);
 }

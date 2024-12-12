@@ -46,6 +46,10 @@ public class Article implements ArticleInterface {
         return new ArrayList<>(submittedIn);
     }
 
+    public void addSubmittedIn(EventInterface event) {
+        submittedIn.add((Event) event);
+    }
+
     public UserInterface getUser() {
         return user;
     }
@@ -82,7 +86,7 @@ public class Article implements ArticleInterface {
         }
     }
 
-    public static ArticleBuilder builder() {
+    public static ArticleBuilder Builder() {
         return new ArticleBuilder();
     }
 }

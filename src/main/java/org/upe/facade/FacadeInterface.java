@@ -23,6 +23,7 @@ public interface FacadeInterface {
     boolean editEventDescription(EventInterface event, String newDescription);
     boolean editEventOrganization(EventInterface event, String newOrganization);
     boolean deleteEvent(EventInterface event, UserInterface user);
+    boolean addArticleOnList(ArticleInterface article, EventInterface event);
 
     // SubEventController methods
     SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date,LocalDate endDate, String description);
@@ -32,7 +33,7 @@ public interface FacadeInterface {
     SubEventInterface getSubEventByID(UUID id);
     boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
     boolean deleteSubEvent(UUID id);
-    void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent);
+    boolean removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent);
 
     // UserController methods
     boolean changeEmail(String userEmail, String newEmail);
@@ -40,8 +41,9 @@ public interface FacadeInterface {
     UserInterface getUserByCPF(String cpf);
 
     // ArticleController methods
-    void createArticle(UserInterface user, String name, String articleAbstract);
+    ArticleInterface createArticle(UserInterface user, String title, String articleAbstract);
     boolean submitArticle(ArticleInterface article, EventInterface event);
+    boolean deleteArticle(ArticleInterface article);
 
     //SessionController methods
     SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent);
