@@ -47,7 +47,7 @@ public class ArticleDAO {
     }
 
 
-    public ArticleInterface findById(String id) {
+    public ArticleInterface findById(UUID id) {
         try {
             return entityManager.find(Article.class, id);
         } catch (Exception e) {
