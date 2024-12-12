@@ -60,6 +60,9 @@ public class SubEvent implements SubEventInterface {
         return new ArrayList<>(sessions);
     }
 
+
+
+
     public SubEvent() {}
 
     // Implementação do padrão UserBuilder

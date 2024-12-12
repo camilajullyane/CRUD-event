@@ -100,4 +100,7 @@ public class Session implements SessionInterface {
         }
     }
 
+    public static Builder Builder() {
+        return new Builder();
+    }
 }

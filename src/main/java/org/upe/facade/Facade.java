@@ -2,12 +2,10 @@ package org.upe.facade;
 
 import org.upe.controllers.*;
 import org.upe.controllers.interfaces.*;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +15,7 @@ public class Facade implements FacadeInterface {
     private final SubEventControllerInterface subEventController;
     private final UserControllerInterface userController;
     private final ArticleControllerInterface articleController;
+    private final SessionControllerInterface sessionController;
 
     public Facade() {
         this.authController = new AuthController();
@@ -24,6 +23,7 @@ public class Facade implements FacadeInterface {
         this.subEventController = new SubEventController();
         this.userController = new UserController();
         this.articleController = new ArticleController();
+        this.sessionController = new SessionController();
     }
 
     // AuthController methods
@@ -131,6 +131,15 @@ public class Facade implements FacadeInterface {
 
     public boolean submitArticle(ArticleInterface article, EventInterface event) {
         return articleController.submitArticle(article, event);
+    }
+
+    public SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
+        return sessionController.create(name,date, beginHour, endHour, local, description, speaker, parentSubEvent);
+    }
+
+
+    public boolean deleteSession(UUID id) {
+        return sessionController.delete(id);
     }
 
 
