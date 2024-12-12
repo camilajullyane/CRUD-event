@@ -1,6 +1,5 @@
 package org.upe.controllers;
 
-import jakarta.inject.Inject;
 import org.upe.controllers.interfaces.UserControllerInterface;
 import org.upe.persistence.DAO.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
@@ -8,8 +7,11 @@ import org.upe.persistence.model.User;
 import org.upe.utils.PasswordUtil;
 
 public class UserController implements UserControllerInterface {
-    @Inject
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
+
+    public UserController(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     public UserInterface getUserByCPF(String cpf) {
         return userDAO.findByCPF(cpf);

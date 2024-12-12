@@ -13,10 +13,15 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class EventController implements EventControllerInterface {
-    private static final EventDAO eventDAO = new EventDAO();
-    private static final UserDAO userDAO = new UserDAO();
-    private static final ArticleDAO articleDAO = new ArticleDAO();
+    private final EventDAO eventDAO;
+    private final UserDAO userDAO;
+    private final ArticleDAO articleDAO;
 
+    public EventController(EventDAO eventDAO, UserDAO userDAO, ArticleDAO articleDAO) {
+        this.eventDAO = eventDAO;
+        this.userDAO = userDAO;
+        this.articleDAO = articleDAO;
+    }
 
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
                                       String organization) {

@@ -2,6 +2,7 @@ package org.upe.facade;
 
 import org.upe.controllers.*;
 import org.upe.controllers.interfaces.*;
+import org.upe.persistence.DAO.*;
 import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
@@ -18,12 +19,12 @@ public class Facade implements FacadeInterface {
     private final SessionControllerInterface sessionController;
 
     public Facade() {
-        this.authController = new AuthController();
-        this.eventController = new EventController();
-        this.subEventController = new SubEventController();
-        this.userController = new UserController();
-        this.articleController = new ArticleController();
-        this.sessionController = new SessionController();
+        this.authController = new AuthController(new UserDAO());
+        this.eventController = new EventController(new EventDAO(), new UserDAO(), new ArticleDAO());
+        this.subEventController = new SubEventController(new SubEventDAO(), new UserDAO());
+        this.userController = new UserController(new UserDAO());
+        this.articleController = new ArticleController(new ArticleDAO(), new EventDAO());
+        this.sessionController = new SessionController(new SessionDAO());
     }
 
 
