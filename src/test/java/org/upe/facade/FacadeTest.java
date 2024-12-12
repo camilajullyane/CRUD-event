@@ -7,10 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.*;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.model.Session;
-import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.model.User;
+import org.upe.persistence.model.*;
 import org.upe.utils.PasswordUtil;
 
 
@@ -34,7 +31,9 @@ public class FacadeTest {
     private static UserInterface userDontSubscribedToSubEvent;
     private static SubEventInterface testSubEvent;
     private static EventInterface testEvent;
+    private static EventInterface testEventWithArticle;
     private static ArticleInterface testArticle;
+    private static ArticleInterface testArticleToBeDeleted;
     private static SessionInterface testSession;
 
     @BeforeAll
@@ -60,6 +59,17 @@ public class FacadeTest {
                 .withOwner((User) userWithEvent)
                 .build();
 
+        testEventWithArticle = Event.Builder()
+                .withName("Google I/O")
+                .withDescription("A Google Event2")
+                .withBeginDate(LocalDate.now())
+                .withEndDate(LocalDate.now())
+                .withLocal("Google HQ2")
+                .withOrganization("Google2")
+                .withOwner((User) userWithEvent)
+                .build();
+
+
         testSubEvent = SubEvent.Builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
 
         testSession = Session.Builder()
@@ -73,11 +83,25 @@ public class FacadeTest {
                 .withParentSubEvent(testSubEvent)
                 .build();
 
+        testArticle = Article.Builder()
+                .withArticleAbstract("Abstract")
+                .withTitle("Test Article")
+                .build();
+
+        testArticleToBeDeleted = Article.Builder()
+                .withArticleAbstract("Abstract")
+                .withTitle("Test Article")
+                .build();
+
         entityManager.persist(userWithEvent);
         entityManager.persist(userDontSubscribedToEvent);
         entityManager.persist(userSubscribedToEvent);
         entityManager.persist(userSubscribedToEvent2);
         entityManager.persist(testEvent);
+        entityManager.persist(testEventWithArticle);
+
+        entityManager.persist(testArticle);
+        entityManager.persist(testArticleToBeDeleted);
 
         entityManager.persist(testSubEvent);
         entityManager.persist(userSubscribedToSubEvent);
@@ -85,6 +109,8 @@ public class FacadeTest {
         testSubEvent.addAttendeeOnSubEvent(userSubscribedToSubEvent);
         entityManager.merge(userSubscribedToSubEvent);
         entityManager.merge(testSubEvent);
+        entityManager.merge(testSession);
+
 
         userSubscribedToEvent.subscribeToEvent(testEvent);
         userSubscribedToEvent2.subscribeToEvent(testEvent);
@@ -94,6 +120,11 @@ public class FacadeTest {
         entityManager.merge(userSubscribedToEvent);
         entityManager.merge(userSubscribedToEvent2);
         entityManager.merge(testEvent);
+        entityManager.merge(testEventWithArticle);
+
+        entityManager.merge(testArticle);
+        entityManager.merge(testArticleToBeDeleted);
+
 
 
         transaction.commit();
@@ -192,6 +223,18 @@ public class FacadeTest {
                 .filter(u -> u.getCpf().equals(userDontSubscribedToEvent.getCpf()))
                 .findFirst();
         assertTrue(attendee.isPresent());
+    }
+
+    @Test
+    void testAddArticleOnList() {
+        boolean result = facade.addArticleOnList(testArticle, testEventWithArticle);
+        assertTrue(result);
+        EventInterface event = facade.getEventByID(testEventWithArticle.getId());
+        Optional<ArticleInterface> article = event.getArticles()
+                .stream()
+                .filter(a -> a.getId().equals(testArticle.getId()))
+                .findFirst();
+        assertTrue(article.isPresent());
     }
 
     @Test
@@ -305,6 +348,12 @@ public class FacadeTest {
     }
 
     @Test
+    void testRemoveAttendeeSubEventOnList() {
+        boolean result = facade.removeAttendeeSubEventOnList(userSubscribedToSubEvent, testSubEvent);
+        assertTrue(result);
+    }
+
+    @Test
     void testGetUserByCPF() {
         UserInterface user = facade.getUserByCPF("12345678910");
         assertNotNull(user);
@@ -334,8 +383,30 @@ public class FacadeTest {
 
     @Test
     void testCreateArticle() {
-
+        ArticleInterface article = facade.createArticle(userWithEvent, "Test Article", "Test Article Abstract");
+        assertNotNull(article);
+        assertEquals("Test Article", article.getTitle());
     }
+
+    @Test
+    void testSubmitArticle() {
+        boolean result = facade.submitArticle(testArticle, testEvent);
+        assertTrue(result);
+        EventInterface event = facade.getEventByID(testEvent.getId());
+        Optional<ArticleInterface> article = event.getArticles()
+                .stream()
+                .filter(a -> a.getId().equals(testArticle.getId()))
+                .findFirst();
+        assertTrue(article.isPresent());
+    }
+
+    @Test
+    void testDeleteArticle() {
+        boolean result = facade.deleteArticle(testArticleToBeDeleted);
+        assertTrue(result);
+    }
+
+
     @Test
     public void testCreateSession() {
         SessionInterface session = facade.createSession("Test Session", LocalDate.now(), LocalDate.now().atStartOfDay(), LocalDate.now().atStartOfDay().plusHours(1), "Test Local", "Test Description", "Test Speaker", testSubEvent);

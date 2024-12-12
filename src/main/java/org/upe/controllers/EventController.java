@@ -1,8 +1,10 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.EventControllerInterface;
+import org.upe.persistence.DAO.ArticleDAO;
 import org.upe.persistence.DAO.EventDAO;
 import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
@@ -13,6 +15,7 @@ import java.util.*;
 public class EventController implements EventControllerInterface {
     private static final EventDAO eventDAO = new EventDAO();
     private static final UserDAO userDAO = new UserDAO();
+    private static final ArticleDAO articleDAO = new ArticleDAO();
 
 
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local,
@@ -46,6 +49,19 @@ public class EventController implements EventControllerInterface {
         event.addAttendeeOnEvent(user);
         eventDAO.update(event);
         userDAO.update((User) user);
+        return true;
+    }
+
+    public boolean addArticleOnList(ArticleInterface article, EventInterface event) {
+        for (ArticleInterface a : event.getArticles()) {
+            if (a.getId().equals(article.getId())) {
+                return false;
+            }
+        }
+        event.addArticleOnEvent(article);
+        eventDAO.update(event);
+        article.getSubmittedIn().add(event);
+        articleDAO.update(article);
         return true;
     }
 

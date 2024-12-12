@@ -80,6 +80,10 @@ public class Facade implements FacadeInterface {
         return eventController.deleteEvent(event, user);
     }
 
+    public boolean addArticleOnList(ArticleInterface article, EventInterface event) {
+        return eventController.addArticleOnList(article, event);
+    }
+
 
 
     // SubEventController methods
@@ -111,8 +115,8 @@ public class Facade implements FacadeInterface {
         return subEventController.deleteSubEvent(id);
     }
 
-    public void removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent) {
-        subEventController.removeAttendeeSubEventOnList(user,subEvent);
+    public boolean removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent) {
+        return subEventController.removeAttendeeSubEventOnList(user,subEvent);
     }
 
 
@@ -133,8 +137,8 @@ public class Facade implements FacadeInterface {
 
 
     // ArticlesController methods
-    public void createArticle(UserInterface user, String name, String articleAbstract) {
-        articleController.createArticle(user, name, articleAbstract);
+    public ArticleInterface createArticle(UserInterface user, String title, String articleAbstract) {
+        return articleController.createArticle(user, title, articleAbstract);
     }
 
     public boolean submitArticle(ArticleInterface article, EventInterface event) {

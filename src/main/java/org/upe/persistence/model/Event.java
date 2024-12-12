@@ -73,6 +73,10 @@ public class Event implements EventInterface {
         user.getAttendeeOn().remove(this);
     }
 
+    public void addArticleOnEvent(ArticleInterface article) {
+        this.articles.add((Article) article);
+    }
+
     // UserBuilder interno
     public static class EventBuilder {
         private String name;

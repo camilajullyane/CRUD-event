@@ -9,4 +9,5 @@ public interface ArticleInterface {
     UserInterface getUser();
     String getArticleAbstract();
     List<EventInterface> getSubmittedIn();
+    void addSubmittedIn(EventInterface event);
 }
