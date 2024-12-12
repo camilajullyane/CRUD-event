@@ -1,10 +1,8 @@
 package org.upe.persistence.interfaces;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import org.upe.persistence.interfaces.UserInterface;
 
 public interface EventInterface {
     UUID getId();
