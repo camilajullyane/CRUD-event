@@ -20,6 +20,7 @@
          new StartApp().start(stage);
      }
 
+
      @Test
      public void testAppStart() {
          assertNotNull(stage, "A aplicação não foi iniciada corretamente.");
