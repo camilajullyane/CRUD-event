@@ -52,7 +52,6 @@ public class User implements UserInterface {
     }
 
 
-
     public List<EventInterface> getAttendeeOn() {
         return new ArrayList<>(attendeeOn);
     }
