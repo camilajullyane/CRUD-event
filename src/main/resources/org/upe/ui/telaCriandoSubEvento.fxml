@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="createSubEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateSubEventController">
+<StackPane fx:id="createSubEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CreateSubEventController">
 
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
@@ -78,7 +78,7 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventDescription" layoutX="98.0" layoutY="221.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventDescription" layoutX="99.0" layoutY="299.0" prefHeight="25.0" prefWidth="256.0" promptText="Descrição" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
@@ -93,12 +93,12 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="subEventSpeaker" layoutX="98.0" layoutY="189.0" prefHeight="25.0" prefWidth="256.0" promptText="Palestrante" style="-fx-background-radius: 25;">
+                <TextField fx:id="subEventSpeaker" layoutX="97.0" layoutY="261.0" prefHeight="25.0" prefWidth="256.0" promptText="Palestrante" style="-fx-background-radius: 25;">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <Button fx:id="publishSubEvent" layoutX="143.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleCreateSubEvent" prefHeight="46.0" prefWidth="167.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Publicar SubEvento" textFill="WHITE">
+                <Button fx:id="publishSubEvent" layoutX="144.0" layoutY="331.0" mnemonicParsing="false" onAction="#handleCreateSubEvent" prefHeight="38.0" prefWidth="147.0" style="-fx-background-color: #2DD4BF; -fx-background-radius: 25;" text="Publicar SubEvento" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -107,6 +107,8 @@
                </font>
                 </Button>
             <Label fx:id="errorMessage" layoutX="97.0" layoutY="294.0" prefHeight="17.0" prefWidth="147.0" text="Preencha todos os campos" textFill="#ff4949" visible="false" />
+            <DatePicker fx:id="beginDate" layoutX="99.0" layoutY="189.0" prefHeight="25.0" prefWidth="256.0" promptText="Data de início" />
+            <DatePicker fx:id="endDate" layoutX="97.0" layoutY="222.0" prefHeight="25.0" prefWidth="256.0" promptText="Data de término" />
             </children>
         </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">

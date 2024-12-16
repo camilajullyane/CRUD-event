@@ -8,9 +8,7 @@ import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
-import java.util.Date;
 
 public class EditEventController {
     private final FacadeInterface facade = new Facade();

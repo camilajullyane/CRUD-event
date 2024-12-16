@@ -1,3 +1,0 @@
-id,parentEventID,name,date,hour,local,description,speaker,attendeesList
-1,1,Sub Event 1,2023-10-10,10:00,Sub Location 1,Sub Description 1,Speaker 1,
-2,1,Sub Event 2,2023-10-10,11:00,Sub Location 2,Sub Description 2,Speaker 2,

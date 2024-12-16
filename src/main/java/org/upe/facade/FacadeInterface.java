@@ -1,11 +1,9 @@
 package org.upe.facade;
 
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,14 +23,17 @@ public interface FacadeInterface {
     boolean editEventDescription(EventInterface event, String newDescription);
     boolean editEventOrganization(EventInterface event, String newOrganization);
     boolean deleteEvent(EventInterface event, UserInterface user);
+    boolean addArticleOnList(ArticleInterface article, EventInterface event);
 
     // SubEventController methods
-    SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker);
+    SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date,LocalDate endDate, String description);
     boolean editSubEventName(SubEventInterface subEvent, String newName);
     boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
-    boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker);
+    SubEventInterface getSubEventByID(UUID id);
+    boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
     boolean deleteSubEvent(UUID id);
+    boolean removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent);
 
     // UserController methods
     boolean changeEmail(String userEmail, String newEmail);
@@ -40,6 +41,11 @@ public interface FacadeInterface {
     UserInterface getUserByCPF(String cpf);
 
     // ArticleController methods
-    void createArticle(UserInterface user, String name, String articleAbstract);
+    ArticleInterface createArticle(UserInterface user, String title, String articleAbstract);
     boolean submitArticle(ArticleInterface article, EventInterface event);
+    boolean deleteArticle(ArticleInterface article);
+
+    //SessionController methods
+    SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent);
+    boolean deleteSession(UUID id);
 }

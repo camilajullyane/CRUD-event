@@ -1,10 +1,10 @@
 package org.upe.controllers.interfaces;
 
+import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +15,8 @@ public interface EventControllerInterface {
     boolean deleteAttendeeOnList(UserInterface user, EventInterface event);
     boolean deleteEvent(EventInterface event, UserInterface user);
     EventInterface getEventById(UUID id);
+    boolean addArticleOnList(ArticleInterface article, EventInterface event);
+
 
     boolean updateName(EventInterface event, String name);
     boolean updateLocal(EventInterface event, String local);

@@ -2,12 +2,10 @@ package org.upe.facade;
 
 import org.upe.controllers.*;
 import org.upe.controllers.interfaces.*;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +15,7 @@ public class Facade implements FacadeInterface {
     private final SubEventControllerInterface subEventController;
     private final UserControllerInterface userController;
     private final ArticleControllerInterface articleController;
+    private final SessionControllerInterface sessionController;
 
     public Facade() {
         this.authController = new AuthController();
@@ -24,7 +23,10 @@ public class Facade implements FacadeInterface {
         this.subEventController = new SubEventController();
         this.userController = new UserController();
         this.articleController = new ArticleController();
+        this.sessionController = new SessionController();
     }
+
+
 
     // AuthController methods
     public UserInterface loginUser(String cpf, String password) {
@@ -34,6 +36,8 @@ public class Facade implements FacadeInterface {
     public UserInterface signUpUser(String name, String cpf, String email, String password) {
         return authController.signUpUser(name, cpf, email, password);
     }
+
+
 
     // EventController methods
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization) {
@@ -76,9 +80,19 @@ public class Facade implements FacadeInterface {
         return eventController.deleteEvent(event, user);
     }
 
+    public boolean addArticleOnList(ArticleInterface article, EventInterface event) {
+        return eventController.addArticleOnList(article, event);
+    }
+
+
+
     // SubEventController methods
-    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date, String description, String speaker) {
-        return subEventController.createSubEvent(parentEvent, name, date, description, speaker);
+    public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate, LocalDate endDate, String description) {
+        return subEventController.createSubEvent(parentEvent, name, beginDate,endDate, description);
+    }
+
+    public boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
+        return subEventController.addAttendeeSubEventOnList(user, subEvent);
     }
 
     public boolean editSubEventName(SubEventInterface subEvent, String newName) {
@@ -93,16 +107,21 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventDescription(subEvent, newDescription);
     }
 
-    public boolean editSubEventSpeaker(SubEventInterface subEvent, String newSpeaker) {
-        return subEventController.editSubEventSpeaker(subEvent, newSpeaker);
+    public SubEventInterface getSubEventByID(UUID id) {
+        return subEventController.getSubEventByID(id);
     }
 
     public boolean deleteSubEvent(UUID id) {
         return subEventController.deleteSubEvent(id);
     }
 
-    // UserController methods
+    public boolean removeAttendeeSubEventOnList(UserInterface user,SubEventInterface subEvent) {
+        return subEventController.removeAttendeeSubEventOnList(user,subEvent);
+    }
 
+
+
+    // UserController methods
     public UserInterface getUserByCPF(String cpf) {
         return userController.getUserByCPF(cpf);
     }
@@ -115,16 +134,30 @@ public class Facade implements FacadeInterface {
         return userController.changePassword(user, currentPassword, newPassword);
     }
 
-    // ArticlesController methods
 
-    public void createArticle(UserInterface user, String name, String articleAbstract) {
-        articleController.createArticle(user, name, articleAbstract);
+
+    // ArticlesController methods
+    public ArticleInterface createArticle(UserInterface user, String title, String articleAbstract) {
+        return articleController.createArticle(user, title, articleAbstract);
     }
 
     public boolean submitArticle(ArticleInterface article, EventInterface event) {
         return articleController.submitArticle(article, event);
     }
 
+    public boolean deleteArticle(ArticleInterface article) {
+        return articleController.deleteArticle(article);
+    }
 
+
+
+    //SessionController methods
+    public SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
+        return sessionController.create(name,date, beginHour, endHour, local, description, speaker, parentSubEvent);
+    }
+
+    public boolean deleteSession(UUID id) {
+        return sessionController.delete(id);
+    }
 
 }

@@ -1,10 +1,8 @@
 package org.upe.persistence.interfaces;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import org.upe.persistence.interfaces.UserInterface;
 
 public interface EventInterface {
     UUID getId();
@@ -16,6 +14,8 @@ public interface EventInterface {
     List<SubEventInterface> getSubEvents();
     List<ArticleInterface> getArticles();
     String getLocal();
+    LocalDate getBeginDate();
+    LocalDate getEndDate();
     void setLocal(String local);
     void setOrganization(String organization);
     void setDescription(String description);
@@ -24,4 +24,6 @@ public interface EventInterface {
     void setEndDate(LocalDate newEndDate);
     void addAttendeeOnEvent(UserInterface user);
     void removeAttendeeOnEvent(UserInterface user);
+    boolean isPrivateEvent();
+    void addArticleOnEvent(ArticleInterface article);
 }

@@ -8,6 +8,7 @@ module crudEvent {
     requires io.github.cdimascio.dotenv.java;
     requires static lombok;
     requires spring.security.crypto;
+    requires spring.core;
 
     opens org.upe.ui to javafx.fxml;
     exports org.upe.ui;
