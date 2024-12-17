@@ -3,11 +3,9 @@ package org.upe.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
-import org.springframework.cglib.core.Local;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
-import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;

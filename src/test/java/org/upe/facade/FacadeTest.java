@@ -6,13 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.model.Event;
-import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.model.User;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
+import org.upe.persistence.model.*;
 import org.upe.utils.PasswordUtil;
 
 
@@ -36,22 +31,25 @@ public class FacadeTest {
     private static UserInterface userDontSubscribedToSubEvent;
     private static SubEventInterface testSubEvent;
     private static EventInterface testEvent;
+    private static EventInterface testEventWithArticle;
     private static ArticleInterface testArticle;
+    private static ArticleInterface testArticleToBeDeleted;
+    private static SessionInterface testSession;
 
     @BeforeAll
     public static void setUP() {
         EntityManager entityManager = EntityManagerFactory.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        userWithEvent = new User("john doe", "12345678910", "john.doe@email.com","password");
-        userSubscribedToEvent = new User("Dwight Schrute", "15348964812", "shrute@dundermifflin.com", "password");
-        userSubscribedToEvent2 = new User("Jim Halpert", "15348964855", "jim@dundermifflin.com", "password");
-        userDontSubscribedToEvent = new User("Michael Scott", "12345678913", "scott@dundermifflin.com", "password");
+        userWithEvent =  User.Builder().withName("John doe").withCpf("12345678910").withEmail("john.doe@email.com").withPassword("password").build();
+        userSubscribedToEvent = User.Builder().withName("Dwight Schrute").withCpf("15348964812").withEmail("shrute@dundermifflin.com").withPassword("password").build();
+        userSubscribedToEvent2 = User.Builder().withName("Jim Halpert").withCpf("15348964855").withEmail("jim@dundermifflin.com").withPassword("password").build();
+        userDontSubscribedToEvent = User.Builder().withName("Michael Scott").withCpf("12345678913").withEmail("scott@dundermifflin.com").withPassword("password").build();
 
-        userSubscribedToSubEvent = new User("Pam Beesly", "15348964813", "beesly@example.com", "password");
-        userDontSubscribedToSubEvent = new User("Ryan Howard", "15348964892", "howard@example.com", "password");
+        userSubscribedToSubEvent = User.Builder().withName("Pam Beesly").withCpf("15348964813").withEmail("beesly@example.com").withPassword("password").build();
+        userDontSubscribedToSubEvent = User.Builder().withName("Ryan Howard").withCpf("15348964892").withEmail("howard@example.com").withPassword("password").build();
 
-        testEvent = Event.builder()
+        testEvent = Event.Builder()
                 .withName("Google I/O")
                 .withDescription("A Google Event")
                 .withBeginDate(LocalDate.now())
@@ -61,13 +59,49 @@ public class FacadeTest {
                 .withOwner((User) userWithEvent)
                 .build();
 
-        testSubEvent = new SubEvent("Google I/O - Day 1", "Google HQ", LocalDate.now(),LocalDate.now(), testEvent);
+        testEventWithArticle = Event.Builder()
+                .withName("Google I/O")
+                .withDescription("A Google Event2")
+                .withBeginDate(LocalDate.now())
+                .withEndDate(LocalDate.now())
+                .withLocal("Google HQ2")
+                .withOrganization("Google2")
+                .withOwner((User) userWithEvent)
+                .build();
+
+
+        testSubEvent = SubEvent.Builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
+
+        testSession = Session.Builder()
+                .withName("Test Session")
+                .withDate(LocalDate.now())
+                .withBeginHour(LocalDate.now().atStartOfDay())
+                .withEndHour(LocalDate.now().atStartOfDay().plusHours(1))
+                .withLocal("Test Local")
+                .withDescription("Test Description")
+                .withSpeaker("Test Speaker")
+                .withParentSubEvent(testSubEvent)
+                .build();
+
+        testArticle = Article.Builder()
+                .withArticleAbstract("Abstract")
+                .withTitle("Test Article")
+                .build();
+
+        testArticleToBeDeleted = Article.Builder()
+                .withArticleAbstract("Abstract")
+                .withTitle("Test Article")
+                .build();
 
         entityManager.persist(userWithEvent);
         entityManager.persist(userDontSubscribedToEvent);
         entityManager.persist(userSubscribedToEvent);
         entityManager.persist(userSubscribedToEvent2);
         entityManager.persist(testEvent);
+        entityManager.persist(testEventWithArticle);
+
+        entityManager.persist(testArticle);
+        entityManager.persist(testArticleToBeDeleted);
 
         entityManager.persist(testSubEvent);
         entityManager.persist(userSubscribedToSubEvent);
@@ -75,6 +109,8 @@ public class FacadeTest {
         testSubEvent.addAttendeeOnSubEvent(userSubscribedToSubEvent);
         entityManager.merge(userSubscribedToSubEvent);
         entityManager.merge(testSubEvent);
+        entityManager.merge(testSession);
+
 
         userSubscribedToEvent.subscribeToEvent(testEvent);
         userSubscribedToEvent2.subscribeToEvent(testEvent);
@@ -84,6 +120,11 @@ public class FacadeTest {
         entityManager.merge(userSubscribedToEvent);
         entityManager.merge(userSubscribedToEvent2);
         entityManager.merge(testEvent);
+        entityManager.merge(testEventWithArticle);
+
+        entityManager.merge(testArticle);
+        entityManager.merge(testArticleToBeDeleted);
+
 
 
         transaction.commit();
@@ -95,39 +136,39 @@ public class FacadeTest {
     }
 
     @Test
-    public void testLoginUser() {
+    void testLoginUser() {
         UserInterface user = facade.loginUser("12345678910", "password");
         assertNotNull(user);
         assertEquals("12345678910", user.getCpf());
     }
 
     @Test
-    public void testLoginUserWithWrongPassword() {
+    void testLoginUserWithWrongPassword() {
         UserInterface user = facade.loginUser("12345678910", "wrongpassword");
         assertNull(user);
     }
 
     @Test
-    public void TestLoginUserWithWrongCPF() {
+    void TestLoginUserWithWrongCPF() {
         UserInterface user = facade.loginUser("12345678911", "password");
         assertNull(user);
     }
 
     @Test
-    public void testSignUpUser() {
+    void testSignUpUser() {
         UserInterface user = facade.signUpUser("Jane Doe", "10987654321", "jane.doe@test.com", "password");
         assertNotNull(user);
         assertEquals("10987654321", user.getCpf());
     }
 
     @Test
-    public void testSignUpUserWithAExistingCPF() {
+    void testSignUpUserWithAExistingCPF() {
         UserInterface user = facade.signUpUser("test", "12345678910", "test@gmail.com", "password");
         assertNull(user);
     }
 
     @Test
-    public void testSignUpUserWithAExistingEmail() {
+    void testSignUpUserWithAExistingEmail() {
         UserInterface user = facade.signUpUser("test", "12345678910", "john.doe@email.com", "password");
         assertNull(user);
     }
@@ -135,45 +176,45 @@ public class FacadeTest {
     //Testes Event
 
     @Test
-    public void testCreateEvent() {
+    void testCreateEvent() {
         EventInterface event = facade.createEvent(userWithEvent, "Test Event", "Test Event Description", LocalDate.now(), LocalDate.now(), "Test Local", "Test Organization");
         assertNotNull(event);
         assertEquals("Test Event", event.getName());
     }
 
     @Test
-    public void testGetAllEvents() {
+    void testGetAllEvents() {
         List<EventInterface> events = facade.getAllEvents();
         assertNotNull(events);
         assertFalse(events.isEmpty());
     }
 
     @Test
-    public void testGetEventByID() {
+    void testGetEventByID() {
         EventInterface event = facade.getEventByID(testEvent.getId());
         assertNotNull(event);
         assertEquals(testEvent.getId(), event.getId());
     }
 
     @Test
-    public void testGetEventByIDWithWrongID() {
+    void testGetEventByIDWithWrongID() {
         EventInterface event = facade.getEventByID(UUID.randomUUID());
         assertNull(event);
     }
     @Test
-    public void testAddAttendeeOnListWithAttendeeAlreadyOnList() {
+    void testAddAttendeeOnListWithAttendeeAlreadyOnList() {
         boolean result = facade.addAttendeeOnList(userSubscribedToEvent, testEvent);
         assertFalse(result);
     }
 
     @Test
-    public void testAddOwnerOnHisOwnEvent() {
+    void testAddOwnerOnHisOwnEvent() {
         boolean result = facade.addAttendeeOnList(userWithEvent, testEvent);
         assertFalse(result);
     }
 
     @Test
-    public void testAddAttendeeOnList() {
+    void testAddAttendeeOnList() {
         boolean result = facade.addAttendeeOnList(userDontSubscribedToEvent, testEvent);
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -185,7 +226,19 @@ public class FacadeTest {
     }
 
     @Test
-    public void testDeleteAttendeeOnList() {
+    void testAddArticleOnList() {
+        boolean result = facade.addArticleOnList(testArticle, testEventWithArticle);
+        assertTrue(result);
+        EventInterface event = facade.getEventByID(testEventWithArticle.getId());
+        Optional<ArticleInterface> article = event.getArticles()
+                .stream()
+                .filter(a -> a.getId().equals(testArticle.getId()))
+                .findFirst();
+        assertTrue(article.isPresent());
+    }
+
+    @Test
+    void testDeleteAttendeeOnList() {
         boolean result = facade.deleteAttendeeOnList(userSubscribedToEvent2, testEvent);
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -197,7 +250,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventName() {
+    void testEditEventName() {
         boolean result = facade.editEventName(testEvent, "New Event Name");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -205,7 +258,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventLocal() {
+    void testEditEventLocal() {
         boolean result = facade.editEventLocal(testEvent, "New Local");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -213,7 +266,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventDescription() {
+    void testEditEventDescription() {
         boolean result = facade.editEventDescription(testEvent, "New Description");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -221,7 +274,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditEventOrganization() {
+    void testEditEventOrganization() {
         boolean result = facade.editEventOrganization(testEvent, "New Organization");
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEvent.getId());
@@ -229,7 +282,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testDeleteEvent() {
+    void testDeleteEvent() {
         boolean result = facade.deleteEvent(testEvent, userWithEvent);
         assertTrue(result);
     }
@@ -237,14 +290,14 @@ public class FacadeTest {
     //Testes SubEvent
 
     @Test
-    public void testCreateSubEvent() {
+    void testCreateSubEvent() {
         SubEventInterface subEvent = facade.createSubEvent(testEvent, "Test SubEvent", LocalDate.now(), LocalDate.now(),"Test SubEvent Description");
         assertNotNull(subEvent);
         assertEquals("Test SubEvent", subEvent.getName());
     }
 
     @Test
-    public void testAddAttendeeOnSubEventList() {
+    void testAddAttendeeOnSubEventList() {
         boolean result = facade.addAttendeeSubEventOnList(userDontSubscribedToSubEvent, testSubEvent);
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
@@ -257,13 +310,13 @@ public class FacadeTest {
     }
 
     @Test
-    public void testAddAttendeeOnSubEventListWithAttendeeAlreadyOnList() {
+    void testAddAttendeeOnSubEventListWithAttendeeAlreadyOnList() {
         boolean result = facade.addAttendeeSubEventOnList(userSubscribedToSubEvent, testSubEvent);
         assertFalse(result);
     }
 
     @Test
-    public void testEditSubEventName() {
+    void testEditSubEventName() {
         boolean result = facade.editSubEventName(testSubEvent, "New SubEvent Name");
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
@@ -271,7 +324,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditSubEventDate() {
+    void testEditSubEventDate() {
         LocalDate newDate = LocalDate.now().plusDays(1);
         boolean result = facade.editSubEventDate(testSubEvent, newDate);
         assertTrue(result);
@@ -280,7 +333,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testEditSubEventDescription() {
+    void testEditSubEventDescription() {
         boolean result = facade.editSubEventDescription(testSubEvent, "New Description");
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
@@ -289,25 +342,31 @@ public class FacadeTest {
 
 
     @Test
-    public void testDeleteSubEvent() {
+    void testDeleteSubEvent() {
         boolean result = facade.deleteSubEvent(testSubEvent.getId());
         assertTrue(result);
     }
 
     @Test
-    public void testGetUserByCPF() {
+    void testRemoveAttendeeSubEventOnList() {
+        boolean result = facade.removeAttendeeSubEventOnList(userSubscribedToSubEvent, testSubEvent);
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetUserByCPF() {
         UserInterface user = facade.getUserByCPF("12345678910");
         assertNotNull(user);
         assertEquals("12345678910", user.getCpf());
     }
     @Test
-    public void testGetUserByCPFWithWrongCPF() {
+    void testGetUserByCPFWithWrongCPF() {
         UserInterface user = facade.getUserByCPF("12345568911");
         assertNull(user);
     }
 
     @Test
-    public void testChangeEmail() {
+    void testChangeEmail() {
         boolean result = facade.changeEmail(userWithEvent.getEmail(), "newemail@gmail.com");
         assertTrue(result);
         UserInterface user = facade.getUserByCPF(userWithEvent.getCpf());
@@ -315,7 +374,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testChangePassword() {
+    void testChangePassword() {
         boolean result = facade.changePassword(userWithEvent, "password", "newpassword");
         assertTrue(result);
         User user = (User) facade.getUserByCPF(userWithEvent.getCpf());
@@ -323,7 +382,41 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateArticle() {
+    void testCreateArticle() {
+        ArticleInterface article = facade.createArticle(userWithEvent, "Test Article", "Test Article Abstract");
+        assertNotNull(article);
+        assertEquals("Test Article", article.getTitle());
+    }
 
+    @Test
+    void testSubmitArticle() {
+        boolean result = facade.submitArticle(testArticle, testEvent);
+        assertTrue(result);
+        EventInterface event = facade.getEventByID(testEvent.getId());
+        Optional<ArticleInterface> article = event.getArticles()
+                .stream()
+                .filter(a -> a.getId().equals(testArticle.getId()))
+                .findFirst();
+        assertTrue(article.isPresent());
+    }
+
+    @Test
+    void testDeleteArticle() {
+        boolean result = facade.deleteArticle(testArticleToBeDeleted);
+        assertTrue(result);
+    }
+
+
+    @Test
+    public void testCreateSession() {
+        SessionInterface session = facade.createSession("Test Session", LocalDate.now(), LocalDate.now().atStartOfDay(), LocalDate.now().atStartOfDay().plusHours(1), "Test Local", "Test Description", "Test Speaker", testSubEvent);
+        assertNotNull(session);
+        assertEquals("Test Session", session.getName());
+    }
+
+    @Test
+    public void testDeleteSession() {
+        boolean result = facade.deleteSession(testSession.getId());
+        assertTrue(result);
     }
 }

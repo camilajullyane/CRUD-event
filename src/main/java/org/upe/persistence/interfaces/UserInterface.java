@@ -15,4 +15,5 @@ public interface UserInterface {
     void addMyEventAsOwner(EventInterface event);
     void unsubscribeToEvent(EventInterface event);
     void unsubscribeToSubEvent(SubEventInterface subEvent);
+    void addArticle(ArticleInterface article);
 }

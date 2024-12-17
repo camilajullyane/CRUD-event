@@ -1,10 +1,8 @@
 package org.upe.persistence.interfaces;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import org.upe.persistence.interfaces.UserInterface;
 
 public interface EventInterface {
     UUID getId();
@@ -27,4 +25,5 @@ public interface EventInterface {
     void addAttendeeOnEvent(UserInterface user);
     void removeAttendeeOnEvent(UserInterface user);
     boolean isPrivateEvent();
+    void addArticleOnEvent(ArticleInterface article);
 }

@@ -51,6 +51,7 @@ public class User implements UserInterface {
         this.password = password;
     }
 
+
     public List<EventInterface> getAttendeeOn() {
         return new ArrayList<>(attendeeOn);
     }
@@ -83,31 +84,33 @@ public class User implements UserInterface {
         this.ownerOf.add((Event) event);
     }
 
-    // Implementação do padrão Builder
-    public static class Builder {
+    public void addArticle(ArticleInterface article) {
+        this.articles.add((Article) article);
+    }
+
+    // Implementação do padrão UserBuilder
+    public static class UserBuilder {
         private String name;
         private String cpf;
         private String email;
         private String password;
 
-        public Builder() {}
-
-        public Builder withName(String name) {
+        public UserBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder withCpf(String cpf) {
+        public UserBuilder withCpf(String cpf) {
             this.cpf = cpf;
             return this;
         }
 
-        public Builder withEmail(String email) {
+        public UserBuilder withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder withPassword(String password) {
+        public UserBuilder withPassword(String password) {
             this.password = PasswordUtil.encodePassword(password);
             return this;
         }
@@ -115,5 +118,9 @@ public class User implements UserInterface {
         public User build() {
             return new User(name, cpf, email, password);
         }
+    }
+
+    public static UserBuilder Builder() {
+        return new UserBuilder();
     }
 }
