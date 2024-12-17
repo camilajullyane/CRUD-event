@@ -41,6 +41,8 @@ public class User implements UserInterface {
     private List<Event> ownerOf = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Certificate> certificateList = new ArrayList<>();
 
     public User() {}
 
