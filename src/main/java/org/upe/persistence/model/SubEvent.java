@@ -20,28 +20,27 @@ public class SubEvent implements SubEventInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private boolean isCertified;
     private String name;
     private String description;
     private LocalDate beginDate;
     private LocalDate endDate;
     private boolean privateSubEvent;
-    private boolean isCertified;
-
     @ManyToMany(mappedBy = "subEventAttendeeOn")
     private List<User> subEventAttendeesList = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "parentEvent_id")
     protected Event parentEvent;
 
-    @OneToMany(mappedBy = "parentSubEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "parentSubEvent")
     private List<Session> sessions = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "subEvent_id")
-    private List<Certificate> certificadoList = new ArrayList<>();
+    @OneToMany(mappedBy = "subEvent")
+    private List<Certificate> certificates = new ArrayList<>();
+
 
     public SubEvent(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
+        this.isCertified = false;
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;
@@ -49,7 +48,6 @@ public class SubEvent implements SubEventInterface {
         this.parentEvent = (Event) parentEvent;
     }
 
-    public SubEvent() {}
 
     public List<UserInterface> getSubEventAttendeesList() {
         return new ArrayList<>(subEventAttendeesList);
@@ -67,21 +65,22 @@ public class SubEvent implements SubEventInterface {
         return new ArrayList<>(sessions);
     }
 
-    public void addCertificate(Certificate certificate) {
-        this.certificadoList.add(certificate);
+    // Adicionar Interface
+    public List<Certificate> getCertificates() { return new ArrayList<>(certificates);}
+
+    public void setIsCertified() {
+        this.isCertified = true;
     }
 
-    public void removeCertificate(Certificate certificate) {
-        this.certificadoList.remove(certificate);
-    }
+    public SubEvent() {}
 
+    // Implementação do padrão UserBuilder
     public static class SubEventBuilder {
         private String name;
         private String description;
         private LocalDate beginDate;
-        private LocalDate endDate;
         private EventInterface parentEvent;
-        private boolean isCertified;
+        private  LocalDate endDate;
 
         public SubEventBuilder withName(String name) {
             this.name = name;
@@ -108,15 +107,8 @@ public class SubEvent implements SubEventInterface {
             return this;
         }
 
-        public SubEventBuilder withCertifiedStatus(boolean isCertified) {
-            this.isCertified = isCertified;
-            return this;
-        }
-
         public SubEvent build() {
-            SubEvent subEvent = new SubEvent(name, description, beginDate, endDate, parentEvent);
-            subEvent.setCertified(isCertified);
-            return subEvent;
+            return new SubEvent(name, description, beginDate, endDate,parentEvent);
         }
     }
 

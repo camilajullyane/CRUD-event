@@ -12,6 +12,7 @@ public interface SubEventControllerInterface {
     boolean editSubEventName(SubEventInterface subEvent, String newName);
     boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
+    boolean editSubEventIsCertified(SubEventInterface subEvent);
     boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
     boolean removeAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);
 

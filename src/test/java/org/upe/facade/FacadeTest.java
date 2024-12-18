@@ -30,6 +30,7 @@ public class FacadeTest {
     private static UserInterface userSubscribedToSubEvent;
     private static UserInterface userDontSubscribedToSubEvent;
     private static SubEventInterface testSubEvent;
+    private static SubEventInterface testSubEvent2;
     private static EventInterface testEvent;
     private static EventInterface testEventWithArticle;
     private static ArticleInterface testArticle;
@@ -71,6 +72,8 @@ public class FacadeTest {
 
 
         testSubEvent = SubEvent.builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
+        testSubEvent2 = SubEvent.builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.of(2024, 12, 15)).withEndDate(LocalDate.of(2024, 12, 16)).withParentEvent(testEvent).build();
+
 
         testSession = Session.builder()
                 .withName("Test Session")
@@ -102,6 +105,7 @@ public class FacadeTest {
 
         entityManager.persist(testArticle);
         entityManager.persist(testArticleToBeDeleted);
+        entityManager.persist(testSubEvent2);
 
         entityManager.persist(testSubEvent);
         entityManager.persist(userSubscribedToSubEvent);
@@ -110,7 +114,6 @@ public class FacadeTest {
         entityManager.merge(userSubscribedToSubEvent);
         entityManager.merge(testSubEvent);
         entityManager.merge(testSession);
-
 
         userSubscribedToEvent.subscribeToEvent(testEvent);
         userSubscribedToEvent2.subscribeToEvent(testEvent);
@@ -287,7 +290,15 @@ public class FacadeTest {
         assertTrue(result);
     }
 
-    //Testes SubEvent
+    // Testes Certificate
+    @Test
+    void testGenerateCertificate() {
+        boolean result = facade.generateCertificate();
+        assertTrue(result);
+    }
+
+
+    // Testes SubEvent
 
     @Test
     void testCreateSubEvent() {

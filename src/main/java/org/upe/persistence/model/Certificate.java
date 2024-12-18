@@ -1,71 +1,58 @@
 package org.upe.persistence.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.upe.persistence.interfaces.CertificateInterface;
+import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "certificates")
-@Getter
-@Setter
-public class Certificate {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+@Getter @Setter
+public class Certificate implements CertificateInterface {
+    @Id @GeneratedValue
     private UUID id;
 
-    private UUID subEventID;
-
-    private String subEventName;
-
-    private LocalDate subEventDate;
-
-    private String userName;
+    // Relação User
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    // Relação SubEvent
+    @ManyToOne
+    @JoinColumn(name = "subevent_id")
+    private SubEvent subEvent;
 
     public Certificate() {}
 
-    private Certificate(UUID subEventID, String subEventName, LocalDate subEventDate, String userName) {
-        this.subEventID = subEventID;
-        this.subEventName = subEventName;
-        this.subEventDate = subEventDate;
-        this.userName = userName;
+    public Certificate(User user, SubEvent subEvent) {
+        this.user = user;
+        this.subEvent = subEvent;
     }
 
-    public static class CertificadoBuilder {
-        private UUID subEventID;
-        private String subEventName;
-        private LocalDate subEventDate;
-        private String userName;
 
-        public CertificadoBuilder withSubEventID(UUID subEventID) {
-            this.subEventID = subEventID;
+    public static class Builder {
+        private UserInterface user;
+        private SubEventInterface subEvent;
+
+        public Builder withUser(UserInterface user) {
+            this.user = user;
             return this;
         }
 
-        public CertificadoBuilder withSubEventName(String subEventName) {
-            this.subEventName = subEventName;
-            return this;
-        }
-
-        public CertificadoBuilder withSubEventDate(LocalDate subEventDate) {
-            this.subEventDate = subEventDate;
-            return this;
-        }
-
-        public CertificadoBuilder withUserName(String userName) {
-            this.userName = userName;
+        public Builder withSubEvent(SubEventInterface subEvent) {
+            this.subEvent = subEvent;
             return this;
         }
 
         public Certificate build() {
-            return new Certificate(subEventID, subEventName, subEventDate, userName);
+            return new Certificate((User)user, (SubEvent)subEvent);
         }
     }
 
-    public static CertificadoBuilder builder() {
-        return new CertificadoBuilder();
+    public static Builder Builder() {
+        return new Builder();
     }
 }
