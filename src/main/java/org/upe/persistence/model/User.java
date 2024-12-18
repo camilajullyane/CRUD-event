@@ -2,10 +2,7 @@ package org.upe.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
 import org.upe.utils.PasswordUtil;
 
 import java.util.ArrayList;
@@ -89,6 +86,8 @@ public class User implements UserInterface {
     public void addArticle(ArticleInterface article) {
         this.articles.add((Article) article);
     }
+
+    public void addCertificate(CertificateInterface certificate) {this.certificateList.add((Certificate) certificate);}
 
     public static class UserBuilder {
         private String name;
