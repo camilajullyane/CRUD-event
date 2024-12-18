@@ -50,5 +50,5 @@ public interface FacadeInterface {
     boolean deleteSession(UUID id);
 
     // CertificateController methods
-    boolean certificateController();
+    boolean generateCertificate();
 }

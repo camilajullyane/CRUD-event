@@ -164,5 +164,5 @@ public class Facade implements FacadeInterface {
         return sessionController.delete(id);
     }
 
-    public boolean certificateController() {return certificateController.generateCertificate();}
+    public boolean generateCertificate() {return certificateController.generateCertificate();}
 }
