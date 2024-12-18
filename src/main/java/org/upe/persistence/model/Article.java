@@ -83,7 +83,7 @@ public class Article implements ArticleInterface {
         }
     }
 
-    public static ArticleBuilder Builder() {
+    public static ArticleBuilder builder() {
         return new ArticleBuilder();
     }
 }

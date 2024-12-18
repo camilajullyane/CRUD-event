@@ -14,7 +14,7 @@ public class CertificateDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
 
     public Certificate create(UUID subEventID, String subEventName, LocalDate subEventDate, String userName) {
-        Certificate certificate = Certificate.Builder()
+        Certificate certificate = Certificate.builder()
                 .withSubEventID(subEventID)
                 .withSubEventName(subEventName)
                 .withSubEventDate(subEventDate)

@@ -8,10 +8,7 @@ import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
 
 @Entity
 @Getter
@@ -100,7 +97,7 @@ public class Session implements SessionInterface {
         }
     }
 
-    public static Builder Builder() {
+    public static Builder builder() {
         return new Builder();
     }
 }

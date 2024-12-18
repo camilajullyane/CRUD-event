@@ -65,7 +65,7 @@ public class Certificate {
         }
     }
 
-    public static CertificadoBuilder Builder() {
+    public static CertificadoBuilder builder() {
         return new CertificadoBuilder();
     }
 }

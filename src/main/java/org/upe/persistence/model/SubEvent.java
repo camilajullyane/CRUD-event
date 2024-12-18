@@ -120,7 +120,7 @@ public class SubEvent implements SubEventInterface {
         }
     }
 
-    public static SubEventBuilder Builder() {
+    public static SubEventBuilder builder() {
         return new SubEventBuilder();
     }
 }
