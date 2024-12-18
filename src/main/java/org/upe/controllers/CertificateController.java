@@ -5,6 +5,7 @@ import org.upe.persistence.DAO.SubEventDAO;
 import org.upe.persistence.interfaces.SubEventInterface;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CertificateController {
     private CertificateDAO certificateDAO;
@@ -15,13 +16,12 @@ public class CertificateController {
         this.subEventDAO = new SubEventDAO();
     }
 
-    public void generateCertificate(SubEventInterface subEvent) {
-        if (LocalDate.now().isAfter(subEvent.getEndDate())) {
-            if (!subEvent.isCertified()){
-                subEvent.getSubEventAttendeesList().forEach(user -> certificateDAO.create(user, subEvent));
-                subEvent.setIsCertified();
-                subEventDAO.update(subEvent);
-            }
-        }
+    public void generateCertificate() {
+        List<SubEventInterface> subEventList = subEventDAO.allSubEventsWithoutCertificate();
+        subEventList.forEach(subEvent -> {
+            subEvent.getSubEventAttendeesList().forEach(user -> certificateDAO.create(user, subEvent));
+            subEvent.setIsCertified();
+            subEventDAO.update(subEvent);
+        });
     }
 }

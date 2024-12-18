@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 public class CertificateDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
     private final Logger LOGGER = Logger.getLogger(CertificateDAO.class.getName());
-
     public UserInterface create(UserInterface user, SubEventInterface subEvent) {
         try {
             Certificate certificate = Certificate.Builder()

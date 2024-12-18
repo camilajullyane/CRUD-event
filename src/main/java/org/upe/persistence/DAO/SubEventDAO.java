@@ -1,10 +1,12 @@
 package org.upe.persistence.DAO;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
+import org.upe.persistence.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -71,6 +73,16 @@ public class SubEventDAO {
         }
     }
 
+    public List<SubEventInterface> allSubEventsWithoutCertificate() {
+        try {
+            String jpql = "SELECT s FROM SubEvent s WHERE s.endDate < CURRENT_DATE AND isCertified = FALSE";
+            TypedQuery<SubEvent> query = entityManager.createQuery(jpql, SubEvent.class);
+            return new ArrayList<>(query.getResultList());
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            return null;
+        }
+    }
     public SubEventInterface getById(UUID id) {
         return entityManager.find(SubEvent.class, id);
     }
