@@ -216,7 +216,6 @@ public class MyEventsController implements Initializable {
     }
 
     private void handleCancelButton(EventInterface event) throws IOException {
-        System.out.println("entrou");
         facade.deleteEvent(event, currentUser);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Cancelar Evento");

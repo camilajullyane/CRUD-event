@@ -408,14 +408,14 @@ public class FacadeTest {
 
 
     @Test
-    public void testCreateSession() {
+    void testCreateSession() {
         SessionInterface session = facade.createSession("Test Session", LocalDate.now(), LocalDate.now().atStartOfDay(), LocalDate.now().atStartOfDay().plusHours(1), "Test Local", "Test Description", "Test Speaker", testSubEvent);
         assertNotNull(session);
         assertEquals("Test Session", session.getName());
     }
 
     @Test
-    public void testDeleteSession() {
+    void testDeleteSession() {
         boolean result = facade.deleteSession(testSession.getId());
         assertTrue(result);
     }
