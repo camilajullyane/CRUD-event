@@ -67,7 +67,7 @@ public class Event implements EventInterface {
     }
 
     public void removeAttendeeOnEvent(UserInterface user) {
-        this.attendeesList.remove((User) user);
+        this.attendeesList.remove(user);
         user.getAttendeeOn().remove(this);
     }
 

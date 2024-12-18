@@ -13,7 +13,8 @@ import java.util.UUID;
 @Entity
 @Getter @Setter
 public class Certificate implements CertificateInterface {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private UUID id;
 
     // Relação User
@@ -25,7 +26,8 @@ public class Certificate implements CertificateInterface {
     @JoinColumn(name = "subevent_id")
     private SubEvent subEvent;
 
-    public Certificate() {}
+    public Certificate() {
+    }
 
     public Certificate(User user, SubEvent subEvent) {
         this.user = user;
@@ -48,7 +50,7 @@ public class Certificate implements CertificateInterface {
         }
 
         public Certificate build() {
-            return new Certificate((User)user, (SubEvent)subEvent);
+            return new Certificate((User) user, (SubEvent) subEvent);
         }
     }
 

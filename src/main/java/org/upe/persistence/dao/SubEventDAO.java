@@ -1,4 +1,4 @@
-package org.upe.persistence.DAO;
+package org.upe.persistence.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -6,7 +6,6 @@ import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.SubEvent;
-import org.upe.persistence.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class SubEventDAO {
                     .withEndDate(endDate)
                     .withParentEvent(parentEvent)
                     .build();
-    
+
             entityManager.getTransaction().begin();
             entityManager.persist(subEvent);
             entityManager.getTransaction().commit();
@@ -54,7 +53,7 @@ public class SubEventDAO {
     public void delete(UUID id) {
         try {
             entityManager.getTransaction().begin();
-            SubEvent subEventToBeDeleted = (SubEvent)  getById(id);
+            SubEvent subEventToBeDeleted = (SubEvent) getById(id);
             subEventToBeDeleted.setPrivateSubEvent(true);
             entityManager.merge(subEventToBeDeleted);
             entityManager.getTransaction().commit();
@@ -69,7 +68,7 @@ public class SubEventDAO {
             return new ArrayList<>(subEvents);
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -80,9 +79,10 @@ public class SubEventDAO {
             return new ArrayList<>(query.getResultList());
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            return null;
+            return new ArrayList<>();
         }
     }
+
     public SubEventInterface getById(UUID id) {
         return entityManager.find(SubEvent.class, id);
     }

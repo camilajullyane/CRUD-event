@@ -1,4 +1,4 @@
-package org.upe.persistence.DAO;
+package org.upe.persistence.dao;
 
 import jakarta.persistence.EntityManager;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;

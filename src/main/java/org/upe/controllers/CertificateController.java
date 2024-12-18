@@ -1,16 +1,15 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.CertificateControllerInterface;
-import org.upe.persistence.DAO.CertificateDAO;
-import org.upe.persistence.DAO.SubEventDAO;
+import org.upe.persistence.dao.CertificateDAO;
+import org.upe.persistence.dao.SubEventDAO;
 import org.upe.persistence.interfaces.SubEventInterface;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class CertificateController implements CertificateControllerInterface {
-    private CertificateDAO certificateDAO;
-    private SubEventDAO subEventDAO;
+    private final CertificateDAO certificateDAO;
+    private final SubEventDAO subEventDAO;
 
     public CertificateController(CertificateDAO certificateDAO, SubEventDAO subEventDAO) {
         this.certificateDAO = certificateDAO;

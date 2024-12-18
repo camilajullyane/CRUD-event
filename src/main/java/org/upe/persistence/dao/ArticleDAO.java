@@ -1,4 +1,4 @@
-package org.upe.persistence.DAO;
+package org.upe.persistence.dao;
 
 import jakarta.persistence.EntityManager;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
@@ -73,7 +73,7 @@ public class ArticleDAO {
             return new ArrayList<>(articles);
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 }
