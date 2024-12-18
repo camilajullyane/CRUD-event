@@ -65,6 +65,12 @@ public class SubEventController implements SubEventControllerInterface {
         return true;
     }
 
+    public boolean editSubEventIsCertified(SubEventInterface subEvent) {
+        subEvent.setIsCertified();
+        subEventDAO.update(subEvent);
+        return true;
+    }
+
 
     public boolean deleteSubEvent(UUID id) {
         subEventDAO.delete(id);

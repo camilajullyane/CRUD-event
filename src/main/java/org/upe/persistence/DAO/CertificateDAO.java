@@ -24,7 +24,7 @@ public class CertificateDAO {
                     .build();
 
             entityManager.getTransaction().begin();
-            entityManager.persist(Certificate);
+            entityManager.persist(certificate);
             entityManager.getTransaction().commit();
             return user;
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package org.upe.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.upe.persistence.interfaces.CertificateInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
@@ -51,7 +52,7 @@ public class Certificate implements CertificateInterface {
         }
     }
 
-    public static Session.Builder Builder() {
-        return new Session.Builder();
+    public static Builder Builder() {
+        return new Builder();
     }
 }

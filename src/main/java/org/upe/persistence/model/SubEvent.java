@@ -68,7 +68,9 @@ public class SubEvent implements SubEventInterface {
     // Adicionar Interface
     public List<Certificate> getCertificates() { return new ArrayList<>(certificates);}
 
-
+    public void setIsCertified() {
+        this.isCertified = true;
+    }
 
     public SubEvent() {}
 
@@ -110,7 +112,7 @@ public class SubEvent implements SubEventInterface {
         }
     }
 
-    public static SubEventBuilder Builder() {
+    public static SubEventBuilder builder() {
         return new SubEventBuilder();
     }
 }
