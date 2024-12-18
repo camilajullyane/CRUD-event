@@ -1,4 +1,4 @@
-package org.upe.persistence.DAO;
+package org.upe.persistence.dao;
 
 import jakarta.persistence.EntityManager;
 import org.upe.persistence.DBStrategy.EntityManagerFactory;
@@ -76,7 +76,7 @@ public class EventDAO {
             return new ArrayList<>(events);
         } catch (Exception e) {
             logger.severe(e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 }

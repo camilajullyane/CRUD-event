@@ -1,9 +1,9 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.EventControllerInterface;
-import org.upe.persistence.DAO.ArticleDAO;
-import org.upe.persistence.DAO.EventDAO;
-import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.dao.ArticleDAO;
+import org.upe.persistence.dao.EventDAO;
+import org.upe.persistence.dao.UserDAO;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;

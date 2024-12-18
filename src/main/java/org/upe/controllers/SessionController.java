@@ -1,7 +1,7 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.SessionControllerInterface;
-import org.upe.persistence.DAO.SessionDAO;
+import org.upe.persistence.dao.SessionDAO;
 import org.upe.persistence.interfaces.SessionInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 

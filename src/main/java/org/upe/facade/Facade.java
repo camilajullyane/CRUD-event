@@ -2,8 +2,8 @@ package org.upe.facade;
 
 import org.upe.controllers.*;
 import org.upe.controllers.interfaces.*;
-import org.upe.persistence.DAO.CertificateDAO;
-import org.upe.persistence.DAO.SubEventDAO;
+import org.upe.persistence.dao.CertificateDAO;
+import org.upe.persistence.dao.SubEventDAO;
 import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;

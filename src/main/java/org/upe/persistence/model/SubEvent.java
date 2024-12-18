@@ -58,7 +58,7 @@ public class SubEvent implements SubEventInterface {
     }
 
     public void removeAttendeeOnSubEvent(UserInterface user) {
-        this.subEventAttendeesList.remove((User) user);
+        this.subEventAttendeesList.remove(user);
     }
 
     public List<SessionInterface> getAllSessions() {
