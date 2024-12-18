@@ -97,7 +97,7 @@ public class MyEventsController implements Initializable {
                         try {
                             handleCreateSubEvent(event);
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            throw new RuntimeException("Failed to create the subevent, " + ex);
                         }
                     });
 
@@ -107,7 +107,7 @@ public class MyEventsController implements Initializable {
                         try {
                             handleShowSubEvents(event);
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            throw new RuntimeException("Failed to show the subevents, " + ex);
                         }
                     });
 
@@ -117,7 +117,7 @@ public class MyEventsController implements Initializable {
                         try {
                             handleEditButton(event);
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            throw new RuntimeException("Failed to edit the event, " + ex);
                         }
                     });
 
@@ -127,7 +127,7 @@ public class MyEventsController implements Initializable {
                         try {
                             handleCancelButton(event);
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            throw new RuntimeException("Failed do cancel the event, " + ex);
                         }
                     });
 
@@ -216,7 +216,6 @@ public class MyEventsController implements Initializable {
     }
 
     private void handleCancelButton(EventInterface event) throws IOException {
-        System.out.println("entrou");
         facade.deleteEvent(event, currentUser);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Cancelar Evento");

@@ -15,11 +15,11 @@ import java.util.logging.Logger;
 
 public class ArticleDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
-    private final Logger LOGGER = Logger.getLogger(ArticleDAO.class.getName());
+    private final Logger logger = Logger.getLogger(ArticleDAO.class.getName());
 
     public ArticleInterface create(String title, String articleAbstract, UserInterface user) {
         try {
-            Article article = Article.Builder()
+            Article article = Article.builder()
                     .withTitle(title)
                     .withArticleAbstract(articleAbstract)
                     .withUser((User) user)
@@ -34,7 +34,7 @@ public class ArticleDAO {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }
@@ -62,7 +62,7 @@ public class ArticleDAO {
             entityManager.getTransaction().commit();
             return article;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }
@@ -72,7 +72,7 @@ public class ArticleDAO {
             List<Article> articles = entityManager.createQuery("SELECT a FROM Article a", Article.class).getResultList();
             return new ArrayList<>(articles);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }

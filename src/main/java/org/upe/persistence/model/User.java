@@ -54,7 +54,6 @@ public class User implements UserInterface {
     }
 
 
-
     public List<EventInterface> getAttendeeOn() {
         return new ArrayList<>(attendeeOn);
     }
@@ -91,7 +90,6 @@ public class User implements UserInterface {
         this.articles.add((Article) article);
     }
 
-    // Implementação do padrão UserBuilder
     public static class UserBuilder {
         private String name;
         private String cpf;
@@ -123,7 +121,7 @@ public class User implements UserInterface {
         }
     }
 
-    public static UserBuilder Builder() {
+    public static UserBuilder builder() {
         return new UserBuilder();
     }
 }

@@ -14,11 +14,11 @@ import java.util.logging.Logger;
 
 public class EventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
-    private final Logger LOGGER = Logger.getLogger(EventDAO.class.getName());
+    private final Logger logger = Logger.getLogger(EventDAO.class.getName());
 
     public Event create(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization, UserInterface user) {
         try {
-            Event event = Event.Builder()
+            Event event = Event.builder()
                     .withName(name)
                     .withDescription(description)
                     .withBeginDate(beginDate)
@@ -33,7 +33,7 @@ public class EventDAO {
             entityManager.getTransaction().commit();
             return event;
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            logger.severe(e.getMessage());
             return null;
         }
     }
@@ -66,7 +66,7 @@ public class EventDAO {
             entityManager.merge(event);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class EventDAO {
             List<Event> events = entityManager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
             return new ArrayList<>(events);
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            logger.severe(e.getMessage());
             return null;
         }
     }
