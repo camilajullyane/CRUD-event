@@ -61,21 +61,21 @@ public class SubEventUIController implements Initializable {
             Label description = new Label(subEvent.getDescription());
             description.getStyleClass().add("custom-label");
 
+            Label beginDateLabel = new Label("Data inicial");
+            beginDateLabel.getStyleClass().add("caption");
 
-            Label date = new Label("Data");
-            date.getStyleClass().add("caption");
+            Label beginDateValue = new Label(subEvent.getBeginDate().toString());
+            beginDateValue.getStyleClass().add("subcaption");
 
-            Label dateValue = new Label(subEvent.getDate().toString());
-            dateValue.getStyleClass().add("subcaption");
+            Label endDateLabel = new Label("Data inicial");
+            endDateLabel.getStyleClass().add("caption");
+
+            Label endDateValue = new Label(subEvent.getEndDate().toString());
+            endDateValue.getStyleClass().add("subcaption");
 
             Label location = new Label("Local");
             location.getStyleClass().add("caption");
 
-            Label owner = new Label("Palestrantes do evento");
-            owner.getStyleClass().add("caption");
-
-            Label ownerValue = new Label(subEvent.getSpeakers());
-            ownerValue.getStyleClass().add("subcaption");
 
             Button seeSessionsButton = new Button("Ver Sessões");
             seeSessionsButton.getStyleClass().add("custom-button");
@@ -88,9 +88,8 @@ public class SubEventUIController implements Initializable {
             });
 
             VBox descriptionBox = new VBox(5, title, description);
-            VBox dateBox = new VBox(5, date, dateValue);
-            VBox ownerBox = new VBox(5, owner, ownerValue);
-            HBox infoBox = new HBox(50, dateBox, ownerBox);
+            VBox dateBox = new VBox(5, beginDateLabel, beginDateValue, endDateLabel, endDateValue);
+            HBox infoBox = new HBox(50, dateBox);
             HBox bottomBox = new HBox(50, seeSessionsButton);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 

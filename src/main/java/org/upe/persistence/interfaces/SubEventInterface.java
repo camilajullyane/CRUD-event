@@ -14,6 +14,8 @@ public interface SubEventInterface {
     void setDescription(String description);
     LocalDate getBeginDate();
     void setBeginDate(LocalDate beginDate);
+    LocalDate getEndDate();
+    void setEndDate(LocalDate beginDate);
     Event getParentEvent();
     void setParentEvent(Event parentEvent);
     void addAttendeeOnSubEvent(UserInterface user);

@@ -35,7 +35,8 @@ public class MySubEventsController {
 
     private void showMySubEvents() {
         EventInterface currentEvent = SceneLoader.getEventData();
-        List<SubEventInterface> subEvents = SceneLoader.getEventData().getSubEvents();
+
+        List<SubEventInterface> subEvents = currentEvent.getSubEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
 
@@ -72,21 +73,20 @@ public class MySubEventsController {
                 Label descriptionLabel = new Label(subEvent.getDescription());
                 descriptionLabel.getStyleClass().add("custom-label");
 
-                Label dateLabel = new Label("Data");
-                dateLabel.getStyleClass().add("caption");
+                Label beginDateLabel = new Label("Data inicial");
+                beginDateLabel.getStyleClass().add("caption");
 
-                Label dateValue = new Label(subEvent.getDate().toString());
-                dateValue.getStyleClass().add("subcaption");
+                Label beginDateValue = new Label(subEvent.getBeginDate().toString());
+                beginDateValue.getStyleClass().add("subcaption");
 
+                Label endDateLabel = new Label("Data inicial");
+                endDateLabel.getStyleClass().add("caption");
+
+                Label endDateValue = new Label(subEvent.getEndDate().toString());
+                endDateValue.getStyleClass().add("subcaption");
 
                 Label locationLabel = new Label("Local");
                 locationLabel.getStyleClass().add("caption");
-
-                Label speakersLabel = new Label("Palestrantes do Evento");
-                speakersLabel.getStyleClass().add("caption");
-
-                Label speakersValue = new Label(subEvent.getSpeakers());
-                speakersValue.getStyleClass().add("subcaption");
 
                 Button editSubEventButton = new Button("Editar SubEvento");
                 editSubEventButton.getStyleClass().add("custom-button");
@@ -109,11 +109,10 @@ public class MySubEventsController {
                 });
 
                 VBox descriptionBox = new VBox(5, titleLabel, descriptionLabel);
-                VBox dateBox = new VBox(5, dateLabel, dateValue);
-                VBox ownerBox = new VBox(5, speakersLabel, speakersValue);
+                VBox dateBox = new VBox(5, beginDateLabel, beginDateValue, endDateLabel, endDateValue);
 
 
-                HBox infoBox = new HBox(50, dateBox, ownerBox);
+                HBox infoBox = new HBox(50, dateBox);
                 HBox bottomBox = new HBox(50, editSubEventButton, seeSessionsButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);

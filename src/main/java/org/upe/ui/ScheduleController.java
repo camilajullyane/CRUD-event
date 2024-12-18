@@ -68,7 +68,6 @@ public class ScheduleController implements Initializable {
         SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", schedulePage);
     }
 
-
     private void showEvents() {
 
         List<EventInterface> events = facade.getAllEvents();

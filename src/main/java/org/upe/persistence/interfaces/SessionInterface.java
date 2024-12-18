@@ -1,6 +1,8 @@
 package org.upe.persistence.interfaces;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.UUID;
 
 public interface SessionInterface {
@@ -11,5 +13,10 @@ public interface SessionInterface {
     LocalDate getDate();
     boolean isPrivateSession();
     UUID getId();
-
+    String getSpeaker();
+    void setSpeaker(String speaker);
+    LocalDateTime getBeginHour();
+    void setBeginHour(LocalDateTime beginHour);
+    LocalDateTime getEndHour();
+    void setEndHour(LocalDateTime endHour);
 }

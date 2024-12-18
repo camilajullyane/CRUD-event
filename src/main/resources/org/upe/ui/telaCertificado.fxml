@@ -46,7 +46,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionsPage" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionsScreen" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -70,44 +70,6 @@
                 <Font size="20.0" />
             </font>
         </Text>
-        <AnchorPane accessibleRole="BUTTON" layoutX="242.0" layoutY="130.0" prefHeight="131.0" prefWidth="510.0" style="-fx-background-color: #444448; -fx-background-radius: 25; -fx-border-radius: 25;">
-            <children>
-                <Button layoutX="370.0" layoutY="53.0" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF; -fx-opacity: 100;" text="FINALIZADO" textFill="WHITE">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/check.png" />
-               </image>
-            </ImageView>
-            <Text fill="#2dd4bf" layoutX="66.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="25.0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="337.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/credencial-de-graduacao.png" />
-               </image>
-            </ImageView>
-            <Button layoutY="-1.0" mnemonicParsing="false" onAction="#moveToOpenCertificatePage" opacity="0.0" prefHeight="149.0" prefWidth="510.0" text="openCertificate">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-        </AnchorPane>
         <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/chamine-de-casa.png" />
@@ -163,5 +125,10 @@
             <Image url="@../../../images/calendar.png" />
          </image>
       </ImageView>
+      <ScrollPane layoutX="220.0" layoutY="106.0" prefHeight="484.0" prefWidth="568.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
     </AnchorPane>
 </StackPane>
