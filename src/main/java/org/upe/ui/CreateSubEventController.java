@@ -42,11 +42,6 @@ public class CreateSubEventController {
     Label errorMessage;
 
     @FXML
-    public void initialize() {
-
-    }
-
-    @FXML
     private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createSubEventPage);
     }
