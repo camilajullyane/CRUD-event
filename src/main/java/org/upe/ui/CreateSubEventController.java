@@ -13,7 +13,6 @@ import java.time.LocalDate;
 
 public class CreateSubEventController {
     private final FacadeInterface facade = new Facade();
-    EventInterface currentEvent = SceneLoader.getEventData();
 
     @FXML
     private StackPane createSubEventPage;
