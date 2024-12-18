@@ -13,7 +13,6 @@ import java.time.LocalDate;
 
 public class CreateSubEventController {
     private final FacadeInterface facade = new Facade();
-    EventInterface currentEvent = SceneLoader.getEventData();
 
     @FXML
     private StackPane createSubEventPage;
@@ -41,11 +40,6 @@ public class CreateSubEventController {
 
     @FXML
     Label errorMessage;
-
-    @FXML
-    public void initialize() {
-
-    }
 
     @FXML
     private void moveToScheduleScreen() throws IOException {

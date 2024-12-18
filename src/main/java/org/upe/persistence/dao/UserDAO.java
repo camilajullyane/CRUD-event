@@ -1,4 +1,4 @@
-package org.upe.persistence.DAO;
+package org.upe.persistence.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -11,11 +11,11 @@ import java.util.logging.Logger;
 
 public class UserDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
-    private final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
+    private final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
     public UserInterface create(String name, String email, String cpf, String password) {
         try {
-            User user = User.Builder()
+            User user = User.builder()
                     .withName(name)
                     .withCpf(cpf)
                     .withEmail(email)
@@ -27,7 +27,7 @@ public class UserDAO {
             entityManager.getTransaction().commit();
             return user;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }
@@ -61,7 +61,7 @@ public class UserDAO {
             entityManager.getTransaction().commit();
             return user;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }

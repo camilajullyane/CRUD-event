@@ -20,6 +20,7 @@ public class SubEvent implements SubEventInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private boolean isCertified;
     private String name;
     private String description;
     private LocalDate beginDate;
@@ -34,8 +35,12 @@ public class SubEvent implements SubEventInterface {
     @OneToMany(mappedBy = "parentSubEvent")
     private List<Session> sessions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "subEvent")
+    private List<Certificate> certificates = new ArrayList<>();
+
 
     public SubEvent(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
+        this.isCertified = false;
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;
@@ -53,15 +58,19 @@ public class SubEvent implements SubEventInterface {
     }
 
     public void removeAttendeeOnSubEvent(UserInterface user) {
-        this.subEventAttendeesList.remove((User) user);
+        this.subEventAttendeesList.remove(user);
     }
 
     public List<SessionInterface> getAllSessions() {
         return new ArrayList<>(sessions);
     }
 
+    // Adicionar Interface
+    public List<Certificate> getCertificates() { return new ArrayList<>(certificates);}
 
-
+    public void setIsCertified() {
+        this.isCertified = true;
+    }
 
     public SubEvent() {}
 
@@ -103,7 +112,7 @@ public class SubEvent implements SubEventInterface {
         }
     }
 
-    public static SubEventBuilder Builder() {
+    public static SubEventBuilder builder() {
         return new SubEventBuilder();
     }
 }

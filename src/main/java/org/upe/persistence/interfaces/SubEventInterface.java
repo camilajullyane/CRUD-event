@@ -14,6 +14,8 @@ public interface SubEventInterface {
     void setDescription(String description);
     LocalDate getBeginDate();
     void setBeginDate(LocalDate beginDate);
+    void setIsCertified();
+    boolean isCertified();
     LocalDate getEndDate();
     void setEndDate(LocalDate beginDate);
     Event getParentEvent();

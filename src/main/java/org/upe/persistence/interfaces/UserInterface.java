@@ -16,4 +16,5 @@ public interface UserInterface {
     void unsubscribeToEvent(EventInterface event);
     void unsubscribeToSubEvent(SubEventInterface subEvent);
     void addArticle(ArticleInterface article);
+    void addCertificate(CertificateInterface certificate);
 }
