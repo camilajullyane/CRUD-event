@@ -19,7 +19,7 @@ public class ArticleDAO {
 
     public ArticleInterface create(String title, String articleAbstract, UserInterface user) {
         try {
-            Article article = Article.Builder()
+            Article article = Article.builder()
                     .withTitle(title)
                     .withArticleAbstract(articleAbstract)
                     .withUser((User) user)

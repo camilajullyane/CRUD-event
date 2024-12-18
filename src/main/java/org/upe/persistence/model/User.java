@@ -119,7 +119,7 @@ public class User implements UserInterface {
         }
     }
 
-    public static UserBuilder Builder() {
+    public static UserBuilder builder() {
         return new UserBuilder();
     }
 }

@@ -41,15 +41,15 @@ public class FacadeTest {
         EntityManager entityManager = EntityManagerFactory.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        userWithEvent =  User.Builder().withName("John doe").withCpf("12345678910").withEmail("john.doe@email.com").withPassword("password").build();
-        userSubscribedToEvent = User.Builder().withName("Dwight Schrute").withCpf("15348964812").withEmail("shrute@dundermifflin.com").withPassword("password").build();
-        userSubscribedToEvent2 = User.Builder().withName("Jim Halpert").withCpf("15348964855").withEmail("jim@dundermifflin.com").withPassword("password").build();
-        userDontSubscribedToEvent = User.Builder().withName("Michael Scott").withCpf("12345678913").withEmail("scott@dundermifflin.com").withPassword("password").build();
+        userWithEvent =  User.builder().withName("John doe").withCpf("12345678910").withEmail("john.doe@email.com").withPassword("password").build();
+        userSubscribedToEvent = User.builder().withName("Dwight Schrute").withCpf("15348964812").withEmail("shrute@dundermifflin.com").withPassword("password").build();
+        userSubscribedToEvent2 = User.builder().withName("Jim Halpert").withCpf("15348964855").withEmail("jim@dundermifflin.com").withPassword("password").build();
+        userDontSubscribedToEvent = User.builder().withName("Michael Scott").withCpf("12345678913").withEmail("scott@dundermifflin.com").withPassword("password").build();
 
-        userSubscribedToSubEvent = User.Builder().withName("Pam Beesly").withCpf("15348964813").withEmail("beesly@example.com").withPassword("password").build();
-        userDontSubscribedToSubEvent = User.Builder().withName("Ryan Howard").withCpf("15348964892").withEmail("howard@example.com").withPassword("password").build();
+        userSubscribedToSubEvent = User.builder().withName("Pam Beesly").withCpf("15348964813").withEmail("beesly@example.com").withPassword("password").build();
+        userDontSubscribedToSubEvent = User.builder().withName("Ryan Howard").withCpf("15348964892").withEmail("howard@example.com").withPassword("password").build();
 
-        testEvent = Event.Builder()
+        testEvent = Event.builder()
                 .withName("Google I/O")
                 .withDescription("A Google Event")
                 .withBeginDate(LocalDate.now())
@@ -59,7 +59,7 @@ public class FacadeTest {
                 .withOwner((User) userWithEvent)
                 .build();
 
-        testEventWithArticle = Event.Builder()
+        testEventWithArticle = Event.builder()
                 .withName("Google I/O")
                 .withDescription("A Google Event2")
                 .withBeginDate(LocalDate.now())
@@ -70,9 +70,9 @@ public class FacadeTest {
                 .build();
 
 
-        testSubEvent = SubEvent.Builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
+        testSubEvent = SubEvent.builder().withName("Google I/O - Day 1").withBeginDate(LocalDate.now()).withEndDate(LocalDate.now()).withParentEvent(testEvent).build();
 
-        testSession = Session.Builder()
+        testSession = Session.builder()
                 .withName("Test Session")
                 .withDate(LocalDate.now())
                 .withBeginHour(LocalDate.now().atStartOfDay())
@@ -83,12 +83,12 @@ public class FacadeTest {
                 .withParentSubEvent(testSubEvent)
                 .build();
 
-        testArticle = Article.Builder()
+        testArticle = Article.builder()
                 .withArticleAbstract("Abstract")
                 .withTitle("Test Article")
                 .build();
 
-        testArticleToBeDeleted = Article.Builder()
+        testArticleToBeDeleted = Article.builder()
                 .withArticleAbstract("Abstract")
                 .withTitle("Test Article")
                 .build();

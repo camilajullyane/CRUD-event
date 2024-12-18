@@ -15,11 +15,11 @@ import java.util.logging.Logger;
 
 public class SubEventDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
-    private final Logger LOGGER = Logger.getLogger(SubEventDAO.class.getName());
+    private final Logger logger = Logger.getLogger(SubEventDAO.class.getName());
 
     public SubEvent create(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
         try {
-            SubEvent subEvent = SubEvent.Builder()
+            SubEvent subEvent = SubEvent.builder()
                     .withName(name)
                     .withDescription(description)
                     .withBeginDate(beginDate)
@@ -32,7 +32,7 @@ public class SubEventDAO {
             entityManager.getTransaction().commit();
             return subEvent;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }
@@ -44,7 +44,7 @@ public class SubEventDAO {
             entityManager.getTransaction().commit();
             return subEvent;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }
@@ -66,7 +66,7 @@ public class SubEventDAO {
             List<SubEvent> subEvents = entityManager.createQuery("SELECT s FROM SubEvent s", SubEvent.class).getResultList();
             return new ArrayList<>(subEvents);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }

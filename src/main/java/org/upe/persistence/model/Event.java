@@ -124,7 +124,7 @@ public class Event implements EventInterface {
         }
     }
 
-    public static EventBuilder Builder() {
+    public static EventBuilder builder() {
         return new EventBuilder();
     }
 }

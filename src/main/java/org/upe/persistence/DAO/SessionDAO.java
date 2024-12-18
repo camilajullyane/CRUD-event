@@ -5,19 +5,16 @@ import org.upe.persistence.DBStrategy.EntityManagerFactory;
 import org.upe.persistence.interfaces.SessionInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.model.Session;
-import org.upe.persistence.model.SubEvent;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SessionDAO {
     private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
-    private final Logger LOGGER = Logger.getLogger(SessionDAO.class.getName());
+    private final Logger logger = Logger.getLogger(SessionDAO.class.getName());
 
 
     public SessionInterface create(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
@@ -37,7 +34,7 @@ public class SessionDAO {
             entityManager.getTransaction().commit();
             return session;
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            logger.severe(e.getMessage());
             return null;
         }
     }
@@ -49,7 +46,7 @@ public class SessionDAO {
             entityManager.getTransaction().commit();
             return session;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             return null;
         }
     }
