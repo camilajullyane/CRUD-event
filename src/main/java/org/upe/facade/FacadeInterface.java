@@ -45,7 +45,10 @@ public interface FacadeInterface {
     boolean submitArticle(ArticleInterface article, EventInterface event);
     boolean deleteArticle(ArticleInterface article);
 
-    //SessionController methods
+    // SessionController methods
     SessionInterface createSession(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent);
     boolean deleteSession(UUID id);
+
+    // CertificateController methods
+    boolean certificateController();
 }
