@@ -26,13 +26,18 @@ jobs:
           
     - name: Create dotenv File
       run: |
-        touch /home/runner/work/CRUD-event/CRUD-event/.env
-        echo DB_URL_DEFAULT="${{ secrets.DB_URL_DEFAULT }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-        echo DB_URL_TEST="${{ secrets.DB_URL_TEST }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-        echo DB_DRIVER="${{ secrets.DB_DRIVER }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-        echo DB_USER="${{ secrets.DB_USER }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-        echo DB_PASSWORD="${{ secrets.DB_PASSWORD }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-        cat /home/runner/work/CRUD-event/CRUD-event/.env
+        $envPath = "C:\path\to\CRUD-event\.env"
+        if (!(Test-Path $envPath)) {
+            New-Item -ItemType File -Path $envPath | Out-Null
+        }
+        
+        # Adiciona as variáveis ao arquivo .env
+        Add-Content -Path $envPath -Value "DB_URL_DEFAULT=${{ secrets.DB_URL_DEFAULT }}"
+        Add-Content -Path $envPath -Value "DB_URL_TEST="${{ secrets.DB_URL_TEST }}"
+        Add-Content -Path $envPath -Value "DB_DRIVER=${{ secrets.DB_DRIVER }}"
+        Add-Content -Path $envPath -Value "DB_USER=${{ secrets.DB_USER }}"
+        Add-Content -Path $envPath -Value "${{ secrets.DB_PASSWORD }})"
+        Get-Content -Path $envPath
       
     - name: Build with Maven
       run: mvn -B package --file pom.xml
