@@ -22,7 +22,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>

@@ -285,5 +285,71 @@ public class SmokeTest extends ApplicationTest {
         }
     }
 
+    @Test
+    public void testSettingsScreen() throws Exception {
+        UserInterface mockUser = mock(UserInterface.class);
+        when(mockUser.getName()).thenReturn("testUser");
+
+        try (MockedStatic<UserSession> mockedSession = mockStatic(UserSession.class)) {
+            mockedSession.when(UserSession::getCurrentUser).thenReturn(mockUser);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaConfiguracoes.fxml"));
+            Parent root = loader.load();
+
+            Platform.runLater(() -> {
+                stage.setScene(new Scene(root));
+                stage.show();
+            });
+
+            WaitForAsyncUtils.waitForFxEvents();
+
+            assertNotNull(lookup("#oldPassword").query(), "TextField não encontrado.");
+            assertNotNull(lookup("#oldEmail").query(), "TextField não encontrado.");
+
+        }
+    }
+
+    @Test
+    public void testMySubEventsScreen() throws Exception {
+        UserInterface mockUser = mock(UserInterface.class);
+        when(mockUser.getName()).thenReturn("testUser");
+
+        EventInterface mockEvent = mock(EventInterface.class);
+        when(mockEvent.getName()).thenReturn("Test Event");
+
+        try (MockedStatic<UserSession> mockedSession = mockStatic(UserSession.class);
+             MockedStatic<SceneLoader> mockedSceneLoader = mockStatic(SceneLoader.class)) {
+            mockedSession.when(UserSession::getCurrentUser).thenReturn(mockUser);
+            mockedSceneLoader.when(SceneLoader::getEventData).thenReturn(mockEvent);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/mySubEvents.fxml"));
+            Parent root = loader.load();
+
+            Platform.runLater(() -> {
+                stage.setScene(new Scene(root));
+                stage.show();
+            });
+
+            WaitForAsyncUtils.waitForFxEvents();
+
+            assertNotNull(lookup("#homeButton").query(), "Button não encontrado.");
+        }
+    }
+
+
+    @Test
+    public void testOpenCertificateScreen() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaCertificado.fxml"));
+        Parent root = loader.load();
+
+        Platform.runLater(() -> {
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
+
+        WaitForAsyncUtils.waitForFxEvents();
+
+        assertNotNull(lookup("#homeButton").query(), "Botão home não encontrado.");
+    }
 }
 

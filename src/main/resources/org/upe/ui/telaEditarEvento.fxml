@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="editEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.EditEventController">
+<StackPane fx:id="editEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.EditEventController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -42,7 +42,7 @@
         </Button>
 
         <Line endX="293.0" layoutX="468.0" layoutY="96.0" startX="-209.0" stroke="WHITE" />
-        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
