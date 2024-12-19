@@ -104,8 +104,7 @@ public class EventController implements EventControllerInterface {
     }
 
     public boolean deleteEvent(EventInterface event, UserInterface user) {
-        eventDAO.delete(event.getId());
-        return true;
+        return eventDAO.delete(event.getId());
     }
 
     public EventInterface getEventById(UUID id) {

@@ -131,23 +131,19 @@ public class EventControllerTest {
 
     @Test
     void testAddArticleOnList() {
-        // Arrange
-        List<EventInterface> mutableArticlesList = new ArrayList<>(); // Lista mutável criada para o teste
+        List<EventInterface> mutableArticlesList = new ArrayList<>();
 
-        // Configura o comportamento do mock para retornar essa lista
         when(mockArticle.getSubmittedIn()).thenReturn(mutableArticlesList);
-        when(mockEvent.getArticles()).thenReturn(new ArrayList<>()); // Também retorna uma lista mutável
+        when(mockEvent.getArticles()).thenReturn(new ArrayList<>());
         doNothing().when(mockEvent).addArticleOnEvent(mockArticle);
         when(articleDAO.update(mockArticle)).thenReturn(mockArticle);
 
-        // Act
         boolean result = eventController.addArticleOnList(mockArticle, mockEvent);
 
-        // Assert
         assertTrue(result);
-        verify(mockEvent).addArticleOnEvent(mockArticle); // Verifica se o método foi chamado
-        verify(eventDAO).update(mockEvent); // Verifica se o evento foi atualizado
-        verify(articleDAO).update(mockArticle); // Verifica se o artigo foi atualizado
+        verify(mockEvent).addArticleOnEvent(mockArticle);
+        verify(eventDAO).update(mockEvent);
+        verify(articleDAO).update(mockArticle);
     }
 
     @Test
@@ -191,6 +187,7 @@ public class EventControllerTest {
     void testDeleteEvent() {
         UUID eventId = UUID.randomUUID();
         when(mockEvent.getId()).thenReturn(eventId);
+        when(eventDAO.delete(eventId)).thenReturn(true);
 
         boolean result = eventController.deleteEvent(mockEvent, mockUser);
 
