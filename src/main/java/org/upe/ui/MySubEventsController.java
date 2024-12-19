@@ -188,7 +188,7 @@ public class MySubEventsController implements Initializable {
     @FXML
     private void handleSeeSession(SubEventInterface subEvent) throws IOException {
         SceneLoader.setSubEventData(subEvent);
-        SceneLoader.loadScene("/org/upe/ui/telaSessao.fxml", "Sessões", mySubEventsPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSecao.fxml", "Sessões", mySubEventsPage);
     }
 
 }

@@ -125,7 +125,7 @@
             <Image url="@../../../images/calendar.png" />
          </image>
       </ImageView>
-      <ScrollPane layoutX="220.0" layoutY="106.0" prefHeight="484.0" prefWidth="568.0">
+      <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="484.0" prefWidth="568.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>

@@ -10,7 +10,8 @@ import java.util.UUID;
 public interface SubEventControllerInterface {
     SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate, LocalDate endDate,String description);
     boolean editSubEventName(SubEventInterface subEvent, String newName);
-    boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
+    boolean editSubEventBeginDate(SubEventInterface subEvent, LocalDate newDate);
+    boolean editSubEventEndDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
     boolean editSubEventIsCertified(SubEventInterface subEvent);
     boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);

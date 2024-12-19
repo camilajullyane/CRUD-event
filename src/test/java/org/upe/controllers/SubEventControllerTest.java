@@ -113,13 +113,24 @@ public class SubEventControllerTest {
     }
 
     @Test
-    void testEditSubEventDate() {
+    void testEditSubEventBeginDate() {
         LocalDate newDate = LocalDate.now().plusDays(2);
 
-        boolean result = subEventController.editSubEventDate(subEventMock, newDate);
+        boolean result = subEventController.editSubEventBeginDate(subEventMock, newDate);
 
         assertTrue(result);
         verify(subEventMock).setBeginDate(newDate);
+        verify(subEventDAOMock).update(subEventMock);
+    }
+
+    @Test
+    void testEditSubEventEndDate() {
+        LocalDate newDate = LocalDate.now().plusDays(2);
+
+        boolean result = subEventController.editSubEventEndDate(subEventMock, newDate);
+
+        assertTrue(result);
+        verify(subEventMock).setEndDate(newDate);
         verify(subEventDAOMock).update(subEventMock);
     }
 

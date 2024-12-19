@@ -55,7 +55,18 @@ public class MyEventsController implements Initializable {
             Label label = new Label("Você não tem eventos criados");
             label.getStyleClass().add("custom-label");
 
-            eventContainer.getChildren().add(label);
+            Button button = new Button("Criar um evento");
+            button.setOnAction(e -> {
+                try {
+                    moveToCreateEventPage();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+            button.getStyleClass().add("custom-button");
+            VBox.setMargin(button, new Insets(50, 0, 0, 0));
+
+            eventContainer.getChildren().addAll(label, button);
             mainContainer.getChildren().add(eventContainer);
             mainContainer.setAlignment(Pos.CENTER);
         } else {
@@ -192,6 +203,11 @@ public class MyEventsController implements Initializable {
     @FXML
     private void moveToSubmissionsPage() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaSubmissões.fxml", "Submissões", myEventsPage);
+    }
+
+    @FXML
+    private void moveToCreateEventPage() throws IOException {
+        SceneLoader.loadScene("/org/upe/ui/telaCriandoEvento.fxml", "Submissões", myEventsPage);
     }
 
     @FXML

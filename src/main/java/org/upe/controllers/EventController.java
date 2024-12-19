@@ -91,6 +91,18 @@ public class EventController implements EventControllerInterface {
         return true;
     }
 
+    public boolean updateBeginDate(EventInterface event, LocalDate newDate) {
+        event.setBeginDate(newDate);
+        eventDAO.update(event);
+        return true;
+    }
+
+    public boolean updateEndDate(EventInterface event, LocalDate newDate) {
+        event.setEndDate(newDate);
+        eventDAO.update(event);
+        return true;
+    }
+
     public boolean updateDescription(EventInterface event, String newDescription) {
         event.setDescription(newDescription);
         eventDAO.update(event);
