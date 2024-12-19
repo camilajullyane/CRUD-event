@@ -67,7 +67,7 @@ public class CreateSubEventController {
     }
 
     @FXML
-    private void handleCreateSubEvent() {
+    private void handleCreateSubEvent() throws IOException {
         if(subEventName.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
                 subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || beginDate.getValue() == null || endDate.getValue() == null) {
             errorMessage.setVisible(true);
@@ -93,7 +93,9 @@ public class CreateSubEventController {
         subEventHour.setText("");
         subEventLocation.setText("");
         subEventSpeaker.setText("");
-
+        beginDate.setValue(null);
+        endDate.setValue(null);
+        SceneLoader.setEventData(currentEvent);
     }
     @FXML
     private void handleLogOut() throws IOException {

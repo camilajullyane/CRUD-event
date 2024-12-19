@@ -1,6 +1,7 @@
 package org.upe.ui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,10 +17,12 @@ import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class MySubEventsController {
+public class MySubEventsController implements Initializable {
     private final FacadeInterface facade = new Facade();
 
     @FXML
@@ -28,12 +31,13 @@ public class MySubEventsController {
     @FXML
     private StackPane mySubEventsPage;
 
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         showMySubEvents();
     }
 
     private void showMySubEvents() {
-        EventInterface currentEvent = SceneLoader.getEventData();
+//        EventInterface currentEvent = SceneLoader.getEventData();
         List<SubEventInterface> subEvents = SceneLoader.getEventData().getSubEvents();
 
         scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom.css")).toExternalForm());
@@ -109,7 +113,6 @@ public class MySubEventsController {
                 subEventContainer.getChildren().addAll(containerBox);
                 mainContainer.getChildren().add(subEventContainer);
                 mainContainer.setAlignment(Pos.CENTER);
-
 
             });
         }
