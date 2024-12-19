@@ -27,6 +27,9 @@ public class SubEventController implements SubEventControllerInterface {
     }
 
     public boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent) {
+        if (subEvent.getParentEvent().getOwner().getId() == user.getId()) {
+            return false;
+        }
 
         Optional<UserInterface> attendee = subEvent.getSubEventAttendeesList()
                 .stream()

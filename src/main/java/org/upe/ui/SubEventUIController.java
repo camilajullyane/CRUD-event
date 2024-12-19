@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +16,10 @@ import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -24,6 +28,7 @@ import java.util.ResourceBundle;
 
 public class SubEventUIController implements Initializable {
     private final FacadeInterface facade = new Facade();
+    private final UserInterface currentUser = UserSession.getCurrentUser();
 
     @FXML
     ScrollPane scrollPane;
@@ -90,11 +95,21 @@ public class SubEventUIController implements Initializable {
                 }
             });
 
+            Button subscribeButton = new Button("Inscrever-se");
+            subscribeButton.getStyleClass().add("custom-button");
+            subscribeButton.setOnAction(e -> {
+                try {
+                    handleSubscriptionButton(subEvent);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+
             VBox descriptionBox = new VBox(5, title, description);
             VBox beginDateBox = new VBox(5, beginDateLabel, beginDateValue);
             VBox endDateBox = new VBox(5, endDateLabel, endDateValue);
             HBox infoBox = new HBox(50, beginDateBox, endDateBox);
-            HBox bottomBox = new HBox(50, seeSessionsButton);
+            HBox bottomBox = new HBox(50, seeSessionsButton, subscribeButton);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 
             VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
@@ -149,7 +164,28 @@ public class SubEventUIController implements Initializable {
     @FXML
     private void handleSeeSession(SubEventInterface subEvent) throws IOException {
         SceneLoader.setSubEventData(subEvent);
-        SceneLoader.loadScene("/org/upe/ui/telaSessao.fxml", "Sessões", subEventPage);
+        SceneLoader.loadScene("/org/upe/ui/telaSecao.fxml", "Sessões", subEventPage);
+    }
+
+    @FXML
+    private void handleSubscriptionButton(SubEventInterface subEvent) throws IOException {
+        boolean isSubscribed = facade.addAttendeeSubEventOnList(currentUser, subEvent);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(!isSubscribed) {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Você já está inscrito neste subEvento ou é dono dele!");
+            alert.showAndWait();
+        } else {
+            alert.setTitle("Inscrição");
+            alert.setHeaderText(null);
+            alert.setContentText("Inscrição realizada com sucesso!");
+            alert.showAndWait();
+            UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
+        }
+
+        showSubEvents();
     }
 
 }

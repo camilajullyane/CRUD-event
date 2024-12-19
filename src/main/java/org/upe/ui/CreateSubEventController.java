@@ -78,7 +78,7 @@ public class CreateSubEventController {
     @FXML
     private void handleCreateSubEvent() throws IOException {
         if(subEventName.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
-                subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || beginDate.getValue() == null || endDate.getValue() == null) {
+                subEventHour.getText().isEmpty() || beginDate.getValue() == null || endDate.getValue() == null) {
             errorMessage.setVisible(true);
             return;
         }
@@ -89,8 +89,8 @@ public class CreateSubEventController {
         LocalDate end = endDate.getValue();
 
         EventInterface currentEvent = SceneLoader.getEventData();
+
         facade.createSubEvent(currentEvent, name, begin, end,description);
-        UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");
@@ -101,10 +101,9 @@ public class CreateSubEventController {
         subEventName.setText("");
         subEventDescription.setText("");
         subEventHour.setText("");
-        subEventLocation.setText("");
-        subEventSpeaker.setText("");
         beginDate.setValue(null);
         endDate.setValue(null);
+        UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
         SceneLoader.setEventData(currentEvent);
     }
     @FXML
