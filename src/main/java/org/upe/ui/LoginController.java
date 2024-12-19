@@ -53,7 +53,7 @@ public class LoginController {
             errorMessage.setVisible(true);
         } else {
             UserSession.getInstance().setCurrentUser(isLogged);
-            SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Principal", loginPage);
+            SceneLoader.loadScene("/org/upe/ui/telaInicio.fxml", "Home", loginPage);
         }
     }
 
