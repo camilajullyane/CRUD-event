@@ -299,6 +299,24 @@ public class FacadeTest {
     }
 
     @Test
+    void testEditEventBeginDate() {
+        LocalDate newDate = LocalDate.now().plusDays(1);
+        boolean result = facade.editEventBeginDate(testEvent, newDate);
+        assertTrue(result);
+        EventInterface event = facade.getEventByID(testEvent.getId());
+        assertEquals(newDate, event.getBeginDate());
+    }
+
+    @Test
+    void testEditEventEndDate() {
+        LocalDate newDate = LocalDate.now().plusDays(1);
+        boolean result = facade.editEventEndDate(testEvent, newDate);
+        assertTrue(result);
+        EventInterface event = facade.getEventByID(testEvent.getId());
+        assertEquals(newDate, event.getEndDate());
+    }
+
+    @Test
     void testDeleteEvent() {
         boolean result = facade.deleteEvent(testEvent, userWithEvent);
         assertTrue(result);
@@ -331,7 +349,6 @@ public class FacadeTest {
                 .filter(u -> u.getCpf().equals(userDontSubscribedToSubEvent.getCpf()))
                 .findFirst();
         assertTrue(attendee.isPresent());
-
     }
 
     @Test
@@ -374,7 +391,6 @@ public class FacadeTest {
         assertEquals("New Description", subEvent.getDescription());
     }
 
-
     @Test
     void testDeleteSubEvent() {
         boolean result = facade.deleteSubEvent(testSubEvent.getId());
@@ -393,6 +409,7 @@ public class FacadeTest {
         assertNotNull(user);
         assertEquals("12345678910", user.getCpf());
     }
+
     @Test
     void testGetUserByCPFWithWrongCPF() {
         UserInterface user = facade.getUserByCPF("12345568911");
