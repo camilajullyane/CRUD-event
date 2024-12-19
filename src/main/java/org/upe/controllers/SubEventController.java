@@ -58,8 +58,13 @@ public class SubEventController implements SubEventControllerInterface {
         return true;
     }
 
-    public boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate) {
+    public boolean editSubEventBeginDate(SubEventInterface subEvent, LocalDate newDate) {
         subEvent.setBeginDate(newDate);
+        subEventDAO.update(subEvent);
+        return true;
+    }
+    public boolean editSubEventEndDate(SubEventInterface subEvent, LocalDate newDate) {
+        subEvent.setEndDate(newDate);
         subEventDAO.update(subEvent);
         return true;
     }

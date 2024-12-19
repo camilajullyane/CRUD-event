@@ -66,6 +66,14 @@ public class Facade implements FacadeInterface {
         return eventController.updateName(event, newName);
     }
 
+    public boolean editEventBeginDate(EventInterface event, LocalDate newDate) {
+        return eventController.updateBeginDate(event, newDate);
+    }
+
+    public boolean editEventEndDate(EventInterface event, LocalDate newDate) {
+        return eventController.updateEndDate(event, newDate);
+    }
+
     public boolean editEventLocal(EventInterface event, String newLocal) {
         return eventController.updateLocal(event, newLocal);
     }
@@ -101,8 +109,12 @@ public class Facade implements FacadeInterface {
         return subEventController.editSubEventName(subEvent, newName);
     }
 
-    public boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate) {
-        return subEventController.editSubEventDate(subEvent, newDate);
+    public boolean editSubEventBeginDate(SubEventInterface subEvent, LocalDate newDate) {
+        return subEventController.editSubEventBeginDate(subEvent, newDate);
+    }
+
+    public boolean editSubEventEndDate(SubEventInterface subEvent, LocalDate newDate) {
+        return subEventController.editSubEventEndDate(subEvent, newDate);
     }
 
     public boolean editSubEventDescription(SubEventInterface subEvent, String newDescription) {

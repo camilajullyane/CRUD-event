@@ -349,9 +349,18 @@ public class FacadeTest {
     }
 
     @Test
-    void testEditSubEventDate() {
+    void testEditSubEventBeginDate() {
         LocalDate newDate = LocalDate.now().plusDays(1);
-        boolean result = facade.editSubEventDate(testSubEvent, newDate);
+        boolean result = facade.editSubEventBeginDate(testSubEvent, newDate);
+        assertTrue(result);
+        SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
+        assertEquals(newDate, subEvent.getBeginDate());
+    }
+
+    @Test
+    void testEditSubEventEndDate() {
+        LocalDate newDate = LocalDate.now().plusDays(1);
+        boolean result = facade.editSubEventEndDate(testSubEvent, newDate);
         assertTrue(result);
         SubEventInterface subEvent = facade.getSubEventByID(testSubEvent.getId());
         assertEquals(newDate, subEvent.getBeginDate());

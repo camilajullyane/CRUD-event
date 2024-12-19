@@ -22,13 +22,16 @@ public interface FacadeInterface {
     boolean editEventLocal(EventInterface event, String newLocal);
     boolean editEventDescription(EventInterface event, String newDescription);
     boolean editEventOrganization(EventInterface event, String newOrganization);
+    boolean editEventBeginDate(EventInterface event, LocalDate newDate);
+    boolean editEventEndDate(EventInterface event, LocalDate newDate);
     boolean deleteEvent(EventInterface event, UserInterface user);
     boolean addArticleOnList(ArticleInterface article, EventInterface event);
 
     // SubEventController methods
     SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate date,LocalDate endDate, String description);
     boolean editSubEventName(SubEventInterface subEvent, String newName);
-    boolean editSubEventDate(SubEventInterface subEvent, LocalDate newDate);
+    boolean editSubEventBeginDate(SubEventInterface subEvent, LocalDate newDate);
+    boolean editSubEventEndDate(SubEventInterface subEvent, LocalDate newDate);
     boolean editSubEventDescription(SubEventInterface subEvent, String newDescription);
     SubEventInterface getSubEventByID(UUID id);
     boolean addAttendeeSubEventOnList(UserInterface user, SubEventInterface subEvent);

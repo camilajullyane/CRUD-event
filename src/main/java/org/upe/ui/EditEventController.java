@@ -2,6 +2,7 @@ package org.upe.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.StackPane;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
@@ -9,6 +10,7 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class EditEventController {
     private final FacadeInterface facade = new Facade();
@@ -31,10 +33,10 @@ public class EditEventController {
     private TextField newEventOrganization;
 
     @FXML
-    private TextField newEventDate;
+    private DatePicker newEventBeginDate;
 
     @FXML
-    private TextField newEventHour;
+    private DatePicker newEventEndDate;
 
     @FXML
     private void handleNameButton() {
@@ -74,6 +76,26 @@ public class EditEventController {
         alert.setTitle("Evento editado");
         alert.setHeaderText(null);
         alert.setContentText("Organização editada com sucesso!");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleBeginDateButton() {
+        facade.editEventBeginDate(currentEvent, newEventBeginDate.getValue());
+        newEventBeginDate.setValue(null);
+        alert.setTitle("Evento editado");
+        alert.setHeaderText(null);
+        alert.setContentText("Data inicial editada com sucesso!");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleEndDateButton() {
+        facade.editEventEndDate(currentEvent, newEventEndDate.getValue());
+        newEventEndDate.setValue(null);
+        alert.setTitle("Evento editado");
+        alert.setHeaderText(null);
+        alert.setContentText("Data final editada com sucesso!");
         alert.showAndWait();
     }
 

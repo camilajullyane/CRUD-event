@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="certificatePage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.CertificateControler">
+<StackPane fx:id="SessionPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.SessionController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -22,7 +22,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -37,7 +37,7 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
-        </Button> 
+        </Button>
         <Button fx:id="scheduleButton" layoutX="40.0" layoutY="130.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" style="-fx-background-color: transparent;" text="Programação" textFill="WHITE">
             <font>
                 <Font size="15.0" />
@@ -46,7 +46,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionsScreen" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
+        <Button layoutX="40.0" layoutY="170.0" mnemonicParsing="false" onAction="#moveToSubmissionsPage" style="-fx-background-color: transparent;" text="Submissões" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
@@ -56,7 +56,7 @@
         </Button>
         <Button layoutX="40.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Certificados" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="15.0" />
+                <Font size="15.0" />
             </font>
             <opaqueInsets>
                 <Insets />
@@ -100,35 +100,42 @@
                 <Image url="@../../../images/deixar.png" />
             </image>
         </ImageView>
-      <Text fill="WHITE" layoutX="438.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CERTIFICADOS" wrappingWidth="119.19995117187506">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Text>
-
-        <ImageView fitHeight="50.0" fitWidth="20.0" layoutX="748.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+        <Text fill="WHITE" layoutX="482.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessões" wrappingWidth="62.0">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Text>
+        <Button layoutX="481.0" layoutY="489.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="32.0" text="donwload button" />
+        <ImageView fitHeight="52.0" fitWidth="25.0" layoutX="230.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/back.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
+        <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="478.0" prefWidth="565.0">
+        </ScrollPane>
+        <ImageView fitHeight="27.0" fitWidth="32.0" layoutX="743.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/settings-icon.png" />
             </image>
         </ImageView>
-        <Button fx:id="settingsButton" layoutX="744.0" layoutY="25.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="26.0" prefWidth="29.0" />
-      <Button fx:id="myEventsButton" layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToMyEventsPage" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/calendar.png" />
-         </image>
-      </ImageView>
-      <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="484.0" prefWidth="568.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
+        <Button layoutX="744.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToSettingsScreen" opacity="0.0" prefHeight="20.0" prefWidth="26.0" text="Button" />
+        <Button layoutX="40.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToMyEventsPage" style="-fx-background-color: transparent;" text="Meus Eventos" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ImageView accessibleRole="BUTTON" fitHeight="50.0" fitWidth="20.0" layoutX="20.0" layoutY="256.0" onDragDetected="#moveToMyEventsPage" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/calendar.png" />
+            </image>
+        </ImageView>
+
     </AnchorPane>
 </StackPane>

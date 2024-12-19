@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.upe.controllers.SubEventController;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
@@ -47,6 +49,9 @@ public class SubEventUIController implements Initializable {
         mainContainer.getChildren().clear();
 
         subEvents.forEach(subEvent -> {
+            if (subEvent.isPrivateSubEvent()) {
+                return;
+            }
             VBox eventContainer = new VBox();
             eventContainer.getStyleClass().add("custom-vbox");
 
@@ -59,28 +64,40 @@ public class SubEventUIController implements Initializable {
             Label description = new Label(subEvent.getDescription());
             description.getStyleClass().add("custom-label");
 
+            Label beginDateLabel = new Label("Data inicial");
+            beginDateLabel.getStyleClass().add("caption");
 
-            Label date = new Label("Data");
-            date.getStyleClass().add("caption");
+            Label beginDateValue = new Label(subEvent.getBeginDate().toString());
+            beginDateValue.getStyleClass().add("subcaption");
 
-            Label dateValue = new Label(subEvent.getBeginDate().toString());
-            dateValue.getStyleClass().add("subcaption");
+            Label endDateLabel = new Label("Data Final");
+            endDateLabel.getStyleClass().add("caption");
+
+            Label endDateValue = new Label(subEvent.getEndDate().toString());
+            endDateValue.getStyleClass().add("subcaption");
 
             Label location = new Label("Local");
             location.getStyleClass().add("caption");
 
-            Label owner = new Label("Palestrantes do evento");
-            owner.getStyleClass().add("caption");
 
+            Button seeSessionsButton = new Button("Ver Sessões");
+            seeSessionsButton.getStyleClass().add("custom-button");
+            seeSessionsButton.setOnAction(e -> {
+                try {
+                    handleSeeSession(subEvent);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
 
             VBox descriptionBox = new VBox(5, title, description);
-            VBox dateBox = new VBox(5, date, dateValue);
-
-
-            HBox infoBox = new HBox(50, dateBox);
+            VBox beginDateBox = new VBox(5, beginDateLabel, beginDateValue);
+            VBox endDateBox = new VBox(5, endDateLabel, endDateValue);
+            HBox infoBox = new HBox(50, beginDateBox, endDateBox);
+            HBox bottomBox = new HBox(50, seeSessionsButton);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 
-            VBox containerBox = new VBox(45,descriptionBox, infoBox);
+            VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
 
             eventContainer.getChildren().addAll(containerBox);
             mainContainer.getChildren().add(eventContainer);
@@ -127,6 +144,12 @@ public class SubEventUIController implements Initializable {
     @FXML
     private void moveToMyEventsPage() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/MyEvents.fxml", "Configurações", subEventPage);
+    }
+
+    @FXML
+    private void handleSeeSession(SubEventInterface subEvent) throws IOException {
+        SceneLoader.setSubEventData(subEvent);
+        SceneLoader.loadScene("/org/upe/ui/telaSessao.fxml", "Sessões", subEventPage);
     }
 
 }
