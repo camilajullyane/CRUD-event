@@ -209,4 +209,40 @@ public class EventControllerTest {
         verify(mockEvent).setName(newName);
         verify(eventDAO).update(mockEvent);
     }
+
+    @Test
+    void testUpdateLocal() {
+        String newLocal = "Updated Location";
+        doNothing().when(mockEvent).setLocal(newLocal);
+
+        boolean result = eventController.updateLocal(mockEvent, newLocal);
+
+        assertTrue(result);
+        verify(mockEvent).setLocal(newLocal);
+        verify(eventDAO).update(mockEvent);
+    }
+
+    @Test
+    void testUpdateDescription() {
+        String newDescription = "Updated Description";
+        doNothing().when(mockEvent).setDescription(newDescription);
+
+        boolean result = eventController.updateDescription(mockEvent, newDescription);
+
+        assertTrue(result);
+        verify(mockEvent).setDescription(newDescription);
+        verify(eventDAO).update(mockEvent);
+    }
+
+    @Test
+    void testUpdateOrganization() {
+        String newOrganization = "Updated Organization";
+        doNothing().when(mockEvent).setOrganization(newOrganization);
+
+        boolean result = eventController.updateOrganization(mockEvent, newOrganization);
+
+        assertTrue(result);
+        verify(mockEvent).setOrganization(newOrganization);
+        verify(eventDAO).update(mockEvent);
+    }
 }

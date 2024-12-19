@@ -99,6 +99,7 @@ public class EventController implements EventControllerInterface {
 
     public boolean updateOrganization(EventInterface event, String newOrganization) {
         event.setOrganization(newOrganization);
+        eventDAO.update(event);
         return true;
     }
 
