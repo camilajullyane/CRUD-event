@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class EventControllerTest {
+class EventControllerTest {
 
     @InjectMocks
     private EventController eventController;

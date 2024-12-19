@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class SessionControllerTest {
+class SessionControllerTest {
 
     @InjectMocks
     private SessionController sessionController;

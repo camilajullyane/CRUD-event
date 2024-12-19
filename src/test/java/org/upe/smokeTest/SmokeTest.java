@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 
-public class SmokeTest extends ApplicationTest {
+class SmokeTest extends ApplicationTest {
     private Stage stage;
 
     private StackPane signUpPage;
@@ -55,13 +55,13 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testAppStart() {
+    void testAppStart() {
         assertNotNull(stage, "A aplicação não foi iniciada corretamente.");
         assertThat(stage.getTitle()).isEqualTo("Even2");
     }
 
     @Test
-    public void testSignUpScreen() throws Exception {
+    void testSignUpScreen() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaCadastro.fxml"));
         Parent root = loader.load();
 
@@ -76,7 +76,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testHomeScreen() throws Exception {
+    void testHomeScreen() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaInicio.fxml"));
         Parent root = loader.load();
 
@@ -91,7 +91,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testScheduleScreen() throws Exception {
+    void testScheduleScreen() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaProgramacao.fxml"));
         Parent root = loader.load();
 
@@ -106,7 +106,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testSubmissionScreen() throws Exception {
+    void testSubmissionScreen() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaSubmissões.fxml"));
         Parent root = loader.load();
 
@@ -121,7 +121,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testSubscriptionScreen() throws Exception {
+    void testSubscriptionScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -144,7 +144,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testMyEventsScreen () throws Exception {
+    void testMyEventsScreen () throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -167,7 +167,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testCertificateScreen() throws Exception {
+    void testCertificateScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -189,7 +189,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testCreateEventScreen() throws Exception {
+    void testCreateEventScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -210,7 +210,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testCreateSubEventScreen() throws Exception {
+    void testCreateSubEventScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -237,7 +237,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testCreateArticleScreen() throws Exception {
+    void testCreateArticleScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -259,7 +259,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testSubEventScreen() throws Exception {
+    void testSubEventScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -286,7 +286,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testSettingsScreen() throws Exception {
+    void testSettingsScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -310,7 +310,7 @@ public class SmokeTest extends ApplicationTest {
     }
 
     @Test
-    public void testMySubEventsScreen() throws Exception {
+    void testMySubEventsScreen() throws Exception {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
@@ -338,7 +338,7 @@ public class SmokeTest extends ApplicationTest {
 
 
     @Test
-    public void testOpenCertificateScreen() throws Exception {
+    void testOpenCertificateScreen() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaCertificado.fxml"));
         Parent root = loader.load();
 
