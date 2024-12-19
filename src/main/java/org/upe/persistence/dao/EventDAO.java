@@ -13,8 +13,16 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 public class EventDAO {
-    private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+    private final EntityManager entityManager;
     private final Logger logger = Logger.getLogger(EventDAO.class.getName());
+
+    public EventDAO() {
+        entityManager = EntityManagerFactory.getEntityManager();
+    }
+
+    public EventDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public Event create(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization, UserInterface user) {
         try {
@@ -39,15 +47,17 @@ public class EventDAO {
     }
 
 
-    public void delete(UUID id) {
+    public boolean delete(UUID id) {
         try {
             entityManager.getTransaction().begin();
             Event eventToBeDeleted = (Event) findById(id);
             eventToBeDeleted.setPrivateEvent(true);
             entityManager.merge(eventToBeDeleted);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
+            return false;
         }
 
     }

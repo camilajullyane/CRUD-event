@@ -15,8 +15,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SubEventDAO {
-    private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+    private final EntityManager entityManager;
     private final Logger logger = Logger.getLogger(SubEventDAO.class.getName());
+
+    public SubEventDAO() {
+        entityManager = EntityManagerFactory.getEntityManager();
+    }
+
+    public SubEventDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public SubEvent create(String name, String description, LocalDate beginDate, LocalDate endDate, EventInterface parentEvent) {
         try {
@@ -84,6 +92,11 @@ public class SubEventDAO {
     }
 
     public SubEventInterface getById(UUID id) {
-        return entityManager.find(SubEvent.class, id);
+        try {
+            return entityManager.find(SubEvent.class, id);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
     }
 }

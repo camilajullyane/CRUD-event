@@ -13,9 +13,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SessionDAO {
-    private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+    private final EntityManager entityManager;
     private final Logger logger = Logger.getLogger(SessionDAO.class.getName());
 
+    public SessionDAO() {
+        entityManager = EntityManagerFactory.getEntityManager();
+    }
+
+    public SessionDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public SessionInterface create(String name, LocalDate date, LocalDateTime beginHour, LocalDateTime endHour, String local, String description, String speaker, SubEventInterface parentSubEvent) {
         try {
@@ -51,19 +58,26 @@ public class SessionDAO {
         }
     }
 
-    public void delete(UUID id) {
+    public boolean delete(UUID id) {
         try {
             entityManager.getTransaction().begin();
             Session sessionToBeDeleted = (Session) getById(id);
             sessionToBeDeleted.setPrivateSession(true);
             entityManager.merge(sessionToBeDeleted);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
+            return false;
         }
     }
 
     public SessionInterface getById(UUID id) {
-        return entityManager.find(Session.class, id);
+        try {
+            return entityManager.find(Session.class, id);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
     }
 }

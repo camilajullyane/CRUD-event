@@ -10,8 +10,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserDAO {
-    private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+    private final EntityManager entityManager;
     private final Logger logger = Logger.getLogger(UserDAO.class.getName());
+
+    public UserDAO() {
+        entityManager = EntityManagerFactory.getEntityManager();
+    }
+
+    public UserDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public UserInterface create(String name, String email, String cpf, String password) {
         try {

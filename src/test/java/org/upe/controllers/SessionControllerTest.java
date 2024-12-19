@@ -61,7 +61,7 @@ class SessionControllerTest {
         // Arrange
         UUID sessionId = UUID.randomUUID();
         when(mockSession.getId()).thenReturn(sessionId);
-
+        when(sessionDAO.delete(sessionId)).thenReturn(true);
         // Act
         boolean result = sessionController.delete(sessionId);
 
