@@ -113,7 +113,7 @@ public class FacadeTest {
         testSubEvent.addAttendeeOnSubEvent(userSubscribedToSubEvent);
         entityManager.merge(userSubscribedToSubEvent);
         entityManager.merge(testSubEvent);
-        entityManager.merge(testSession);
+        entityManager.persist(testSession);
 
         userSubscribedToEvent.subscribeToEvent(testEvent);
         userSubscribedToEvent2.subscribeToEvent(testEvent);
@@ -127,8 +127,6 @@ public class FacadeTest {
 
         entityManager.merge(testArticle);
         entityManager.merge(testArticleToBeDeleted);
-
-
 
         transaction.commit();
     }
