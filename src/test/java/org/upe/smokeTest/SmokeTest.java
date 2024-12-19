@@ -214,8 +214,13 @@ public class SmokeTest extends ApplicationTest {
         UserInterface mockUser = mock(UserInterface.class);
         when(mockUser.getName()).thenReturn("testUser");
 
-        try (MockedStatic<UserSession> mockedSession = mockStatic(UserSession.class)) {
+        EventInterface mockEvent = mock(EventInterface.class);
+        when(mockEvent.getName()).thenReturn("Test Event");
+
+        try (MockedStatic<UserSession> mockedSession = mockStatic(UserSession.class);
+             MockedStatic<SceneLoader> mockedSceneLoader = mockStatic(SceneLoader.class)) {
             mockedSession.when(UserSession::getCurrentUser).thenReturn(mockUser);
+            mockedSceneLoader.when(SceneLoader::getEventData).thenReturn(mockEvent);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/upe/ui/telaCriandoSubEvento.fxml"));
             Parent root = loader.load();
