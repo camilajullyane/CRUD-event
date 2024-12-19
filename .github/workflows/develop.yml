@@ -7,6 +7,20 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:latest  # Substitua por sua imagem de banco de dados, se for diferente
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: teste-jpa
+        options: >-
+          --health-cmd="pg_isready -U testuser" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -17,15 +31,14 @@ jobs:
           java-version: 21
           distribution: 'zulu'
           
-          
       - name: Create dotenv File
         run: |
           touch /home/runner/work/CRUD-event/CRUD-event/.env
-          echo DB_URL_DEFAULT="${{ secrets.DB_URL_DEFAULT }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-          echo DB_URL_TEST="${{ secrets.DB_URL_TEST }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-          echo DB_DRIVER="${{ secrets.DB_DRIVER }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-          echo DB_USER="${{ secrets.DB_USER }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
-          echo DB_PASSWORD="${{ secrets.DB_PASSWORD }}" >> /home/runner/work/CRUD-event/CRUD-event/.env
+          echo DB_URL_DEFAULT="jdbc:postgresql://localhost:5432/default" >> /home/runner/work/CRUD-event/CRUD-event/.env
+          echo DB_URL_TEST="jdbc:postgresql://localhost:5432/teste-jpa" >> /home/runner/work/CRUD-event/CRUD-event/.env
+          echo DB_DRIVER="org.postgresql.Driver" >> /home/runner/work/CRUD-event/CRUD-event/.env
+          echo DB_USER="testuser" >> /home/runner/work/CRUD-event/CRUD-event/.env
+          echo DB_PASSWORD="testpassword" >> /home/runner/work/CRUD-event/CRUD-event/.env
           cat /home/runner/work/CRUD-event/CRUD-event/.env
 
       - name: Install Xvfb
