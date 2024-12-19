@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="editEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.EditSubEventController">
+<StackPane fx:id="editEventPage" style="-fx-background-color: #3F3F46;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upe.ui.EditSubEventController">
     <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3F3F46;">
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333338" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="210.0">
             <rotationAxis>
@@ -33,7 +33,7 @@
         </Button>
 
         <Line endX="293.0" layoutX="468.0" layoutY="96.0" startX="-209.0" stroke="WHITE" />
-        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" onAction="#moveToHomeScreen" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
+        <Button fx:id="homeButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#moveToHomeScreen" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: transparent;" text="Início" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -133,7 +133,7 @@
                 <Image url="@../../../images/calendar.png" />
             </image>
         </ImageView>
-        <Label layoutX="288.0" layoutY="166.0" prefHeight="17.0" prefWidth="48.0" text="Nome" textFill="WHITE">
+        <Label layoutX="283.0" layoutY="166.0" prefHeight="17.0" prefWidth="48.0" text="Nome" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
@@ -142,22 +142,12 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="288.0" layoutY="202.0" prefHeight="17.0" prefWidth="48.0" text="Local" textFill="WHITE">
+        <Label layoutX="283.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="Descrição" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="288.0" layoutY="246.0" prefHeight="20.0" prefWidth="77.0" text="Descrição" textAlignment="CENTER" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <Label layoutX="291.0" layoutY="289.0" prefHeight="20.0" prefWidth="98.0" text="Palestrante" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <Label layoutX="292.0" layoutY="335.0" prefHeight="20.0" prefWidth="88.0" text="Hora" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="283.0" layoutY="266.0" prefHeight="20.0" prefWidth="88.0" text="Data Inicial" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -169,12 +159,9 @@
         </ImageView>
         <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToMySubEventPage" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
         <TextField fx:id="newSubEventName" layoutX="414.0" layoutY="164.0" promptText="Novo nome" />
-        <TextField fx:id="newSubEventLocal" layoutX="414.0" layoutY="204.0" promptText="Novo local" />
-        <TextField fx:id="newSubEventDescription" layoutX="414.0" layoutY="244.0" promptText="Nova descrição" />
-        <TextField fx:id="newSubEventSpeaker" layoutX="414.0" layoutY="288.0" promptText="Novo palestrante" />
-        <TextField fx:id="newSubEventHour" layoutX="414.0" layoutY="333.0" promptText="Novo horário" />
-
-        <Button fx:id="localButton" layoutX="593.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleLocalButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
+        <TextField fx:id="newSubEventDescription" layoutX="414.0" layoutY="213.0" promptText="Nova descrição" />
+        <TextField fx:id="newSubEventBeginDate" layoutX="414.0" layoutY="264.0" promptText="Nova data inicial" />
+        <Button fx:id="descriptionButton" layoutX="593.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleDescriptionButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
             <font>
                 <Font name="Microsoft YaHei Bold" size="12.0" />
             </font>
@@ -182,7 +169,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="descriptionButton" layoutX="593.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleDescriptionButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
+        <Button fx:id="beginHourButton" layoutX="593.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleBeginHourButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
             <font>
                 <Font name="Microsoft YaHei Bold" size="12.0" />
             </font>
@@ -190,21 +177,19 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button fx:id="organizationButton" layoutX="593.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleOrganizationButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
-            <font>
-                <Font name="Microsoft YaHei Bold" size="12.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
-        <Button fx:id="hourButton" layoutX="593.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleHourButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
-            <font>
-                <Font name="Microsoft YaHei Bold" size="12.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
+      <Label layoutX="283.0" layoutY="314.0" prefHeight="20.0" prefWidth="88.0" text="Data Final" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newSubEventEndDate" layoutX="414.0" layoutY="312.0" promptText="Nova data final" />
+      <Button fx:id="endHourButton" layoutX="593.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleEndHourButton" prefHeight="27.0" prefWidth="88.0" style="-fx-background-radius: 25; -fx-background-color: #2DD4BF;" text="Aplicar" textFill="WHITE">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
     </AnchorPane>
 </StackPane>

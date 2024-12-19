@@ -2,6 +2,7 @@ package org.upe.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.SubEventController;
 import org.upe.facade.Facade;
@@ -10,6 +11,7 @@ import org.upe.utils.SceneLoader;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class EditSubEventController {
     private final Facade facade = new Facade();
@@ -25,16 +27,13 @@ public class EditSubEventController {
     private TextField newSubEventName;
 
     @FXML
-    private TextField newSubEventLocal;
-
-    @FXML
     private TextField newSubEventDescription;
 
     @FXML
-    private TextField newSubEventSpeaker;
+    private TextField newSubEventBeginHour;
 
     @FXML
-    private TextField newSubEventHour;
+    private TextField newSubEventEndHour;
 
 
     @FXML
@@ -55,6 +54,26 @@ public class EditSubEventController {
         alert.setTitle("SubEvento editado");
         alert.setHeaderText(null);
         alert.setContentText("Descrição editada com sucesso!");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleBeginHourButton() {
+        facade.editSubEventBeginDate(subEvent, LocalDate.parse(newSubEventBeginHour.getText()));
+        newSubEventBeginHour.setText("");
+        alert.setTitle("SubEvento editado");
+        alert.setHeaderText(null);
+        alert.setContentText("Data inicial editada com sucesso!");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleEndHourButton() {
+        facade.editSubEventEndDate(subEvent, LocalDate.parse(newSubEventEndHour.getText()));
+        newSubEventEndHour.setText("");
+        alert.setTitle("SubEvento editado");
+        alert.setHeaderText(null);
+        alert.setContentText("Data final editada com sucesso!");
         alert.showAndWait();
     }
 

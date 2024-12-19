@@ -112,7 +112,7 @@
             </image>
         </ImageView>
         <Button layoutX="227.0" layoutY="32.0" mnemonicParsing="false" onAction="#moveToScheduleScreen" opacity="0.0" prefHeight="26.0" prefWidth="32.0" text="backButton" />
-        <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="478.0" prefWidth="565.0">
+        <ScrollPane fx:id="scrollPane" layoutX="220.0" layoutY="106.0" prefHeight="484.0" prefWidth="568.0">
         </ScrollPane>
       <ImageView fitHeight="27.0" fitWidth="32.0" layoutX="743.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -75,12 +75,17 @@ public class MySubEventsController implements Initializable {
                 Label descriptionLabel = new Label(subEvent.getDescription());
                 descriptionLabel.getStyleClass().add("custom-label");
 
-                Label dateLabel = new Label("Data");
-                dateLabel.getStyleClass().add("caption");
+                Label beginDateLabel = new Label("Data inicial");
+                beginDateLabel.getStyleClass().add("caption");
 
-                Label dateValue = new Label(subEvent.getBeginDate().toString());
-                dateValue.getStyleClass().add("subcaption");
+                Label beginDateValue = new Label(subEvent.getBeginDate().toString());
+                beginDateValue.getStyleClass().add("subcaption");
 
+                Label endDateLabel = new Label("Data Final");
+                endDateLabel.getStyleClass().add("caption");
+
+                Label endDateValue = new Label(subEvent.getEndDate().toString());
+                endDateValue.getStyleClass().add("subcaption");
 
                 Label locationLabel = new Label("Local");
                 locationLabel.getStyleClass().add("caption");
@@ -99,12 +104,22 @@ public class MySubEventsController implements Initializable {
                     }
                 });
 
+                Button seeSessionsButton = new Button("Ver Sessões");
+                seeSessionsButton.getStyleClass().add("custom-button");
+                seeSessionsButton.setOnAction(e -> {
+                    try {
+                        handleSeeSession(subEvent);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
                 VBox descriptionBox = new VBox(5, titleLabel, descriptionLabel);
-                VBox dateBox = new VBox(5, dateLabel, dateValue);
+                VBox beginDateBox = new VBox(5, beginDateLabel, beginDateValue);
+                VBox endDateBox = new VBox(5, endDateLabel, endDateValue);
 
-
-                HBox infoBox = new HBox(50, dateBox);
-                HBox bottomBox = new HBox(50, editSubEventButton);
+                HBox infoBox = new HBox(50, beginDateBox, endDateBox);
+                HBox bottomBox = new HBox(50, editSubEventButton, seeSessionsButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);
                 VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
@@ -113,6 +128,7 @@ public class MySubEventsController implements Initializable {
                 subEventContainer.getChildren().addAll(containerBox);
                 mainContainer.getChildren().add(subEventContainer);
                 mainContainer.setAlignment(Pos.CENTER);
+
 
             });
         }
@@ -167,6 +183,12 @@ public class MySubEventsController implements Initializable {
     private void handleEditSubEventButton(SubEventInterface subEvent) throws IOException {
         SceneLoader.setSubEventData(subEvent);
         SceneLoader.loadScene("/org/upe/ui/telaEditarSubEvento.fxml", "Editar SubEvento", mySubEventsPage);
+    }
+
+    @FXML
+    private void handleSeeSession(SubEventInterface subEvent) throws IOException {
+        SceneLoader.setSubEventData(subEvent);
+        SceneLoader.loadScene("/org/upe/ui/telaSecao.fxml", "Sessões", mySubEventsPage);
     }
 
 }

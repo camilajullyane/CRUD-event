@@ -105,6 +105,13 @@ public class SubscriptionController implements Initializable {
             label.getStyleClass().add("custom-label");
 
             Button button = new Button("Ver eventos disponíveis");
+            button.setOnAction(e -> {
+                try {
+                    schedulePage();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
             button.getStyleClass().add("custom-button");
             VBox.setMargin(button, new Insets(50, 0, 0, 0));
 

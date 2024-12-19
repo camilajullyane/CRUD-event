@@ -1,6 +1,5 @@
 package org.upe.persistence.interfaces;
 
-import org.springframework.cglib.core.Local;
 import org.upe.persistence.model.Event;
 
 import java.time.LocalDate;
@@ -16,8 +15,9 @@ public interface SubEventInterface {
     LocalDate getBeginDate();
     void setBeginDate(LocalDate beginDate);
     void setIsCertified();
-    LocalDate getEndDate();
     boolean isCertified();
+    LocalDate getEndDate();
+    void setEndDate(LocalDate beginDate);
     Event getParentEvent();
     void setParentEvent(Event parentEvent);
     void addAttendeeOnSubEvent(UserInterface user);
