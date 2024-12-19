@@ -34,6 +34,7 @@ public class FacadeTest {
     private static EventInterface testEvent;
     private static EventInterface testEventWithArticle;
     private static ArticleInterface testArticle;
+    private static ArticleInterface testArticle2;
     private static ArticleInterface testArticleToBeDeleted;
     private static SessionInterface testSession;
 
@@ -91,6 +92,11 @@ public class FacadeTest {
                 .withTitle("Test Article")
                 .build();
 
+        testArticle2 = Article.builder()
+                .withArticleAbstract("Abstract")
+                .withTitle("Test Article")
+                .build();
+
         testArticleToBeDeleted = Article.builder()
                 .withArticleAbstract("Abstract")
                 .withTitle("Test Article")
@@ -106,6 +112,7 @@ public class FacadeTest {
         entityManager.persist(testArticle);
         entityManager.persist(testArticleToBeDeleted);
         entityManager.persist(testSubEvent2);
+        entityManager.persist(testArticle2);
 
         entityManager.persist(testSubEvent);
         entityManager.persist(userSubscribedToSubEvent);
@@ -113,7 +120,7 @@ public class FacadeTest {
         testSubEvent.addAttendeeOnSubEvent(userSubscribedToSubEvent);
         entityManager.merge(userSubscribedToSubEvent);
         entityManager.merge(testSubEvent);
-        entityManager.merge(testSession);
+        entityManager.persist(testSession);
 
         userSubscribedToEvent.subscribeToEvent(testEvent);
         userSubscribedToEvent2.subscribeToEvent(testEvent);
@@ -123,12 +130,13 @@ public class FacadeTest {
         entityManager.merge(userSubscribedToEvent);
         entityManager.merge(userSubscribedToEvent2);
         entityManager.merge(testEvent);
+
+        testEventWithArticle.addArticleOnEvent(testArticle);
+        testArticle.addSubmittedIn(testEventWithArticle);
         entityManager.merge(testEventWithArticle);
 
         entityManager.merge(testArticle);
         entityManager.merge(testArticleToBeDeleted);
-
-
 
         transaction.commit();
     }
@@ -230,14 +238,20 @@ public class FacadeTest {
 
     @Test
     void testAddArticleOnList() {
-        boolean result = facade.addArticleOnList(testArticle, testEventWithArticle);
+        boolean result = facade.addArticleOnList(testArticle2, testEventWithArticle);
         assertTrue(result);
         EventInterface event = facade.getEventByID(testEventWithArticle.getId());
         Optional<ArticleInterface> article = event.getArticles()
                 .stream()
-                .filter(a -> a.getId().equals(testArticle.getId()))
+                .filter(a -> a.getId().equals(testArticle2.getId()))
                 .findFirst();
         assertTrue(article.isPresent());
+    }
+
+    @Test
+    void testAddArticleOnListWithArticleAlreadyOnList() {
+        boolean result = facade.addArticleOnList(testArticle, testEventWithArticle);
+        assertFalse(result);
     }
 
     @Test

@@ -65,10 +65,4 @@ public class UserDAO {
             return null;
         }
     }
-
-    public void delete(UserInterface user) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(user);
-        entityManager.getTransaction().commit();
-    }
 }

@@ -2,8 +2,7 @@ package org.upe.facade;
 
 import org.upe.controllers.*;
 import org.upe.controllers.interfaces.*;
-import org.upe.persistence.dao.CertificateDAO;
-import org.upe.persistence.dao.SubEventDAO;
+import org.upe.persistence.dao.*;
 import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
@@ -22,12 +21,13 @@ public class Facade implements FacadeInterface {
 
     public Facade() {
         this.certificateController = new CertificateController(new CertificateDAO(), new SubEventDAO());
-        this.authController = new AuthController();
-        this.eventController = new EventController();
-        this.subEventController = new SubEventController();
-        this.userController = new UserController();
-        this.articleController = new ArticleController();
-        this.sessionController = new SessionController();
+        this.authController = new AuthController(new UserDAO());
+        this.eventController = new EventController(new EventDAO(), new UserDAO(), new ArticleDAO());
+        this.subEventController = new SubEventController(new SubEventDAO(), new UserDAO());
+        this.userController = new UserController(new UserDAO());
+        this.articleController = new ArticleController(new ArticleDAO(), new EventDAO());
+        this.sessionController = new SessionController(new SessionDAO());
+
     }
 
 
@@ -40,8 +40,6 @@ public class Facade implements FacadeInterface {
     public UserInterface signUpUser(String name, String cpf, String email, String password) {
         return authController.signUpUser(name, cpf, email, password);
     }
-
-
 
     // EventController methods
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization) {

@@ -13,8 +13,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class SubEventController implements SubEventControllerInterface {
-    public static final SubEventDAO subEventDAO = new SubEventDAO();
-    public static final UserDAO userDAO = new UserDAO();
+    public SubEventDAO subEventDAO;
+    public UserDAO userDAO;
+
+    public SubEventController(SubEventDAO subEventDAO, UserDAO userDAO) {
+        this.subEventDAO = subEventDAO;
+        this.userDAO = userDAO;
+    }
 
     // falta regras de negocio
     public SubEventInterface createSubEvent(EventInterface parentEvent, String name, LocalDate beginDate,LocalDate endDate, String description) {

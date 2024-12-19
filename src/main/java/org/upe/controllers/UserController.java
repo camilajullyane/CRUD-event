@@ -7,7 +7,11 @@ import org.upe.persistence.model.User;
 import org.upe.utils.PasswordUtil;
 
 public class UserController implements UserControllerInterface {
-    private static final UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO;
+
+    public UserController(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     public UserInterface getUserByCPF(String cpf) {
         return userDAO.findByCPF(cpf);
@@ -36,9 +40,5 @@ public class UserController implements UserControllerInterface {
         utilityUser.setEmail(newEmail);
         userDAO.update(utilityUser);
         return true;
-    }
-
-    public void deleteUser(UserInterface user) {
-        userDAO.delete(user);
     }
 }
