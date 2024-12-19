@@ -49,6 +49,9 @@ public class SubEventUIController implements Initializable {
         mainContainer.getChildren().clear();
 
         subEvents.forEach(subEvent -> {
+            if (subEvent.isPrivateSubEvent()) {
+                return;
+            }
             VBox eventContainer = new VBox();
             eventContainer.getStyleClass().add("custom-vbox");
 
@@ -67,7 +70,7 @@ public class SubEventUIController implements Initializable {
             Label beginDateValue = new Label(subEvent.getBeginDate().toString());
             beginDateValue.getStyleClass().add("subcaption");
 
-            Label endDateLabel = new Label("Data inicial");
+            Label endDateLabel = new Label("Data Final");
             endDateLabel.getStyleClass().add("caption");
 
             Label endDateValue = new Label(subEvent.getEndDate().toString());
@@ -88,8 +91,9 @@ public class SubEventUIController implements Initializable {
             });
 
             VBox descriptionBox = new VBox(5, title, description);
-            VBox dateBox = new VBox(5, beginDateLabel, beginDateValue, endDateLabel, endDateValue);
-            HBox infoBox = new HBox(50, dateBox);
+            VBox beginDateBox = new VBox(5, beginDateLabel, beginDateValue);
+            VBox endDateBox = new VBox(5, endDateLabel, endDateValue);
+            HBox infoBox = new HBox(50, beginDateBox, endDateBox);
             HBox bottomBox = new HBox(50, seeSessionsButton);
             infoBox.setAlignment(Pos.CENTER_LEFT);
 

@@ -137,10 +137,10 @@ public class MyEventsController implements Initializable {
 
 
                     HBox infoBox = new HBox(50, locationBox, ownerBox);
-                    HBox bottomBox = new HBox(50, createSubEventButton, showAllMySubEventsButton, editEventButton, cancelButton);
+                    HBox bottomBox1 = new HBox(50, editEventButton, cancelButton);
+                    HBox bottomBox2 = new HBox(50, createSubEventButton, showAllMySubEventsButton);
                     infoBox.setAlignment(Pos.CENTER_LEFT);
-                    bottomBox.setAlignment(Pos.CENTER);
-                    VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox);
+                    VBox containerBox = new VBox(45,descriptionBox, infoBox, bottomBox1, bottomBox2);
 
 
 

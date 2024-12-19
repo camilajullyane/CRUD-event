@@ -7,6 +7,7 @@ import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.utils.SceneLoader;
+import org.upe.utils.UserSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -81,6 +82,7 @@ public class CreateSubEventController {
 
         EventInterface currentEvent = SceneLoader.getEventData();
         facade.createSubEvent(currentEvent, name, begin, end,description);
+        UserSession.getInstance().setCurrentUser(facade.getUserByCPF(UserSession.getInstance().getCurrentUser().getCpf()));
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aviso");

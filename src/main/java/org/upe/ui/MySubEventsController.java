@@ -79,7 +79,7 @@ public class MySubEventsController {
                 Label beginDateValue = new Label(subEvent.getBeginDate().toString());
                 beginDateValue.getStyleClass().add("subcaption");
 
-                Label endDateLabel = new Label("Data inicial");
+                Label endDateLabel = new Label("Data Final");
                 endDateLabel.getStyleClass().add("caption");
 
                 Label endDateValue = new Label(subEvent.getEndDate().toString());
@@ -109,10 +109,10 @@ public class MySubEventsController {
                 });
 
                 VBox descriptionBox = new VBox(5, titleLabel, descriptionLabel);
-                VBox dateBox = new VBox(5, beginDateLabel, beginDateValue, endDateLabel, endDateValue);
+                VBox beginDateBox = new VBox(5, beginDateLabel, beginDateValue);
+                VBox endDateBox = new VBox(5, endDateLabel, endDateValue);
 
-
-                HBox infoBox = new HBox(50, dateBox);
+                HBox infoBox = new HBox(50, beginDateBox, endDateBox);
                 HBox bottomBox = new HBox(50, editSubEventButton, seeSessionsButton);
                 infoBox.setAlignment(Pos.CENTER_LEFT);
                 bottomBox.setAlignment(Pos.CENTER);
