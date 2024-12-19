@@ -14,8 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ArticleDAO {
-    private final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+    private final EntityManager entityManager;
     private final Logger logger = Logger.getLogger(ArticleDAO.class.getName());
+
+    public ArticleDAO() {
+        entityManager = EntityManagerFactory.getEntityManager();
+    }
+
+    public ArticleDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
 
     public ArticleInterface create(String title, String articleAbstract, UserInterface user) {
         try {
