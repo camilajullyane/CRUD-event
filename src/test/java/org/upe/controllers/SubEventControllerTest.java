@@ -89,13 +89,10 @@ public class SubEventControllerTest {
 
     @Test
     void testRemoveAttendeeSubEventOnList() {
-        // Arrange
         lenient().when(subEventMock.getSubEventAttendeesList()).thenReturn(Collections.singletonList(userMock));
 
-        // Act
         boolean result = subEventController.removeAttendeeSubEventOnList(userMock, subEventMock);
 
-        // Assert
         assertTrue(result);
         verify(subEventMock).removeAttendeeOnSubEvent(userMock);
         verify(subEventDAOMock).update(subEventMock);
@@ -106,13 +103,10 @@ public class SubEventControllerTest {
 
     @Test
     void testEditSubEventName() {
-        // Arrange
         String newName = "New SubEvent Name";
 
-        // Act
         boolean result = subEventController.editSubEventName(subEventMock, newName);
 
-        // Assert
         assertTrue(result);
         verify(subEventMock).setName(newName);
         verify(subEventDAOMock).update(subEventMock);
@@ -120,13 +114,10 @@ public class SubEventControllerTest {
 
     @Test
     void testEditSubEventDate() {
-        // Arrange
         LocalDate newDate = LocalDate.now().plusDays(2);
 
-        // Act
         boolean result = subEventController.editSubEventDate(subEventMock, newDate);
 
-        // Assert
         assertTrue(result);
         verify(subEventMock).setBeginDate(newDate);
         verify(subEventDAOMock).update(subEventMock);
@@ -134,13 +125,10 @@ public class SubEventControllerTest {
 
     @Test
     void testEditSubEventDescription() {
-        // Arrange
         String newDescription = "New Description for SubEvent";
 
-        // Act
         boolean result = subEventController.editSubEventDescription(subEventMock, newDescription);
 
-        // Assert
         assertTrue(result);
         verify(subEventMock).setDescription(newDescription);
         verify(subEventDAOMock).update(subEventMock);
@@ -148,28 +136,36 @@ public class SubEventControllerTest {
 
     @Test
     void testDeleteSubEvent() {
-        // Arrange
         UUID subEventId = UUID.randomUUID();
 
-        // Act
+
         boolean result = subEventController.deleteSubEvent(subEventId);
 
-        // Assert
+
         assertTrue(result);
         verify(subEventDAOMock).delete(subEventId);
     }
 
     @Test
     void testGetSubEventByID() {
-        // Arrange
         UUID subEventId = UUID.randomUUID();
         when(subEventDAOMock.getById(subEventId)).thenReturn(subEventMock);
 
-        // Act
         SubEventInterface result = subEventController.getSubEventByID(subEventId);
 
-        // Assert
         assertNotNull(result);
         verify(subEventDAOMock).getById(subEventId);
     }
+
+    @Test
+    void testGetSubEventWithWrongID() {
+        UUID subEventId = UUID.randomUUID();
+        when(subEventDAOMock.getById(subEventId)).thenReturn(null);
+
+        SubEventInterface result = subEventController.getSubEventByID(subEventId);
+
+        assertNull(result);
+        verify(subEventDAOMock).getById(subEventId);
+    }
+
 }
