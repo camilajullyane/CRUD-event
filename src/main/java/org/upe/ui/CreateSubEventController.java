@@ -13,7 +13,6 @@ import java.time.LocalDate;
 
 public class CreateSubEventController {
     private final FacadeInterface facade = new Facade();
-    EventInterface currentEvent = SceneLoader.getEventData();
 
     @FXML
     private StackPane createSubEventPage;
@@ -43,11 +42,6 @@ public class CreateSubEventController {
     Label errorMessage;
 
     @FXML
-    public void initialize() {
-
-    }
-
-    @FXML
     private void moveToScheduleScreen() throws IOException {
         SceneLoader.loadScene("/org/upe/ui/telaProgramacao.fxml", "Programação", createSubEventPage);
     }
@@ -73,7 +67,7 @@ public class CreateSubEventController {
     }
 
     @FXML
-    private void handleCreateSubEvent() {
+    private void handleCreateSubEvent() throws IOException {
         if(subEventName.getText().isEmpty() || subEventDescription.getText().isEmpty() ||
                 subEventHour.getText().isEmpty() || subEventLocation.getText().isEmpty() || beginDate.getValue() == null || endDate.getValue() == null) {
             errorMessage.setVisible(true);
@@ -99,7 +93,9 @@ public class CreateSubEventController {
         subEventHour.setText("");
         subEventLocation.setText("");
         subEventSpeaker.setText("");
-
+        beginDate.setValue(null);
+        endDate.setValue(null);
+        SceneLoader.setEventData(currentEvent);
     }
     @FXML
     private void handleLogOut() throws IOException {

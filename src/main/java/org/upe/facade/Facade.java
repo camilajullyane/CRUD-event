@@ -2,7 +2,7 @@ package org.upe.facade;
 
 import org.upe.controllers.*;
 import org.upe.controllers.interfaces.*;
-import org.upe.persistence.DAO.*;
+import org.upe.persistence.dao.*;
 import org.upe.persistence.interfaces.*;
 
 import java.time.LocalDate;
@@ -17,14 +17,17 @@ public class Facade implements FacadeInterface {
     private final UserControllerInterface userController;
     private final ArticleControllerInterface articleController;
     private final SessionControllerInterface sessionController;
+    private final CertificateControllerInterface certificateController;
 
     public Facade() {
+        this.certificateController = new CertificateController(new CertificateDAO(), new SubEventDAO());
         this.authController = new AuthController(new UserDAO());
         this.eventController = new EventController(new EventDAO(), new UserDAO(), new ArticleDAO());
         this.subEventController = new SubEventController(new SubEventDAO(), new UserDAO());
         this.userController = new UserController(new UserDAO());
         this.articleController = new ArticleController(new ArticleDAO(), new EventDAO());
         this.sessionController = new SessionController(new SessionDAO());
+
     }
 
 
@@ -161,4 +164,5 @@ public class Facade implements FacadeInterface {
         return sessionController.delete(id);
     }
 
+    public boolean generateCertificate() {return certificateController.generateCertificate();}
 }

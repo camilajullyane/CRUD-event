@@ -1,7 +1,7 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.AuthControllerInterface;
-import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.dao.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
 import org.upe.utils.PasswordUtil;

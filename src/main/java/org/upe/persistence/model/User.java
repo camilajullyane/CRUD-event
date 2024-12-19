@@ -2,10 +2,7 @@ package org.upe.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.upe.persistence.interfaces.ArticleInterface;
-import org.upe.persistence.interfaces.EventInterface;
-import org.upe.persistence.interfaces.SubEventInterface;
-import org.upe.persistence.interfaces.UserInterface;
+import org.upe.persistence.interfaces.*;
 import org.upe.utils.PasswordUtil;
 
 import java.util.ArrayList;
@@ -41,6 +38,8 @@ public class User implements UserInterface {
     private List<Event> ownerOf = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Certificate> certificateList = new ArrayList<>();
 
     public User() {}
 
@@ -73,11 +72,11 @@ public class User implements UserInterface {
     }
 
     public void unsubscribeToSubEvent(SubEventInterface subEvent) {
-        this.subEventAttendeeOn.remove((SubEvent) subEvent);
+        this.subEventAttendeeOn.remove(subEvent);
     }
 
     public void unsubscribeToEvent(EventInterface event) {
-        this.attendeeOn.remove((Event) event);
+        this.attendeeOn.remove(event);
     }
 
     public void addMyEventAsOwner(EventInterface event) {
@@ -88,7 +87,8 @@ public class User implements UserInterface {
         this.articles.add((Article) article);
     }
 
-    // Implementação do padrão UserBuilder
+    public void addCertificate(CertificateInterface certificate) {this.certificateList.add((Certificate) certificate);}
+
     public static class UserBuilder {
         private String name;
         private String cpf;
@@ -120,7 +120,7 @@ public class User implements UserInterface {
         }
     }
 
-    public static UserBuilder Builder() {
+    public static UserBuilder builder() {
         return new UserBuilder();
     }
 }

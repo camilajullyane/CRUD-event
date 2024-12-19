@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.upe.persistence.DAO.SessionDAO;
+import org.upe.persistence.dao.SessionDAO;
 import org.upe.persistence.interfaces.SessionInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 

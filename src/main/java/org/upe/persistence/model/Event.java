@@ -38,7 +38,6 @@ public class Event implements EventInterface {
     @ManyToMany(mappedBy = "submittedIn")
     private List<Article> articles = new ArrayList<>();
 
-    // Construtor privado para garantir o uso do UserBuilder
     private Event(String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization , User owner) {
         this.name = name;
         this.description = description;
@@ -49,7 +48,6 @@ public class Event implements EventInterface {
         this.organization = organization;
     }
 
-    // Construtor padrão
     public Event() {}
 
     public List<UserInterface> getAttendeesList() {
@@ -69,7 +67,7 @@ public class Event implements EventInterface {
     }
 
     public void removeAttendeeOnEvent(UserInterface user) {
-        this.attendeesList.remove((User) user);
+        this.attendeesList.remove(user);
         user.getAttendeeOn().remove(this);
     }
 
@@ -77,7 +75,6 @@ public class Event implements EventInterface {
         this.articles.add((Article) article);
     }
 
-    // UserBuilder interno
     public static class EventBuilder {
         private String name;
         private String description;
@@ -127,7 +124,7 @@ public class Event implements EventInterface {
         }
     }
 
-    public static EventBuilder Builder() {
+    public static EventBuilder builder() {
         return new EventBuilder();
     }
 }

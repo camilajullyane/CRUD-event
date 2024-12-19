@@ -31,7 +31,6 @@ public class Article implements ArticleInterface {
     )
     private List<Event> submittedIn = new ArrayList<>();
 
-    // Construtor privado para garantir o uso do UserBuilder
     private Article(String title, String articleAbstract, User user, List<Event> submittedIn) {
         this.title = title;
         this.articleAbstract = articleAbstract;
@@ -39,7 +38,6 @@ public class Article implements ArticleInterface {
         this.submittedIn = submittedIn;
     }
 
-    // Construtor padrão
     public Article() {}
 
     public List<EventInterface> getSubmittedIn() {
@@ -54,7 +52,6 @@ public class Article implements ArticleInterface {
         return user;
     }
 
-    // UserBuilder interno
     public static class ArticleBuilder {
         private String title;
         private String articleAbstract;
@@ -86,7 +83,7 @@ public class Article implements ArticleInterface {
         }
     }
 
-    public static ArticleBuilder Builder() {
+    public static ArticleBuilder builder() {
         return new ArticleBuilder();
     }
 }

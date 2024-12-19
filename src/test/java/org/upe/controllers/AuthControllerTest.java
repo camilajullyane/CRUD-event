@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.dao.UserDAO;
 import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.User;
 
@@ -27,12 +27,12 @@ public class AuthControllerTest {
 
     @BeforeAll
     static void setUp() {
-        mockUser = User.Builder()
+        mockUser = User.builder()
                 .withCpf("12345678900")
                 .withPassword("password")
                 .build();
 
-        fullDataUser = User.Builder()
+        fullDataUser = User.builder()
                 .withName("Batman")
                 .withEmail("bruce@batmail.bat")
                 .withCpf("12345678910")

@@ -7,11 +7,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.upe.persistence.DAO.ArticleDAO;
-import org.upe.persistence.DAO.EventDAO;
-import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.dao.ArticleDAO;
+import org.upe.persistence.dao.EventDAO;
+import org.upe.persistence.dao.UserDAO;
 import org.upe.persistence.interfaces.ArticleInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.persistence.interfaces.UserInterface;
 import org.upe.persistence.model.Event;
 import org.upe.persistence.model.User;
 
@@ -31,8 +32,6 @@ public class EventControllerTest {
     @InjectMocks
     private EventController eventController;
 
-
-
     @Mock
     private EventDAO eventDAO;
     @Mock
@@ -46,6 +45,8 @@ public class EventControllerTest {
     private Event mockEvent;
     @Mock
     private ArticleInterface mockArticle;
+    @Mock
+    private EventInterface mockEventInterface;
 
     @Test
     void testCreateEvent() {
@@ -85,31 +86,48 @@ public class EventControllerTest {
         verify(eventDAO).getAll();
     }
 
-//    @Test
-//    void testAddAttendeeOnList() {
-//        // Arrange
-//        UserInterface eventOwner = mock(UserInterface.class); // Cria um mock para o dono do evento
-//        when(mockEvent.getOwner()).thenReturn(eventOwner); // O dono do evento NÃO é mockUser
-//        when(mockEvent.getAttendeesList()).thenReturn(Collections.emptyList()); // Lista de participantes vazia
-//        doNothing().when(mockEvent).addAttendeeOnEvent(mockUser); // Métodos void
-//        doNothing().when(mockUser).subscribeToEvent(mockEvent);  // Métodos void
-//        when(eventDAO.update(mockEvent)).thenReturn(mockEvent); // Método com retorno
-//        when(userDAO.update(mockUser)).thenReturn(mockUser);    // Método com retorno
-//
-//        // Act
-//        boolean result = eventController.addAttendeeOnList(mockUser, mockEvent);
-//
-//        // Assert
-//        assertTrue(result); // Verifica se o método retornou true
-//        verify(mockEvent).addAttendeeOnEvent(mockUser); // Verifica se o método foi chamado
-//        verify(mockUser).subscribeToEvent(mockEvent);  // Verifica se o método foi chamado
-//        verify(eventDAO).update(mockEvent);            // Verifica se o método foi chamado
-//        verify(userDAO).update(mockUser);              // Verifica se o método foi chamado
-//    }
+    @Test
+    void testAddAttendeeOnList() {
+        // Arrange
+        UserInterface eventOwner = mock(UserInterface.class);
+        when(mockUser.getId()).thenReturn(1L);
+        when(eventOwner.getId()).thenReturn(2L);
+        when(mockEventInterface.getOwner()).thenReturn(eventOwner); // O dono do evento NÃO é mockUser
+        when(mockEventInterface.getAttendeesList()).thenReturn(Collections.emptyList()); // Lista de participantes vazia
+        doNothing().when(mockEventInterface).addAttendeeOnEvent(mockUser); // Métodos void
+        doNothing().when(mockUser).subscribeToEvent(mockEventInterface);  // Métodos void// Método com retorno
+        when(userDAO.update(mockUser)).thenReturn(mockUser);    // Método com retorno
 
+        // Act
+        boolean result = eventController.addAttendeeOnList(mockUser, mockEventInterface);
 
+        // Assert
+        assertTrue(result); // Verifica se o método retornou true
+        verify(mockEventInterface).addAttendeeOnEvent(mockUser); // Verifica se o método foi chamado
+        verify(mockUser).subscribeToEvent(mockEventInterface);  // Verifica se o método foi chamado
+        verify(eventDAO).update(mockEventInterface);            // Verifica se o método foi chamado
+        verify(userDAO).update(mockUser);              // Verifica se o método foi chamado
+    }
 
+    @Test
+    void testAddOwnerOnHisOwnEvent() {
+        when(mockEventInterface.getOwner()).thenReturn(mockUser);
+        boolean result = eventController.addAttendeeOnList(mockUser, mockEventInterface);
+        assertFalse(result);
+    }
 
+    @Test
+    void testAddAttendeeAlreadyOnList() {
+        UserInterface attendee = mock(UserInterface.class);
+        when(attendee.getCpf()).thenReturn("12345678900");
+        when(mockUser.getCpf()).thenReturn("12345678900");
+        when(mockEventInterface.getOwner()).thenReturn(mock(UserInterface.class));
+        when(mockEventInterface.getAttendeesList()).thenReturn(Collections.singletonList(attendee));
+
+        boolean result = eventController.addAttendeeOnList(mockUser, mockEventInterface);
+
+        assertFalse(result);
+    }
 
     @Test
     void testAddArticleOnList() {
@@ -132,7 +150,28 @@ public class EventControllerTest {
         verify(articleDAO).update(mockArticle); // Verifica se o artigo foi atualizado
     }
 
+    @Test
+    void testGetEventById() {
+        UUID eventId = UUID.randomUUID();
+        when(eventDAO.findById(eventId)).thenReturn(mockEvent);
 
+        EventInterface result = eventController.getEventById(eventId);
+
+        assertNotNull(result);
+        assertEquals(mockEvent, result);
+        verify(eventDAO).findById(eventId);
+    }
+
+    @Test
+    void testGetEventWithInvalidId() {
+        UUID eventId = UUID.randomUUID();
+        when(eventDAO.findById(eventId)).thenReturn(null);
+
+        EventInterface result = eventController.getEventById(eventId);
+
+        assertNull(result);
+        verify(eventDAO).findById(eventId);
+    }
 
     @Test
     void testDeleteAttendeeOnList() {

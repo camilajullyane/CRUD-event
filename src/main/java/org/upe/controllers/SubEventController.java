@@ -1,8 +1,8 @@
 package org.upe.controllers;
 
 import org.upe.controllers.interfaces.SubEventControllerInterface;
-import org.upe.persistence.DAO.SubEventDAO;
-import org.upe.persistence.DAO.UserDAO;
+import org.upe.persistence.dao.SubEventDAO;
+import org.upe.persistence.dao.UserDAO;
 import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
@@ -66,6 +66,12 @@ public class SubEventController implements SubEventControllerInterface {
 
     public boolean editSubEventDescription(SubEventInterface subEvent, String newDescription) {
         subEvent.setDescription(newDescription);
+        subEventDAO.update(subEvent);
+        return true;
+    }
+
+    public boolean editSubEventIsCertified(SubEventInterface subEvent) {
+        subEvent.setIsCertified();
         subEventDAO.update(subEvent);
         return true;
     }
