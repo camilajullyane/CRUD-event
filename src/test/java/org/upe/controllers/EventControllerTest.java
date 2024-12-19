@@ -242,4 +242,28 @@ public class EventControllerTest {
         verify(mockEvent).setOrganization(newOrganization);
         verify(eventDAO).update(mockEvent);
     }
+
+    @Test
+    void testUpdateBeginDate() {
+        LocalDate newDate = LocalDate.now().plusDays(2);
+        doNothing().when(mockEvent).setBeginDate(newDate);
+
+        boolean result = eventController.updateBeginDate(mockEvent, newDate);
+
+        assertTrue(result);
+        verify(mockEvent).setBeginDate(newDate);
+        verify(eventDAO).update(mockEvent);
+    }
+
+    @Test
+    void testUpdateEndDate() {
+        LocalDate newDate = LocalDate.now().plusDays(2);
+        doNothing().when(mockEvent).setEndDate(newDate);
+
+        boolean result = eventController.updateEndDate(mockEvent, newDate);
+
+        assertTrue(result);
+        verify(mockEvent).setEndDate(newDate);
+        verify(eventDAO).update(mockEvent);
+    }
 }
