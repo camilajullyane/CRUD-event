@@ -7,7 +7,11 @@ import org.upe.persistence.model.User;
 import org.upe.utils.PasswordUtil;
 
 public class UserController implements UserControllerInterface {
-    private static final UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO;
+
+    public UserController(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     public UserInterface getUserByCPF(String cpf) {
         return userDAO.findByCPF(cpf);

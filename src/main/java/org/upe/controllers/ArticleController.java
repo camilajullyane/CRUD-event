@@ -8,9 +8,13 @@ import org.upe.persistence.interfaces.EventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
 public class ArticleController implements ArticleControllerInterface {
+    private final ArticleDAO articleDAO;
+    private final EventDAO eventDAO;
 
-    private static final ArticleDAO articleDAO = new ArticleDAO();
-    private static final EventDAO eventDAO = new EventDAO();
+    public ArticleController(ArticleDAO articleDAO, EventDAO eventDAO) {
+        this.articleDAO = articleDAO;
+        this.eventDAO = eventDAO;
+    }
 
     public ArticleInterface createArticle(UserInterface user, String name, String articleAbstract) {
         ArticleInterface article = articleDAO.create(name, articleAbstract, user);

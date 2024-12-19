@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import org.upe.controllers.SubEventController;
+import org.upe.facade.Facade;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.utils.SceneLoader;
 import javafx.scene.control.TextField;
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class EditSubEventController {
-    SubEventController subEventController = new SubEventController();
+    private final Facade facade = new Facade();
 
     SubEventInterface subEvent = SceneLoader.getSubEventData();
 
@@ -38,7 +39,7 @@ public class EditSubEventController {
 
     @FXML
     private void handleNameButton() {
-        subEventController.editSubEventName(subEvent, newSubEventName.getText());
+        facade.editSubEventName(subEvent, newSubEventName.getText());
         newSubEventName.setText("");
         alert.setTitle("SubEvento editado");
         alert.setHeaderText(null);
@@ -49,7 +50,7 @@ public class EditSubEventController {
 
     @FXML
     private void handleDescriptionButton() {
-        subEventController.editSubEventDescription(subEvent, newSubEventDescription.getText());
+        facade.editSubEventDescription(subEvent, newSubEventDescription.getText());
         newSubEventDescription.setText("");
         alert.setTitle("SubEvento editado");
         alert.setHeaderText(null);
