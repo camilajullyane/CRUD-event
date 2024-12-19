@@ -41,8 +41,6 @@ public class Facade implements FacadeInterface {
         return authController.signUpUser(name, cpf, email, password);
     }
 
-
-
     // EventController methods
     public EventInterface createEvent(UserInterface user, String name, String description, LocalDate beginDate, LocalDate endDate, String local, String organization) {
         return eventController.createEvent(user, name, description, beginDate, endDate, local, organization);

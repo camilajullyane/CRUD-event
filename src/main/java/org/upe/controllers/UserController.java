@@ -41,8 +41,4 @@ public class UserController implements UserControllerInterface {
         userDAO.update(utilityUser);
         return true;
     }
-
-    public void deleteUser(UserInterface user) {
-        userDAO.delete(user);
-    }
 }
