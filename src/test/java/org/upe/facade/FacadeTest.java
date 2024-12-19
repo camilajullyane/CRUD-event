@@ -430,4 +430,5 @@ public class FacadeTest {
         boolean result = facade.deleteSession(testSession.getId());
         assertTrue(result);
     }
+
 }
