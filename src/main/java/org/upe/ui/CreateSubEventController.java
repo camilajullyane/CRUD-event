@@ -6,6 +6,7 @@ import javafx.scene.layout.StackPane;
 import org.upe.facade.Facade;
 import org.upe.facade.FacadeInterface;
 import org.upe.persistence.interfaces.EventInterface;
+import org.upe.utils.DatePickerUtil;
 import org.upe.utils.SceneLoader;
 import org.upe.utils.UserSession;
 
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 
 public class CreateSubEventController {
     private final FacadeInterface facade = new Facade();
+    private final EventInterface currentEvent = SceneLoader.getEventData();
 
     @FXML
     private StackPane createSubEventPage;
@@ -41,6 +43,12 @@ public class CreateSubEventController {
 
     @FXML
     Label errorMessage;
+
+    @FXML
+    public void initialize() {
+        DatePickerUtil.restrictDatePicker(beginDate, currentEvent.getBeginDate(), currentEvent.getEndDate());
+        DatePickerUtil.restrictDatePicker(endDate, currentEvent.getBeginDate(), currentEvent.getEndDate());
+    }
 
     @FXML
     private void moveToScheduleScreen() throws IOException {
