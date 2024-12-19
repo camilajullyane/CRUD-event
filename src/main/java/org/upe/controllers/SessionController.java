@@ -22,7 +22,6 @@ public class SessionController implements SessionControllerInterface {
     }
 
     public boolean delete(UUID id) {
-        sessionDAO.delete(id);
-        return true;
+        return sessionDAO.delete(id);
     }
 }
