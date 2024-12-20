@@ -80,6 +80,9 @@ class AuthControllerTest {
     @Test
     void testSingUpWithExistingEmail() {
         when(userDAO.findByEmail(fullDataUser.getEmail())).thenReturn(fullDataUser);
-        UserInterface result = authController.signUpUser(fullDataUser.getName(), fullDataUser.getCpf(), fullDataUser.getEmail(), fullDataUser.getPassword());
+
+        // Verifica diretamente se o resultado é nulo, sem usar a variável "result"
+        assertNull(authController.signUpUser(fullDataUser.getName(), fullDataUser.getCpf(), fullDataUser.getEmail(), fullDataUser.getPassword()));
     }
+
 }

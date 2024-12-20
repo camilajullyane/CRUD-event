@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DatePickerUtilTest extends ApplicationTest {
+class DatePickerUtilTest extends ApplicationTest {
 
     private DatePicker datePicker;
 
