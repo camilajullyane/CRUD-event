@@ -6,8 +6,7 @@ import org.upe.persistence.interfaces.CertificateInterface;
 import org.upe.persistence.interfaces.SubEventInterface;
 import org.upe.persistence.interfaces.UserInterface;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.UUID;
 
 @Entity
